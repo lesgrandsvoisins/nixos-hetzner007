@@ -54,5 +54,7 @@ in
     wget
     xcaddy 
     zlib
+    yarn
+    yan2nix
   ];
 }
