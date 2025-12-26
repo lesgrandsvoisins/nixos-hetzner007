@@ -56,5 +56,6 @@ in
     zlib
     yarn
     yarn2nix
+    gcc
   ];
 }
