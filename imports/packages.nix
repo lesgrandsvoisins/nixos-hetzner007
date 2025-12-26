@@ -28,20 +28,31 @@ in
       '';
     }
     ) 
-    curl
-    wget
-    lynx
-    git
-    tmux
+    acme-sh
     bat
-    zlib
-    lzlib
-    dig
-    killall
-    pwgen
-    oauth2-proxy
     certbot
-    lego
+    curl
+    dig
+    ffmpeg
+    git
+    gnumake
+    go 
     inetutils
+    killall
+    lego
+    lynx
+    lzlib
+    nodejs
+    nodenv
+    oauth2-proxy
+    openldap
+    openssl
+    pwgen
+    python3Full
+    tmux
+    uv
+    wget
+    xcaddy 
+    zlib
   ];
 }
