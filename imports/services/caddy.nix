@@ -96,7 +96,7 @@ in
             transport http {
               tls_server_name max.local
               tls_insecure_skip_verify
-              tls_client_auth /var/run/dashy/ssl/cert.pem /var/run/dashy/ssl/key.pem
+              tls_client_auth /var/lib/caddy/ssl/cert.pem /var/lib/caddy/ssl/key.pem
             }
           }
         '';
