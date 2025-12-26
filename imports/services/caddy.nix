@@ -6,7 +6,10 @@ in
 
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
-    "f /etc/caddy/caddy.env 0640 caddy users"
+    "f /etc/caddy/caddy.env 0664 caddy users"
+    "d /var/lib/caddy/ssl 0755 caddy users"
+    "f /var/lib/caddy/ssl/key.pem 0664 caddy users"
+    "f /var/lib/caddy/ssl/cert.pem 0664 caddy users"
   ];
 
   services.caddy = {
