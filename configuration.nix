@@ -17,6 +17,7 @@ let
   external-netmask6 = "64";
 in
 {
+  nix.settings.experimental-features = "nix-command flakes";
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
