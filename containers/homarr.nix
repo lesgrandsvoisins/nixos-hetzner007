@@ -13,6 +13,7 @@ in
         ../imports/packages/vim.nix
         ../imports/packages/common.nix
       ];
+      services.redis.servers.homarr.enable = true;
 
       system.stateVersion = "25.11";
     };

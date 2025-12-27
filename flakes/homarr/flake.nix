@@ -3,35 +3,49 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
-        pkgs = import nixpkgs { inherit system; };
-        # pkgs-unstable = import nixpkgs-unstable  { inherit system; };
-        # pkgs-unstable = import (fetchTarball https://github.com/nixos/nixpkgs-channels/archive/nixos-unstable.tar.gz) {};
-        # pnpm = unstable.pnpm;
-        # nodejs25 = pkgs-unstable.nodejs_25;
-        # npm = unstable.nodePackages.npm
+        pkgs = import nixpkgs { 
+          inherit system; 
+        };
       in
       {
-        packages.default = pkgs.buildNpmPackage (finalAttrs: {
+        packages.default = pkgs.stdenv.mkDerivation rec {
           pname = "homarr";
           version = "1.48.0";
 
           src = pkgs.fetchFromGitHub {
             owner = "homarr-labs";
             repo = "homarr";
-            tag = "v${finalAttrs.version}";
+            tag = "v${version}";
             hash = "sha256-iWdaQv+aTPB+4uDCgkoLMq7tVfCFN8kv+acRo9Oby5g="; # first build → copy `got:` here
           };
 
-          buildInputs = with pkgs; [ pnpm nodejs_25 nodePackages.npm ];
+          # phases = [ "installPhase" ];
 
-          npmDepsHash = ""; # second build → copy `got:` here
+          buildInputs = with pkgs; [
+          #   corepack
+            corepack_24
+          ];
+
+          pnpmDeps = pkgs.pnpm.fetchDeps {
+            inherit pname version src;
+            fetcherVersion = 3;
+            hash = "";
+          };
+
+          # npmDepsHash = ""; # second build → copy `got:` here
 
           # buildPhase = ''
           #   echo "Installing dependencies with PNPM..."
@@ -52,18 +66,24 @@
           #   cp ${./package-lock.json} package-lock.json
           # '';
 
+          buildPhase = ''
+            mkdir -p $out/bin
+            pnpm install
+          '';
+            # corepack enable --install-directory=$out/bin pnpm
+
+
           meta = {
             description = "Dashy, a modernish dashboard";
             homepage = "https://dashy.to/";
             license = pkgs.lib.licenses.mit;
           };
-        });
+        };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [
-            pkgs.nodejs_25
-            pkgs.pnpm
-            pkgs.nodePackages.npm
+          buildInputs = with pkgs; [
+            corepack_24
+            # corepack
           ];
         };
       }
