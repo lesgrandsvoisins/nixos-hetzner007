@@ -1,5 +1,5 @@
 {
-  description = "Dashy dashboard packaged with buildNpmPackage (lambda style)";
+  description = "Dashy built dynamically with Yarn (no buildNpmPackage)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -10,46 +10,49 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
+        node20 = pkgs.nodejs_20;
       in
       {
-        packages.default = pkgs.buildNpmPackage (finalAttrs: {
+        packages.default = pkgs.stdenv.mkDerivation rec {
           pname = "dashy";
           version = "3.1.1";
 
           src = pkgs.fetchFromGitHub {
             owner = "Lissy93";
             repo = "dashy";
-            tag = "${finalAttrs.version}";
-            hash = "sha256-ci4YlxFNp+JD5EzYfhtM9jKy5fl+a48vp9QzZHh5NRg=";
+            tag = "${version}";
+            hash = "sha256-ci4YlxFNp+JD5EzYfhtM9jKy5fl+a48vp9QzZHh5NRg="; # first build → copy got:
           };
 
-          # Second build will fail -> paste 'got:' here
-          npmDepsHash = "sha256-3Fab/pfAQd0O10U7FQjfJP79zIR3ubn+CfEY/ujxFMc=";
+          buildInputs = [ node20 pkgs.yarn ];
 
-          # Dashy has engine checks we want to ignore
-          npmPackFlags = [ "--legacy-peer-deps" "--ignore-engines" ];
-          # NODE_OPTIONS = "";
-          npmFlags = [ "--legacy-peer-deps" "--ignore-engines"];
+          dontUseSandbox = true;
           makeCacheWritable = true;
 
-          # Inject your local package-lock.json
-          postPatch = ''
-            echo "Copying vendored package-lock.json..."
-            cp ${./package-lock.json} package-lock.json
+          # Run Yarn dynamically at build time
+          buildPhase = ''
+            echo "Installing Dashy dependencies with Yarn..."
+            yarn --ignore-engines install 
+            yarn --ignore-engines build 
           '';
 
-          meta = {
-            description = "Dashy, a modernish dashboard";
-            homepage = "https://dashy.to/";
-            license = pkgs.lib.licenses.mit;
-          };
-        });
+          installPhase = ''
+            mkdir -p $out
+            cp -r ./* $out/
+          '';
 
-        # Optional: dev shell
+          meta = with pkgs.lib; {
+            description = "Dashy dashboard installed dynamically with Yarn";
+            homepage = "https://dashy.to/";
+            license = licenses.mit;
+          };
+        };
+
+        # Dev shell for local development
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            pkgs.nodejs
-            pkgs.nodePackages.npm
+            node20
+            pkgs.yarn
           ];
         };
       }

@@ -3,10 +3,6 @@
 let
 in
 {
-  imports = [
-    ./packages/vim.nix
-    ./packages/common.nix
-  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -28,19 +24,5 @@ in
       '';
     }
     ) 
-    acme-sh
-    bat
-    certbot
-    ffmpeg
-    go 
-    lego
-    nodejs
-    nodenv
-    oauth2-proxy
-    xcaddy 
-    zlib
-    yarn
-    yarn2nix
-    gcc
   ];
 }

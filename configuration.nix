@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   external-mac = "90:1b:0e:9e:ec:37";
   ext-if = "enx901b0e9eec37";
@@ -16,17 +16,20 @@ let
   external-gw6 = "fe80::1";
   external-netmask6 = "64";
 in
-{
+{  
+  systemd.tmpfiles.rules = [
+    "d /var/lib/homarr/db 0755 caddy users"
+  ];
   nix.settings.experimental-features = "nix-command flakes";
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
       ./imports/networking.nix
       ./imports/security.nix
       ./imports/users.nix
       ./imports/packages.nix
       ./imports/services.nix
-      ./derivations/default.nix
+      ./containers/homarr.nix
     ];
 
   # Bootloader.
