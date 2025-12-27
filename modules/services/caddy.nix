@@ -85,8 +85,12 @@ in
       };
       "test.whowhatetc.com" = {
         extraConfig = ''
-          authorize with identifiedpolicy
-          reverse_proxy http://127.0.0.1:8080
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "homarr.whowhatetc.com" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
         '';
       };
       "dashy.whowhatetc.com" = {

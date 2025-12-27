@@ -63,6 +63,8 @@ in
     # firewall.allowedTCPPorts = [ ... ];
     # firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
-    firewall.enable = false;
+    firewall.enable = true;
+    firewall.allowedTCPPorts = [22 25 53 80 443];
+    firewall.allowedUDPPorts = [53];
   };
 }
