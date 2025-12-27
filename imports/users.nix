@@ -22,13 +22,13 @@ in
     isNormalUser = true;
     description = "homarr";
     extraGroups = [ "caddy" ];
-    # packages = with pkgs; [
-    #   nodejs_24
-    #   (pnpm_10.override { nodejs = nodejs_24; })
-    #   pnpmConfigHook
-    #   fetchPnpmDeps
-    #   stdenv
-    # ];
+    packages = with pkgs.unstable; [
+      nodejs_25
+      (pnpm_10.override { nodejs = nodejs_25; })
+      pnpmConfigHook
+      fetchPnpmDeps
+      stdenv
+    ];
   };
 
   # home-manager.users.homarr = {
