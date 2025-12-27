@@ -6,8 +6,8 @@
     caddy-ui-whowhatetc.url = "path:./flakes/caddy-ui";
     agenix.url = "github:ryantm/agenix";
     flake-utils.url = "github:numtide/flake-utils";
-     home-manager = {
-      url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -21,12 +21,13 @@
     caddy-ui-whowhatetc, 
     ... 
     }@inputs: 
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        # pkgs = import nixpkgs { inherit system; };
-      in {
-      }
-    ) // {
+    # flake-utils.lib.eachDefaultSystem (system:
+    #  let
+    #    # pkgs = import nixpkgs { inherit system; };
+    #  in {
+    #  }
+    #) // 
+    {
       nixosConfigurations = {
         whowhatetc = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -34,6 +35,7 @@
             ./overlays.nix
             ./configuration.nix
             agenix.nixosModules.default
+            home-manager.nixosModules.home-manager
           ];
           specialArgs = { inherit inputs; };
         };

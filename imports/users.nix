@@ -26,8 +26,7 @@ in
       nodejs_25
       (pnpm_10.override { nodejs = nodejs_25; })
       pnpmConfigHook
-      fetchPnpmDeps
-      stdenv
+      # fetchPnpmDeps
     ];
   };
 

@@ -1,4 +1,4 @@
-{ config, pkgs, system, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 in

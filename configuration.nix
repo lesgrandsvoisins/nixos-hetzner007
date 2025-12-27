@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, home-manager, lib, ... }:
 let
   external-mac = "90:1b:0e:9e:ec:37";
   ext-if = "enx901b0e9eec37";
@@ -27,6 +27,7 @@ in
       ./imports/networking.nix
       ./imports/security.nix
       ./imports/users.nix
+      ./imports/home.nix
       ./imports/packages.nix
       ./imports/services.nix
       ./containers/homarr.nix

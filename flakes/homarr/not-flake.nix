@@ -117,10 +117,6 @@
             nodejs
           ];
         };
-        # apps.default = {
-        #   type = "app";
-        #   program = "${self.packages.${system}.homarr}/public/index.html";
-        # };
       }
     );
 }
