@@ -16,45 +16,70 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { 
-          inherit system; 
-        };
+        pkgs = import nixpkgs { inherit system; };
+        nodejs = pkgs.nodejs_25;
+        pnpm = pkgs.pnpm_10.override { nodejs = nodejs; };
+        pnpmConfigHook = pkgs.pnpmConfigHook;
+        stdenv = pkgs.stdenv;
       in
       {
-        packages.default = pkgs.stdenv.mkDerivation rec {
+        packages.default = stdenv.mkDerivation (finalAttrs: {
           pname = "homarr";
           version = "1.48.0";
 
           src = pkgs.fetchFromGitHub {
             owner = "homarr-labs";
             repo = "homarr";
-            tag = "v${version}";
+            tag = "v${finalAttrs.version}";
             hash = "sha256-iWdaQv+aTPB+4uDCgkoLMq7tVfCFN8kv+acRo9Oby5g="; # first build → copy `got:` here
+            # sha256-iWdaQv+aTPB+4uDCgkoLMq7tVfCFN8kv+acRo9Oby5g=
           };
 
-          # phases = [ "installPhase" ];
-
-          buildInputs = with pkgs; [
-          #   corepack
-            corepack_24
+          nativeBuildInputs = [
+            pnpm
+            nodejs
+            pnpmConfigHook
           ];
 
-          pnpmDeps = pkgs.pnpm.fetchDeps {
-            inherit pname version src;
+          # pnpmDeps = pnpm.fetchDeps {
+          pnpmDeps = pkgs.fetchPnpmDeps {
+            inherit (finalAttrs) pname version src;
+            pnpm = pnpm;
+            nodejs = nodejs;
             fetcherVersion = 3;
-            hash = "";
+            hash = "sha256-fh599IyeF0EUlyyvinDiaq/qsJB3Zdp1WQ2iYr2L/GM=";
           };
+
+          # configurePhase = ''
+          #   export PATH="${node}/bin:$PATH"
+          #   pnpm install --offline --frozen-lockfile --ignore-engines
+          # '';
+
+          # buildPhase = ''
+          #   pnpm build
+          # '';
+
+          # installPhase = ''
+          #   mkdir -p $out
+          #   cp -r .next public $out/
+          # '';
 
           # npmDepsHash = ""; # second build → copy `got:` here
 
           # buildPhase = ''
           #   echo "Installing dependencies with PNPM..."
           #   pnpm config set nodeVersion 25.2.1
-          #   pnpm install
+
+          # '';
+          # buildPhase = ''
+          #   pnpm build
           # '';
           # configurePhase = ''
-          #   pnpm install
-          #   npm install
+          #     ${pnpm}/bin/pnpm --offline --frozen-lockfile --ignore-engines
+          # '';
+          # installPhase = ''
+          #   mkdir -p $out
+          #   cp -r .next public $out/
           # '';
 
           # npmPackFlags = [ "--ignore-engines" ];
@@ -63,29 +88,44 @@
           # Inject your local package-lock.json
           # postPatch = ''
           #   echo "Copying vendored package-lock.json..."
-          #   cp ${./package-lock.json} package-lock.json
+          #   cp ${./package.json} package.json
+          #   cp ${./pnpm-lock.yaml} pnpm-lock.yaml
+          #   cp ${./pnpm-workspace.yaml} pnpm-workspace.yaml
           # '';
 
-          buildPhase = ''
-            mkdir -p $out/bin
-            pnpm install
-          '';
-            # corepack enable --install-directory=$out/bin pnpm
+          # installPhase = ''
+          #   mkdir -p $out/bin
+          #   pnpm install
 
+          # '';
+
+          # buildPhase = ''
+          #   mkdir -p $out/bin
+          #   pnpm install
+          # '';
+          # corepack enable --install-directory=$out/bin pnpm
 
           meta = {
-            description = "Dashy, a modernish dashboard";
-            homepage = "https://dashy.to/";
-            license = pkgs.lib.licenses.mit;
+            description = "Homarr, a modernish dashboard";
+            homepage = "https://homarr.dev/";
           };
-        };
+        });
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            corepack_24
+          buildInputs = [
+            pnpm
+            nodejs
+            pnpmConfigHook
+            # pkgs.nodejs_25
+            # (pkgs.pnpm.override { nodejs = pkgs.nodejs_25; })
+            # corepack_24
             # corepack
           ];
         };
+        # apps.default = {
+        #   type = "app";
+        #   program = "${self.packages.${system}.homarr}/public/index.html";
+        # };
       }
     );
 }
