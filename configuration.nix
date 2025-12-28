@@ -21,7 +21,7 @@ in {
     ./modules/home.nix
     ./modules/packages.nix
     ./modules/services.nix
-    ./containers/homarr.nix
+    # ./containers/homarr.nix
   ];
 
   # Bootloader.

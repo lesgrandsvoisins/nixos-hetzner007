@@ -6,11 +6,11 @@
 }: let
   vars = import ../vars.nix;
   # homarr = pkgs.callPackage ../derivations/homarr/package.nix {};
-  nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-  unstable = import nixpkgs-unstable {
-    system = pkgs.stdenv.hostPlatform.system;
-    config.allowUnfree = true; # Also allow unfree packages from unstable
-  };
+  # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  # unstable = import nixpkgs-unstable {
+  #   system = pkgs.stdenv.hostPlatform.system;
+  #   config.allowUnfree = true; # Also allow unfree packages from unstable
+  # };
 in {
   containers.homarr = {
     bindMounts = {
