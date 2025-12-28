@@ -12,5 +12,6 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # homarr
+    nixos-container
   ];
 }
