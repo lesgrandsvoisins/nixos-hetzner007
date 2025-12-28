@@ -99,8 +99,6 @@
 
             mkdir -p $out/{bin,share/homarr}
 
-            cp ./.env.example $out/homarr.env
-
             for i in apps packages tooling
             do
               echo $i

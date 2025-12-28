@@ -1,10 +1,12 @@
-
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-in
-{
+  vars = import ../vars.nix;
+in {
   # imports = [
   #   (import "${home-manager}/nixos")
   # ];
@@ -13,27 +15,36 @@ in
   users.users.mannchri = {
     isNormalUser = true;
     description = "mannchri";
-    extraGroups = [ "networkmanager" "wheel" "acme" "caddy" ];
+    extraGroups = ["networkmanager" "wheel" "acme" "caddy"];
     packages = with pkgs; [];
+    uid = 1001;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.homarr = {
     isNormalUser = true;
     description = "homarr";
-    extraGroups = [ "caddy" ];
+    extraGroups = ["caddy"];
     packages = with pkgs.unstable; [
       nodejs_25
-      (pnpm_10.override { nodejs = nodejs_25; })
+      (pnpm_10.override {nodejs = nodejs_25;})
       pnpmConfigHook
       # fetchPnpmDeps
     ];
+    uid = 1002;
   };
+
+  users.users.caddy = {
+    uid = 239;
+    group = "caddy";
+    isSystemUser = true;
+  };
+  users.groups.caddy.gid = 239;
+  users.groups.users.gid = 100;
 
   # home-manager.users.homarr = {
   #   /* The home.stateVersion option does not have a default and must be set */
   #   home.stateVersion = "25.11";
   #   /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
   # };
-
 }
