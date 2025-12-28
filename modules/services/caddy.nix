@@ -1,9 +1,11 @@
-{ config, pkgs, lib, ... }:
-let 
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
-in
-{ 
-
+in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
     "f /etc/caddy/caddy.env 0664 caddy users"
@@ -32,7 +34,7 @@ in
           realm keycloak
           client_id {env.KEYCLOAK_CLIENT_ID}
           client_secret {env.KEYCLOAK_CLIENT_SECRET}
-          scopes profile openid email 
+          scopes profile openid email
           extract all from userinfo
           metadata_url https://keycloak.gdvoisins.com/realms/master/.well-known/openid-configuration
         }
@@ -47,7 +49,6 @@ in
               "Dashy" https://whowhatetc.com:443/ icon "las la-star"
               "Moi" "/whoami" icon "las la-user"
             }
-            
           }
 
           transform user {
@@ -77,6 +78,16 @@ in
     '';
 
     virtualHosts = {
+      "www.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://homarr.whowhatetc.com
+        '';
+      };
+      "whowhatetc.com" = {
+        extraConfig = ''
+          redir https://homarr.whowhatetc.com
+        '';
+      };
       "auth.whowhatetc.com" = {
         extraConfig = ''
           authenticate with keygdvoisinscom
