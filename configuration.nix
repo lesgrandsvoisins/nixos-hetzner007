@@ -1,25 +1,27 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, home-manager, lib, ... }:
-let
-in
-{  
+{
+  config,
+  pkgs,
+  home-manager,
+  lib,
+  ...
+}: let
+in {
   systemd.tmpfiles.rules = [
     "d /var/lib/homarr/db 0755 caddy users"
   ];
-  nix.settings.experimental-features = "nix-command flakes";
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ./modules/networking.nix
-      ./modules/security.nix
-      ./modules/users.nix
-      ./modules/home.nix
-      ./modules/packages.nix
-      ./modules/services.nix
-    ];
+  nix.settings.experimental-features = ["nix-command flakes"];
+  imports = [
+    ./hardware-configuration.nix
+    ./modules/networking.nix
+    ./modules/security.nix
+    ./modules/users.nix
+    ./modules/home.nix
+    ./modules/packages.nix
+    ./modules/services.nix
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -44,11 +46,8 @@ in
     LC_TIME = "fr_FR.UTF-8";
   };
 
-
   # Configure console keymap
   console.keyMap = "fr";
-
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -57,5 +56,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
