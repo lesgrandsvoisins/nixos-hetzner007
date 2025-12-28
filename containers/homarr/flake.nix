@@ -9,13 +9,12 @@
   in {
     nixosConfigurations.container = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+
       modules = [
         ({pkgs, ...}: let
           vars = import ../../vars.nix;
         in {
           boot.isContainer = true;
-
-          privateNetwork = false;
 
           # networking.firewall.allowedTCPPorts = [80 443];
 
