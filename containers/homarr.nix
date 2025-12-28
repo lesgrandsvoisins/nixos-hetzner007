@@ -13,7 +13,7 @@ in {
     bindMounts = {
     };
     autoStart = true;
-    flake = "path:/home/mannchri/whowhatetc-nixos/containers/homarr/flake";
+    flake = "path:/home/mannchri/whowhatetc-nixos/containers/homarr";
     # config = /home/mannchri/whowhatetc-nixos/containers/homarr/config
   };
 }

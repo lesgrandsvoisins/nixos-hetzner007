@@ -10,6 +10,7 @@ in {
     ../modules/packages/vim.nix
     ../modules/packages/common.nix
     ./services.nix
+    ./systemd-services.nix
     ./users.nix
   ];
   environment.systemPackages = [
