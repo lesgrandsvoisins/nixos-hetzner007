@@ -15,7 +15,9 @@
         in {
           boot.isContainer = true;
 
-          networking.firewall.allowedTCPPorts = [80 443];
+          privateNetwork = false;
+
+          # networking.firewall.allowedTCPPorts = [80 443];
 
           users.users.homarr = {
             isNormalUser = true;
