@@ -2,7 +2,7 @@
   pkgs ? import <nixpkgs-unstable> {},
   fetchFromGitHub ? pkgs.fetchFromGitHub,
   nodePackages ? pkgs.nodePackages,
-  makeBinaryWrapper ? pkgs.makeBinaryWrapper,
+  makeWrapper ? pkgs.makeWrapper,
   nodejs ? pkgs.nodejs_24,
   pnpm_10 ? pkgs.pnpm_10.override { nodejs = nodejs; },
   fetchPnpmDeps ? pkgs.fetchPnpmDeps,
@@ -30,6 +30,8 @@ let
     cp -r --no-preserve=mode ${dashboardIcons}/svg/. $out/share/homepage/public/icons
     cp ${dashboardIcons}/LICENSE $out/share/homepage/public/icons/
   '';
+
+  homarrAssets = ./assets;
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "homarr";
@@ -42,6 +44,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-iWdaQv+aTPB+4uDCgkoLMq7tVfCFN8kv+acRo9Oby5g="; 
   };
 
+
+
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     pnpm = pnpm_10;
@@ -51,7 +55,7 @@ stdenv.mkDerivation (finalAttrs: {
   };
 
   nativeBuildInputs = [
-    makeBinaryWrapper
+    makeWrapper
     nodejs
     pnpmConfigHook
     pnpm_10
@@ -72,6 +76,8 @@ stdenv.mkDerivation (finalAttrs: {
   preBuild = ''
     # patch next.js file-system-cache to use NIXPKGS_HOMARR_CACHE_DIR
     echo "install"
+
+
 
     echo ".env.example"
     # cp ./.env.example ./homarr.env
@@ -124,6 +130,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   buildPhase = ''
     runHook preBuild
+
     # mkdir -p config
     # pnpm build
     runHook postBuild
@@ -138,19 +145,20 @@ stdenv.mkDerivation (finalAttrs: {
     # cp -r .next/standalone $out/share/homarr/
 
     cp ./.env.example $out/homarr.env
-    cp ./homarr-install.sh $out/bin/homarr-install.sh
+
     
-    substituteInPlace ./homarr.env \ 
-      --replace-warn  "DB_DRIVER='better-sqlite3'" \
-                      "DB_DRIVER='@DB_DRIVER@'"
-      --replace-warn  'FULL_PATH_TO_YOUR_SQLITE_DB_FILE' \
-                      '@DB_URL@'
-      --replace-warn  '0000000000000000000000000000000000000000000000000000000000000000' \
-                      '@SECRET_ENCRYPTION_KEY@'
-      --replace-warn  '# CRON_JOB_API_KEY="your-generated-api-key"' \
-                      'CRON_JOB_API_KEY="@SECRET_API_KEY@"'
-      --replace-warn  'supersecret' \
-                      '@SECRET_AUTH@'
+    
+    # substituteInPlace ./homarr.env \ 
+    #   --replace-warn  "DB_DRIVER='better-sqlite3'" \
+    #                   "DB_DRIVER='@DB_DRIVER@'"
+    #   --replace-warn  'FULL_PATH_TO_YOUR_SQLITE_DB_FILE' \
+    #                   '@DB_URL@'
+    #   --replace-warn  '0000000000000000000000000000000000000000000000000000000000000000' \
+    #                   '@SECRET_ENCRYPTION_KEY@'
+    #   --replace-warn  '# CRON_JOB_API_KEY="your-generated-api-key"' \
+    #                   'CRON_JOB_API_KEY="@SECRET_API_KEY@"'
+    #   --replace-warn  'supersecret' \
+    #                   '@SECRET_AUTH@'
     for i in apps packages tooling
     do
       echo $i
@@ -162,7 +170,10 @@ stdenv.mkDerivation (finalAttrs: {
     # mkdir -p $out/share/homarr/.next
     # cp -r .next/static $out/share/homarr/.next/static
 
-    makeWrapper "$out/bin/homarr-install.sh" $wrapperfile
+    cp ${homarrAssets}/homarr-install.sh $out/bin/homarr-install.sh
+    cp ${homarrAssets}/homarr.env $out/bin/homarr.env
+
+    # wrapProgram $out/bin/homarr-install.sh
 
     # makeWrapper "${lib.getExe nodejs}" $out/bin/homarr \
     #   --set-default PORT 3000 \
