@@ -6,7 +6,6 @@ in {
       wantedBy = ["default.target"];
       description = "Système de tableaux de bords Homarr";
       script = "/home/homarr/homarr/start.sh";
-      environment = "/etc/homarr/homarr.env";
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr";
         User = "homarr";
