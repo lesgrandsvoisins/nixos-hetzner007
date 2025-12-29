@@ -14,7 +14,7 @@
       modules = [
         ({pkgs, ...}: let
           # vars = import ../../vars.nix;
-          $ homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
+          # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
         in {
           boot.isContainer = true;
           boot.isNspawnContainer=true;
