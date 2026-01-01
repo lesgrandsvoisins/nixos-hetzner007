@@ -17,7 +17,8 @@ in {
       smtp_options = {
         smtp_encryption = "STARTTLS";
         user = "list@lesgrandsvoisins.com";
-        enable_password_reset = false;
+        server = "mail.lesgrandsvoisins.com";
+        enable_password_reset = true;
         port = 587;
       };
       ldaps_options = {
@@ -32,7 +33,7 @@ in {
       http_url = "http://0.0.0.0:17170";
       jwt_secret_file = null;
       ldap_base_dn = "dc=whowhatetc,dc=com";
-      ldap_host = "0.0.0.0";
+      ldap_host = "::";
       ldap_port = 3890;
       ldap_user_dn = "admin";
       ldap_user_email = "admin@lesgrandsvoisins.com";
