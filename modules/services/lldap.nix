@@ -20,7 +20,7 @@ in {
         server = "mail.lesgrandsvoisins.com";
         enable_password_reset = true;
         port = 587;
-        from = "List des rands Voisins <list@lesgrandsvoisins.com>";
+        from = "List des Grands Voisins <list@lesgrandsvoisins.com>";
       };
       ldaps_options = {
         enabled = true;
@@ -29,12 +29,12 @@ in {
         key_file = "/var/lib/acme/lldap.whowhatetc.com/key.pem";
       };
       force_ldap_user_pass_reset = "always";
-      http_host = "0.0.0.0";
+      http_host = "::";
       http_port = 17170;
-      http_url = "http://0.0.0.0:17170";
+      http_url = "https://lldap.whowhatetc.com";
       jwt_secret_file = null;
       ldap_base_dn = "dc=whowhatetc,dc=com";
-      ldap_host = "0.0.0.0";
+      ldap_host = "::";
       ldap_port = 3890;
       ldap_user_dn = "admin";
       ldap_user_email = "admin@lesgrandsvoisins.com";
