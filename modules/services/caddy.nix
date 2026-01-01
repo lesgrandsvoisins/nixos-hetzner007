@@ -14,6 +14,12 @@ in {
     "f /var/lib/caddy/ssl/cert.pem 0664 caddy caddy"
   ];
 
+  security.acme.certs."lldap.whowhatetc.com" = {
+    dnsProvider = "porkbun";
+    environmentFile = "/var/caddy/caddy.env";
+    group = "services";
+  };
+
   services.caddy = {
     enable = true;
     package = pkgs.caddy.withPlugins {
