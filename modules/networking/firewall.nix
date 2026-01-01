@@ -24,6 +24,18 @@ in {
     #   nftables -t nat -A POSTROUTING --sport 636 -p tcp -m tcp --dport 3636 -j MASQUERADE";
     # '';
   };
+  networking.nat = {
+    externalIPv6 = external-ip6;
+    externalIP = external-ip;
+    enableIPv6 = true;
+    forwardPorts = [
+      {
+        sourcePort = 636;
+        proto = "tcp";
+        destination = "0.0.0.0:3636";
+      }
+    ];
+  };
   networking.nftables = {
     enable = true;
     #   "natlldap" = {

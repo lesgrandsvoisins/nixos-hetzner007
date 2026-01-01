@@ -33,7 +33,7 @@ in {
       http_url = "http://0.0.0.0:17170";
       jwt_secret_file = null;
       ldap_base_dn = "dc=whowhatetc,dc=com";
-      ldap_host = "::";
+      ldap_host = "0.0.0.0";
       ldap_port = 3890;
       ldap_user_dn = "admin";
       ldap_user_email = "admin@lesgrandsvoisins.com";
