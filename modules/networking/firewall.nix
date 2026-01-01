@@ -34,7 +34,7 @@ in {
       {
         sourcePort = 636;
         proto = "tcp";
-        destination = "0.0.0.0:3636";
+        destination = "[::]:3636";
       }
     ];
   };
