@@ -28,6 +28,11 @@ in {
       order authenticate before respond
       order authorize before basicauth
 
+      # acme_dns {$API_DNS_PROVIDER_NAME} {
+      #   api_key {$API_DNS_PROVIDER_KEY}
+      #   api_secret_key {$API_DNS_PROVIDER_SECRET_KEY}
+      # }
+
       security {
         oauth identity provider keycloak {
           driver generic
@@ -127,6 +132,11 @@ in {
       "lldap.whowhatetc.com" = {
         extraConfig = ''
           reverse_proxy http://0.0.0.0:17170
+        '';
+      };
+      "forgejo.whowhatetc.com" = {
+        extraConfig = ''
+          reverse_proxy http://0.0.0.0:3003
         '';
       };
       "dashy.whowhatetc.com" = {

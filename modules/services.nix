@@ -9,12 +9,31 @@ in {
     ./services/lldap.nix
     ./services/caddy.nix
   ];
+  # systemd.tmpfiles.rules = [
+  #   "d /etc/pocket-id 0775 pocket-id services"
+  #   "f /etc/pocket-id/pocket-id.env 0664 pocket-id services"
+  #   "f /etc/pocket-id/.encryption_key 0664 pocket-id services"
+  # ];
   services = {
     openssh.enable = true;
     redis.servers.homarr = {
       enable = true;
       port = 6379;
     };
+    # forgejo = {
+    #   enable = true;
+    #   HTTP_PORT = 3003;
+    #   HTTP_ADDR = "0.0.0.0";
+    # };
+    # pocket-id = {
+    #   enable = true;
+    #   settings = {
+    #     APP_URL = "http://localhost:1411";
+    #     ENCRYPTION_KEY_FILE = "/etc/pocket-id/.encryption_key";
+    #     TRUST_PROXY = "true";
+    #     UPLOAD_PATH = "/var/lib/pocket-id"
+    #   };
+    # };
     #     acme-dns = {
     #       enable = true;
     #       settings = {

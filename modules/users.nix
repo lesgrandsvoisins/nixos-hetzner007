@@ -52,6 +52,7 @@ in {
     group = "services";
     isSystemUser = true;
   };
+  users.users.lldap.extraGroups = ["caddy"];
   users.groups.caddy.gid = vars.gid.caddy;
   users.groups.services.gid = vars.gid.services;
   users.groups.users.gid = vars.gid.users;
