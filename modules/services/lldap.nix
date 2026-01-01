@@ -17,7 +17,7 @@ in {
       smtp_options = {
         smtp_encryption = "STARTTLS";
         user = "list@lesgrandsvoisins.com";
-        enable_password_reset = true;
+        enable_password_reset = false;
         port = 587;
       };
       ldaps_options = {

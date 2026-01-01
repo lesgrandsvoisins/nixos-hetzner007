@@ -28,10 +28,10 @@ in {
       order authenticate before respond
       order authorize before basicauth
 
-      # acme_dns {$API_DNS_PROVIDER_NAME} {
-      #   api_key {$API_DNS_PROVIDER_KEY}
-      #   api_secret_key {$API_DNS_PROVIDER_SECRET_KEY}
-      # }
+      acme_dns {$API_DNS_PROVIDER_NAME} {
+        api_key {$API_DNS_PROVIDER_KEY}
+        api_secret_key {$API_DNS_PROVIDER_SECRET_KEY}
+      }
 
       security {
         oauth identity provider keycloak {
