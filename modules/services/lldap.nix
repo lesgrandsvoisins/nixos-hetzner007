@@ -21,7 +21,7 @@ in {
       };
       ldaps_options = {
         enabled = true;
-        port = 636;
+        port = 3636;
         cert_file = "/var/lib/caddy/ssl/cert.pem";
         key_file = "/var/lib/caddy/ssl/key.pem";
       };

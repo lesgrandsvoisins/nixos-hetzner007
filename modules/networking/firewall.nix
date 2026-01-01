@@ -19,5 +19,12 @@ in {
     enable = true;
     allowedTCPPorts = [22 25 53 80 443 636];
     allowedUDPPorts = [53];
+    filterForward = true;
+    extraCommands = ''
+      nftables -t nat -A POSTROUTING --sport 636 -p tcp -m tcp --dport 3636 -j MASQUERADE";
+    '';
+  };
+  networking.nftables = {
+    enable = true;
   };
 }
