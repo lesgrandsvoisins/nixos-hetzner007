@@ -29,6 +29,7 @@ in {
     externalIPv6 = external-ip6;
     externalIP = external-ip;
     enableIPv6 = true;
+    externalInterface = "eth0";
     forwardPorts = [
       {
         sourcePort = 636;
