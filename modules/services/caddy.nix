@@ -91,7 +91,8 @@ in {
       };
       "a11yproject.lgv.info" = {
         extraConfig = ''
-          root /var/www/a11yproject.lgv.info
+          root * /var/www/a11yproject.lgv.info
+          file_server
         '';
       };
       "whowhatetc.com" = {
