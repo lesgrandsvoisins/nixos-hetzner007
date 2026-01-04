@@ -24,7 +24,7 @@ in {
     enable = true;
     environmentFile = "/etc/wiki-js/.env";
     settings = {
-      port = var.ports.wiki-js-http;
+      port = vars.ports.wiki-js-http;
       db = {
         # host = "2a01:4f8:241:4faa::10";
         port = vars.ports.postgresql;
@@ -38,7 +38,7 @@ in {
       loglevel = "info";
       ssl = {
         enabled = true;
-        port = var.ports.wiki-js-https;
+        port = vars.ports.wiki-js-https;
         provider = "custom";
         format = "pem";
         cert = "/var/lib/acme/wiki-js.whowhatetc.com/fullchain.pem";
