@@ -85,7 +85,7 @@ in {
     '';
 
     virtualHosts = {
-      "${vars.domains.wiki-js}" = {
+      "wiki.whowhatetc.com" = {
         extraConfig = ''
           reverse_proxy https://[::1]:3443
         '';
