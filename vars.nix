@@ -9,4 +9,6 @@
   uid.lldap = 501;
   uid.wiki-js = 502;
   ports.postgresql = 5434;
+  ports.wiki-js-https = 3443;
+  ports.wiki-js-http = 3480;
 }
