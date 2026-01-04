@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-let
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+in {
   security = {
     acme = {
       acceptTerms = true;
@@ -9,10 +11,10 @@ in
         email = "hostmaster@lesgrandsvoisins.com";
       };
       certs = {
-         "hetzner007.gdvoisins.com" = {
-           group = "users";
-           listenHTTP = ":80";
-         };
+        "hetzner007.gdvoisins.com" = {
+          group = "users";
+          listenHTTP = ":80";
+        };
         "gdvoisins.com" = {
           dnsProvider = "clouddns";
           # environmentFile = "/etc/.secrets/.cloudns.auth";
@@ -22,6 +24,16 @@ in
           };
           extraDomainNames = ["www.gdvoisins.com"];
           group = "users";
+        };
+        "whowhatetc.com" = {
+          dnsProvider = "clouddns";
+          # environmentFile = "/etc/.secrets/.cloudns.auth";
+          credentialFiles = {
+            "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
+            "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
+          };
+          extraDomainNames = ["wiki.whowhatetc.com"];
+          group = "services";
         };
       };
     };

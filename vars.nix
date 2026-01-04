@@ -7,4 +7,5 @@
   uid.mael = 1003;
   uid.mannchri = 1000;
   uid.lldap = 501;
+  uid.wiki-js = 502;
 }
