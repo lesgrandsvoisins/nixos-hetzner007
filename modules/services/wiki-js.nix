@@ -25,6 +25,7 @@ in {
     environmentFile = "/etc/wiki-js/.env";
     settings = {
       port = vars.ports.wiki-js-http;
+      bindIP = vars.ips.wiki-js;
       db = {
         # host = "2a01:4f8:241:4faa::10";
         port = vars.ports.postgresql;

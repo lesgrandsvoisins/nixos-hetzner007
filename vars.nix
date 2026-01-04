@@ -11,4 +11,6 @@
   ports.postgresql = 5434;
   ports.wiki-js-https = 3443;
   ports.wiki-js-http = 3480;
+  ips.wiki-js = "::1";
+  domains.wiki-js = "wiki.whowhatetc.com";
 }

@@ -5,6 +5,7 @@
   ...
 }: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
+  vars = ../../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -84,6 +85,11 @@ in {
     '';
 
     virtualHosts = {
+      "${vars.domains.wiki-js}" = {
+        extraConfig = ''
+          reverse_proxy https://[::1]:3443
+        '';
+      };
       "www.whowhatetc.com" = {
         extraConfig = ''
           redir https://homarr.whowhatetc.com
