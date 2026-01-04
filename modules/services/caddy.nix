@@ -87,7 +87,7 @@ in {
     virtualHosts = {
       "wiki.whowhatetc.com" = {
         extraConfig = ''
-          reverse_proxy https://[::1]:3443
+          reverse_proxy http://[::1]:3480
         '';
       };
       "www.whowhatetc.com" = {
