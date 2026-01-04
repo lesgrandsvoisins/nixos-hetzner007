@@ -21,6 +21,7 @@ in {
           credentialFiles = {
             "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
             "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
+            "CLOUDNS_AUTH_EMAIL_FILE" = "/etc/.secrets/.cloudns.auth.email";
           };
           extraDomainNames = ["www.gdvoisins.com"];
           group = "users";
