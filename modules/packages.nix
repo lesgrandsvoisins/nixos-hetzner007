@@ -15,5 +15,6 @@ in {
     nixos-container
     # pocketbase
     nftables
+    net-tools
   ];
 }
