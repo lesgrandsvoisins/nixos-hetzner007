@@ -26,7 +26,7 @@ in {
     settings = {
       db = {
         # host = "2a01:4f8:241:4faa::10";
-        port = 5432;
+        port = vars.ports.postgresql;
         # host = "localhost";
         host = "/run/postgresql/";
         # host = "/run/postgresql/";

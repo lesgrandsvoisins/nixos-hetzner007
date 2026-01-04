@@ -8,4 +8,5 @@
   uid.mannchri = 1000;
   uid.lldap = 501;
   uid.wiki-js = 502;
+  ports.postgresql = 5434;
 }
