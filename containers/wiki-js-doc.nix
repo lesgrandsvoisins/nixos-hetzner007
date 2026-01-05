@@ -5,6 +5,7 @@
   ...
 }: let
   vars = import ../vars.nix;
+  in
 {
   containers.wiki-js-doc = {
     localAddress = "10.0.10.101";
@@ -18,7 +19,7 @@
       protocol = "tcp";
     };
     bindMounts = {
-      
+
     };
     config = {
 

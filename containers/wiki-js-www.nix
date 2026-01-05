@@ -5,6 +5,7 @@
   ...
 }: let
   vars = import ../vars.nix;
+  in
 {
   containers.wiki-js-www = {
     localAddress = "10.0.11.101";
