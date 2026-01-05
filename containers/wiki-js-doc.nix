@@ -8,7 +8,6 @@
   in
 {
   containers.wiki-js-doc = {
-    system.stateVersion = "25.11";
     localAddress = "10.0.10.101";
     localAddress6 = "fa10::101";
     hostAddress = "10.0.10.1";
@@ -23,6 +22,7 @@
 
     };
     config = {
+      system.stateVersion = "25.11";
 
     };
   };
