@@ -13,11 +13,11 @@
     hostAddress = "10.0.10.1";
     hostAddress6 = "fa10::1";
     privateNetwork = true; # ve-wiki-js-doc
-    forwardPorts = {
+    forwardPorts = [{
       containerPort = 3444;
       hostPort = 3444; 
       protocol = "tcp";
-    };
+    }];
     bindMounts = {
 
     };
