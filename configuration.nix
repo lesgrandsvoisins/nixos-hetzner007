@@ -22,6 +22,8 @@ in {
     ./modules/packages.nix
     ./modules/services.nix
     ./containers/homarr.nix
+    ./containers/wiki-js-www.nix
+    ./containers/wiki-js-doc.nix
   ];
 
   # Bootloader.
