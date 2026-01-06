@@ -145,7 +145,7 @@ in {
       };
       "www.ggvv.org" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org
+          reverse_proxy http://localhost:3000
         '';
       };
       "a11yproject.lgv.info" = {
@@ -156,7 +156,7 @@ in {
       };
       "ggvv.org" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org
+          reverse_proxy http://localhost:3000
         '';
       };
       "www.quiquoietc.com" = {
