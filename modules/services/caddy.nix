@@ -15,7 +15,7 @@ in {
     "f /var/lib/caddy/ssl/cert.pem 0664 caddy caddy"
   ];
 
-  security.acme.certs."lldap.whowhatetc.com" = {
+  security.acme.certs."lldap.ggvv.org" = {
     dnsProvider = "porkbun";
     environmentFile = "/var/caddy/caddy.env";
     group = "services";
@@ -50,10 +50,10 @@ in {
           crypto default token lifetime 3600
           crypto key sign-verify {env.JWT_SHARED_KEY}
           enable identity provider keycloak
-          cookie domain whowhatetc.com
+          cookie domain ggvv.org
           ui {
             links {
-              "Dashy" https://whowhatetc.com:443/ icon "las la-star"
+              "Dashy" https://ggvv.org:443/ icon "las la-star"
               "Moi" "/whoami" icon "las la-user"
             }
           }
@@ -65,7 +65,7 @@ in {
         }
 
         authorization policy identifiedpolicy {
-          set auth url https://auth.whowhatetc.com
+          set auth url https://auth.ggvv.org
           allow roles guest authp/admin authp/user
           crypto key verify {env.JWT_SHARED_KEY}
           set user identity subject
@@ -75,7 +75,7 @@ in {
         }
 
         authorization policy userpolicy {
-          set auth url https://auth.whowhatetc.com
+          set auth url https://auth.ggvv.org
           allow roles authp/admin authp/user
           crypto key verify {env.JWT_SHARED_KEY}
           inject headers with claims
@@ -85,14 +85,14 @@ in {
     '';
 
     virtualHosts = {
-      "wiki.whowhatetc.com" = {
+      "wiki.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://[::1]:3480
         '';
       };
-      "www.whowhatetc.com" = {
+      "www.ggvv.org" = {
         extraConfig = ''
-          redir https://homarr.whowhatetc.com
+          redir https://homarr.ggvv.org
         '';
       };
       "a11yproject.lgv.info" = {
@@ -101,33 +101,33 @@ in {
           file_server
         '';
       };
-      "whowhatetc.com" = {
+      "ggvv.org" = {
         extraConfig = ''
-          redir https://homarr.whowhatetc.com
+          redir https://homarr.ggvv.org
         '';
       };
       "www.quiquoietc.com" = {
         extraConfig = ''
-          redir https://homarr.whowhatetc.com
+          redir https://homarr.ggvv.org
         '';
       };
       "quiquoietc.com" = {
         extraConfig = ''
-          redir https://homarr.whowhatetc.com
+          redir https://homarr.ggvv.org
         '';
       };
-      "auth.whowhatetc.com" = {
+      "auth.ggvv.org" = {
         extraConfig = ''
           authenticate with keygdvoisinscom
-          respond "auth.whowhatetc.com is running"
+          respond "auth.ggvv.org is running"
         '';
       };
-      "test.whowhatetc.com" = {
+      "test.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
       };
-      "maelanc.whowhatetc.com" = {
+      "maelanc.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:8090
         '';
@@ -137,22 +137,22 @@ in {
           reverse_proxy http://localhost:8090
         '';
       };
-      "homarr.whowhatetc.com" = {
+      "homarr.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
       };
-      "lldap.whowhatetc.com" = {
+      "lldap.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://0.0.0.0:17170
         '';
       };
-      "forgejo.whowhatetc.com" = {
+      "forgejo.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://0.0.0.0:3003
         '';
       };
-      "dashy.whowhatetc.com" = {
+      "dashy.ggvv.org" = {
         extraConfig = ''
           authorize with identifiedpolicy
           reverse_proxy https://max.local:8443 {

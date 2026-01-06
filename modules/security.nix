@@ -26,14 +26,14 @@ in {
           extraDomainNames = ["www.gdvoisins.com"];
           group = "users";
         };
-        "whowhatetc.com" = {
+        "ggvv.org" = {
           dnsProvider = "clouddns";
           # environmentFile = "/etc/.secrets/.cloudns.auth";
           credentialFiles = {
             "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
             "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
           };
-          extraDomainNames = ["wiki.whowhatetc.com"];
+          extraDomainNames = ["wiki.ggvv.org"];
           group = "services";
         };
       };

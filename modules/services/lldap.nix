@@ -5,7 +5,7 @@ in {
     "f /etc/lldap/lldap.env 0664 lldap services"
     "f /etc/lldap/.lldap_user_pass 0664 lldap services"
   ];
-  # security.acme.certs."lldap.whowhatetc.com".group = "caddy";
+  # security.acme.certs."lldap.ggvv.org".group = "caddy";
   services.lldap = {
     enable = true;
     environmentFile = "/etc/lldap/lldap.env";
@@ -25,13 +25,13 @@ in {
       ldaps_options = {
         enabled = true;
         port = 3636;
-        cert_file = "/var/lib/acme/lldap.whowhatetc.com/fullchain.pem";
-        key_file = "/var/lib/acme/lldap.whowhatetc.com/key.pem";
+        cert_file = "/var/lib/acme/lldap.ggvv.org/fullchain.pem";
+        key_file = "/var/lib/acme/lldap.ggvv.org/key.pem";
       };
       force_ldap_user_pass_reset = "always";
       http_host = "::";
       http_port = 17170;
-      http_url = "https://lldap.whowhatetc.com";
+      http_url = "https://lldap.ggvv.org";
       jwt_secret_file = null;
       ldap_base_dn = "dc=whowhatetc,dc=com";
       ldap_host = "::";

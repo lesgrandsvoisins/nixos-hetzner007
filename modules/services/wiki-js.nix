@@ -42,8 +42,8 @@ in {
         port = vars.ports.wiki-js-https;
         provider = "custom";
         format = "pem";
-        cert = "/var/lib/acme/whowhatetc.com/fullchain.pem";
-        key = "/var/lib/acme/whowhatetc.com/key.pem";
+        cert = "/var/lib/acme/ggvv.org/fullchain.pem";
+        key = "/var/lib/acme/ggvv.org/key.pem";
         passphrase = null;
         dhparam = null;
       };
