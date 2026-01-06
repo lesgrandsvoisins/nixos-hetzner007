@@ -85,6 +85,59 @@ in {
     '';
 
     virtualHosts = {
+      "wiki.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://wiki.ggvv.org
+        '';
+      };
+      "www.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://www.ggvv.org
+        '';
+      };
+      "whowhatetc.com" = {
+        extraConfig = ''
+          redir https://ggvv.org{uri}
+        '';
+      };
+      "auth.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://homarr.ggvv.org{uri}
+        '';
+      };
+      "test.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://.ggvv.org{uri}
+        '';
+      };
+      "maelanc.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://maelanc.ggvv.org{uri}
+        '';
+      };
+      "homarr.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://homarr.ggvv.org{uri}
+        '';
+      };
+      "lldap.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://lldap.ggvv.org{uri}
+        '';
+      };
+      "forgejo.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://forgejo.ggvv.org{uri}
+        '';
+      };
+      "dashy.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://dashy.ggvv.org{uri}
+        '';
+      };
+
+      ############################3
+
       "wiki.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://[::1]:3480
