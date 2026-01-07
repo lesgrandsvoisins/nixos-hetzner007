@@ -24,7 +24,7 @@ in {
     enable = true;
     environmentFile = "/etc/wiki-js/.env";
     settings = {
-      port = vars.ports.wiki-js-http;
+      port = vars.ports.wiki-js-www-http;
       bindIP = vars.ips.wiki-js;
       db = {
         # host = "2a01:4f8:241:4faa::10";
@@ -39,7 +39,7 @@ in {
       loglevel = "info";
       ssl = {
         enabled = true;
-        port = vars.ports.wiki-js-https;
+        port = vars.ports.wiki-js-www-https;
         provider = "custom";
         format = "pem";
         cert = "/var/lib/acme/ggvv.org/fullchain.pem";

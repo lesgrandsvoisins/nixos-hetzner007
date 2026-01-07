@@ -3,17 +3,7 @@
   pkgs,
   ...
 }: let
-  external-mac = "90:1b:0e:9e:ec:37";
-  ext-if = "enx901b0e9eec37";
-  external-ip = "213.239.216.138";
-  external-gw = "213.239.216.159";
-  external-netmask = "27";
-  external2-ip = "213.239.217.187";
-  external2-gw = "213.239.217.161";
-  external2-netmask = "27";
-  external-ip6 = "2a01:4f8:a0:73ba::";
-  external-gw6 = "fe80::1";
-  external-netmask6 = "64";
+  vars = import ../../vars.nix;
 in {
   networking.firewall = {
     enable = true;
@@ -26,15 +16,15 @@ in {
   };
   networking.nat = {
     enable = true;
-    externalIPv6 = external-ip6;
-    externalIP = external-ip;
+    externalIPv6 = (builtins.elemAt vars.hetzner.ipv6 0).addr;
+    externalIP = (builtins.elemAt vars.hetzner.ipv4 0).addr;
     enableIPv6 = true;
-    externalInterface = "eth0";
+    externalInterface = vars.hetzner.interface;
     forwardPorts = [
       {
         sourcePort = 636;
         proto = "tcp";
-        destination = "[::]:3636";
+        destination = "[::]:${builtins.toString vars.ports.lldap-ldaps}";
       }
     ];
   };

@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   # Enable the OpenSSH daemon.
   imports = [
@@ -20,7 +21,7 @@ in {
     openssh.enable = true;
     redis.servers.homarr = {
       enable = true;
-      port = 6379;
+      port = vars.ports.redis-services-homarr;
     };
     # forgejo = {
     #   enable = true;
