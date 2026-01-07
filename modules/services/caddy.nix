@@ -117,7 +117,7 @@ in {
       };
       "homarr.whowhatetc.com" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org{uri}
+          reverse_proxy http://localhost:3000
         '';
       };
       "lldap.whowhatetc.com" = {
