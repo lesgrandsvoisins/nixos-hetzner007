@@ -28,19 +28,19 @@ in {
     uid = vars.uid.mael;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.homarr = {
-    isNormalUser = true;
-    description = "homarr";
-    extraGroups = ["caddy" "services"];
-    packages = with pkgs.unstable; [
-      nodejs_25
-      (pnpm_10.override {nodejs = nodejs_25;})
-      pnpmConfigHook
-      # fetchPnpmDeps
-    ];
-    uid = vars.uid.homarr;
-  };
+  # # Define a user account. Don't forget to set a password with ‘passwd’.
+  # users.users.homarr = {
+  #   isNormalUser = true;
+  #   description = "homarr";
+  #   extraGroups = ["caddy" "services"];
+  #   packages = with pkgs.unstable; [
+  #     nodejs_25
+  #     (pnpm_10.override {nodejs = nodejs_25;})
+  #     pnpmConfigHook
+  #     # fetchPnpmDeps
+  #   ];
+  #   uid = vars.uid.homarr;
+  # };
 
   users.users.caddy = {
     uid = vars.uid.caddy;

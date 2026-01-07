@@ -14,6 +14,5 @@ in {
     };
     autoStart = true;
     flake = "path:/home/mannchri/whowhatetc-nixos/containers/homarr";
-    # config = /home/mannchri/whowhatetc-nixos/containers/homarr/config
   };
 }

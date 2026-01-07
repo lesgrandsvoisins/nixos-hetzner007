@@ -3,7 +3,7 @@
   gid.users = 100;
   gid.services = 500;
   uid.caddy = 239;
-  uid.homarr = 1002;
+  uid.homarr = 1002; # Ce n'est plus utilisé
   uid.mael = 1003;
   uid.mannchri = 1000;
   uid.lldap = 501;
