@@ -2,9 +2,9 @@
   pkgs,
   lib,
   config,
+  vars,
   ...
 }: let
-  vars = import ../../vars.nix;
 in {
   users.users.wiki-js = {
     isSystemUser = true;

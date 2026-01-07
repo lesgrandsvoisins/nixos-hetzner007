@@ -1,5 +1,12 @@
 # home.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  vars,
+  ...
+}: let
+in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

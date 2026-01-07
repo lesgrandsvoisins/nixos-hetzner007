@@ -2,10 +2,11 @@
   config,
   pkgs,
   lib,
+  vars,
   ...
 }: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
-  vars = ../../vars.nix;
+  # vars = ../../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"

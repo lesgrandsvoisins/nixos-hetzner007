@@ -1,9 +1,10 @@
 {
-  config,
   pkgs,
+  lib,
+  config,
+  vars,
   ...
 }: let
-  vars = import ../../vars.nix;
 in {
   networking.firewall = {
     enable = true;

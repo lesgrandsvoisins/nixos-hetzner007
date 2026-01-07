@@ -12,12 +12,18 @@
       system = "x86_64-linux";
 
       modules = [
-        ({pkgs, ...}: let
+        ({
+          pkgs,
+          lib,
+          config,
+          vars,
+          ...
+        }: let
           # vars = import ../../vars.nix;
           # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
         in {
           boot.isContainer = true;
-          boot.isNspawnContainer=true;
+          boot.isNspawnContainer = true;
 
           # networking.firewall.allowedTCPPorts = [80 443];
           # networking.hostname = "homarr";

@@ -1,9 +1,10 @@
 {
   config,
   pkgs,
+  lib,
+  vars,
   ...
 }: let
-  vars = import ../vars.nix;
 in {
   # Enable the OpenSSH daemon.
   imports = [

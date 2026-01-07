@@ -1,4 +1,10 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  vars,
+  ...
+}: let
 in {
   systemd.services = {
     homarr = {

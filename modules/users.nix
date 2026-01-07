@@ -1,11 +1,13 @@
 {
-  config,
   pkgs,
+  lib,
+  config,
+  vars,
   ...
 }: let
   # home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  vars = import ../vars.nix;
+  # vars = import ../vars.nix;
 in {
   # imports = [
   #   (import "${home-manager}/nixos")

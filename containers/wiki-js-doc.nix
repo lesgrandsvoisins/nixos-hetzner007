@@ -2,9 +2,10 @@
   config,
   pkgs,
   lib,
+  vars,
   ...
 }: let
-  vars = import ../vars.nix;
+  # vars = import ../vars.nix;
 in {
   containers.wiki-js-doc = {
     localAddress = "10.0.10.101";

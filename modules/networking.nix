@@ -1,9 +1,11 @@
 {
   config,
   pkgs,
+  lib,
+  vars,
   ...
 }: let
-  external-mac = "90:1b:0e:9e:ec:37";
+  external-mac = (builtins.elemAt vars.hetzner.interfaces 0).mac;
   ext-if = "enx901b0e9eec37";
   external-ip = "213.239.216.138";
   external-gw = "213.239.216.159";

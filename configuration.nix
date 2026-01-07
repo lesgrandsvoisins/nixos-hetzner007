@@ -6,6 +6,7 @@
   pkgs,
   home-manager,
   lib,
+  vars,
   ...
 }: let
 in {

@@ -1,5 +1,11 @@
-{pkgs, ...}: let
-  vars = import ../../vars.nix;
+{
+  pkgs,
+  lib,
+  config,
+  vars,
+  ...
+}: let
+  # vars = import ../../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /etc/lldap 0775 lldap services"

@@ -18,9 +18,13 @@
   ports.lldap-ldap = 3890;
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
-  hetzner.ipv4 = [
+  hetzner.interfaces = [
     {
       mac = "90:1b:0e:9e:ec:37";
+    }
+  ];
+  hetzner.ipv4 = [
+    {
       interface = "enx901b0e9eec37";
       ip = "213.239.216.138";
       gw = "213.239.216.159";

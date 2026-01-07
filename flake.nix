@@ -27,7 +27,9 @@
   #  in {
   #  }
   #) //
-  {
+  let
+    vars = import ./vars.nix;
+  in {
     nixosConfigurations = {
       whowhatetc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -37,7 +39,7 @@
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit vars inputs;};
       };
     };
   };

@@ -1,9 +1,11 @@
-
-{ config, pkgs, ... }:
-let
-in
 {
-
+  config,
+  pkgs,
+  libs,
+  vars,
+  ...
+}: let
+in {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
