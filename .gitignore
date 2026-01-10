@@ -8,3 +8,7 @@ result-*
 node_modules
 work
 dist
+
+/result
+/.direnv
+/.pre-commit-config.yaml

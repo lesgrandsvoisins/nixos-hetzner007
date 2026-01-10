@@ -2,39 +2,41 @@
   description = "grandsvoisins.com configuration";
 
   inputs = {
-    # self.submodules = true; # See ./vendor
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
 
     # Principle inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-unified.url = "github:srid/nixos-unified";
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs = {
-      darwin.follows = "nix-darwin";
-      home-manager.follows = "home-manager";
-      nixpkgs.follows = "nixpkgs";
-    };
+    # nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+    # nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    # home-manager.url = "github:nix-community/home-manager/release-25.11";
+    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # nixos-hardware.url = "github:NixOS/nixos-hardware";
+    # nixos-unified.url = "github:srid/nixos-unified";
+    # disko.url = "github:nix-community/disko";
+    # disko.inputs.nixpkgs.follows = "nixpkgs";
+    # agenix.url = "github:ryantm/agenix";
+    # agenix.inputs = {
+    #   darwin.follows = "nix-darwin";
+    #   home-manager.follows = "home-manager";
+    #   nixpkgs.follows = "nixpkgs";
+    # };
     # nuenv.url = "github:hallettj/nuenv/writeShellApplication";
 
     # Software inputs
     # github-nix-ci.url = "github:juspay/github-nix-ci";
-    nixos-vscode-server.flake = false;
-    nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    # nixos-vscode-server.flake = false;
+    # nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
+    # nix-index-database.url = "github:nix-community/nix-index-database";
+    # nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     # vira.url = "github:juspay/vira/logsink";
     # nix-ai-tools.url = "github:numtide/nix-ai-tools";
     # nix-ai-tools.inputs.nixpkgs.follows = "nixpkgs";
-    landrun-nix.url = "github:srid/landrun-nix";
+    # landrun-nix.url = "github:srid/landrun-nix";
     # AI.url = "path:vendor/AI";
     # AI.flake = false;
     # jumphost-nix.url = "path:vendor/jumphost-nix";
@@ -55,11 +57,14 @@
 
   outputs = inputs @ {self, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
-      imports = with builtins;
-        map
-        (fn: ./modules/flake-parts/${fn})
-        (attrNames (readDir ./modules/flake-parts));
+      # systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+
+      (inputs.import-tree ./modules);
+
+      # imports = with builtins;
+      #   map
+      #   (fn: ./modules/flake-parts/${fn})
+      #   (attrNames (readDir ./modules/flake-parts));
 
       perSystem = {
         lib,
