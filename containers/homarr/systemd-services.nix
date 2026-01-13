@@ -32,7 +32,7 @@ in {
       #   /run/current-system/sw/bin/pnpm next start /home/homarr/homarr/apps/nextjs/
       # '';
       # environment = "/etc/homarr/homarr.env";
-      script = "/home/homarr/homarr/bin/start.sh";
+      script = "/home/homarr/homarr/start.sh";
       path = with pkgs; [
         nodejs_25
         (pnpm_10.override {nodejs = nodejs_25;})
