@@ -39,6 +39,42 @@ in {
             address = (builtins.elemAt vars.hetzner.ipv6 0).addr;
             prefixLength = (builtins.elemAt vars.hetzner.ipv6 0).netmask;
           }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 1).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 1).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 2).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 2).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 3).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 3).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 4).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 4).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 5).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 5).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 6).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 6).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 7).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 7).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 8).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 8).netmask;
+          }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+          }
         ];
       };
     };
