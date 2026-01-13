@@ -10,8 +10,58 @@
   vars = import ../../vars.nix;
 in {
   systemd.services = {
-    homarr = {
+    homarr-tasks = {
       enable = true;
+      wantedBy = ["multi-user.target"];
+      unitConfig = {
+        Type = "simple";
+        # ...
+      };
+      script = ''
+        node apps/tasks/tasks.cjs
+      '';
+      path = with pkgs; [
+        nodejs_25
+        (pnpm_10.override {nodejs = nodejs_25;})
+        pnpmConfigHook
+      ];
+      serviceConfig = {
+        WorkingDirectory = "/home/homarr/homarr/";
+        User = "homarr";
+        Group = "users";
+        Restart = "always";
+        # Type = "simple";
+        EnvironmentFile = "/etc/homarr/homarr.env";
+      };
+    };
+    homarr-websocket = {
+      enable = true;
+      wantedBy = ["multi-user.target"];
+      script = ''
+        node apps/websocket/wssServer.cjs
+      '';
+      unitConfig = {
+        Type = "simple";
+        # ...
+      };
+      requires = ["homarr-tasks.service"];
+      path = with pkgs; [
+        nodejs_25
+        (pnpm_10.override {nodejs = nodejs_25;})
+        pnpmConfigHook
+      ];
+      serviceConfig = {
+        WorkingDirectory = "/home/homarr/homarr/";
+        User = "homarr";
+        Group = "users";
+        Restart = "always";
+        # Type = "simple";
+        EnvironmentFile = "/etc/homarr/homarr.env";
+      };
+    };
+    homarr-nextjs = {
+      enable = true;
+      requires = ["homarr-websocket.service"];
       unitConfig = {
         Type = "simple";
         # ...
@@ -27,9 +77,7 @@ in {
       # alias node=/run/current-system/sw/bin/node
       # alias pnpm=/run/current-system/sw/bin/pnpm
       script = ''
-        /run/current-system/sw/bin/node apps/tasks/tasks.cjs &
-        /run/current-system/sw/bin/node apps/websocket/wssServer.cjs &
-        /run/current-system/sw/bin/pnpm next start /home/homarr/homarr/apps/nextjs/
+        pnpm next start /home/homarr/homarr/apps/nextjs/
       '';
       # environment = "/etc/homarr/homarr.env";
       # script = "/home/homarr/homarr/start.sh";
