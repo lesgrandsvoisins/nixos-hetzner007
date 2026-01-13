@@ -4,6 +4,7 @@ switch-flake:
 	# git push
 	make -C ./containers/homarr/ update
 	sudo nixos-rebuild switch --upgrade --flake ./#whowhatetc
+	sudo machinectl restart homarr
 
 flake-check:
 	nix flake check
