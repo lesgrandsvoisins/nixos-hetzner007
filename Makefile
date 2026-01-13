@@ -6,9 +6,9 @@ switch-flake:
 	sudo nixos-rebuild switch --upgrade --flake ./#whowhatetc
 	sudo machinectl restart homarr
 
-flake-check:
-	nix flake check
+check:
 	make -C ./containers/homarr check
+	nix flake check
 
 take-out-the-old-garbage:
 	nix-collect-garbage --delete-older-than 7d
