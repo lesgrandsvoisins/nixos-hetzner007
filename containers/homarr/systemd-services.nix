@@ -12,15 +12,18 @@ in {
       enable = true;
       wantedBy = ["default.target"];
       description = "Système de tableaux de bords Homarr";
-      script = "/home/homarr/homarr/start.sh";
+      # script = "/home/homarr/homarr/start.sh";
       # script = ''
       #   /run/current-system/sw/bin/node --env-file=/etc/homarr/homarr.env apps/tasks/tasks.cjs &
       #   /run/current-system/sw/bin/node --env-file=/etc/homarr/homarr.env apps/websocket/wssServer.cjs &
       #   /run/current-system/sw/bin/pnpm dotenv -e /etc/homarr/homarr.env -- next start /home/homarr/homarr/apps/nextjs/
       # '';
-      # environment = {
-      #   PATH = "/run/wrappers/bin:/home/homarr/.nix-profile/bin:/nix/profile/bin:/home/homarr/.local/state/nix/profile/bin:/etc/profiles/per-user/homarr/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-      # };
+      script = ''
+        /run/current-system/sw/bin/node apps/tasks/tasks.cjs &
+        /run/current-system/sw/bin/node apps/websocket/wssServer.cjs &
+        /run/current-system/sw/bin/pnpm next start /home/homarr/homarr/apps/nextjs/
+      '';
+      # environment = "/etc/homarr/homarr.env";
 
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr/";
@@ -28,6 +31,7 @@ in {
         Group = "users";
         Restart = "always";
         # Type = "simple";
+        EnvironmentFile = "/etc/homarr/homarr.env";
       };
     };
   };

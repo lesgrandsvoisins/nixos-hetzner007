@@ -8,6 +8,7 @@ switch-flake:
 
 flake-check:
 	nix flake check
+	make -C ./containers/homarr check
 
 take-out-the-old-garbage:
 	nix-collect-garbage --delete-older-than 7d
