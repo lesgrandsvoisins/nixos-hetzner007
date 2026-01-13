@@ -19,6 +19,8 @@ in {
       #   /run/current-system/sw/bin/pnpm dotenv -e /etc/homarr/homarr.env -- next start /home/homarr/homarr/apps/nextjs/
       # '';
       script = ''
+        alias node=/run/current-system/sw/bin/node
+        alias pnpm=/run/current-system/sw/bin/pnpm
         /run/current-system/sw/bin/node apps/tasks/tasks.cjs &
         /run/current-system/sw/bin/node apps/websocket/wssServer.cjs &
         /run/current-system/sw/bin/pnpm next start /home/homarr/homarr/apps/nextjs/
