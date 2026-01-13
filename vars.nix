@@ -22,7 +22,7 @@
     {
       mac = "90:1b:0e:9e:ec:37";
       interface = "enx901b0e9eec37";
-      ip = "213.239.216.138";
+      addr = "213.239.216.138";
       gw = "213.239.216.159";
       netmask = "27";
     }
@@ -36,7 +36,52 @@
     {
       addr = "2a01:4f8:a0:73ba::";
       gw = "fe80::1";
-      netmask = "64";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::1";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::2";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::3";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::4";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::5";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::6";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::7";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::8";
+      gw = "fe80::1";
+      netmask = 64;
+    }
+    {
+      addr = "2a01:4f8:a0:73ba::9";
+      gw = "fe80::1";
+      netmask = 64;
     }
   ];
   hetzner.interface = "eth0";
