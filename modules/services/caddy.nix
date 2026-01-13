@@ -103,12 +103,12 @@ in {
       };
       "auth.whowhatetc.com" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org{uri}
+          redir https://gvois.grandsvoisins.org{uri} 301
         '';
       };
       "test.whowhatetc.com" = {
         extraConfig = ''
-          redir https://.ggvv.org{uri}
+          redir https://test.ggvv.org{uri}
         '';
       };
       "maelanc.whowhatetc.com" = {
@@ -118,7 +118,32 @@ in {
       };
       "homarr.whowhatetc.com" = {
         extraConfig = ''
-          reverse_proxy http://localhost:3000
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
+      "www.gvois.com" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
+      "gvois.com" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
+      "gvois.org" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
+      "www.gvois.org" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
+      "gvois.grandsvoisins.com" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
         '';
       };
       "lldap.whowhatetc.com" = {
@@ -162,12 +187,12 @@ in {
       };
       "www.quiquoietc.com" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org
+          redir https://gvois.grandsvoisins.org
         '';
       };
       "quiquoietc.com" = {
         extraConfig = ''
-          redir https://homarr.ggvv.org
+          redir https://gvois.grandsvoisins.org
         '';
       };
       "auth.ggvv.org" = {
@@ -191,7 +216,7 @@ in {
           reverse_proxy http://localhost:8090
         '';
       };
-      "homarr.ggvv.org" = {
+      "gvois.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
