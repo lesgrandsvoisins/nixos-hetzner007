@@ -2,9 +2,10 @@
   pkgs,
   lib,
   config,
-  vars,
+  # vars,
   ...
 }: let
+  vars = import ../../vars.nix;
 in {
   systemd.services = {
     homarr = {
@@ -16,9 +17,9 @@ in {
         /run/current-system/sw/bin/node --env-file=/etc/homarr/homarr.env apps/websocket/wssServer.cjs &
         /run/current-system/sw/bin/pnpm -F nextjs start
       '';
-      environment = {
-        PATH = "/run/wrappers/bin:/home/homarr/.nix-profile/bin:/nix/profile/bin:/home/homarr/.local/state/nix/profile/bin:/etc/profiles/per-user/homarr/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
-      };
+      # environment = {
+      #   PATH = "/run/wrappers/bin:/home/homarr/.nix-profile/bin:/nix/profile/bin:/home/homarr/.local/state/nix/profile/bin:/etc/profiles/per-user/homarr/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+      # };
 
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr/";

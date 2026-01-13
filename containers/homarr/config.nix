@@ -2,9 +2,10 @@
   pkgs,
   lib,
   config,
-  vars,
+  # vars,
   ...
 }: let
+  vars = import ../../vars.nix;
   # unstable = import <nixpkgs-unstable>;
 in {
   nix.settings.experimental-features = ["nix-command flakes"];

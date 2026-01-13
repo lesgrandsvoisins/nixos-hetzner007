@@ -2,9 +2,10 @@
   pkgs,
   lib,
   config,
-  vars,
+  # vars,
   ...
 }: let
+  vars = import ../../vars.nix;
 in {
   services = {
     redis.servers.homarr.enable = true;

@@ -2,9 +2,10 @@
   pkgs,
   config,
   lib,
-  vars,
+  # vars,
   ...
 }: let
+  vars = import ../../vars.nix;
 in {
   users.users.homarr = {
     isNormalUser = true;

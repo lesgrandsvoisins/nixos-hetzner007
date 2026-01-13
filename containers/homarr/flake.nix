@@ -5,7 +5,7 @@
     self,
     nixpkgs,
   }: let
-    # vars = import ../../vars.nix;
+    vars = import ../../vars.nix;
     # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
   in {
     nixosConfigurations.container = nixpkgs.lib.nixosSystem {
@@ -16,7 +16,7 @@
           pkgs,
           lib,
           config,
-          vars,
+          # vars,
           ...
         }: let
           # vars = import ../../vars.nix;
