@@ -2,7 +2,6 @@ rebuild:
 	git pull
 	# git commit -am "Building new system"
 	# git push
-	make -C ./containers/homarr/ update
 	sudo nixos-rebuild switch --upgrade --flake ./#whowhatetc
 
 rebuild-ass:

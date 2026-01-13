@@ -121,6 +121,11 @@ in {
           redir https://gvois.grandsvoisins.org{uri} 301
         '';
       };
+      "homarr.ggvv.org" = {
+        extraConfig = ''
+          redir https://gvois.grandsvoisins.org{uri} 301
+        '';
+      };
       "www.gvois.com" = {
         extraConfig = ''
           redir https://gvois.grandsvoisins.org{uri} 301
