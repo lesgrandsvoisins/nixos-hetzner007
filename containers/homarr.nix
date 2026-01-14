@@ -14,6 +14,6 @@ in {
     bindMounts = {
     };
     autoStart = true;
-    flake = "path:/home/mannchri/whowhatetc-nixos/containers/homarr";
+    flake = "path:/home/mannchri/grandsvoisins-nixos/containers/homarr";
   };
 }

@@ -1,6 +1,6 @@
-# whowhatetc-nixos
+# grandsvoisins-nixos
 
-Configuration Nixos du Serveur WhoWhatEtc
+Configuration Nixos du Serveur grandsvoisins
 
 ## Références
 

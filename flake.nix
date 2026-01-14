@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    # caddy-ui-whowhatetc.url = "path:./flakes/caddy-ui";
+    # caddy-ui-grandsvoisins.url = "path:./flakes/caddy-ui";
     # homarr.url = "path:./flakes/homarr";
     agenix.url = "github:ryantm/agenix";
     flake-utils.url = "github:numtide/flake-utils";
@@ -31,7 +31,7 @@
     vars = import ./vars.nix;
   in {
     nixosConfigurations = {
-      whowhatetc = nixpkgs.lib.nixosSystem {
+      grandsvoisins = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./overlays.nix
