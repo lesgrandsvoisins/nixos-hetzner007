@@ -18,5 +18,29 @@ in {
     # pocketbase
     nftables
     net-tools
+
+    ghost-cli
+
+    htop
+    pnpm
+    bottom
+    coreutils
+    findutils # locate
+    jq
+    killall
+    mosh
+    procs
+    tree
+    unzip
+    dust # dust
+    ripgrep # rg
+    sd # sed alternative
+    fx # pour json
+    mkcert
+    httpie
+    nil # nix
+    shellcheck
+    shfmt
+    statix
   ];
 }
