@@ -4,7 +4,7 @@ rebuild:
 	# git push
 	sudo nixos-rebuild switch --upgrade --flake ./#grandsvoisins
 
-rebuild-ass:
+rebuild-all:
 	make rebuild
 	make -C ./containers/homarr/ update
 	sudo machinectl restart homarr
