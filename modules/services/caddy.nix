@@ -174,6 +174,11 @@ in {
           reverse_proxy http://[::1]:3480
         '';
       };
+      "wiki.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://[::1]:3480
+        '';
+      };
       "www.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000

@@ -8,6 +8,7 @@
   vars = import ../../vars.nix;
   # unstable = import <nixpkgs-unstable>;
 in {
+  networking.hostName = "homarr";
   nix.settings.experimental-features = ["nix-command flakes"];
   imports = [
     ../modules/packages/vim.nix
@@ -16,6 +17,7 @@ in {
     ./systemd-services.nix
     ./users.nix
   ];
+
   environment.systemPackages = [
     unstable.nodejs_25
     (unstable.pnpm_10.override {nodejs = unstable.nodejs_25;})
