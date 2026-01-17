@@ -49,6 +49,11 @@ in {
     group = "caddy";
     isSystemUser = true;
   };
+  users.users.keycloak = {
+    uid = vars.uid.keycloak;
+    group = "services";
+    isSystemUser = true;
+  };
   users.users.lldap = {
     uid = vars.uid.lldap;
     group = "services";

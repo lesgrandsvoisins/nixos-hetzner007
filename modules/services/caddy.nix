@@ -169,6 +169,13 @@ in {
 
       ############################3
 
+      "keycloak.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy https://192.168.105.11 {
+            tls_trust_pool /etc/keycloak/certs/keycloak.pem
+          }
+        '';
+      };
       "wiki.ggvv.org" = {
         extraConfig = ''
           reverse_proxy http://[::1]:3480

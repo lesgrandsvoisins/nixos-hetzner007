@@ -8,6 +8,7 @@
   uid.mannchri = 1000;
   uid.lldap = 501;
   uid.wiki-js = 502;
+  uid.keycloak = 503;
   ports.postgresql = 5434;
   ports.wiki-js-www-https = 3443;
   ports.wiki-js-www-http = 3480;
