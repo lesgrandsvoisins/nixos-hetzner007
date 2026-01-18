@@ -4,10 +4,12 @@
   lib,
   vars,
   ...
-}: let
+}:
+let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
   # vars = ../../vars.nix;
-in {
+in
+{
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
     "f /etc/caddy/caddy.env 0664 caddy users"
@@ -25,7 +27,7 @@ in {
   services.caddy = {
     enable = true;
     package = pkgs.caddy.withPlugins {
-      plugins = ["github.com/greenpau/caddy-security@v1.1.31"];
+      plugins = [ "github.com/greenpau/caddy-security@v1.1.31" ];
       hash = "sha256-aM5UdzmqOwGcdQUzDAEEP30CC1W2UPD10QhF0i7GwQE=";
     };
 
@@ -171,16 +173,22 @@ in {
 
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
-          # caddy trust /etc/keycloak/certs/keycloak.pem
-          reverse_proxy https://[2a01:4f8:241:4faa::11] {
-        transport http {
-            # tls
-            # tls_insecure_skip_verify
-            tls_trust_pool file {
-              pem_file /etc/keycloak/certs/keycloak.pem
-            }
-        }
-    }
+                # caddy trust /etc/keycloak/certs/keycloak.pem
+                reverse_proxy https://[2a01:4f8:241:4faa::11] {
+              transport http {
+                  tls
+                  tls_server_name localhost
+                  # tls_insecure_skip_verify
+                  tls_trust_pool file {
+                    pem_file /etc/keycloak/certs/keycloak.pem
+                  }
+                  header_up Host {upstream_hostport}
+                  header_up X-Real-IP {remote}
+                  header_up X-Forwarded-For {remote}
+                  header_up X-Forwarded-Port {server_port}
+                  header_up X-Forwarded-Proto {scheme}
+              }
+          }
         '';
       };
       "wiki.ggvv.org" = {
