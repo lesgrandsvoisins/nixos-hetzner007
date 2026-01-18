@@ -27,5 +27,8 @@ in {
     tmux
     uv
     wget
+    net-tools
+    unzip
+    mkcert
   ];
 }

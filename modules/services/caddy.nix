@@ -171,7 +171,7 @@ in {
 
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
-          reverse_proxy https://192.168.105.11 {
+          reverse_proxy https://[2a01:4f8:241:4faa::11] {
             # tls_trust_pool /etc/keycloak/certs/keycloak.pem
           }
         '';

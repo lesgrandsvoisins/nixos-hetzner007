@@ -17,7 +17,6 @@ in {
     nixos-container
     # pocketbase
     nftables
-    net-tools
 
     ghost-cli
 
@@ -31,12 +30,10 @@ in {
     mosh
     procs
     tree
-    unzip
     dust # dust
     ripgrep # rg
     sd # sed alternative
     fx # pour json
-    mkcert
     httpie
     nil # nix
     shellcheck
