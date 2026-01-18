@@ -14,7 +14,10 @@ in
   ];
   containers.keycloak = {
     bindMounts = { 
-      
+      "/etc/keycloak/" = {
+        hostPath = "/etc/keycloak/";
+        isReadOnly = true;
+      };
     };
     autoStart = true;
     privateNetwork = true;

@@ -12,10 +12,6 @@
 in {
   containers.homarr = {
     bindMounts = {
-      "/etc/keycloak/" = {
-        hostPath = "/etc/keycloak/";
-        isReadOnly = true;
-      };
     };
     autoStart = true;
     flake = "path:/home/mannchri/grandsvoisins-nixos/containers/homarr";
