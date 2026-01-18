@@ -18,7 +18,7 @@ in {
     # pocketbase
     nftables
 
-    ghost-cli
+    # ghost-cli
 
     htop
     pnpm
@@ -39,5 +39,8 @@ in {
     shellcheck
     shfmt
     statix
+
+    caddy
+    nss
   ];
 }
