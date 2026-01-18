@@ -13,7 +13,9 @@ in
     "d /etc/keycloak/certs 0660 root root"
   ];
   containers.keycloak = {
-    bindMounts = { };
+    bindMounts = { 
+      
+    };
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.105.10";
