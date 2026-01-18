@@ -25,8 +25,8 @@ in
     localAddress = "192.168.105.11";
     # hostAddress6 = "fa01::1";
     # localAddress6 = "fa01::2";
-    hostAddress6 = "2a01:4f8:241:4faa::10/64";
-    localAddress6 = "2a01:4f8:241:4faa::11/64";
+    hostAddress6 = "2a01:4f8:241:4faa::10";
+    localAddress6 = "2a01:4f8:241:4faa::11";
     config = {
       system.stateVersion = "25.11";
       nix.settings.experimental-features = "nix-command flakes";

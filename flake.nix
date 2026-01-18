@@ -31,7 +31,7 @@
     vars = import ./vars.nix;
   in {
     nixosConfigurations = {
-      grandsvoisins = nixpkgs.lib.nixosSystem {
+      hetzner007 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./overlays.nix

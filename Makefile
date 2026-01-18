@@ -2,7 +2,7 @@ rebuild:
 	git pull
 	# git commit -am "Building new system"
 	# git push
-	sudo nixos-rebuild switch --upgrade --flake ./#grandsvoisins
+	sudo nixos-rebuild switch --upgrade --flake ./#hetzner007
 
 rebuild-all:
 	make rebuild
