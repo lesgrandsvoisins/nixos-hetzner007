@@ -176,7 +176,9 @@ in {
         transport http {
             # tls
             # tls_insecure_skip_verify
-            tls_trust_pool file /etc/keycloak/certs/keycloak.pem
+            tls_trust_pool file {
+              pem_file /etc/keycloak/certs/keycloak.pem
+            }
         }
     }
         '';
