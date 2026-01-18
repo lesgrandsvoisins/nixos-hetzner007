@@ -167,14 +167,12 @@ in {
         '';
       };
 
-      ############################3
+      ############################
 
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
-          reverse_proxy https://[2a01:4f8:241:4faa::11] {
-            tls_trust_pool /etc/keycloak/certs/keycloak.pem
-            # tls internal
-          }
+          # caddy trust /etc/keycloak/certs/keycloak.pem
+          reverse_proxy https://[2a01:4f8:241:4faa::11] 
         '';
       };
       "wiki.ggvv.org" = {
