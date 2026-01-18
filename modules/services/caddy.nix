@@ -172,7 +172,13 @@ in {
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
           # caddy trust /etc/keycloak/certs/keycloak.pem
-          reverse_proxy https://[2a01:4f8:241:4faa::11] 
+          reverse_proxy https://[2a01:4f8:241:4faa::11] {
+        transport http {
+            # tls
+            # tls_insecure_skip_verify
+            tls_trust_pool /etc/keycloak/certs/keycloak.pem
+        }
+    }
         '';
       };
       "wiki.ggvv.org" = {
