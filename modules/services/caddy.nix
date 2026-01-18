@@ -174,10 +174,10 @@ in
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
                 # caddy trust /etc/keycloak/certs/keycloak.pem
-                reverse_proxy https://[2a01:4f8:241:4faa::11] {
+                reverse_proxy ipv6/[2a01:4f8:241:4faa::11] {
               transport http {
                   tls
-                  tls_server_name localhost
+                  # tls_server_name localhost
                   # tls_insecure_skip_verify
                   tls_trust_pool file {
                     pem_file /etc/keycloak/certs/keycloak.pem
