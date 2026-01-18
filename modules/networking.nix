@@ -26,7 +26,10 @@ in {
   };
   networking = {
     hostName = "hetzner007";
-    domain = "grandsvoisins.org";
+    domain = "hetzner007.grandsvoisins.org";
+    hosts = {
+      "2a01:4f8:241:4faa::11" = ["keycloak.local"];
+    };
     useNetworkd = true;
     enableIPv6 = true;
     defaultGateway6 = {
@@ -73,10 +76,10 @@ in {
             address = (builtins.elemAt vars.hetzner.ipv6 8).addr;
             prefixLength = (builtins.elemAt vars.hetzner.ipv6 8).netmask;
           }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
-          }
+          # {
+          #   address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+          #   prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+          # }
         ];
       };
     };

@@ -13,7 +13,7 @@ in
     "d /etc/keycloak/certs 0660 root root"
   ];
   containers.keycloak = {
-    bindMounts = { 
+    bindMounts = {
       "/etc/keycloak/" = {
         hostPath = "/etc/keycloak/";
         isReadOnly = true;
@@ -35,6 +35,11 @@ in
         ../modules/packages/vim.nix
       ];
       networking = {
+        hostName = "keycloak";
+        domain = "keycloak.grandsvoisins.org";
+        hosts = {
+          "2a01:4f8:241:4faa::11" = [ "keycloak.local" ];
+        };
         useHostResolvConf = false;
         interfaces."eth0".useDHCP = true;
         firewall = {
@@ -46,6 +51,16 @@ in
             5432
             14443
           ];
+        };
+        interfaces.eth0 = {
+          ipv6 = {
+            addresses = [
+              {
+                address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+                prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+              }
+            ];
+          };
         };
       };
       systemd.tmpfiles.rules = [
@@ -75,8 +90,8 @@ in
             proxy-headers = "xforwarded";
             hostname = "keycloak.grandsvoisins.org";
           };
-          sslCertificate = "/etc/keycloak/certs/keycloak.pem";
-          sslCertificateKey = "/etc/keycloak/certs/keycloak-key.pem";
+          sslCertificate = "/etc/keycloak/certs/keycloak.local.pem";
+          sslCertificateKey = "/etc/keycloak/certs/keycloak.local-key.pem";
         };
       };
     };
