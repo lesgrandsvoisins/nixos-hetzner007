@@ -182,11 +182,11 @@ in
                   tls_trust_pool file {
                     pem_file /etc/keycloak/certs/keycloak.pem
                   }
-                  header_up Host {upstream_hostport}
-                  header_up X-Real-IP {remote}
-                  header_up X-Forwarded-For {remote}
-                  header_up X-Forwarded-Port {server_port}
-                  header_up X-Forwarded-Proto {scheme}
+                  # header_up Host {upstream_hostport}
+                  # header_up X-Real-IP {remote}
+                  # header_up X-Forwarded-For {remote}
+                  # header_up X-Forwarded-Port {server_port}
+                  # header_up X-Forwarded-Proto {scheme}
               }
           }
         '';
