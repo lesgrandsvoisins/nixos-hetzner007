@@ -76,10 +76,10 @@ in {
             address = (builtins.elemAt vars.hetzner.ipv6 8).addr;
             prefixLength = (builtins.elemAt vars.hetzner.ipv6 8).netmask;
           }
-          # {
-          #   address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
-          #   prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
-          # }
+          {
+            address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+            prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+          }
         ];
       };
     };
