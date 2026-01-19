@@ -93,16 +93,6 @@ in
       externalInterface = "eth0";
       enableIPv6 = true;
       forwardPorts = [
-        {
-          destination = "[fa01::2]:443";
-          proto = "tcp";
-          sourcePort = 444;
-        }
-        {
-          destination = "[fa01::2]:80";
-          proto = "tcp";
-          sourcePort = 88;
-        }
       ];
     };
 

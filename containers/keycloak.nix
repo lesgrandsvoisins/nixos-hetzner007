@@ -52,16 +52,16 @@ in
             14443
           ];
         };
-        interfaces.eth0 = {
-          ipv6 = {
-            addresses = [
-              {
-                address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
-                prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
-              }
-            ];
-          };
-        };
+        # interfaces.eth0 = {
+        #   ipv6 = {
+        #     addresses = [
+        #       {
+        #         address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+        #         prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+        #       }
+        #     ];
+        #   };
+        # };
       };
       systemd.tmpfiles.rules = [
         "d /etc/keycloak/certs 0660 root root"
@@ -85,8 +85,9 @@ in
             host = "localhost";
           };
           settings = {
-            # https-port = 14443;
-            # http-port = 14080;
+            https-port = 443;
+            http-port = 80;
+            http-host = "keycloak.local";
             proxy-headers = "xforwarded";
             hostname = "keycloak.grandsvoisins.org";
           };
