@@ -4,7 +4,8 @@
   lib,
   vars,
   ...
-}: let
+}:
+let
   vars = import ../vars.nix;
   # external-mac = "90:1b:0e:9e:ec:37";
   # ext-if = "enx901b0e9eec37";
@@ -17,7 +18,8 @@
   # external-ip6 = "2a01:4f8:a0:73ba::";
   # external-gw6 = "fe80::1";
   # external-netmask6 = "64";
-in {
+in
+{
   imports = [
     ./networking/firewall.nix
   ];
@@ -28,7 +30,7 @@ in {
     hostName = "hetzner007";
     domain = "hetzner007.grandsvoisins.org";
     hosts = {
-      "2a01:4f8:241:4faa::11" = ["keycloak.local"];
+      "fa01::2" = [ "keycloak.local" ];
     };
     useNetworkd = true;
     enableIPv6 = true;
@@ -86,9 +88,28 @@ in {
 
     nat = {
       enable = true;
-      internalInterfaces = ["ve-*"];
+      internalInterfaces = [ "ve-*" ];
+      # internalInterfaces = ["ve-*" "br0"];
       externalInterface = "eth0";
       enableIPv6 = true;
+      forwardPorts = [
+        {
+          destination = "[fa01::2]:443";
+          proto = "tcp";
+          sourcePort = 444;
+        }
+        {
+          destination = "[fa01::2]:80";
+          proto = "tcp";
+          sourcePort = 88;
+        }
+      ];
     };
+
+    # bridges = {
+    #   br0 = {
+    #     interfaces = [];
+    #   };
+    # };
   };
 }

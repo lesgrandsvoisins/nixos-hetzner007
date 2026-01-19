@@ -4,12 +4,26 @@
   config,
   vars,
   ...
-}: let
-in {
+}:
+let
+in
+{
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 25 53 80 389 443 587 636 3636];
-    allowedUDPPorts = [53];
+    allowedTCPPorts = [
+      22
+      25
+      53
+      80
+      88 # Keycloak Forward
+      389
+      443
+      444 # Keycloak Forward
+      587
+      636
+      3636
+    ];
+    allowedUDPPorts = [ 53 ];
     # filterForward = true;
     # extraCommands = ''
     #   nftables -t nat -A POSTROUTING --sport 636 -p tcp -m tcp --dport 3636 -j MASQUERADE";
