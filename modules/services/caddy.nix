@@ -173,21 +173,21 @@ in
 
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
-                # caddy trust /etc/keycloak/certs/keycloak.pem
-                reverse_proxy https://keycloak.local {
-              transport http {
-                  tls
-                  tls_server_name keycloak.local
-                  # tls_insecure_skip_verify
-                  tls_trust_pool file {
-                    pem_file /etc/keycloak/certs/keycloak.local.pem
-                  }
-                  # header_up Host {upstream_hostport}
-                  # header_up X-Real-IP {remote}
-                  # header_up X-Forwarded-For {remote}
-                  # header_up X-Forwarded-Port {server_port}
-                  # header_up X-Forwarded-Proto {scheme}
-              }
+          # caddy trust /etc/keycloak/certs/keycloak.local.pem
+          reverse_proxy https://keycloak.local {
+            transport http {
+                tls
+                # tls_server_name keycloak.local
+                # tls_insecure_skip_verify
+                tls_trust_pool file {
+                  pem_file /etc/keycloak/certs/keycloak.local.pem
+                }
+                # header_up Host {upstream_hostport}
+                # header_up X-Real-IP {remote}
+                # header_up X-Forwarded-For {remote}
+                # header_up X-Forwarded-Port {server_port}
+                # header_up X-Forwarded-Proto {scheme}
+            }
           }
         '';
       };
