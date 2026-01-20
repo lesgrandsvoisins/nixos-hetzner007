@@ -153,6 +153,16 @@ in
           redir https://place.grandsvoisins.org{uri} 301
         '';
       };
+      "hopgv.com" = {
+        serverAliases = [
+          "www.hopgv.com"
+          "hopgv.org"
+          "www.hopgv.org"
+          "gafam.us"
+          "www.gafam.us"
+        ];
+        extraConfig = "redir https://place.grandsvoisins.org{uri} 301";
+      };
       # "lesgv.com" = {
       #   extraConfig = ''
       #     redir https://place.grandsvoisins.org{uri} 301
