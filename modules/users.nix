@@ -48,6 +48,7 @@ in {
     uid = vars.uid.caddy;
     group = "caddy";
     isSystemUser = true;
+    extraGroups = ["services"];
   };
   users.users.keycloak = {
     uid = vars.uid.keycloak;

@@ -177,7 +177,7 @@ in
           reverse_proxy https://keycloak.local {
             transport http {
                 tls
-                # tls_server_name keycloak.local
+                tls_server_name keycloak.local
                 # tls_insecure_skip_verify
                 tls_trust_pool file {
                   pem_file /etc/keycloak/certs/keycloak.local.pem
