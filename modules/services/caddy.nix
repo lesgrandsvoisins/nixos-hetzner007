@@ -143,12 +143,13 @@ in
           redir https://place.grandsvoisins.org{uri} 301
         '';
       };
-      "gvplace.com" = {
+      "gvplace.com"  = {
+        serverAliases = [ "www.gvplace.com"  ];
         extraConfig = ''
           redir https://place.grandsvoisins.org{uri} 301
         '';
       };
-      "www.gvplace.com" = {
+      = {
         extraConfig = ''
           redir https://place.grandsvoisins.org{uri} 301
         '';
