@@ -149,11 +149,6 @@ in
           redir https://place.grandsvoisins.org{uri} 301
         '';
       };
-      = {
-        extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
-        '';
-      };
       "hopgv.com" = {
         serverAliases = [
           "www.hopgv.com"
