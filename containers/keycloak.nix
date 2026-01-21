@@ -10,7 +10,7 @@ in
 {
 
   systemd.tmpfiles.rules = [
-    "d /etc/keycloak/certs 0660 root root"
+    "d /etc/keycloak/certs 0664 keycloak services"
   ];
   containers.keycloak = {
     bindMounts = {
@@ -64,7 +64,7 @@ in
         # };
       };
       systemd.tmpfiles.rules = [
-        "d /etc/keycloak/certs 0660 root root"
+        "d /etc/keycloak/certs 0664 keycloak services"
       ];
       users.users.keycloak = {
         uid = vars.uid.keycloak;

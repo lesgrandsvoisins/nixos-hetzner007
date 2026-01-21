@@ -47,6 +47,7 @@ in {
   users.users.caddy = {
     uid = vars.uid.caddy;
     # group = "caddy";
+    # group = "services";
     isSystemUser = true;
     extraGroups = ["services"];
   };
@@ -54,13 +55,14 @@ in {
     uid = vars.uid.keycloak;
     group = "services";
     isSystemUser = true;
+    extraGroups = ["caddy"];
   };
   users.users.lldap = {
     uid = vars.uid.lldap;
     group = "services";
     isSystemUser = true;
+    extraGroups = ["caddy"];
   };
-  users.users.lldap.extraGroups = ["caddy"];
   users.groups.caddy.gid = vars.gid.caddy;
   users.groups.services.gid = vars.gid.services;
   users.groups.users.gid = vars.gid.users;
