@@ -46,7 +46,7 @@ in {
 
   users.users.caddy = {
     uid = vars.uid.caddy;
-    group = "caddy";
+    # group = "caddy";
     isSystemUser = true;
     extraGroups = ["services"];
   };
