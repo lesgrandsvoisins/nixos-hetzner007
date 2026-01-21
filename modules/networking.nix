@@ -28,7 +28,7 @@ in
   };
   networking = {
     hostName = "hetzner007";
-    domain = "hetzner007.grandsvoisins.org";
+    domain = "hetzner007.gdvoisins.org";
     hosts = {
       "fa01::2" = [ "keycloak.local" ];
     };

@@ -1,4 +1,4 @@
-# grandsvoisins-nixos
+# nixos-hetzner007
 
 Configuration Nixos du Serveur grandsvoisins
 
