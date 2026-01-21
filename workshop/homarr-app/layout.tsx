@@ -40,22 +40,22 @@ const fontSans = Inter({
 
 // eslint-disable-next-line no-restricted-syntax
 export const generateMetadata = async (): Promise<Metadata> => ({
-  title: "Homarr",
+  title: "#GDVoisins : Les Grands Voisins",
   description:
-    "Simplify the management of your server with Homarr - a sleek, modern dashboard that puts all of your apps and services at your fingertips.",
+    "GD Voisins est un tableau de bord, un portail pour toutes et tous les Grands Voisins (de tous statuts socio-économiques)",
   openGraph: {
-    title: "Homarr Dashboard",
+    title: "DG Voisins : Portail",
     description:
-      "Simplify the management of your server with Homarr - a sleek, modern dashboard that puts all of your apps and services at your fingertips.",
-    url: "https://homarr.dev",
-    siteName: "Homarr Documentation",
+      "GD Voisins est un tableau de bord, un portail pour toutes et tous les Grands Voisins (de tous statuts socio-économiques)",
+    url: "https://wiki.grandsvoisins.org",
+    siteName: "GD Voisins Documentation",
   },
   icons: {
     icon: "/logo/logo.png",
     apple: "/logo/logo.png",
   },
   appleWebApp: {
-    title: "Homarr",
+    title: "GD Voisins",
     capable: true,
     startupImage: { url: "/logo/logo.png" },
     statusBarStyle: (await getCurrentColorSchemeAsync()) === "dark" ? "black-translucent" : "default",
