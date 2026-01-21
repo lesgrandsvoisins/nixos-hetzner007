@@ -105,7 +105,7 @@ in
       };
       "auth.whowhatetc.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "test.whowhatetc.com" = {
@@ -120,33 +120,33 @@ in
       };
       "homarr.whowhatetc.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "homarr.ggvv.org" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "www.gvois.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "gvois.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "gvois.org" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "gvplace.com"  = {
         serverAliases = [ "www.gvplace.com"  ];
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "hopgv.com" = {
@@ -156,37 +156,38 @@ in
           "www.hopgv.org"
           "gafam.us"
           "www.gafam.us"
+          "gdvoisins.org"
         ];
-        extraConfig = "redir https://place.grandsvoisins.org{uri} 301";
+        extraConfig = "redir https://www.gdvoisins.org{uri} 301";
       };
       # "lesgv.com" = {
       #   extraConfig = ''
-      #     redir https://place.grandsvoisins.org{uri} 301
+      #     redir https://www.gdvoisins.org{uri} 301
       #   '';
       # };
       # "www.lesgv.com" = {
       #   extraConfig = ''
-      #     redir https://place.grandsvoisins.org{uri} 301
+      #     redir https://www.gdvoisins.org{uri} 301
       #   '';
       # };
       # "lesgv.org" = {
       #   extraConfig = ''
-      #     redir https://place.grandsvoisins.org{uri} 301
+      #     redir https://www.gdvoisins.org{uri} 301
       #   '';
       # };
       # "www.lesgv.org" = {
       #   extraConfig = ''
-      #     redir https://place.grandsvoisins.org{uri} 301
+      #     redir https://www.gdvoisins.org{uri} 301
       #   '';
       # };
       "www.gvois.org" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "gvois.grandsvoisins.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org{uri} 301
+          redir https://www.gdvoisins.org{uri} 301
         '';
       };
       "lldap.whowhatetc.com" = {
@@ -255,12 +256,12 @@ in
       };
       "www.quiquoietc.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org
+          redir https://www.gdvoisins.org
         '';
       };
       "quiquoietc.com" = {
         extraConfig = ''
-          redir https://place.grandsvoisins.org
+          redir https://www.gdvoisins.org
         '';
       };
       "auth.ggvv.org" = {
@@ -289,7 +290,7 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
-      "place.grandsvoisins.org" = {
+      "www.gdvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
