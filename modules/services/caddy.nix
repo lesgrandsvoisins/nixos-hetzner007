@@ -87,7 +87,7 @@ in
 
         authorization policy httpxpolicy {
           set auth url https://auth.ggvv.org
-          # allow roles authp/admin authp/user
+          allow roles guest authp/admin authp/user
           crypto key verify {env.JWT_SHARED_KEY}
           inject headers with claims
           inject header "HTTP_X_REMOTE_USER" from "userinfo|name"
@@ -350,7 +350,7 @@ in
         extraConfig = ''
           # authorize with identifiedpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
-          header HTTP_X_REMOTE_USER public
+            # header HTTP_X_REMOTE_USER public
            transport http {
                 tls
                 tls_server_name radicale.local
