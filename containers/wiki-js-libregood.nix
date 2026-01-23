@@ -18,6 +18,7 @@ in
     "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
+  users.users.postgres.extraGroups = ["services"];
   containers.wiki-js-libregood = {
     localAddress = "10.0.12.102";
     localAddress6 = "fa12::102";
@@ -52,17 +53,17 @@ in
       systemd.services.wiki-js.serviceConfig.User = "wiki-js";
       systemd.services.wiki-js.serviceConfig.Group = "services";
       systemd.tmpfiles.rules = [
-        "d /etc/wiki-js 0750 wiki-js services"
-        "f /etc/wiki-js/.env 0640 wiki-js services"
+        "d /etc/wiki-js-libregood 0750 wiki-js services"
+        "f /etc/wiki-js-libregood/.env 0640 wiki-js services"
         # "L /run/postgresql/.s.PGSQL.5432 /run/postgresql/.s.PGSQL.5434" # Strange fix
       ];
       services.cron.systemCronJobs = [ "0 0 1 * *  root systemctl restart wiki-js" ];
 
-      systemd.services."wiki-js".serviceConfig.EnvironmentFile = "/etc/wiki-js-libregood/.env";
+      systemd.services."postgresql".serviceConfig.EnvironmentFile = "/etc/wiki-js-libregood/.env";
 
       services.wiki-js = {
         enable = true;
-        environmentFile = "/etc/wiki-js/.env";
+        environmentFile = "/etc/wiki-js-libregood/.env";
         settings = {
           port = vars.ports.wiki-js-libregood-http;
           bindIP = "10.0.12.102";
