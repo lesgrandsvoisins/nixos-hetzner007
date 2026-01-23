@@ -360,6 +360,10 @@ in
             header_up X_REMOTE_USER "public"
             header_up REMOTE_USER "public"
             header_up HTTP_REMOTE_USER "public"
+            header_down HTTP_X_REMOTE_USER "public"
+            header_down X_REMOTE_USER "public"
+            header_down REMOTE_USER "public"
+            header_down HTTP_REMOTE_USER "public"
             transport http {
               tls
               tls_server_name radicale.local
