@@ -11,10 +11,11 @@ in
 {
   networking.hosts = {
     "10.0.12.102" = [ "wiki-js-libregood.local" ];
-    "fa12::102" = [ "wiki-js-libregood.local" ];
+    # "fa12::102" = [ "wiki-js-libregood.local" ];
   };
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js-libregood/ 0755 wiki-js services"
+    "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
   containers.wiki-js-libregood = {
@@ -57,22 +58,25 @@ in
       ];
       services.cron.systemCronJobs = [ "0 0 1 * *  root systemctl restart wiki-js" ];
 
+      systemd.services."wiki-js".environment = "/etc/wiki-js-libregood/.env";
+
       services.wiki-js = {
         enable = true;
         environmentFile = "/etc/wiki-js/.env";
         settings = {
           port = vars.ports.wiki-js-libregood-http;
-          bindIP = vars.ips.wiki-js;
+          bindIP = "10.0.12.102";
           db = {
             # host = "2a01:4f8:241:4faa::10";
             # port = vars.ports.postgresql;
             # host = "localhost";
             # port = 5432;
-            host = "/run/postgresql/";
+            host = "/run/postgresql";
+            # host = "127.0.0.1";
             # host = "/run/postgresql/";
             db = "wiki-js-libregood";
             user = "wiki-js";
-            # ssl = true;
+            ssl = true;
           };
           loglevel = "info";
           ssl = {
@@ -89,15 +93,22 @@ in
       };
       services.postgresql = {
         enable = true;
-        enableTCPIP = false;
+        enableTCPIP = true;
+        listen_addresses = [
+          "[::1]"
+          "127.0.0.1"
+        ];
         initialScript = pkgs.writeText "init-sql-script" ''
           GRANT ALL PRIVILEGES ON SCHEMA public to "wiki-js";
           GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
+          ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
         ensureUsers = [
           {
             name = "wiki-js";
             ensureDBOwnership = true;
+            ensureClauses.login = true;
+
           }
         ];
         ensureDatabases = [ "wiki-js-libregood"  "wiki-js" ];
