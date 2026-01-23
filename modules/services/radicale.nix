@@ -11,7 +11,8 @@ in {
     "d /etc/radicale/certs 0755 radicale services"
   ];
   networking.hosts = {
-    "fa01::2" = [ "keycloak.local" ];
+    "::1" = [ "radicale.local" ];
+    "127.0.0.1" = [ "radicale.local" ];
   };
   users.users.radicale = {
     extraGroups = ["services"];
