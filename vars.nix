@@ -19,7 +19,10 @@
     postgresql = 5434;
     wiki-js-www-https = 3443;
     wiki-js-www-http = 3480;
+    wiki-js-libregood-https = 3445;
+    wiki-js-libregood-http = 3482;
     wiki-js-doc-https = 3444;
+    wiki-js-doc-http = 3481;
     redis-services-homarr = 6379;
     lldap-ldaps = 3636;
     lldap-http = 17170;

@@ -25,6 +25,7 @@ in {
     ./containers/homarr.nix
     ./containers/wiki-js-www.nix
     ./containers/wiki-js-doc.nix
+    ./containers/wiki-js-libregood.nix
     ./containers/keycloak.nix
   ];
 

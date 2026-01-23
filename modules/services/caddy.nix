@@ -172,6 +172,11 @@ in
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
+      "libregood.com"  = {
+        extraConfig = ''
+          redir https://www.libregood.com{uri} 301
+        '';
+      };
       "hopgv.com" = {
         serverAliases = [
           "www.hopgv.com"
@@ -321,6 +326,20 @@ in
       "www.gdvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
+        '';
+      };
+      "www.libregood.com" = {
+        extraConfig = ''
+          reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.radicale} {
+          
+           transport http {
+                tls
+                tls_server_name wiki-js-libregood.local
+                tls_trust_pool file {
+                  pem_file /etc/radicale/certs/wiki-js-libregood.local.pem
+                }
+            }
+          }
         '';
       };
       # "www.gv.je" = {
