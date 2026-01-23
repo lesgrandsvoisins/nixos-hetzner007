@@ -113,7 +113,7 @@ in
           ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
         settings = {
-          # listen_addresses = "wiki-js-libregood.local";
+          listen_addresses = lib.mkForce "wiki-js-libregood.local" ;
           ssl = true;
           ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
           ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
