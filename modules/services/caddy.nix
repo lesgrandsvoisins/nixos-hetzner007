@@ -85,6 +85,14 @@ in
           inject headers with claims
         }
 
+        authorization policy httpxpolicy {
+          set auth url https://auth.ggvv.org
+          # allow roles authp/admin authp/user
+          crypto key verify {env.JWT_SHARED_KEY}
+          inject headers with claims
+          inject header "HTTP_X_REMOTE_USER" from "userinfo|name"
+        }
+
       }
     '';
 
@@ -325,8 +333,24 @@ in
       };
       "radicale.gdvoisins.com" = {
         extraConfig = ''
-          authorize with identifiedpolicy
+          authorize with httpxpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
+           transport http {
+                tls
+                tls_server_name radicale.local
+                # tls_insecure_skip_verify # Change this
+                tls_trust_pool file {
+                  pem_file /etc/radicale/certs/radicale.local.pem
+                }
+            }
+          }
+        '';
+      };
+      "cal.gdvoisins.com" = {
+        extraConfig = ''
+          # authorize with identifiedpolicy
+          reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
+          header HTTP_X_REMOTE_USER public
            transport http {
                 tls
                 tls_server_name radicale.local
