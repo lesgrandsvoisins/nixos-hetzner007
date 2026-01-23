@@ -90,6 +90,10 @@ in
             db = "wiki-js-libregood";
             user = "wiki-js";
             ssl = true;
+            sslOptions = {
+              auto = false;
+              ca = "/etc/wiki-js-libregood/certs/wiki-js-libregood.local.pem";
+            };
           };
           loglevel = "info";
           ssl = {
