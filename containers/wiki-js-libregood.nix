@@ -89,16 +89,18 @@ in
       };
       services.postgresql = {
         enable = true;
+        enableTCPIP = false;
         initialScript = pkgs.writeText "init-sql-script" ''
-          GRANT ALL PRIVILEGES ON DATABASE wiki-js-libregood to wiki-js;
+          GRANT ALL PRIVILEGES ON SCHEMA public to "wiki-js";
+          GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
         '';
         ensureUsers = [
           {
             name = "wiki-js";
-            # ensureDBOwnership = true;
+            ensureDBOwnership = true;
           }
         ];
-        ensureDatabases = [ "wiki-js-libregood"  ];
+        ensureDatabases = [ "wiki-js-libregood"  "wiki-js" ];
       };
     };
   };
