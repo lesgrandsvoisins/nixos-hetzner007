@@ -13,6 +13,26 @@ in
     "10.0.12.102" = [ "wiki-js-libregood.local" ];
     # "fa12::102" = [ "wiki-js-libregood.local" ];
   };
+  # networking.macvlans = {
+  #   vlan-wiki = {
+  #     interface = "enp0s31f6";
+
+  #   };
+  # };
+  # networking.bridges = {
+  #   br-wiki-js-lg = {
+  #     interfaces = [
+  #       "enp0s31f6"
+  #     ];
+  #     ipv4.adresses = [
+  #       {
+  #         address = "10.10.10.11";
+  #         prefixLength = 24;
+  #       }
+  #     ];
+  #   };
+  # };
+
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js-libregood/ 0755 wiki-js services"
     "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
@@ -21,23 +41,24 @@ in
   ];
   users.users.postgres.extraGroups = [ "services" ];
   containers.wiki-js-libregood = {
-    localAddress = "10.0.12.102";
-    localAddress6 = "fa12::102";
-    hostAddress = "10.0.12.1";
-    hostAddress6 = "fa12::1";
+    # localAddress = "10.0.12.102";
+    # localAddress6 = "fa12::102";
+    # hostAddress = "10.0.12.1";
+    # hostAddress6 = "fa12::1";
     privateNetwork = true; # ve-wiki-js-libregood
-    forwardPorts = [
-      {
-        containerPort = vars.ports.wiki-js-libregood-https;
-        hostPort = vars.ports.wiki-js-libregood-https;
-        protocol = "tcp";
-      }
-      {
-        containerPort = vars.ports.wiki-js-libregood-http;
-        hostPort = vars.ports.wiki-js-libregood-http;
-        protocol = "tcp";
-      }
-    ];
+    hostBridge = "br0";
+    # forwardPorts = [
+    #   {
+    #     containerPort = vars.ports.wiki-js-libregood-https;
+    #     hostPort = vars.ports.wiki-js-libregood-https;
+    #     protocol = "tcp";
+    #   }
+    #   {
+    #     containerPort = vars.ports.wiki-js-libregood-http;
+    #     hostPort = vars.ports.wiki-js-libregood-http;
+    #     protocol = "tcp";
+    #   }
+    # ];
     bindMounts = {
       "/etc/wiki-js-libregood/" = {
         hostPath = "/etc/wiki-js-libregood/";
@@ -52,13 +73,13 @@ in
         "10.0.12.102" = [ "wiki-js-libregood.local" ];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
-    # networking.interfaces."enp0s31f6".ipv6.routes = [
-    #   {
-    #     address = "fe80::4438:1aff:fea3:c2fd";
-    #     prefixLength = 64;
-    #     via = "fa12::1";
-    #   }
-    # ];
+      # networking.interfaces."enp0s31f6".ipv6.routes = [
+      #   {
+      #     address = "fe80::4438:1aff:fea3:c2fd";
+      #     prefixLength = 64;
+      #     via = "fa12::1";{
+      #   }
+      # ];
 
       environment.systemPackages = with pkgs; [
         net-tools

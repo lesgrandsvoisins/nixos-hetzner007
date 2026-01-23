@@ -34,11 +34,21 @@ in
     };
     useNetworkd = true;
     enableIPv6 = true;
+    bridges = {
+      br0 = {
+        interfaces = ["${vars.hetzner.interface}" ];
+      };
+    };
+
+
+
     defaultGateway6 = {
       address = "fe80::1";
-      interface = "${vars.hetzner.interface}";
+      interface = "br0";
+      # interface = "${vars.hetzner.interface}";
     };
-    interfaces."${vars.hetzner.interface}" = {
+    interfaces."br0" = {
+    # interfaces."${vars.hetzner.interface}" = {
       useDHCP = true;
       ipv6 = {
         addresses = [
