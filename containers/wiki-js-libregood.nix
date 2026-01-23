@@ -42,6 +42,14 @@ in
     autoStart = true;
     config = {
       system.stateVersion = "25.11";
+      
+      networking.hosts = {
+        "10.0.12.102" = [ "wiki-js-libregood.local" ];
+        # "fa12::102" = [ "wiki-js-libregood.local" ];
+      };
+      environment.systemPackages = with pkgs; [
+        netstat
+      ];
 
       users.users.wiki-js = {
         isSystemUser = true;
