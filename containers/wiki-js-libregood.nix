@@ -67,9 +67,10 @@ in
             # host = "2a01:4f8:241:4faa::10";
             # port = vars.ports.postgresql;
             # host = "localhost";
-            host = "/run/postgresql/";
+            # port = 5432;
+            host = "/run/postgresql/;
             # host = "/run/postgresql/";
-            db = "wiki-js";
+            db = "wiki-js-libregood";
             user = "wiki-js";
             # ssl = true;
           };
