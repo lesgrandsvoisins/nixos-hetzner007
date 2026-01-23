@@ -100,10 +100,8 @@ in
           ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
         settings = {
-          listen_addresses = [
-            "[::1]"
-            "127.0.0.1"
-          ];
+          listen_addresses = 
+            "wiki-js-libregood.local";
         };
         ensureUsers = [
           {
