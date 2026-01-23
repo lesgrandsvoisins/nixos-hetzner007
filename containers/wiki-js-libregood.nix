@@ -53,7 +53,7 @@ in
       systemd.tmpfiles.rules = [
         "d /etc/wiki-js 0750 wiki-js services"
         "f /etc/wiki-js/.env 0640 wiki-js services"
-        "L /run/postgresql/.s.PGSQL.5434 /run/postgresql/.s.PGSQL.5432" # Strange fix
+        # "L /run/postgresql/.s.PGSQL.5432 /run/postgresql/.s.PGSQL.5434" # Strange fix
       ];
       services.cron.systemCronJobs = [ "0 0 1 * *  root systemctl restart wiki-js" ];
 
@@ -65,7 +65,7 @@ in
           bindIP = vars.ips.wiki-js;
           db = {
             # host = "2a01:4f8:241:4faa::10";
-            port = vars.ports.postgresql;
+            # port = vars.ports.postgresql;
             # host = "localhost";
             host = "/run/postgresql/";
             # host = "/run/postgresql/";
