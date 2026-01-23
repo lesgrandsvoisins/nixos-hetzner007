@@ -276,6 +276,11 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
+      "je.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
       "www.quiquoietc.com" = {
         extraConfig = ''
           redir https://www.gdvoisins.org
