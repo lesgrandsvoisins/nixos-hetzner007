@@ -48,7 +48,7 @@ in
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
       environment.systemPackages = with pkgs; [
-        netstat
+        net-tools
       ];
 
       users.users.wiki-js = {
