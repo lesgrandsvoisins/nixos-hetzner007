@@ -323,6 +323,18 @@ in
           }
         '';
       };
+      "radicale.gdvoisins.com" = {
+        extraConfig = ''
+          authorize with identifiedpolicy
+          reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
+            transport http {
+              tls_server_name max.local
+              tls_insecure_skip_verify
+              tls_client_auth /etc/radicale/certs/radicale.local.pem /etc/radicale/certs/radicale.local-key.pem
+            }
+          }
+        '';
+      };
     };
   };
 }

@@ -1,4 +1,5 @@
 certs:
 	mkcert radicale.local
-	sudo mkdir -p /etc/keycloak/certs
-	mv radicale.local radicale.local-pem /etc/radicale/certs
+	mv radicale.local.pem /etc/radicale/certs
+	mv radicale.local-key.pem /etc/radicale/certs
+	sudo chown -R radicale:services /etc/keycloak/certs

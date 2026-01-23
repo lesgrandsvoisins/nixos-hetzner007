@@ -22,10 +22,10 @@ in {
     enable = true;
     settings = {
       server = {
-        hosts = [ "0.0.0.0:5232" "[::]:5232" ];
+        hosts = [ "0.0.0.0:${builtins.toString vars.ports.radicale}" "[::]:${builtins.toString vars.ports.radicale}" ];
         ssl = true;
-        certificate = "";
-        key = "";
+        certificate = "/etc/radicale/certs/radicale.local.pem";
+        key = "/etc/radicale/certs/radicale.local-key.pem";
       };
       auth = {
         type = "http_x_remote_user";

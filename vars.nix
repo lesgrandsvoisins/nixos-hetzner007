@@ -24,6 +24,7 @@
     lldap-ldaps = 3636;
     lldap-http = 17170;
     lldap-ldap = 3890;
+    radicale = 5232;
   };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
