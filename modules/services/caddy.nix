@@ -90,6 +90,9 @@ in
           crypto key verify {env.JWT_SHARED_KEY}
           inject headers with claims
           inject header "HTTP_X_REMOTE_USER" from "userinfo|preferred_username"
+          inject header "X_REMOTE_USER" from "userinfo|preferred_username"
+          inject header "REMOTE_USER" from "userinfo|preferred_username"
+          inject header "HTTP_REMOTE_USER" from "userinfo|preferred_username"
         }
 
       }
@@ -349,6 +352,9 @@ in
         extraConfig = ''
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
             header_up +HTTP_X_REMOTE_USER "public"
+            header_up +X_REMOTE_USER "public"
+            header_up +REMOTE_USER "public"
+            header_up +HTTP_REMOTE_USER "public"
             transport http {
               tls
               tls_server_name radicale.local
