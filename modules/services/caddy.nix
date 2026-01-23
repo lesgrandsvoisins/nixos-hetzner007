@@ -347,16 +347,14 @@ in
       };
       "cal.gdvoisins.com" = {
         extraConfig = ''
-          # authorize with identifiedpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
-           header_up +HTTP_X_REMOTE_USER "public"
-           transport http {
-                tls
-                tls_server_name radicale.local
-                # tls_insecure_skip_verify # Change this
-                tls_trust_pool file {
-                  pem_file /etc/radicale/certs/radicale.local.pem
-                }
+            header_up +HTTP_X_REMOTE_USER "public"
+            transport http {
+              tls
+              tls_server_name radicale.local
+              tls_trust_pool file {
+                pem_file /etc/radicale/certs/radicale.local.pem
+              }
             }
           }
         '';
