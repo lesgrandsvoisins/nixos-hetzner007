@@ -99,10 +99,10 @@ in
           GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
           ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
-        settings = {
-          listen_addresses = 
-            "wiki-js-libregood.local";
-        };
+        # settings = {
+        #   listen_addresses = 
+        #     "wiki-js-libregood.local";
+        # };
         ensureUsers = [
           {
             name = "wiki-js";
