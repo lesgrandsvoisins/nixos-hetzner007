@@ -336,7 +336,7 @@ in
                 tls
                 tls_server_name wiki-js-libregood.local
                 tls_trust_pool file {
-                  pem_file /etc/wiki-js-libregood/certs/wiki-js-libregood.local.pem
+                  pem_file /etc/wiki-js-libregood/certs/wiki-je-libregood.local.pem
                 }
             }
           }
