@@ -47,9 +47,9 @@ in
         "10.0.12.102" = [ "wiki-js-libregood.local" ];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
-    networking.interfaces."ve-wiki-js-k7X_".ipv6.routes = [
+    networking.interfaces."enp0s31f6".ipv6.routes = [
       {
-        address = "2a01:4f8:a0:73ba::10";
+        address = "fe80::4438:1aff:fea3:c2fd";
         prefixLength = 64;
         via = "fa12::1";
       }
@@ -82,7 +82,7 @@ in
         environmentFile = "/etc/wiki-js-libregood/.env";
         settings = {
           port = vars.ports.wiki-js-libregood-http;
-          bindIP = "2a01:4f8:a0:73ba::";
+          bindIP = "[fe80::4438:1aff:fea3:c2fd]";
           # bindIP = "10.0.12.102";
           db = {
             # host = "2a01:4f8:241:4faa::10";
