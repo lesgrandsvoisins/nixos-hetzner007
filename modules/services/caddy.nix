@@ -160,6 +160,11 @@ in
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
+      "gv.je" = {
+        extraConfig = ''
+          redir https://www.gv.je{uri} 301
+        '';
+      };
       "gvplace.com"  = {
         serverAliases = [ "www.gvplace.com"  ];
         extraConfig = ''
@@ -308,6 +313,11 @@ in
         '';
       };
       "www.gdvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "www.gv.je" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
