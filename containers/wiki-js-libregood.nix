@@ -94,15 +94,17 @@ in
       services.postgresql = {
         enable = true;
         enableTCPIP = true;
-        listen_addresses = [
-          "[::1]"
-          "127.0.0.1"
-        ];
         initialScript = pkgs.writeText "init-sql-script" ''
           GRANT ALL PRIVILEGES ON SCHEMA public to "wiki-js";
           GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
           ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
+        settings = {
+          listen_addresses = [
+            "[::1]"
+            "127.0.0.1"
+          ];
+        };
         ensureUsers = [
           {
             name = "wiki-js";
@@ -111,7 +113,10 @@ in
 
           }
         ];
-        ensureDatabases = [ "wiki-js-libregood"  "wiki-js" ];
+        ensureDatabases = [
+          "wiki-js-libregood"
+          "wiki-js"
+        ];
       };
     };
   };
