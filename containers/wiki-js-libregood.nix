@@ -83,17 +83,17 @@ in
             # port = vars.ports.postgresql;
             # host = "localhost";
             # port = 5432;
-            host = "wiki-js-libregood.local";
-            # host = "/run/postgresql";
+            # host = "wiki-js-libregood.local";
+            host = "/run/postgresql";
             # host = "127.0.0.1";
             # host = "/run/postgresql/";
             db = "wiki-js-libregood";
             user = "wiki-js";
-            ssl = true;
-            sslOptions = {
-              auto = false;
-              cert = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
-            };
+            # ssl = true;
+            # sslOptions = {
+            #   auto = false;
+            #   cert = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
+            # };
           };
           loglevel = "info";
           ssl = {
@@ -118,9 +118,9 @@ in
         '';
         settings = {
           listen_addresses = lib.mkForce "wiki-js-libregood.local" ;
-          ssl = true;
-          ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
-          ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
+          # ssl = true;
+          # ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
+          # ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
         };
         ensureUsers = [
           {
