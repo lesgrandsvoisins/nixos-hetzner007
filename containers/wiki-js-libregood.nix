@@ -86,8 +86,9 @@ in
         enable = true;
         environmentFile = "/etc/wiki-js-libregood/.env";
         settings = {
-          port = vars.ports.wiki-js-libregood-https;
+          port = vars.ports.wiki-js-libregood-http;
           # bindIP = "fe80::94f6:edff:fe4f:9624";
+          bindIP = "127.0.0.1";
           # bindIP = "10.0.12.102";
           db = {
             # host = "2a01:4f8:241:4faa::10";

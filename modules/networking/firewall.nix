@@ -22,6 +22,8 @@ in
       587
       636
       3636
+      vars.ports.wiki-js-libregood-https
+      vars.ports.wiki-js-libregood-http
     ];
     allowedUDPPorts = [ 53 ];
     # filterForward = true;
