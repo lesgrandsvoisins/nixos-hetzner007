@@ -12,6 +12,7 @@ in {
     ./services/caddy.nix
     ./services/postgresql.nix
     ./services/wiki-js.nix
+    ./services/radicale.nix
   ];
   # systemd.tmpfiles.rules = [
   #   "d /etc/pocket-id 0775 pocket-id services"
