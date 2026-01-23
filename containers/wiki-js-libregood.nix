@@ -62,6 +62,7 @@ in
 
       environment.systemPackages = with pkgs; [
         net-tools
+        lynx
       ];
 
       users.users.wiki-js = {
