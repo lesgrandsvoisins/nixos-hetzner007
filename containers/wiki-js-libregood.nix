@@ -42,10 +42,10 @@ in
   users.users.postgres.extraGroups = [ "services" ];
   containers.wiki-js-libregood = {
     # localAddress = "10.0.12.102";
-    # localAddress6 = "fa12::102";
+    localAddress6 = "2a01:4f8:a0:73ba::10";
     # hostAddress = "10.0.12.1";
     # hostAddress6 = "fa12::1";
-    privateNetwork = true; # ve-wiki-js-libregood
+    # privateNetwork = true; # ve-wiki-js-libregood
     hostBridge = "br0";
     # forwardPorts = [
     #   {
