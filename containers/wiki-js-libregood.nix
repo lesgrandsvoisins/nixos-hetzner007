@@ -84,7 +84,7 @@ in
             # host = "localhost";
             # port = 5432;
             host = "wiki-js-libregood.local";
-            host = "/run/postgresql";
+            # host = "/run/postgresql";
             # host = "127.0.0.1";
             # host = "/run/postgresql/";
             db = "wiki-js-libregood";
