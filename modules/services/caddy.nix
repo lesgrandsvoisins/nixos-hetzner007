@@ -354,10 +354,10 @@ in
       "cal.gdvoisins.com" = {
         extraConfig = ''
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
-            header_up +HTTP_X_REMOTE_USER "public"
-            header_up +X_REMOTE_USER "public"
-            header_up +REMOTE_USER "public"
-            header_up +HTTP_REMOTE_USER "public"
+            header_up HTTP_X_REMOTE_USER "public"
+            header_up X_REMOTE_USER "public"
+            header_up REMOTE_USER "public"
+            header_up HTTP_REMOTE_USER "public"
             transport http {
               tls
               tls_server_name radicale.local
