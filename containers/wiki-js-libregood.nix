@@ -16,6 +16,7 @@ in
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js-libregood/ 0755 wiki-js services"
     "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
+    "d /etc/wiki-js-libregood/certs/postgresql/ 0755 postgres services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
   users.users.postgres.extraGroups = ["services"];
@@ -47,6 +48,8 @@ in
         "10.0.12.102" = [ "wiki-js-libregood.local" ];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
+
+
       environment.systemPackages = with pkgs; [
         net-tools
       ];
@@ -80,6 +83,7 @@ in
             # port = vars.ports.postgresql;
             # host = "localhost";
             # port = 5432;
+            host = "wiki-js-libregood.local";
             host = "/run/postgresql";
             # host = "127.0.0.1";
             # host = "/run/postgresql/";
@@ -93,8 +97,8 @@ in
             port = vars.ports.wiki-js-libregood-https;
             provider = "custom";
             format = "pem";
-            cert = "/etc/wiki-js-libregood/wiki-js-libregood.local.pem";
-            key = "/etc/wiki-js-libregood/wiki-js-libregood.local-key.pem";
+            cert = "/etc/wiki-js-libregood/certs/wiki-js-libregood.local.pem";
+            key = "/etc/wiki-js-libregood/certs/wiki-js-libregood.local-key.pem";
             passphrase = null;
             dhparam = null;
           };
@@ -108,10 +112,12 @@ in
           GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
           ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
         '';
-        # settings = {
-        #   listen_addresses = 
-        #     "wiki-js-libregood.local";
-        # };
+        settings = {
+          # listen_addresses = "wiki-js-libregood.local";
+          ssl = true;
+          ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
+          ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
+        };
         ensureUsers = [
           {
             name = "wiki-js";
