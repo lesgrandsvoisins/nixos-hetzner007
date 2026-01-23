@@ -7,19 +7,19 @@
 }: let
   # vars = import ../vars.nix;
 in {
-    networking.hosts = {
-    "::1" = [ "wiki-js-libregood.local" ];
-    "fa11::102" = [ "wiki-js-libregood.local" ];
+  networking.hosts = {
+    "10.0.12.102" = [ "wiki-js-libregood.local" ];
+    "fa12::102" = [ "wiki-js-libregood.local" ];
   };
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js-libregood/ 0755 wiki-js services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
   containers.wiki-js-libregood = {
-    localAddress = "10.0.11.102";
-    localAddress6 = "fa11::102";
-    hostAddress = "10.0.11.1";
-    hostAddress6 = "fa11::1";
+    localAddress = "10.0.12.102";
+    localAddress6 = "fa12::102";
+    hostAddress = "10.0.12.1";
+    hostAddress6 = "fa12::1";
     privateNetwork = true; # ve-wiki-js-libregood
     forwardPorts = [
       {
@@ -44,7 +44,7 @@ in {
     uid = vars.uid.wiki-js;
     group = "services";
   };
-    users.groups.services.gid = vars.gid.services;
+  users.groups.services.gid = vars.gid.services;
 
   systemd.services.wiki-js.serviceConfig.User = "wiki-js";
   systemd.services.wiki-js.serviceConfig.Group = "services";
