@@ -19,7 +19,7 @@ in
     "d /etc/wiki-js-libregood/certs/postgresql/ 0755 postgres services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
-  users.users.postgres.extraGroups = ["services"];
+  users.users.postgres.extraGroups = [ "services" ];
   containers.wiki-js-libregood = {
     localAddress = "10.0.12.102";
     localAddress6 = "fa12::102";
@@ -33,7 +33,6 @@ in
         protocol = "tcp";
       }
     ];
-
     bindMounts = {
       "/etc/wiki-js-libregood/" = {
         hostPath = "/etc/wiki-js-libregood/";
@@ -43,12 +42,18 @@ in
     autoStart = true;
     config = {
       system.stateVersion = "25.11";
-      
+
       networking.hosts = {
         "10.0.12.102" = [ "wiki-js-libregood.local" ];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
-
+    networking.interfaces."ve-wiki-js-k7X_@if2".ipv6.routes = [
+      {
+        address = "2a01:4f8:a0:73ba::10";
+        prefixLength = 64;
+        via = "fa12::1";
+      }
+    ];
 
       environment.systemPackages = with pkgs; [
         net-tools
@@ -77,7 +82,8 @@ in
         environmentFile = "/etc/wiki-js-libregood/.env";
         settings = {
           port = vars.ports.wiki-js-libregood-http;
-          bindIP = "10.0.12.102";
+          bindIP = "2a01:4f8:a0:73ba::";
+          # bindIP = "10.0.12.102";
           db = {
             # host = "2a01:4f8:241:4faa::10";
             # port = vars.ports.postgresql;
