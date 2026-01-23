@@ -89,6 +89,7 @@ in
           set auth url https://auth.ggvv.org
           crypto key verify {env.JWT_SHARED_KEY}
           acl default allow
+          # acl default allow
           # allow any
           # allow roles anonymous guest
           # default allow
