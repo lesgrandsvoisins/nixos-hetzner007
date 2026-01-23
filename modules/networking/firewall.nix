@@ -36,7 +36,8 @@ in
     externalIPv6 = (builtins.elemAt vars.hetzner.ipv6 0).addr;
     externalIP = (builtins.elemAt vars.hetzner.ipv4 0).addr;
     enableIPv6 = true;
-    externalInterface = vars.hetzner.interface;
+    # externalInterface = "br0";
+    # externalInterface = vars.hetzner.interface;
     forwardPorts = [
       {
         sourcePort = 636;

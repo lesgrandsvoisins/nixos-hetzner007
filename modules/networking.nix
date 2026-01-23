@@ -100,7 +100,8 @@ in
       enable = true;
       internalInterfaces = [ "ve-*" ];
       # internalInterfaces = ["ve-*" "br0"];
-      externalInterface = "${vars.hetzner.interface}";
+      externalInterface = "br0";
+      # externalInterface = "${vars.hetzner.interface}";
       enableIPv6 = true;
       forwardPorts = [
       ];
