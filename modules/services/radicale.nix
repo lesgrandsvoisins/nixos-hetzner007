@@ -23,7 +23,7 @@ in {
     enable = true;
     settings = {
       server = {
-        hosts = [ "0.0.0.0:${builtins.toString vars.ports.radicale}" "[::]:${builtins.toString vars.ports.radicale}" ];
+        hosts = [ "127.0.0.1:${builtins.toString vars.ports.radicale}" "[::1]:${builtins.toString vars.ports.radicale}" ];
         ssl = true;
         certificate = "/etc/radicale/certs/radicale.local.pem";
         key = "/etc/radicale/certs/radicale.local-key.pem";
