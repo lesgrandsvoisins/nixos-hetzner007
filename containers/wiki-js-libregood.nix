@@ -58,7 +58,7 @@ in
       ];
       services.cron.systemCronJobs = [ "0 0 1 * *  root systemctl restart wiki-js" ];
 
-      systemd.services."wiki-js".environment = "/etc/wiki-js-libregood/.env";
+      systemd.services."wiki-js".serviceConfig.EnvironmentFile = "/etc/wiki-js-libregood/.env";
 
       services.wiki-js = {
         enable = true;
