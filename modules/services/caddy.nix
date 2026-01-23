@@ -88,8 +88,7 @@ in
         authorization policy httpxpolicy {
           set auth url https://auth.ggvv.org
           crypto key verify {env.JWT_SHARED_KEY}
-          allow roles guest 
-          # authp/admin authp/user
+          allow roles guest authp/admin authp/user
           # acl default allow
           # acl default allow
           # allow any

@@ -29,7 +29,7 @@ in {
         key = "/etc/radicale/certs/radicale.local-key.pem";
       };
       auth = {
-        type = "http_x_remote_user";
+        type = "remote_user";
         htpasswd_filename = "/etc/radicale/users";
         htpasswd_encryption = "autodetect";
       };
