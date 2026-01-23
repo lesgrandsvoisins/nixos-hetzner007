@@ -88,6 +88,7 @@ in
         authorization policy httpxpolicy {
           set auth url https://auth.ggvv.org
           crypto key verify {env.JWT_SHARED_KEY}
+          default allow
           inject headers with claims
           inject header "HTTP_X_REMOTE_USER" from "userinfo|preferred_username"
           inject header "X_REMOTE_USER" from "userinfo|preferred_username"
