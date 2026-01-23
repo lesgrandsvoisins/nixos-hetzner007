@@ -330,16 +330,16 @@ in
       };
       "www.libregood.com" = {
         extraConfig = ''
-          # reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-https} {
-          reverse_proxy http://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-http} {
+          reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-https} {
+          # reverse_proxy http://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-http} {
           
-          #  transport http {
-          #       tls
-          #       tls_server_name wiki-js-libregood.local
-          #       tls_trust_pool file {
-          #         pem_file /etc/wiki-js-libregood/certs/wiki-je-libregood.local.pem
-          #       }
-          #   }
+           transport http {
+                tls
+                tls_server_name wiki-js-libregood.local
+                tls_trust_pool file {
+                  pem_file /etc/wiki-js-libregood/certs/wiki-je-libregood.local.pem
+                }
+            }
           }
         '';
       };
