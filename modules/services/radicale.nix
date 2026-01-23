@@ -29,9 +29,9 @@ in {
         key = "/etc/radicale/certs/radicale.local-key.pem";
       };
       auth = {
-        type = "remote_user";
-        htpasswd_filename = "/etc/radicale/users";
-        htpasswd_encryption = "autodetect";
+        type = "http_x_remote_user";
+        # htpasswd_filename = "/etc/radicale/users";
+        # htpasswd_encryption = "autodetect";
       };
       # storage = {
       #   filesystem_folder = "/var/lib/radicale/collections";
