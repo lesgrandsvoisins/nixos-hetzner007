@@ -349,7 +349,7 @@ in
         extraConfig = ''
           # authorize with identifiedpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
-            # header HTTP_X_REMOTE_USER public
+           header_up +HTTP_X_REMOTE_USER "public"
            transport http {
                 tls
                 tls_server_name radicale.local
