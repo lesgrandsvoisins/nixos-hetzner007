@@ -1,22 +1,30 @@
 {
-  gid.caddy = 239;
-  gid.users = 100;
-  gid.services = 500;
-  uid.caddy = 239;
-  uid.homarr = 1002; # Ce n'est plus utilisé
-  uid.mael = 1003;
-  uid.mannchri = 1000;
-  uid.lldap = 501;
-  uid.wiki-js = 502;
-  uid.keycloak = 503;
-  ports.postgresql = 5434;
-  ports.wiki-js-www-https = 3443;
-  ports.wiki-js-www-http = 3480;
-  ports.wiki-js-doc-https = 3444;
-  ports.redis-services-homarr = 6379;
-  ports.lldap-ldaps = 3636;
-  ports.lldap-http = 17170;
-  ports.lldap-ldap = 3890;
+  gid = {
+    caddy = 239;
+    users = 100;
+    services = 500;
+    radicale = 504;
+  };
+  uid = {
+    caddy = 239;
+    homarr = 1002; # Ce n'est plus utilisé
+    mael = 1003;
+    mannchri = 1000;
+    lldap = 501;
+    wiki-js = 502;
+    keycloak = 503;
+    radicale = 504;
+  };
+  ports = {
+    postgresql = 5434;
+    wiki-js-www-https = 3443;
+    wiki-js-www-http = 3480;
+    wiki-js-doc-https = 3444;
+    redis-services-homarr = 6379;
+    lldap-ldaps = 3636;
+    lldap-http = 17170;
+    lldap-ldap = 3890;
+  };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
   hetzner.interfaces = [
@@ -89,5 +97,5 @@
       netmask = 64;
     }
   ];
-  hetzner.interface = "eth0";
+  hetzner.interface = "enp0s31f6";
 }

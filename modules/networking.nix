@@ -36,9 +36,9 @@ in
     enableIPv6 = true;
     defaultGateway6 = {
       address = "fe80::1";
-      interface = "eth0";
+      interface = "${vars.hetzner.interface}";
     };
-    interfaces.eth0 = {
+    interfaces."${vars.hetzner.interface}" = {
       useDHCP = true;
       ipv6 = {
         addresses = [
@@ -90,7 +90,7 @@ in
       enable = true;
       internalInterfaces = [ "ve-*" ];
       # internalInterfaces = ["ve-*" "br0"];
-      externalInterface = "eth0";
+      externalInterface = "${vars.hetzner.interface}";
       enableIPv6 = true;
       forwardPorts = [
       ];
