@@ -32,6 +32,11 @@ in
         hostPort = vars.ports.wiki-js-libregood-https;
         protocol = "tcp";
       }
+      {
+        containerPort = vars.ports.wiki-js-libregood-http;
+        hostPort = vars.ports.wiki-js-libregood-http;
+        protocol = "tcp";
+      }
     ];
     bindMounts = {
       "/etc/wiki-js-libregood/" = {
@@ -47,13 +52,13 @@ in
         "10.0.12.102" = [ "wiki-js-libregood.local" ];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
-    networking.interfaces."enp0s31f6".ipv6.routes = [
-      {
-        address = "fe80::4438:1aff:fea3:c2fd";
-        prefixLength = 64;
-        via = "fa12::1";
-      }
-    ];
+    # networking.interfaces."enp0s31f6".ipv6.routes = [
+    #   {
+    #     address = "fe80::4438:1aff:fea3:c2fd";
+    #     prefixLength = 64;
+    #     via = "fa12::1";
+    #   }
+    # ];
 
       environment.systemPackages = with pkgs; [
         net-tools
@@ -82,7 +87,7 @@ in
         environmentFile = "/etc/wiki-js-libregood/.env";
         settings = {
           port = vars.ports.wiki-js-libregood-https;
-          bindIP = "fe80::94f6:edff:fe4f:9624";
+          # bindIP = "fe80::94f6:edff:fe4f:9624";
           # bindIP = "10.0.12.102";
           db = {
             # host = "2a01:4f8:241:4faa::10";
