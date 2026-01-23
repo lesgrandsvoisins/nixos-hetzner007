@@ -87,7 +87,8 @@ in
             host = "/run/postgresql";
             # host = "127.0.0.1";
             # host = "/run/postgresql/";
-            db = "wiki-js-libregood";
+            # db = "wiki-js-libregood";
+            db = "wiki-js";
             user = "wiki-js";
             # ssl = true;
             # sslOptions = {
@@ -110,24 +111,23 @@ in
       };
       services.postgresql = {
         enable = true;
-        enableTCPIP = true;
-        initialScript = pkgs.writeText "init-sql-script" ''
-          GRANT ALL PRIVILEGES ON SCHEMA public to "wiki-js";
-          GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
-          ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
-        '';
-        settings = {
-          listen_addresses = lib.mkForce "wiki-js-libregood.local" ;
-          # ssl = true;
-          # ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
-          # ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
-        };
+        # enableTCPIP = true;
+        # initialScript = pkgs.writeText "init-sql-script" ''
+        #   GRANT ALL PRIVILEGES ON SCHEMA public to "wiki-js";
+        #   GRANT ALL PRIVILEGES ON DATABASE "wiki-js-libregood" to "wiki-js";
+        #   ALTER ROLE "wiki-js" WITH ENCRYPTED PASSWORD '@DB_PASS@';
+        # '';
+        # settings = {
+        #   listen_addresses = lib.mkForce "wiki-js-libregood.local" ;
+        #   # ssl = true;
+        #   # ssl_cert_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
+        #   # ssl_key_file = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local-key.pem";
+        # };
         ensureUsers = [
           {
             name = "wiki-js";
             ensureDBOwnership = true;
-            ensureClauses.login = true;
-
+            # ensureClauses.login = true;
           }
         ];
         ensureDatabases = [
