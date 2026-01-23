@@ -92,7 +92,7 @@ in
             ssl = true;
             sslOptions = {
               auto = false;
-              ca = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
+              cert = "/etc/wiki-js-libregood/certs/postgresql/wiki-js-libregood.local.pem";
             };
           };
           loglevel = "info";
