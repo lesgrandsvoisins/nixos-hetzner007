@@ -13,7 +13,7 @@ in {
   };
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js-libregood/ 0755 wiki-js services"
-    "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
+    # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
   containers.wiki-js-libregood = {
     localAddress = "10.0.11.102";
@@ -28,8 +28,14 @@ in {
         protocol = "tcp";
       }
     ];
+
     bindMounts = {
+      "/etc/wiki-js-libregood/" = {
+        hostPath = "/etc/wiki-js-libregood/";
+        isReadOnly = true;
+      };
     };
+    autoStart = true;
     config = {
       system.stateVersion = "25.11";
 
