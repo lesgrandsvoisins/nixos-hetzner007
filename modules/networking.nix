@@ -43,9 +43,12 @@ in
 
 
     defaultGateway6 = {
-      address = "fe80::1";
+      address = "fe80::1"; # fe80::4f9:2bff:fe32:2571
       interface = "br0";
       # interface = "${vars.hetzner.interface}";
+    };
+    interfaces."${vars.hetzner.interface}" = {
+      useDHCP = true;
     };
     interfaces."br0" = {
     # interfaces."${vars.hetzner.interface}" = {
