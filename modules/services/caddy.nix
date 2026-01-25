@@ -161,18 +161,18 @@ in
         '';
       };
       "gv.je" = {
-        serverAliases = ["www.gv.je" ];
+        serverAliases = [ "www.gv.je" ];
         extraConfig = ''
           redir https://je.grandsvoisins.org{uri} 301
         '';
       };
-      "gvplace.com"  = {
-        serverAliases = [ "www.gvplace.com"  ];
+      "gvplace.com" = {
+        serverAliases = [ "www.gvplace.com" ];
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "libregood.com"  = {
+      "libregood.com" = {
         extraConfig = ''
           redir https://www.libregood.com{uri} 301
         '';
@@ -357,7 +357,7 @@ in
         extraConfig = ''
           reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-https} {
           # reverse_proxy http://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-http} {
-          
+
            transport http {
                 tls
                 tls_server_name wiki-js-libregood.local
@@ -402,8 +402,8 @@ in
       };
       "radicale.gdvoisins.com" = {
         extraConfig = ''
-          authorize with httpxpolicy
-          reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
+          # authorize with httpxpolicy
+          reverse_proxy https://2.gv.je:${builtins.toString vars.ports.radicale} {
            transport http {
                 tls
                 tls_server_name radicale.local
@@ -415,27 +415,27 @@ in
           }
         '';
       };
-      "cal.gdvoisins.com" = {
-        extraConfig = ''
-          reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
-            header_up HTTP_X_REMOTE_USER "public"
-            header_up X_REMOTE_USER "public"
-            header_up REMOTE_USER "public"
-            header_up HTTP_REMOTE_USER "public"
-            header_down HTTP_X_REMOTE_USER "public"
-            header_down X_REMOTE_USER "public"
-            header_down REMOTE_USER "public"
-            header_down HTTP_REMOTE_USER "public"
-            transport http {
-              tls
-              tls_server_name radicale.local
-              tls_trust_pool file {
-                pem_file /etc/radicale/certs/radicale.local.pem
-              }
-            }
-          }
-        '';
-      };
+      # "cal.gdvoisins.com" = {
+      #   extraConfig = ''
+      #     reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
+      #       header_up HTTP_X_REMOTE_USER "public"
+      #       header_up X_REMOTE_USER "public"
+      #       header_up REMOTE_USER "public"
+      #       header_up HTTP_REMOTE_USER "public"
+      #       header_down HTTP_X_REMOTE_USER "public"
+      #       header_down X_REMOTE_USER "public"
+      #       header_down REMOTE_USER "public"
+      #       header_down HTTP_REMOTE_USER "public"
+      #       transport http {
+      #         tls
+      #         tls_server_name radicale.local
+      #         tls_trust_pool file {
+      #           pem_file /etc/radicale/certs/radicale.local.pem
+      #         }
+      #       }
+      #     }
+      #   '';
+      # };
     };
   };
 }
