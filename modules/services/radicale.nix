@@ -30,8 +30,8 @@ in {
     requires = ["network.target"];
     description = "Public consultable copy of some Radicale stuff for publication";
     serviceConfig = {
-      user = "radicale";
-      group = "radicale";
+      User = "radicale";
+      Group = "radicale";
       WorkingDirectory="/var/lib/radicale-public";
     };
     script = ''
