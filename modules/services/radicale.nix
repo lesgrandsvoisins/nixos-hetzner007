@@ -54,17 +54,23 @@ in {
         # type = "http_x_remote_user";
         # htpasswd_filename = "/etc/radicale/users";
         # htpasswd_encryption = "autodetect";
-        type = "ldap";
-        ldap_uri = "ldaps://ldap.lesgrandsvoisins.com:14636";
-        ldap_base = "dc=lesgrandsvoisins,dc=com";
-        ldap_reader_dn = "uid=reader,ou=users,dc=lesgrandsvoisins,dc=com";
-        ldap_secret_file = "/etc/radicale/.ldappasswd";
-        ldap_user_attribute = "cn";
-        ldap_security = "tls";
-        ldap_ssl_verify_mode = "OPTIONAL"; # Should work as REQUIRED
+        # type = "ldap";
+        # ldap_uri = "ldaps://ldap.lesgrandsvoisins.com:14636";
+        # ldap_base = "dc=lesgrandsvoisins,dc=com";
+        # ldap_reader_dn = "uid=reader,ou=users,dc=lesgrandsvoisins,dc=com";
+        # ldap_secret_file = "/etc/radicale/.ldappasswd";
+        # ldap_user_attribute = "cn";
+        # ldap_security = "tls";
+        # ldap_ssl_verify_mode = "OPTIONAL"; # Should work as REQUIRED
         # ldap_group_base = "ou=groups,dc=lesgrandsvoisins,dc=com";
-
+        # ldap_groups_attribute = "memberOf";
+        type = "imap";
+        imap_host = "mail.lesgrandsvoisins.com:993";
+        imap_security = "tls";
       };
+      extraArgs = [
+        "--defaults"
+      ];
       # storage = {
       #   filesystem_folder = "/var/lib/radicale/collections";
       # };
