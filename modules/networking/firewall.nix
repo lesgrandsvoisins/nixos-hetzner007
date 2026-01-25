@@ -33,9 +33,9 @@ in
   };
   networking.nat = {
     enable = true;
-    externalIPv6 = (builtins.elemAt vars.hetzner.ipv6 0).addr;
+    # externalIPv6 = (builtins.elemAt vars.hetzner.ipv6 0).addr;
     externalIP = (builtins.elemAt vars.hetzner.ipv4 0).addr;
-    enableIPv6 = true;
+    # enableIPv6 = true;
     # externalInterface = "br0";
     # externalInterface = vars.hetzner.interface;
     forwardPorts = [
