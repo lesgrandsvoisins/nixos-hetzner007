@@ -29,17 +29,17 @@ in {
         key = "/etc/radicale/certs/radicale.local-key.pem";
       };
       auth = {
-        # type = "http_x_remote_user";
+        type = "http_x_remote_user";
         # htpasswd_filename = "/etc/radicale/users";
         # htpasswd_encryption = "autodetect";
-        type = "ldap";
-        ldap_uri = "ldap://ldap.lesgrandsvoisins.com:14389/";
-        ldap_base = "ou=users,dc=lesgrandsvoisins,dc=com";
-        ldap_reader_dn = "uid=reader,ou=users,dc=lesgrandsvoisins,dc=com";
-        ldap_secret_file = "/etc/radicale/.ldappasswd";
-        ldap_user_attribute = "cn";
-        ldap_security = "starttls";
-        ldap_group_base = "ou=groups,dc=lesgrandsvoisins,dc=com";
+        # type = "ldap";
+        # ldap_uri = "ldap://ldap.lesgrandsvoisins.com:14389/";
+        # ldap_base = "ou=users,dc=lesgrandsvoisins,dc=com";
+        # ldap_reader_dn = "uid=reader,ou=users,dc=lesgrandsvoisins,dc=com";
+        # ldap_secret_file = "/etc/radicale/.ldappasswd";
+        # ldap_user_attribute = "cn";
+        # ldap_security = "starttls";
+        # ldap_group_base = "ou=groups,dc=lesgrandsvoisins,dc=com";
 
       };
       # storage = {

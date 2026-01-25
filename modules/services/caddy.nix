@@ -402,7 +402,7 @@ in
       };
       "radicale.gdvoisins.com" = {
         extraConfig = ''
-          # authorize with httpxpolicy
+          authorize with httpxpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
            transport http {
                 tls
