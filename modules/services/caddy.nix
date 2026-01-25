@@ -403,7 +403,7 @@ in
       "radicale.gdvoisins.com" = {
         extraConfig = ''
           # authorize with httpxpolicy
-          reverse_proxy https://2.gv.je:${builtins.toString vars.ports.radicale} {
+          reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
            transport http {
                 tls
                 tls_server_name radicale.local

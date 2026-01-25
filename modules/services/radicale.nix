@@ -11,7 +11,7 @@ in {
     "d /etc/radicale/certs 0755 radicale services"
   ];
   networking.hosts = {
-    "::1" = [ "radicale.local" ];
+    # "::1" = [ "radicale.local" ];
     "127.0.0.1" = [ "radicale.local" ];
   };
   users.users.radicale = {
