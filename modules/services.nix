@@ -28,7 +28,7 @@ in
       extraOptions = [
         "--autocreate"
         "--defaults"
-        # "--current-user-principal user"
+        "--current-user-principal public"
         # "--dump-dav-xml"
       ];
     };

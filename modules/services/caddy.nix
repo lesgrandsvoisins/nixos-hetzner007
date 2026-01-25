@@ -287,7 +287,7 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
-      "cal.grandsvoisins.org" = {
+      "xcal.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
         '';
@@ -400,14 +400,12 @@ in
           }
         '';
       };
-      "radicale.gdvoisins.com" = {
+      "rcal.grandsvoisins.org" = {
         extraConfig = ''
-          # authorize with httpxpolicy
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
            transport http {
                 tls
                 tls_server_name radicale.local
-                # tls_insecure_skip_verify # Change this
                 tls_trust_pool file {
                   pem_file /etc/radicale/certs/radicale.local.pem
                 }
