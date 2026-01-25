@@ -328,12 +328,12 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
-      "2a01:4f8:a0:73ba::1" = {
+      "1.gv.je" = {
         extraConfig = ''
           respond "Hello [2a01:4f8:a0:73ba::1]"
         '';
       };
-      "2a01:4f8:a0:73ba::" = {
+      "0.gv.je" = {
         extraConfig = ''
           respond "Hello [2a01:4f8:a0:73ba::]"
         '';
