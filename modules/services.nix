@@ -4,8 +4,10 @@
   lib,
   vars,
   ...
-}: let
-in {
+}:
+let
+in
+{
   # Enable the OpenSSH daemon.
   imports = [
     ./services/lldap.nix
@@ -20,7 +22,27 @@ in {
   #   "f /etc/pocket-id/.encryption_key 0664 pocket-id services"
   # ];
   services = {
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      listenAddresses = [
+        {
+          addr = "2a01:4f8:a0:73ba::";
+          port = 22;
+        }
+        {
+          addr = "::";
+          port = 22;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 22;
+        }
+        {
+          addr = "0.0.0.0";
+          port = 22;
+        }
+      ];
+    };
     redis.servers.homarr = {
       enable = true;
       port = vars.ports.redis-services-homarr;
