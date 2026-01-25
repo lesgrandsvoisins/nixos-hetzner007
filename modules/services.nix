@@ -25,11 +25,11 @@ in
     xandikos = {
       enable = true;
       port = vars.ports.xandikos;
+      address = "localhost";
       extraOptions = [
         "--autocreate"
         "--defaults"
-        "--current-user-principal public"
-        "--directory /var/lib/xandikos/"
+        "--current-user-principal /public"
         # "--dump-dav-xml"
       ];
     };
