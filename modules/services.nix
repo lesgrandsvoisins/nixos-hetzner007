@@ -29,6 +29,7 @@ in
         "--autocreate"
         "--defaults"
         "--current-user-principal public"
+        "--directory /var/lib/xandikos/"
         # "--dump-dav-xml"
       ];
     };
