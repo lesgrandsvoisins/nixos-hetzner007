@@ -28,8 +28,8 @@ in
       extraOptions = [
         "--autocreate"
         "--defaults"
-        "--current-user-principal user"
-        "--dump-dav-xml"
+        # "--current-user-principal user"
+        # "--dump-dav-xml"
       ];
     };
     openssh = {

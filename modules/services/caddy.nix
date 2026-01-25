@@ -282,6 +282,16 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
+      "je.0.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "je.1.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
       "je.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
