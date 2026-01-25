@@ -34,24 +34,24 @@ in
     };
     useNetworkd = true;
     enableIPv6 = true;
-    bridges = {
-      br0 = {
-        interfaces = ["${vars.hetzner.interface}" ];
-      };
-    };
+    # bridges = {
+    #   br0 = {
+    #     interfaces = ["${vars.hetzner.interface}" ];
+    #   };
+    # };
 
 
 
     defaultGateway6 = {
       address = "fe80::1"; # fe80::4f9:2bff:fe32:2571
-      interface = "br0";
-      # interface = "${vars.hetzner.interface}";
+      # interface = "br0";
+      interface = "${vars.hetzner.interface}";
     };
-    interfaces."${vars.hetzner.interface}" = {
-      useDHCP = true;
-    };
-    interfaces."br0" = {
     # interfaces."${vars.hetzner.interface}" = {
+    #   useDHCP = true;
+    # };
+    # interfaces."br0" = {
+    interfaces."${vars.hetzner.interface}" = {
       useDHCP = true;
       ipv6 = {
         addresses = [
@@ -103,8 +103,8 @@ in
       enable = true;
       internalInterfaces = [ "ve-*" ];
       # internalInterfaces = ["ve-*" "br0"];
-      externalInterface = "br0";
-      # externalInterface = "${vars.hetzner.interface}";
+      # externalInterface = "br0";
+      externalInterface = "${vars.hetzner.interface}";
       enableIPv6 = true;
       forwardPorts = [
       ];
