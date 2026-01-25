@@ -22,6 +22,7 @@ in
       587
       636
       3636
+      5232
       vars.ports.wiki-js-libregood-https
       vars.ports.wiki-js-libregood-http
     ];
