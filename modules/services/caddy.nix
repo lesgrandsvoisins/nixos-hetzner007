@@ -294,7 +294,7 @@ in
             not method GET
           }
           respond @not_get "Method Not Allowed" 405
-          reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
+          reverse_proxy http://localhost:${builtins.toString vars.ports.radicale-public}
         '';
       };
       "je.1.grandsvoisins.org" = {

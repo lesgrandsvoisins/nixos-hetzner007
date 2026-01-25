@@ -9,6 +9,8 @@ in {
   systemd.tmpfiles.rules = [
     "d /etc/radicale 0755 radicale services"
     "d /etc/radicale/certs 0755 radicale services"
+    "d /var/lib/radicale-public 0755 radicale services"
+
   ];
   networking.hosts = {
     # "::1" = [ "radicale.local" ];
@@ -19,6 +21,27 @@ in {
     uid = vars.uid.radicale;
   };
   users.groups.radicale.gid = vars.gid.radicale;
+  environment.systemPackages = with pkgs; [
+    radicale
+  ];
+  systemd.services.radicale-public = {
+    enable = true;
+    after = ["network.target"];
+    requires = ["network.target"];
+    description = "Public consultable copy of some Radicale stuff for publication";
+    serviceConfig = {
+      user = "radicale";
+      group = "radicale";
+      WorkingDirectory="/var/lib/radicale-public";
+    };
+    script = ''
+      ${pkgs.radicale}/bin/radicale \
+        --hosts localhost:${builtins.toString vars.ports.radicale-public} \
+        --auth-type none \
+        --storage-type file \
+        --storage-filesystem-folder /var/lib/radicale-public 
+      '';
+  };
   services.radicale = {
     enable = true;
     settings = {

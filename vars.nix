@@ -28,6 +28,7 @@
     lldap-http = 17170;
     lldap-ldap = 3890;
     radicale = 5232;
+    radicale-public = 5252;
     xandikos = 10888;
   };
   ips.wiki-js = "::1";
