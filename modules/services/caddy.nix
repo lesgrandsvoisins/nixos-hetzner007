@@ -287,8 +287,13 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
-      "xcal.grandsvoisins.org" = {
+      "pcal.gv.je" = {
+      # "pcal.grandsvoisins.org" = {
         extraConfig = ''
+          @not_get {
+            not method GET
+          }
+          respond @not_get "Method Not Allowed" 405
           reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
         '';
       };
@@ -400,7 +405,16 @@ in
           }
         '';
       };
-      "rcal.grandsvoisins.org" = {
+
+      "xcal.gv.je" = {
+      # "xcal.grandsvoisins.org" = {
+        extraConfig = ''
+          authorize with identifiedpolicy
+          reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
+        '';
+      };
+      "rcal.gv.je" = {
+      # "rcal.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
            transport http {
