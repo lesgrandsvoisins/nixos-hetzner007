@@ -22,13 +22,19 @@ in
   #   "f /etc/pocket-id/.encryption_key 0664 pocket-id services"
   # ];
   services = {
+    xandikos = {
+      enable = true;
+      port = vars.ports.xandikos;
+      extraOptions = [
+        "--autocreate"
+        "--defaults"
+        "--current-user-principal user"
+        "--dump-dav-xml"
+      ];
+    };
     openssh = {
       enable = true;
       listenAddresses = [
-        {
-          addr = "[2a01:4f8:a0:73ba::]";
-          port = 22;
-        }
         {
           addr = "[::]";
           port = 22;
