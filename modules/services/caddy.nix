@@ -287,6 +287,11 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
+      "cal.grandsvoisins.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
+        '';
+      };
       "je.1.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
