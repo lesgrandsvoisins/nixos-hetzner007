@@ -26,15 +26,11 @@ in
       enable = true;
       listenAddresses = [
         {
-          addr = "2a01:4f8:a0:73ba::";
+          addr = "[2a01:4f8:a0:73ba::]";
           port = 22;
         }
         {
-          addr = "::";
-          port = 22;
-        }
-        {
-          addr = "0.0.0.0";
+          addr = "[::]";
           port = 22;
         }
         {
