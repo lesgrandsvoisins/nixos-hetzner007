@@ -4,8 +4,10 @@
   lib,
   vars,
   ...
-}: let
-in {
+}:
+let
+in
+{
   systemd.tmpfiles.rules = [
     "d /etc/radicale 0755 radicale services"
     "d /etc/radicale/certs 0755 radicale services"
@@ -17,7 +19,7 @@ in {
     "127.0.0.1" = [ "radicale.local" ];
   };
   users.users.radicale = {
-    extraGroups = ["services"];
+    extraGroups = [ "services" ];
     uid = vars.uid.radicale;
   };
   users.groups.radicale.gid = vars.gid.radicale;
@@ -26,26 +28,29 @@ in {
   ];
   systemd.services.radicale-public = {
     enable = true;
-    after = ["network.target"];
-    requires = ["network.target"];
+    after = [ "network.target" ];
+    requires = [ "network.target" ];
     description = "Public consultable copy of some Radicale stuff for publication";
     serviceConfig = {
       User = "radicale";
       Group = "radicale";
-      WorkingDirectory="/var/lib/radicale-public";
+      WorkingDirectory = "/var/lib/radicale-public";
     };
     script = ''
       ${pkgs.radicale}/bin/radicale \
         --hosts localhost:${builtins.toString vars.ports.radicale-public} \
         --auth-type none \
         --storage-filesystem-folder /var/lib/radicale-public 
-      '';
+    '';
   };
   services.radicale = {
     enable = true;
     settings = {
       server = {
-        hosts = [ "127.0.0.1:${builtins.toString vars.ports.radicale}" "[::1]:${builtins.toString vars.ports.radicale}" ];
+        hosts = [
+          "127.0.0.1:${builtins.toString vars.ports.radicale}"
+          "[::1]:${builtins.toString vars.ports.radicale}"
+        ];
         ssl = true;
         certificate = "/etc/radicale/certs/radicale.local.pem";
         key = "/etc/radicale/certs/radicale.local-key.pem";
@@ -68,9 +73,6 @@ in {
         imap_host = "mail.lesgrandsvoisins.com:993";
         imap_security = "tls";
       };
-      extraArgs = [
-        "--defaults"
-      ];
       # storage = {
       #   filesystem_folder = "/var/lib/radicale/collections";
       # };
