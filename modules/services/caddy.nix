@@ -290,10 +290,10 @@ in
       "pcal.gv.je" = {
       # "pcal.grandsvoisins.org" = {
         extraConfig = ''
-          @not_get {
-            not method GET
-          }
-          respond @not_get "Method Not Allowed" 405
+          # @not_get {
+          #   not method GET
+          # }
+          # respond @not_get "Method Not Allowed" 405
           reverse_proxy http://localhost:${builtins.toString vars.ports.radicale-public}
         '';
       };
