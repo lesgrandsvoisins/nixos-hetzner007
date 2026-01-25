@@ -38,7 +38,6 @@ in {
       ${pkgs.radicale}/bin/radicale \
         --hosts localhost:${builtins.toString vars.ports.radicale-public} \
         --auth-type none \
-        --storage-type file \
         --storage-filesystem-folder /var/lib/radicale-public 
       '';
   };
