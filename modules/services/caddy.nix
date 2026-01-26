@@ -302,7 +302,7 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
-      "je.grandsvoisins.org" = {
+      "info.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
