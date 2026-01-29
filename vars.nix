@@ -14,6 +14,7 @@
     wiki-js = 502;
     keycloak = 503;
     radicale = 504;
+    syncin = 1505;
   };
   ports = {
     postgresql = 5434;
