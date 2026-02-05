@@ -38,7 +38,6 @@ in {
       # SMTP_SSL = true;
       SMTP_SECURITY = "force_tls";
       ROCKET_TLS="{certs=\"/etc/vaultwarden/.tls/vaultwarden.local.pem\",key=\"/etc/vaultwarden/.tls/vaultwarden.local-key.pem\"}";
-
     };
   };
 }
