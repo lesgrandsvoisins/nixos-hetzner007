@@ -10,7 +10,7 @@ in {
     "d /etc/vaultwarden 0755 vaultwarden services"
     "f /etc/vaultwarden/vaultwarden.env 0600 vaultwarden services"
   ];
-  users.users.vaultwarden.extragrousp = ["services"];
+  users.users.vaultwarden.extraGroups = ["services"];
   services.vaultwarden = {
     domain = "https://vw.gv.je";
     enable = true;
