@@ -17,7 +17,7 @@
     syncin = 1505;
   };
   ports = {
-    postgresql = 5434;
+    postgresql = 5432;
     wiki-js-www-https = 3443;
     wiki-js-www-http = 3480;
     wiki-js-libregood-https = 3445;
