@@ -276,6 +276,16 @@ in
           encode zstd gzip
           reverse_proxy 127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT} {
               header_up X-Real-IP {remote_host}
+
+
+           transport http {
+                tls
+                tls_server_name vaultwarden.local
+                tls_trust_pool file {
+                  pem_file /etc/vaultwarden/.tls/vaultwarden.local.pem
+                }
+            }
+
           }
         '';
       };
