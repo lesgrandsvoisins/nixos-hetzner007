@@ -271,6 +271,14 @@ in
           reverse_proxy http://localhost:3000
         '';
       };
+      "vw.gv.je" = {
+        extraConfig = ''
+          encode zstd gzip
+          reverse_proxy :${toString config.services.vaultwarden.config.ROCKET_PORT} {
+              header_up X-Real-IP {remote_host}
+          }
+        '';
+      };
       "a11yproject.lgv.info" = {
         extraConfig = ''
           root * /var/www/a11yproject.lgv.info/dist
@@ -288,7 +296,7 @@ in
         '';
       };
       "pcal.gv.je" = {
-      # "pcal.grandsvoisins.org" = {
+        # "pcal.grandsvoisins.org" = {
         extraConfig = ''
           # @not_get {
           #   not method GET
@@ -412,14 +420,14 @@ in
       };
 
       "xcal.gv.je" = {
-      # "xcal.grandsvoisins.org" = {
+        # "xcal.grandsvoisins.org" = {
         extraConfig = ''
           authorize with identifiedpolicy
           reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
         '';
       };
       "rcal.gv.je" = {
-      # "rcal.grandsvoisins.org" = {
+        # "rcal.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy https://radicale.local:${builtins.toString vars.ports.radicale} {
            transport http {
