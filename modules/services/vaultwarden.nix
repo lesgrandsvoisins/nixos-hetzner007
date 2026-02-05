@@ -6,6 +6,11 @@
   ...
 }: let
 in {
+  systemd.tmpfiles.rules = [
+    "d /etc/vaultwarden 0755 vaultwarden services"
+    "f /etc/vaultwarden/vaultwarden.env 0600 vaultwarden services"
+  ];
+  users.users.vaultwarden.extragrousp = ["services"];
   services.vaultwarden = {
     domain = "https://vw.gv.je";
     enable = true;
