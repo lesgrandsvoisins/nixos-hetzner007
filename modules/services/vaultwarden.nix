@@ -31,7 +31,8 @@ in {
       # ROCKET_ADDRESS = "127.0.0.1";
       # ROCKET_LOG = "critical";  
       SMTP_PORT = 465;
-      SMTP_SSL = true;
+      # SMTP_SSL = true;
+      SMTP_SECURITY = "force_tls";
     };
   };
 }
