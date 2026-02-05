@@ -280,7 +280,7 @@ in
                 tls
                 tls_server_name vaultwarden.local
                 tls_trust_pool file {
-                  pem_file /etc/vaultwarden/.tls/vaultwarden.nlocal.pem
+                  pem_file /etc/vaultwarden/.tls/vaultwarden.local.pem
                 }
             }
 
