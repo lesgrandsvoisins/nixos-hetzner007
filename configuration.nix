@@ -27,6 +27,8 @@ in {
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
     ./containers/keycloak.nix
+    ./modules/keycloak.nix
+    ./modules/postgres.nix
   ];
 
   # Bootloader.

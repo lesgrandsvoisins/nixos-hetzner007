@@ -4,12 +4,10 @@
   lib,
   vars,
   ...
-}:
-let
+}: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
   # vars = ../../vars.nix;
-in
-{
+in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
     "f /etc/caddy/caddy.env 0664 caddy users"
@@ -28,7 +26,7 @@ in
     enable = true;
     # group = "services";
     package = pkgs.caddy.withPlugins {
-      plugins = [ "github.com/greenpau/caddy-security@v1.1.31" ];
+      plugins = ["github.com/greenpau/caddy-security@v1.1.31"];
       hash = "sha256-aM5UdzmqOwGcdQUzDAEEP30CC1W2UPD10QhF0i7GwQE=";
     };
 
@@ -161,13 +159,13 @@ in
         '';
       };
       "gv.je" = {
-        serverAliases = [ "www.gv.je" ];
+        serverAliases = ["www.gv.je"];
         extraConfig = ''
           redir https://je.grandsvoisins.org{uri} 301
         '';
       };
       "gvplace.com" = {
-        serverAliases = [ "www.gvplace.com" ];
+        serverAliases = ["www.gvplace.com"];
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
         '';
@@ -236,6 +234,26 @@ in
 
       ############################
 
+      "key.gv.je" = {
+        extraConfig = ''
+          #  caddy trust /etc/keycloak/certs/keycloak.local.pem
+          reverse_proxy https://key.gv.je:14443 {
+            transport http {
+                tls
+                # tls_server_name key.gv.je
+                tls_insecure_skip_verify # Change this
+                # tls_trust_pool file {
+                #   pem_file /etc/keycloak/certs/key.gv.je.pem
+                # }
+                # header_up Host {upstream_hostport}
+                # header_up X-Real-IP {remote}
+                # header_up X-Forwarded-For {remote}
+                # header_up X-Forwarded-Port {server_port}
+                # header_up X-Forwarded-Proto {scheme}
+            }
+          }
+        '';
+      };
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
