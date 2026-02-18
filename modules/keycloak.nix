@@ -32,6 +32,7 @@ in {
         # host = "127.0.0.1";
         # useSSL = false;
         # caCert = "/etc/key.gv.je/postgres.crt";
+        port = vars.ports.postgresql;
       };
       settings = {
         https-port = 14446;
