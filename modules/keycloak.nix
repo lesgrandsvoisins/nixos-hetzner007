@@ -43,6 +43,7 @@ in {
         hostname = "key.gv.je";
         hostname-admin = "admin.key.gv.je";
         db-url-port = lib.mkForce vars.ports.postgresql;
+        db-url = lib.mkForce "postgresql://:${builtins.toString vars.ports.postgresql}/dbname?host=/var/lib/postgresql";
       };
       sslCertificate = "/var/lib/acme/key.gv.je/fullchain.pem";
       sslCertificateKey = "/var/lib/acme/key.gv.je/key.pem";
