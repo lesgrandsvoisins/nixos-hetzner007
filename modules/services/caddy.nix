@@ -254,6 +254,7 @@ in {
             }
           }
         '';
+      };
 
       "admin.key.gv.je" = {
         extraConfig = ''
