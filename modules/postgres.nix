@@ -15,6 +15,7 @@ in {
       ssl = true;
       ssl_cert_file = "/etc/postgres/postgres.crt";
       ssl_key_file = "/etc/postgres/postgres.key";
+      port = 5432;
     };
     ensureUsers = [
       {
