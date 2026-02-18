@@ -238,7 +238,7 @@ in {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
           caddy trust /var/lib/acme/key.gv.je/fullchain.pem;
-          reverse_proxy https://localhost:14443 {
+          reverse_proxy https://localhost:14446 {
             transport http {
                 tls
                 tls_server_name key.gv.je
@@ -259,7 +259,7 @@ in {
       "admin.key.gv.je" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
-          reverse_proxy https://localhost:14443 {
+          reverse_proxy https://localhost:14446 {
             transport http {
                 tls
                 tls_server_name admin.key.gv.je
