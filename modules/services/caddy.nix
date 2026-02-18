@@ -237,7 +237,7 @@ in {
       "key.gv.je" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
-          caddy trust /var/lib/acme/key.gv.je/fullchain.pem;
+          # caddy trust /var/lib/acme/key.gv.je/fullchain.pem;
           reverse_proxy https://localhost:14446 {
             transport http {
                 tls
