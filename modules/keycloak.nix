@@ -12,6 +12,12 @@ in {
     group = "services";
     isSystemUser = true;
   };
+  security.acme.certs."key.gv.je" = {
+    dnsProvider = "porkbun";
+    environmentFile = "/var/caddy/caddy.env";
+    group = "services";
+    extraDomainNames = ["admin.key.gv.je"];
+  };
   services = {
     keycloak = {
       enable = true;
@@ -34,7 +40,7 @@ in {
         # proxy = "reencrypt";
         proxy-headers = "xforwarded";
         hostname = "key.gv.je";
-        # hostname-admin = "admin.key.gv.je";
+        hostname-admin = "admin.key.gv.je";
       };
       sslCertificate = "/var/lib/acme/key.gv.je/fullchain.pem";
       sslCertificateKey = "/var/lib/acme/key.gv.je/key.pem";
