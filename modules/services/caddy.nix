@@ -265,7 +265,7 @@ in {
                 tls_server_name admin.key.gv.je
                 # tls_insecure_skip_verify # Change this
                 tls_trust_pool file {
-                  pem_file /etc/keycloak/certs/key.gv.je.pem
+                  pem_file /var/lib/acme/key.gv.je.pem
                 }
                 # header_up Host {upstream_hostport}
                 # header_up X-Real-IP {remote}
