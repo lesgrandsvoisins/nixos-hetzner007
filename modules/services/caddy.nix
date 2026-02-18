@@ -237,14 +237,35 @@ in {
       "key.gv.je" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
-          reverse_proxy https://key.gv.je:14443 {
+          caddy trust /var/lib/acme/key.gv.je/fullchain.pem;
+          reverse_proxy https://localhost:14443 {
             transport http {
                 tls
-                # tls_server_name key.gv.je
-                tls_insecure_skip_verify # Change this
-                # tls_trust_pool file {
-                #   pem_file /etc/keycloak/certs/key.gv.je.pem
-                # }
+                tls_server_name key.gv.je
+                # tls_insecure_skip_verify # Change this
+                tls_trust_pool file {
+                  pem_file /var/lib/acme/key.gv.je/fullchain.pem
+                }
+                # header_up Host {upstream_hostport}
+                # header_up X-Real-IP {remote}
+                # header_up X-Forwarded-For {remote}
+                # header_up X-Forwarded-Port {server_port}
+                # header_up X-Forwarded-Proto {scheme}
+            }
+          }
+        '';
+
+      "admin.key.gv.je" = {
+        extraConfig = ''
+          #  caddy trust /etc/keycloak/certs/keycloak.local.pem
+          reverse_proxy https://localhost:14443 {
+            transport http {
+                tls
+                tls_server_name admin.key.gv.je
+                # tls_insecure_skip_verify # Change this
+                tls_trust_pool file {
+                  pem_file /etc/keycloak/certs/key.gv.je.pem
+                }
                 # header_up Host {upstream_hostport}
                 # header_up X-Real-IP {remote}
                 # header_up X-Forwarded-For {remote}
