@@ -41,7 +41,7 @@ in {
         # proxy = "reencrypt";
         proxy-headers = "xforwarded";
         hostname = "key.gv.je";
-        hostname-admin = "admin.key.gv.je";
+        # hostname-admin = "https://admin.key.gv.je";
         # db-url-port = lib.mkForce vars.ports.postgresql;
         # db-url = lib.mkForce "postgresql:///dbname?host=/var/lib/postgresql?port=${builtins.toString vars.ports.postgresql}";
       };
