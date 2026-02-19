@@ -159,9 +159,13 @@ in {
         '';
       };
       "gv.je" = {
-        serverAliases = ["www.gv.je"];
         extraConfig = ''
-          redir https://je.grandsvoisins.org{uri} 301
+          redir https://www.gv.je{uri} 301
+        '';
+      };
+      "www.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
         '';
       };
       "gvplace.com" = {
