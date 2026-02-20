@@ -369,7 +369,8 @@ in {
       };
       "je.grandsvoisins.org" = {
         extraConfig = ''
-          reverse_proxy http://localhost:3000
+          # reverse_proxy http://localhost:3000
+          redir https://www.gv.je{uri} 301
         '';
       };
       "www.quiquoietc.com" = {
