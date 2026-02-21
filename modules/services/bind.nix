@@ -8,7 +8,7 @@
 in {
   users.users.named.uid = vars.uid.named;
   users.groups.named.gid = vars.gid.named;
-  systemd.tempfiles.rules = [
+  systemd.tmpfiles.rules = [
     "d /var/lib/bind/zones 0775 named named"
   ];
   services.bind = {
