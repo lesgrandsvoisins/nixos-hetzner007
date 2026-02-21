@@ -7,6 +7,7 @@
 }: let
 in {
   users.users.named.uid = vars.uid.named;
+  users.users.named.group = "named";
   users.groups.named.gid = vars.gid.named;
   systemd.tmpfiles.rules = [
     "d /var/lib/bind/zones 0775 named named"
