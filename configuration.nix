@@ -15,20 +15,18 @@ in {
   ];
   nix.settings.experimental-features = ["nix-command flakes"];
   imports = [
-    ./hardware-configuration.nix
-    ./modules/networking.nix
-    ./modules/security.nix
-    ./modules/users.nix
-    ./modules/home.nix
-    ./modules/packages.nix
-    ./modules/services.nix
     ./containers/homarr.nix
-    ./containers/wiki-js-www.nix
+    ./containers/keycloak.nix
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
-    ./containers/keycloak.nix
-    ./modules/keycloak.nix
-    ./modules/postgres.nix
+    ./containers/wiki-js-www.nix
+    ./hardware-configuration.nix
+    ./modules/home.nix
+    ./modules/networking.nix
+    ./modules/packages.nix
+    ./modules/security.nix
+    ./modules/services.nix
+    ./modules/users.nix
   ];
 
   # Bootloader.
