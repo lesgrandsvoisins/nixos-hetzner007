@@ -4,6 +4,7 @@
     users = 100;
     services = 500;
     radicale = 504;
+    named = 989;
   };
   uid = {
     caddy = 239;
@@ -15,6 +16,7 @@
     keycloak = 503;
     radicale = 504;
     syncin = 1505;
+    named = 991;
   };
   ports = {
     postgresql = 5434;
