@@ -4,18 +4,18 @@
   lib,
   vars,
   ...
-}:
-let
-in
-{
+}: let
+in {
   # Enable the OpenSSH daemon.
   imports = [
-    ./services/lldap.nix
+    ./services/bind.nix
     ./services/caddy.nix
-    ./services/postgresql.nix
-    ./services/wiki-js.nix
+    ./services/keycloak.nix
+    ./services/lldap.nix
+    ./services/postgres.nix
     ./services/radicale.nix
     ./services/vaultwarden.nix
+    ./services/wiki-js.nix
   ];
   # systemd.tmpfiles.rules = [
   #   "d /etc/pocket-id 0775 pocket-id services"
