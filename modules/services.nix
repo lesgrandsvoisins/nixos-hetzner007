@@ -12,7 +12,7 @@ in {
     ./services/caddy.nix
     ./services/keycloak.nix
     ./services/lldap.nix
-    ./services/postgres.nix
+    ./services/postgresql.nix
     ./services/radicale.nix
     ./services/vaultwarden.nix
     ./services/wiki-js.nix

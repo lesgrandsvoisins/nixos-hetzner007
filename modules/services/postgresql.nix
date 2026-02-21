@@ -1,3 +1,4 @@
+# postgres.nix
 {
   pkgs,
   lib,
@@ -6,18 +7,22 @@
   ...
 }: let
 in {
-  # services.postgresql = {
-  #   enable = true;
-
-  #   # enableTCPIP = true;
-  #   # listen_addresses = "2a01:4f8:241:4faa::10";
-  #   enableTCPIP = false;
-  #   settings = {
-  #     # ssl = true;
-  #     # ssl_key_file = "/var/lib/acme/www.configmagic.com/key.pem";
-  #     # ssl_cert_file = "/var/lib/acme/www.configmagic.com/fullchain.pem";
-  #     # port = vars.ports.postgresql;
-  #     # listen_addresses = lib.mkForce "2a01:4f8:241:4faa::";
-  #   };
-  # };
+  services.postgresql = {
+    # package = pkgs.postgresql_18;
+    enable = true;
+    enableTCPIP = true;
+    settings = {
+      ssl = true;
+      ssl_cert_file = "/etc/postgres/postgres.crt";
+      ssl_key_file = "/etc/postgres/postgres.key";
+      port = vars.ports.postgresql;
+    };
+    ensureUsers = [
+      {
+        name = "keygvje";
+        ensureDBOwnership = true;
+      }
+    ];
+    ensureDatabases = ["keygvje"];
+  };
 }
