@@ -13,7 +13,7 @@ in {
     "d /var/lib/bind/zones 0775 named named"
   ];
   services.bind = {
-    enable = false;
+    enable = true;
     zones = {
       "configmagic.com" = {
         file = "/var/lib/bind/zones/configmagic.com.txt";
