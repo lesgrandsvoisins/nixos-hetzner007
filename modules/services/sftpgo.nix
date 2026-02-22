@@ -5,19 +5,22 @@
   vars,
   ...
 }: let
+  sftpgo-prelogin-hook = pkgs.callPackage ../../derivations/sftpgo-hook/default.nix {};
 in {
+  environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
   users.users.sftpgo.group = "sftpgo";
   users.groups.sftpgo.gid = vars.gid.sftpgo;
   systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";};
-  systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};
+  # systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};
   systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_USERNAME" = "adminsftpgo";};
-  systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_PASSWORD" = "$(cat /etc/sftpgo/.secret.adminpassword)";};
+  # systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_PASSWORD" = "$(cat /etc/sftpgo/.secret.adminpassword)";};
   systemd.tmpfiles.rules = [
     "f /etc/sftpgo/.secret.smtppassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.postgresqlpassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.oidcpassword 0660 sftpgo root"
     "d /etc/sftpgo/env.d 0770 sftpgo root"
+    "d ${vars.dirs.sftpgo-users} 0770 sftpgo root"
   ];
   services.sftpgo = {
     enable = true;
@@ -29,6 +32,10 @@ in {
     loadDataFile = null;
     settings = {
       # templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
+      common.pre_login_hook = {
+        enabled = true;
+        hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
+      };
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
@@ -75,6 +82,7 @@ in {
             client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
             username_field = "preferred_username";
             redirect_base_url = "https://sftpgo.gv.je";
+            implicit_roles = true;
           };
         }
       ];

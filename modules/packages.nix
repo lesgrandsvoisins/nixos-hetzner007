@@ -43,6 +43,7 @@ in {
     caddy
     nss
 
-    keeweb
+    # keeweb
+    jq
   ];
 }

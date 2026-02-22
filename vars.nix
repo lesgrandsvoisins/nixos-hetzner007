@@ -39,6 +39,9 @@
     sfptgo-sftp = 1282;
     sfptgo-webdav = 1281;
   };
+  dirs = {
+    sftpgo-users = "/srv/sftpgo/users";
+  };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
   hetzner.interfaces = [
