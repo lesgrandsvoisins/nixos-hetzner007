@@ -45,12 +45,12 @@ in {
         # pre_login_hook
         # post_login_hook
         create_default_admin = true;
-        # oidc = {
-        #   config_url = "https://key.gv.je/realms/master";
-        #   client_id = "sftpgo";
-        #   client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
-        #   username_field = "preferred_username";
-        # };
+        oidc = {
+          config_url = "https://key.gv.je/realms/master";
+          client_id = "sftpgo";
+          client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
+          username_field = "preferred_username";
+        };
       };
       webdavd.bindings = [
         {
