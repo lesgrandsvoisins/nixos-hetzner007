@@ -22,6 +22,13 @@ in {
     "d /etc/sftpgo/env.d 0770 sftpgo root"
     "d ${vars.dirs.sftpgo-users} 0770 sftpgo root"
   ];
+  systemd.services.sftpgo.serviceConfig.Environment = [
+    "SFTPGO_HOME_BASE=${vars.dirs.sftpgo-users}"
+    # If SFTPGo runs as root (or has CAP_CHOWN), you can set ownership:
+    # "SFTPGO_HOME_UID=1001"
+    # "SFTPGO_HOME_GID=1001"
+    "SFTPGO_HOME_MODE=2770"
+  ];
   services.sftpgo = {
     enable = true;
     extraArgs = [
@@ -83,6 +90,25 @@ in {
             username_field = "preferred_username";
             redirect_base_url = "https://sftpgo.gv.je";
             implicit_roles = true;
+            scopes = [
+              "openid"
+              "profile"
+              "email"
+              "username"
+            ];
+            security = {
+              https_proxy_headers = [
+                {
+                  "key" = "X-Forwarded-Proto";
+                  "value" = "https";
+                }
+              ];
+              hosts_proxy_headers = ["X-Forwarded-Host"];
+              enabled = true;
+              allowed_hosts = ["sftpgo.gv.je"];
+              proxy_allowed = ["127.0.0.1/32"];
+            };
+            custom_fields = ["sftpgo_home_dir"];
           };
         }
       ];

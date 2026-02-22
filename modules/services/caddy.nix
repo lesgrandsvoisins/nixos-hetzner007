@@ -289,6 +289,9 @@ in {
       "sftpgo.gv.je" = {
         extraConfig = ''
           reverse_proxy https://127.0.0.1:${builtins.toString vars.ports.sfptgo-httpd} {
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
             transport http {
               tls
               tls_server_name 127.0.0.1
