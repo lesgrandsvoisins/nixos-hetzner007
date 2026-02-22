@@ -32,7 +32,7 @@ in {
         host = "127.0.0.1";
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
-        connection_string = "poatgresql://:5434/sftpgo";
+        connection_string = "postgresql://:5434/sftpgo";
         # password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
         # ssl-mode = 1;
         # root_cert = "/etc/postgres/root.crt";
