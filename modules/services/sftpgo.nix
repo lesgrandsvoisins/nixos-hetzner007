@@ -74,6 +74,7 @@ in {
             client_id = "sftpgo";
             client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
             username_field = "preferred_username";
+            redirect_base_url = "https://sftpgo.gv.je";
           };
         }
       ];
