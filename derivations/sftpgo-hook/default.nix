@@ -12,9 +12,9 @@ in
 
       # Optional ownership/perms (useful if SFTPGo runs as root)
       # If not set, the script will not chown (but will still mkdir).
-      OWNER_UID="''${SFTPGO_HOME_UID:-${builtins.toString vars.uid.sftpgo}}"
-      OWNER_GID="''${SFTPGO_HOME_GID:-${builtins.toString vars.gid.sftpgo}}"
-      HOME_MODE="''${SFTPGO_HOME_MODE:-0750}"
+      # OWNER_UID="''${SFTPGO_HOME_UID:-${builtins.toString vars.uid.sftpgo}}"
+      # OWNER_GID="''${SFTPGO_HOME_GID:-${builtins.toString vars.gid.sftpgo}}"
+      # HOME_MODE="''${SFTPGO_HOME_MODE:-0750}"
 
       if [ -z "''${SFTPGO_LOGIND_USER:-}" ]; then
         echo "SFTPGO_LOGIND_USER is not set" >&2
@@ -42,7 +42,7 @@ in
 
       # Create home dir (and parents)
       mkdir -p "$HOME_DIR"
-      chmod "$HOME_MODE" "$HOME_DIR"
+      # chmod "$HOME_MODE" "$HOME_DIR"
 
       # # If running with permissions, set ownership
       # if [ -n "$OWNER_UID" ] && [ -n "$OWNER_GID" ]; then
