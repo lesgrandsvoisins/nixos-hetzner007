@@ -22,7 +22,11 @@ in {
         name = "keygvje";
         ensureDBOwnership = true;
       }
+      {
+        name = "sftpgo";
+        ensureDBOwnership = true;
+      }
     ];
-    ensureDatabases = ["keygvje"];
+    ensureDatabases = ["keygvje" "sftpgo"];
   };
 }

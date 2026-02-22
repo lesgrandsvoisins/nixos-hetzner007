@@ -288,7 +288,15 @@ in {
       };
       "sftpgo.gv.je" = {
         extraConfig = ''
-          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-httpd}
+          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-httpd} {
+            transport http {
+              tls
+              tls_server_name 127.0.0.1
+                tls_trust_pool file {
+                  pem_file /etc/sftpgo/127.0.0.1.pem
+                }
+            }
+          }
         '';
       };
       "webdav.gv.je" = {
