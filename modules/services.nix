@@ -14,6 +14,7 @@ in {
     ./services/lldap.nix
     ./services/postgresql.nix
     ./services/radicale.nix
+    ./services/sftpgo.nix
     ./services/vaultwarden.nix
     ./services/wiki-js.nix
   ];

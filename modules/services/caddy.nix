@@ -286,6 +286,16 @@ in {
           }
         '';
       };
+      "sftpgo.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-httpd}
+        '';
+      };
+      "webdav.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-webdav}
+        '';
+      };
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem

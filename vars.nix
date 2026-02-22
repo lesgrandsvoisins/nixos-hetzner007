@@ -5,6 +5,7 @@
     services = 500;
     radicale = 504;
     named = 989;
+    sftpgo = 1506;
   };
   uid = {
     caddy = 239;
@@ -16,6 +17,7 @@
     keycloak = 503;
     radicale = 504;
     syncin = 1505;
+    sftpgo = 1506;
     named = 991;
   };
   ports = {
@@ -33,6 +35,9 @@
     radicale = 5232;
     radicale-public = 5252;
     xandikos = 10888;
+    sfptgo-httpd = 1280;
+    sfptgo-sftp = 1282;
+    sfptgo-webdav = 1281;
   };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
