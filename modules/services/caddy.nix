@@ -123,9 +123,9 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "kpw.gv.je" = {
+      "keepass.gv.je" = {
         extraConfig = ''
-          file_server ${pkgs.keeweb}/bin/keeweb
+          file_server /var/www/keeweb/
         '';
       };
       "test.whowhatetc.com" = {
