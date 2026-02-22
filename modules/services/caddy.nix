@@ -315,22 +315,22 @@ in {
           }
         '';
       };
-      "webdav.gv.je" = {
-        extraConfig = ''
-          reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
-            header_up Host {host}
-            header_up X-Forwarded-Proto {scheme}
-            header_up X-Forwarded-Host {host}
-            transport http {
-              tls
-              tls_server_name webdav.gv.je
-              tls_trust_pool file {
-                pem_file /var/lib/acme/webdav.gv.je/fullchain.pem
-              }
-            }
-          }
-        '';
-      };
+      # "webdav.gv.je" = {
+      #   extraConfig = ''
+      #     reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
+      #       header_up Host {host}
+      #       header_up X-Forwarded-Proto {scheme}
+      #       header_up X-Forwarded-Host {host}
+      #       transport http {
+      #         tls
+      #         tls_server_name webdav.gv.je
+      #         tls_trust_pool file {
+      #           pem_file /var/lib/acme/webdav.gv.je/fullchain.pem
+      #         }
+      #       }
+      #     }
+      #   '';
+      # };
       "keycloak.grandsvoisins.org" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
