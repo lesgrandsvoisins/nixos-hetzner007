@@ -29,11 +29,11 @@ in {
       dataprovider = {
         driver = "postgresql";
         name = "sftpgo";
-        host = "localhost";
+        host = "127.0.0.1";
         port = builtins.toString vars.ports.postgresql;
         ssl-mode = 1;
         root_cert = "/etc/postgres/root.crt";
-        disable_sni = false;
+        disable_sni = true;
         track_quota = 2;
         # users_base_dir = "/tmp";
         # pre_login_hook
