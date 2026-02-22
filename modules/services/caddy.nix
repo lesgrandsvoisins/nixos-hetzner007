@@ -125,7 +125,7 @@ in {
       };
       "keepass.gv.je" = {
         extraConfig = ''
-          file_server /var/www/keeweb/
+          file_server /var/www/keeweb
         '';
       };
       "test.whowhatetc.com" = {
