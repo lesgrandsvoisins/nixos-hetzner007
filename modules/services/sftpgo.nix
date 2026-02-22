@@ -31,6 +31,8 @@ in {
         name = "sftpgo";
         host = "127.0.0.1";
         port = builtins.toString vars.ports.postgresql;
+        username = "sftpgo";
+        password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
         ssl-mode = 1;
         root_cert = "/etc/postgres/root.crt";
         disable_sni = true;
@@ -72,9 +74,10 @@ in {
       ];
       smtp = {
         user = "list@lesgrandsvoisins.com";
-        port = 456;
+        port = 465;
         host = "mail.lesgrandsvoisins.com";
         from = "list@lesgrandsvoisins.com";
+        password = "$(cat /etc/sftpgo/.secret.smtppassword)";
         encryption = 1; # 1 TLS 2 STARTTLS
         auth_type = 1; # 1 Login 0 Plain 2 CRAM-MD5
       };
