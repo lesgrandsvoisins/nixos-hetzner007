@@ -6,6 +6,7 @@
   ...
 }: let
   sftpgo-prelogin-hook = pkgs.callPackage ../../derivations/sftpgo-hook/default.nix {};
+  sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
 in {
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
@@ -41,7 +42,7 @@ in {
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
-        host = "127.0.0.1";
+        host = "${sftpgo_host}";
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
         connection_string = "postgresql://:5434/sftpgo";
@@ -54,31 +55,37 @@ in {
         # pre_login_hook
         # post_login_hook
         create_default_admin = true;
-        pre_login_hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
+        # pre_login_hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
       };
       webdavd.bindings = [
         {
-          address = "127.0.0.1";
+          address = "${sftpgo_host}";
           port = vars.ports.sfptgo-webdav;
         }
       ];
       sftp.bindings = [
         {
-          address = "127.0.0.1";
+          address = "${sftpgo_host}";
           port = vars.ports.sfptgo-sftp;
         }
       ];
       httpd.bindings = [
         {
-          address = "127.0.0.1";
+          address = "${sftpgo_host}";
           port = vars.ports.sfptgo-httpd;
           enable_web_client = true;
           enable_web_admin = true;
           enabled_login_methods = 0;
           disabled_login_methods = 0;
           enable_https = true;
-          certificate_file = "/etc/sftpgo/127.0.0.1.pem";
-          certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
+          # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
+          # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
+          certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
+          certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
+          proxy_mode = 1;
+          proxy_allowed = ["${sftpgo_host}"];
+          client_ip_proxy_header = "X-Forwarded-Host";
+          languages = ["fr" "en" "es"];
           oidc = {
             config_url = "https://key.gv.je/realms/master";
             client_id = "sftpgo";
@@ -92,19 +99,18 @@ in {
             #   "email"
             #   "username"
             # ];
-            security = {
-              https_proxy_headers = [
-                {
-                  "key" = "X-Forwarded-Proto";
-                  "value" = "https";
-                }
-              ];
-              hosts_proxy_headers = ["X-Forwarded-Host"];
-              enabled = true;
-              allowed_hosts = ["sftpgo.gv.je"];
-              proxy_allowed = ["127.0.0.1/32"];
-            };
-            custom_fields = ["sftpgo_home_dir"];
+            # security = {
+            #   https_proxy_headers = [
+            #     {
+            #       "key" = "X-Forwarded-Proto";
+            #       "value" = "https";
+            #     }
+            #   ];
+            #   hosts_proxy_headers = ["X-Forwarded-Host"];
+            #   enabled = true;
+            #   allowed_hosts = ["sftpgo.gv.je"];
+            # };
+            # custom_fields = ["sftpgo_home_dir"];
           };
         }
       ];

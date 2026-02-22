@@ -7,6 +7,7 @@
 }: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
   # vars = ../../vars.nix;
+  sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -18,8 +19,14 @@ in {
 
   security.acme.certs."lldap.ggvv.org" = {
     dnsProvider = "porkbun";
-    environmentFile = "/var/caddy/caddy.env";
+    environmentFile = "/etc/caddy/caddy.env";
     group = "services";
+  };
+
+  security.acme.certs."sftpgo.gv.je" = {
+    dnsProvider = "porkbun";
+    environmentFile = "/etc/caddy/caddy.env";
+    group = "sftpgo";
   };
 
   services.caddy = {
@@ -288,15 +295,15 @@ in {
       };
       "sftpgo.gv.je" = {
         extraConfig = ''
-          reverse_proxy https://127.0.0.1:${builtins.toString vars.ports.sfptgo-httpd} {
+          reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-httpd} {
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
             header_up X-Forwarded-Host {host}
             transport http {
               tls
-              tls_server_name 127.0.0.1
+              tls_server_name ${sftpgo_host}
                 tls_trust_pool file {
-                  pem_file /etc/sftpgo/127.0.0.1.pem
+                  pem_file /var/lib/acme/${sftpgo_host}/fullchain.pem
                 }
             }
           }
