@@ -90,12 +90,12 @@ in {
             username_field = "preferred_username";
             redirect_base_url = "https://sftpgo.gv.je";
             implicit_roles = true;
-            scopes = [
-              "openid"
-              "profile"
-              "email"
-              "username"
-            ];
+            # scopes = [
+            #   "openid"
+            #   "profile"
+            #   "email"
+            #   "username"
+            # ];
             security = {
               https_proxy_headers = [
                 {
