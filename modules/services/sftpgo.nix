@@ -45,12 +45,6 @@ in {
         # pre_login_hook
         # post_login_hook
         create_default_admin = true;
-        oidc = {
-          config_url = "https://key.gv.je/realms/master";
-          client_id = "sftpgo";
-          client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
-          username_field = "preferred_username";
-        };
       };
       webdavd.bindings = [
         {
@@ -71,9 +65,16 @@ in {
           enable_web_client = true;
           enable_web_admin = true;
           enabled_login_methods = 0;
+          disabled_login_methods = 0;
           enable_https = true;
           certificate_file = "/etc/sftpgo/127.0.0.1.pem";
           certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
+          oidc = {
+            config_url = "https://key.gv.je/realms/master";
+            client_id = "sftpgo";
+            client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
+            username_field = "preferred_username";
+          };
         }
       ];
       smtp = {
