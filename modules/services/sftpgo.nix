@@ -28,7 +28,7 @@ in {
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
     settings = {
-      templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
+      # templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
@@ -84,6 +84,7 @@ in {
         password = "$(cat /etc/sftpgo/.secret.smtppassword)";
         encryption = 1; # 1 TLS 2 STARTTLS
         auth_type = 1; # 1 Login 0 Plain 2 CRAM-MD5
+        templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
       };
     };
   };
