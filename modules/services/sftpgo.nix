@@ -6,7 +6,8 @@
   ...
 }: let
   sftpgo-prelogin-hook = pkgs.callPackage ../../derivations/sftpgo-hook/default.nix {};
-  sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
+  # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
+  sftpgo_host = "127.0.0.1";
 in {
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;

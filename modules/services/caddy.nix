@@ -7,7 +7,8 @@
 }: let
   # caddy-ui-lesgrandsvoisins = pkgs.callPackage ./derivations/caddy-ui-lesgrandsvoisins.nix {};
   # vars = ../../vars.nix;
-  sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
+  # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
+  sftpgo_host = "127.0.0.1";
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -311,7 +312,7 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-webdav}{
+          reverse_proxy http://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
             header_up X-Forwarded-Host {host}
