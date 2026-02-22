@@ -44,11 +44,11 @@ in
       mkdir -p "$HOME_DIR"
       chmod "$HOME_MODE" "$HOME_DIR"
 
-      # If running with permissions, set ownership
-      if [ -n "$OWNER_UID" ] && [ -n "$OWNER_GID" ]; then
-        # If not privileged, this will fail; fail fast so you notice misconfig.
-        chown "$OWNER_UID:$OWNER_GID" "$HOME_DIR"
-      fi
+      # # If running with permissions, set ownership
+      # if [ -n "$OWNER_UID" ] && [ -n "$OWNER_GID" ]; then
+      #   # If not privileged, this will fail; fail fast so you notice misconfig.
+      #   chown "$OWNER_UID:$OWNER_GID" "$HOME_DIR"
+      # fi
 
       # Emit user JSON for SFTPGo
       OUTPUT=$(cat <<EOF
