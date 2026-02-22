@@ -28,6 +28,7 @@ in {
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
     settings = {
+      templates_path = "${pkgs.sftpgo}/share/sftpgo";
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
