@@ -38,6 +38,8 @@ in
 
       HOME_DIR="$HOME_BASE/$USERNAME"
 
+      echo "$HOME_DIR is HOME_DIR" >&2
+
       # Create home dir (and parents)
       mkdir -p "$HOME_DIR"
       chmod "$HOME_MODE" "$HOME_DIR"
