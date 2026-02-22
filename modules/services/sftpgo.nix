@@ -32,21 +32,22 @@ in {
         host = "127.0.0.1";
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
+        connection_string = "poatgresql://:5434/sftpgo";
         # password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
         # ssl-mode = 1;
         # root_cert = "/etc/postgres/root.crt";
         # disable_sni = true;
-        track_quota = 2;
+        # track_quota = 2;
         # users_base_dir = "/tmp";
         # pre_login_hook
         # post_login_hook
         create_default_admin = true;
-        oidc = {
-          config_url = "https://key.gv.je/realms/master";
-          client_id = "sftpgo";
-          client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
-          username_field = "preferred_username";
-        };
+        # oidc = {
+        #   config_url = "https://key.gv.je/realms/master";
+        #   client_id = "sftpgo";
+        #   client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
+        #   username_field = "preferred_username";
+        # };
       };
       webdavd.bindings = [
         {
