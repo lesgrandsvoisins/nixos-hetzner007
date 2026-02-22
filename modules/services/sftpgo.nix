@@ -11,7 +11,7 @@ in {
   users.users.sftpgo.uid = vars.uid.sftpgo;
   users.users.sftpgo.group = "sftpgo";
   users.groups.sftpgo.gid = vars.gid.sftpgo;
-  systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";};
+  # systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";};
   # systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};
   systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_USERNAME" = "adminsftpgo";};
   # systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_PASSWORD" = "$(cat /etc/sftpgo/.secret.adminpassword)";};
