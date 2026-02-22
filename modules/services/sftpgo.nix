@@ -22,8 +22,8 @@ in {
   services.sftpgo = {
     enable = true;
     extraArgs = [
-      "--config-dir"
-      "/etc/sftpgo"
+      # "--config-dir"
+      # "/etc/sftpgo"
     ];
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
