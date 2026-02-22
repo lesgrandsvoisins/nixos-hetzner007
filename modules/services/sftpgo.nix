@@ -62,6 +62,12 @@ in {
         {
           address = "${sftpgo_host}";
           port = vars.ports.sfptgo-webdav;
+          enable_https = true;
+          # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
+          # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
+          certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
+          certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
+          client_ip_proxy_header = "X-Forwarded-Host";
         }
       ];
       sftp.bindings = [
