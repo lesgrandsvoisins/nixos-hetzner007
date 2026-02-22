@@ -123,6 +123,11 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
+      "kpw.gv.je" = {
+        extraConfig = ''
+          file_server ${pkgs.keeweb}/bin/keeweb
+        '';
+      };
       "test.whowhatetc.com" = {
         extraConfig = ''
           redir https://test.ggvv.org{uri}
