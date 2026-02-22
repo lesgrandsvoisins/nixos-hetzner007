@@ -40,7 +40,7 @@
     sfptgo-webdav = 1281;
   };
   dirs = {
-    sftpgo-users = "/srv/sftpgo/users";
+    sftpgo-users = "/var/lib/sftpgo/users";
   };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";
