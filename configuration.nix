@@ -7,6 +7,7 @@
   home-manager,
   lib,
   vars,
+  secrets,
   ...
 }: let
 in {

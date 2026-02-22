@@ -29,6 +29,7 @@
   #) //
   let
     vars = import ./vars.nix;
+    secrets = import ./secrets.nix;
   in {
     nixosConfigurations = {
       hetzner007 = nixpkgs.lib.nixosSystem {
@@ -39,7 +40,7 @@
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
-        specialArgs = {inherit vars inputs;};
+        specialArgs = {inherit vars secrets inputs;};
       };
     };
   };

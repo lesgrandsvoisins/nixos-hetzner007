@@ -9,6 +9,10 @@ in {
   users.users.sftpgo.uid = vars.uid.sftpgo;
   users.users.sftpgo.group = "sftpgo";
   users.groups.sftpgo.gid = vars.gid.sftpgo;
+  systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.dataprovider)";};
+  systemd.tmpfiles.rules = [
+    "d /etc/sftpgo/.secret.dataprovider 0660 sftpgo root"
+  ];
   services.sftpgo = {
     enable = true;
     extraArgs = [
