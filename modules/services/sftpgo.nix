@@ -82,8 +82,8 @@ in {
           # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
           certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
           certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
-          proxy_mode = 1;
-          proxy_allowed = ["${sftpgo_host}"];
+          # proxy_mode = 1;
+          # proxy_allowed = ["${sftpgo_host}"];
           client_ip_proxy_header = "X-Forwarded-Host";
           languages = ["fr" "en" "es"];
           oidc = {
