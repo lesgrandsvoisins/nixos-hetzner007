@@ -13,7 +13,6 @@ in {
   systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};
   systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_USERNAME" = "adminsftpgo";};
   systemd.services.sftpgo.environment = {"SFTPGO_DEFAULT_ADMIN_PASSWORD" = "$(cat /etc/sftpgo/.secret.adminpassword)";};
-  SFTPGO_DEFAULT_ADMIN_USERNAME
   systemd.tmpfiles.rules = [
     "f /etc/sftpgo/.secret.smtppassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.postgresqlpassword 0660 sftpgo root"
