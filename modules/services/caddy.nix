@@ -301,9 +301,9 @@ in {
             header_up X-Forwarded-Host {host}
             transport http {
               tls
-              tls_server_name ${sftpgo_host}
+              tls_server_name sftpgo.gv.je
                 tls_trust_pool file {
-                  pem_file /var/lib/acme/${sftpgo_host}/fullchain.pem
+                  pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
                 }
             }
           }
@@ -311,7 +311,18 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-webdav}
+          reverse_proxy http://127.0.0.1:${builtins.toString vars.ports.sfptgo-webdav}{
+            header_up Host {host}
+            header_up X-Forwarded-Proto {scheme}
+            header_up X-Forwarded-Host {host}
+            transport http {
+              tls
+              tls_server_name sftpgo.gv.je
+              tls_trust_pool file {
+                pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
+              }
+            }
+          }
         '';
       };
       "keycloak.grandsvoisins.org" = {
