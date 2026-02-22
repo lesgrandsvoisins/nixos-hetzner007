@@ -51,7 +51,7 @@ in
       fi
 
       # Emit user JSON for SFTPGo
-      cat <<EOF
+      OUTPUT=$(cat <<EOF
       {
         "status": 1,
         "username": "$USERNAME",
@@ -65,5 +65,9 @@ in
         }
       }
       EOF
+      )
+
+      echo "OUTPUT is $OUTPUT" >&2
+      echo "$OUTPUT"
     '';
   }
