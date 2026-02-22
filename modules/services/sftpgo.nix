@@ -33,9 +33,9 @@ in {
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
         password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
-        ssl-mode = 1;
-        root_cert = "/etc/postgres/root.crt";
-        disable_sni = true;
+        # ssl-mode = 1;
+        # root_cert = "/etc/postgres/root.crt";
+        # disable_sni = true;
         track_quota = 2;
         # users_base_dir = "/tmp";
         # pre_login_hook
