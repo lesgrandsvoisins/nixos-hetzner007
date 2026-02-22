@@ -15,11 +15,13 @@ in {
     "f /etc/sftpgo/.secret.smtppassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.postgresqlpassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.oidcpassword 0660 sftpgo root"
+    "d /etc/sftpgo/env.d 0770 sftpgo root"
   ];
   services.sftpgo = {
     enable = true;
     extraArgs = [
-      ""
+      "--config-dir"
+      "/etc/sftpgo"
     ];
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
