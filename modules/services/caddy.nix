@@ -29,6 +29,11 @@ in {
     environmentFile = "/etc/caddy/caddy.env";
     group = "sftpgo";
   };
+  security.acme.certs."webdav.gv.je" = {
+    dnsProvider = "porkbun";
+    environmentFile = "/etc/caddy/caddy.env";
+    group = "sftpgo";
+  };
 
   services.caddy = {
     enable = true;
@@ -312,15 +317,15 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          reverse_proxy http://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
+          reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
             header_up X-Forwarded-Host {host}
             transport http {
               tls
-              tls_server_name sftpgo.gv.je
+              tls_server_name webdav.gv.je
               tls_trust_pool file {
-                pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
+                pem_file /var/lib/acme/webdav.gv.je/fullchain.pem
               }
             }
           }
