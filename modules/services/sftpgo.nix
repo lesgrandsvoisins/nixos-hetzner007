@@ -26,7 +26,7 @@ in {
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
     settings = {
-      dataprovider = {
+      data_provider = {
         driver = "postgresql";
         name = "sftpgo";
         host = "127.0.0.1";
