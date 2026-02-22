@@ -38,11 +38,6 @@ in {
     dataDir = "/var/lib/sftpgo";
     loadDataFile = null;
     settings = {
-      # templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
-      common.pre_login_hook = {
-        enabled = true;
-        hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
-      };
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
@@ -59,6 +54,10 @@ in {
         # pre_login_hook
         # post_login_hook
         create_default_admin = true;
+        pre_login_hook = {
+          enabled = true;
+          hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
+        };
       };
       webdavd.bindings = [
         {
