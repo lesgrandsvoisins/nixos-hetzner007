@@ -36,7 +36,7 @@ in {
   boot.loader.grub.useOSProber = true;
 
   boot.swraid.mdadmConf = ''
-    MAILADDR=chris@lesgrandsvoisins.com
+    MAILADDR chris@lesgrandsvoisins.com
   '';
   # Set your time zone.
   time.timeZone = "Europe/Paris";
