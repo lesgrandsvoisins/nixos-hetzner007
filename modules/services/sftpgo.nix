@@ -12,6 +12,7 @@ in {
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
   users.users.sftpgo.group = "sftpgo";
+  users.users.sftpgo.extraGroups = ["services"];
   users.groups.sftpgo.gid = vars.gid.sftpgo;
   # systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";};
   # systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};
@@ -62,12 +63,12 @@ in {
         {
           address = "${sftpgo_host}";
           port = vars.ports.sfptgo-webdav;
-          # enable_https = true;
+          enable_https = true;
           # # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
           # # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
-          # certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
-          # certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
-          # client_ip_proxy_header = "X-Forwarded-Host";
+          certificate_file = "/var/lib/acme/webdav.gv.je/fullchain.pem";
+          certificate_key_file = "/var/lib/acme/webdav.gv.je/key.pem";
+          client_ip_proxy_header = "X-Forwarded-Host";
         }
       ];
       sftp.bindings = [
@@ -82,8 +83,7 @@ in {
           port = vars.ports.sfptgo-httpd;
           enable_web_client = true;
           enable_web_admin = true;
-          enabled_login_methods = 0;
-          disabled_login_methods = 0;
+          disabled_login_methods = 8;
           enable_https = true;
           # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
           # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
@@ -119,6 +119,11 @@ in {
             # };
             # custom_fields = ["sftpgo_home_dir"];
           };
+          branding = {
+            name = "Casiers électroniques GV.je : SFTPgo";
+            short_name = "Casiers sftpgo.GV.je";
+          };
+          web_root = "https://sftpgo.gv.je";
         }
       ];
       smtp = {
