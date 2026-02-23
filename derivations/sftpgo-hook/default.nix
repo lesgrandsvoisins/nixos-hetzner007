@@ -23,6 +23,9 @@ in
 
       USER_JSON="$SFTPGO_LOGIND_USER"
       USERNAME="$(printf '%s' "$USER_JSON" | jq -r '.username // empty')"
+      USEREMAIL="$(printf '%s' "$USER_JSON" | jq -r '.email // .oidc_custom_fields.email // empty')"
+
+      echo "EMAIL $USEREMAIL" >&2
 
       if [ -z "$USERNAME" ] || [ "$USERNAME" = "null" ]; then
         echo "Could not extract .username from SFTPGO_LOGIND_USER" >&2
@@ -38,7 +41,7 @@ in
 
       HOME_DIR="$HOME_BASE/$USERNAME"
 
-      echo "$HOME_DIR is HOME_DIR" >&2
+      # echo "HOME_DIR is $HOME_DIR" >&2
 
       # Create home dir (and parents)
       mkdir -p "$HOME_DIR"
@@ -67,7 +70,7 @@ in
       EOF
       )
 
-      echo "OUTPUT is $OUTPUT" >&2
+      # echo "OUTPUT is $OUTPUT" >&2
       echo "$OUTPUT"
     '';
   }
