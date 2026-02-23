@@ -98,7 +98,8 @@ in {
           # proxy_mode = 1;
           # proxy_allowed = ["${sftpgo_host}"];
           client_ip_proxy_header = "X-Forwarded-Host";
-          languages = ["fr" "en" "es"];
+          # languages = ["fr" "en" "es"];
+          languages = ["fr"];
           oidc = {
             config_url = "https://key.gv.je/realms/master";
             client_id = "sftpgo";
