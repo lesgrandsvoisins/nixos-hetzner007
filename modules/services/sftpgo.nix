@@ -60,12 +60,11 @@ in {
         pre_login_hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
       };
       sftpd.bindings = [
-         {
+        {
           address = "${sftpgo_host}";
           port = vars.ports.sfptgo-sftp;
-
-         }
-      ]
+        }
+      ];
       webdavd.bindings = [
         {
           address = "${sftpgo_host}";
