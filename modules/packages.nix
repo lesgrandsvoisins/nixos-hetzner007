@@ -45,5 +45,6 @@ in {
 
     # keeweb
     jq
+    mdadm
   ];
 }
