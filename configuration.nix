@@ -35,6 +35,9 @@ in {
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
+  boot.swraid.mdadmConf = ''
+    MAILADDR=chris@lesgrandsvoisins.com
+  '';
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
