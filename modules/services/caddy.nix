@@ -116,6 +116,47 @@ in {
     '';
 
     virtualHosts = {
+      "node-red.gv.je" = {
+        extraConfig = ''
+
+          reverse_proxy https://${vars.hosts.node-red.ipv4}:${builtins.toString vars.ports.node-red} {
+            transport http {
+                tls
+                tls_server_name node-red.local
+                # tls_insecure_skip_verify # Change this
+                tls_trust_pool file {
+                  pem_file /etc/node-red/node-red.local.pem
+                }
+                # header_up Host {upstream_hostport}
+                # header_up X-Real-IP {remote}
+                # header_up X-Forwarded-For {remote}
+                # header_up X-Forwarded-Port {server_port}
+                # header_up X-Forwarded-Proto {scheme}
+            }
+            # Ensure upstream sees original Host
+            header_up Host {host}
+
+            # Equivalent of X-Real-IP $remote_addr
+            header_up X-Real-IP {remote_host}
+
+            # Equivalent of X-Forwarded-For $proxy_add_x_forwarded_for
+            # (Caddy sets X-Forwarded-For automatically; this makes it explicit)
+            header_up X-Forwarded-For {remote_host}
+
+            # Equivalent of X-Forwarded-Proto $scheme
+            header_up X-Forwarded-Proto {scheme}
+
+            # Equivalent of X-Forwarded-Host $host
+            header_up X-Forwarded-Host {host}
+
+            # Equivalent of X-Forwarded-Port $server_port
+            header_up X-Forwarded-Port {server_port}
+
+            # WebSockets: handled automatically by Caddy; no need for Upgrade/Connection directives
+
+          }
+        '';
+      };
       "wiki.whowhatetc.com" = {
         extraConfig = ''
           redir https://wiki.ggvv.org

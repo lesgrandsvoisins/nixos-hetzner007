@@ -6,6 +6,7 @@
     radicale = 504;
     named = 989;
     sftpgo = 1506;
+    node-red = 1507;
   };
   uid = {
     caddy = 239;
@@ -18,6 +19,7 @@
     radicale = 504;
     syncin = 1505;
     sftpgo = 1506;
+    node-red = 1507;
     named = 991;
   };
   ports = {
@@ -38,6 +40,13 @@
     sfptgo-httpd = 1280;
     sfptgo-sftp = 1282;
     sfptgo-webdav = 1281;
+    node-red = 1507;
+  };
+  hosts = {
+    node-red = {
+      ipv4 = "10.0.13.101";
+      ipv6 = "fa13::101";
+    };
   };
   dirs = {
     sftpgo-users = "/var/lib/sftpgo/users";
