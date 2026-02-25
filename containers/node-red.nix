@@ -74,7 +74,7 @@ in {
         # "f /etc/node-red/node-red.local-key.pem 0640 node-red services"
       ];
       # system.stateVersion = "25.11";
-      # imports = [../modules/packages/common.nix];
+      # imports = [../modules/packages/common.nix];n
       systemd.services.node-red = {
         path = with pkgs; [
           # git is needed for projects, but systemd resets the path so we need to add it back
