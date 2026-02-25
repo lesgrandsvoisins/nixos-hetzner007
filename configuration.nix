@@ -18,6 +18,7 @@ in {
   imports = [
     ./containers/homarr.nix
     ./containers/keycloak.nix
+    ./containers/node-red.nix
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
     ./containers/wiki-js-www.nix
