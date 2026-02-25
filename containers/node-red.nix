@@ -29,23 +29,23 @@ in {
   # systemd.services.node-red-init = {
   # };
 
-  systemd.services.node-red-initssl = {
-    enable = true;
-    # enableDefaultPath = true;
-    wantedBy = ["multi-user.target"];
-    unitConfig = {
-      Description = ''
-        Creating of /etc/node-red/red-node.local{,-key}.pem files
-      '';
-    };
-    serviceConfig = {
-      User = "node-red";
-      Group = "services";
-      ExecStart = "/run/current-system/sw/bin/mkcert red-node.local";
-      WorkingDirectory = "/etc/node-red";
-      Type = "oneshot";
-    };
-  };
+  # systemd.services.node-red-initssl = {
+  #   enable = true;
+  #   # enableDefaultPath = true;
+  #   wantedBy = ["multi-user.target"];
+  #   unitConfig = {
+  #     Description = ''
+  #       Creating of /etc/node-red/red-node.local{,-key}.pem files
+  #     '';
+  #   };
+  #   serviceConfig = {
+  #     User = "node-red";
+  #     Group = "services";
+  #     ExecStart = "/run/current-system/sw/bin/mkcert red-node.local";
+  #     WorkingDirectory = "/etc/node-red";
+  #     Type = "oneshot";
+  #   };
+  # };
 
   containers.node-red = {
     localAddress = vars.hosts.node-red.ipv4;
