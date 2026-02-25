@@ -26,8 +26,27 @@ in {
     # "f /etc/node-red/node-red.local.pem 0664 node-red services"
     # "f /etc/node-red/node-red.local-key.pem 0640 node-red services"
   ];
-  systemd.services.node-red-init = {
+  # systemd.services.node-red-init = {
+  # };
+
+  systemd.services.node-red-initssl = {
+    enable = true;
+    # enableDefaultPath = true;
+    wantedBy = ["multi-user.target"];
+    unitConfig = {
+      Description = ''
+        Creating of /etc/node-red/red-node.local{,-key}.pem files
+      '';
+    };
+    serviceConfig = {
+      User = "node-red";
+      Group = "services";
+      ExecStart = "/run/current-system/sw/bin/mkcert red-node.local";
+      WorkingDirectory = "/etc/node-red";
+      Type = "oneshot";
+    };
   };
+
   containers.node-red = {
     localAddress = vars.hosts.node-red.ipv4;
     localAddress6 = vars.hosts.node-red.ipv6;
@@ -40,14 +59,22 @@ in {
         isReadOnly = true;
       };
     };
+    autoStart = true;
+
     config = {
+      system.stateVersion = "25.11";
+      nix.settings.experimental-features = "nix-command flakes";
+      imports = [
+        ../modules/packages/common.nix
+        ../modules/packages/vim.nix
+      ];
       systemd.tmpfiles.rules = [
         "d /etc/node-red 0775 node-red services"
         # "f /etc/node-red/node-red.local.pem 0664 node-red services"
         # "f /etc/node-red/node-red.local-key.pem 0640 node-red services"
       ];
-      system.stateVersion = "25.11";
-      imports = [../modules/packages/common.nix];
+      # system.stateVersion = "25.11";
+      # imports = [../modules/packages/common.nix];
       systemd.services.node-red = {
         path = with pkgs; [
           # git is needed for projects, but systemd resets the path so we need to add it back
@@ -97,23 +124,6 @@ in {
         port = vars.ports.node-red;
         configFile = ./node-red/settings.js;
         withNpmAndGcc = true; # Allow imperative download of nodes. Need to enable nix-ld
-      };
-      systemd.services.node-red-initssl = {
-        enable = true;
-        # enableDefaultPath = true;
-        wantedBy = ["multi-user.target"];
-        unitConfig = {
-          Description = ''
-            Creating of /etc/node-red/red-node.local{,-key}.pem files
-          '';
-        };
-        serviceConfig = {
-          User = "node-red";
-          Group = "services";
-          ExecStart = "/run/current-system/sw/bin/mkcert red-node.local";
-          WorkingDirectory = "/etc/node-red";
-          Type = "oneshot";
-        };
       };
     };
   };
