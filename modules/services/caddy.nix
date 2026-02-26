@@ -122,10 +122,10 @@ in {
           reverse_proxy https://${vars.hosts.node-red.ipv4}:${builtins.toString vars.ports.node-red} {
             transport http {
                 tls
-                tls_server_name node-red.local
+                tls_server_name node-red.containers
                 # tls_insecure_skip_verify # Change this
                 tls_trust_pool file {
-                  pem_file /etc/node-red/node-red.local.pem
+                  pem_file /etc/node-red/node-red.containers+1.pem
                 }
                 # header_up Host {upstream_hostport}
                 # header_up X-Real-IP {remote}

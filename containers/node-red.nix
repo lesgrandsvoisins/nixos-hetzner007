@@ -19,12 +19,12 @@ in {
     # groups.node-red.gid = vars.gid.node-red;
   };
   networking.hosts = {
-    "${vars.hosts.node-red.ipv4}" = ["node-red.local"];
+    "${vars.hosts.node-red.ipv4}" = ["node-red.containers"];
   };
   systemd.tmpfiles.rules = [
     "d /etc/node-red 0775 node-red services"
-    # "f /etc/node-red/node-red.local.pem 0664 node-red services"
-    # "f /etc/node-red/node-red.local-key.pem 0640 node-red services"
+    # "f /etc/node-red/node-red.containers.pem 0664 node-red services"
+    # "f /etc/node-red/node-red.containers-key.pem 0640 node-red services"
   ];
   # systemd.services.node-red-init = {
   # };
@@ -35,13 +35,13 @@ in {
   #   wantedBy = ["multi-user.target"];
   #   unitConfig = {
   #     Description = ''
-  #       Creating of /etc/node-red/node-red.local{,-key}.pem files
+  #       Creating of /etc/node-red/node-red.containers+1{,-key}.pem files
   #     '';
   #   };
   #   serviceConfig = {
   #     User = "node-red";
   #     Group = "services";
-  #     ExecStart = "/run/current-system/sw/bin/mkcert node-red.local";
+  #     ExecStart = "/run/current-system/sw/bin/mkcert --install -cert-file /etc/node-red/node-red.containers+1.pem -key-file /etc/node-red/node-red.containers+1-key.pem node-red.containers node-red.local";
   #     WorkingDirectory = "/etc/node-red";
   #     Type = "oneshot";
   #   };
@@ -70,8 +70,8 @@ in {
       ];
       systemd.tmpfiles.rules = [
         "d /etc/node-red 0775 node-red services"
-        # "f /etc/node-red/node-red.local.pem 0664 node-red services"
-        # "f /etc/node-red/node-red.local-key.pem 0640 node-red services"
+        # "f /etc/node-red/node-red.containers.pem 0664 node-red services"
+        # "f /etc/node-red/node-red.containers-key.pem 0640 node-red services"
       ];
       # system.stateVersion = "25.11";
       # imports = [../modules/packages/common.nix];n
@@ -108,7 +108,7 @@ in {
       };
 
       networking.hosts = {
-        "${vars.hosts.node-red.ipv4}" = ["node-red.local"];
+        "${vars.hosts.node-red.ipv4}" = ["node-red.cont"];
       };
       users = {
         users.node-red = {
