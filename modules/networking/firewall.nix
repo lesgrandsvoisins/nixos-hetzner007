@@ -27,8 +27,8 @@ in {
     ];
     # interfaces."ve-node-red".allowedTCPPorts = [vars.ports.node-red];
     extraInputRules = ''
-      ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
-      ip daddr ${builtins.toString vars.hosts.node-red.ipv6}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
+      ip daddr ${builtins.toString vars.hosts.node-red.ipv4} tcp dport ${builtins.toString vars.ports.node-red} accept
+      ip daddr ${builtins.toString vars.hosts.node-red.ipv6} tcp dport ${builtins.toString vars.ports.node-red} accept
     '';
     allowedUDPPorts = [53];
     # filterForward = true;
