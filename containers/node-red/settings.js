@@ -91,8 +91,8 @@ module.exports = {
 
     /** Option 1: static object */
     https: {
-        key: require("fs").readFileSync('/etc/node-red/node-red.local-key.pem'),
-        cert: require("fs").readFileSync('/etc/node-red/node-red.local.pem')
+        key: require("fs").readFileSync('/etc/node-red/node-red.containers+1-key.pem'),
+        cert: require("fs").readFileSync('/etc/node-red/node-red.containers+1.pem')
     },
 
     /** Option 2: function that returns the HTTP configuration object */
@@ -143,7 +143,7 @@ module.exports = {
      ******************************************************************************/
 
     /** the tcp port that the Node-RED web server is listening on */
-    uiPort: process.env.PORT || 1880,
+    // uiPort: process.env.PORT || 1880,
 
     /** By default, the Node-RED UI accepts connections on all IPv4 interfaces.
      * To listen on all IPv6 addresses, set uiHost to "::",

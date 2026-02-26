@@ -124,6 +124,7 @@ in {
         port = vars.ports.node-red;
         configFile = ./node-red/settings.js;
         withNpmAndGcc = true; # Allow imperative download of nodes. Need to enable nix-ld
+        openFirewall = true;
       };
     };
   };
