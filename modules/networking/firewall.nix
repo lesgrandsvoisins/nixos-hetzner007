@@ -4,10 +4,8 @@
   config,
   vars,
   ...
-}:
-let
-in
-{
+}: let
+in {
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
@@ -21,12 +19,14 @@ in
       444 # Keycloak Forward
       587
       636
+      # vars.ports.node-red
       3636
       5232
       vars.ports.wiki-js-libregood-https
       vars.ports.wiki-js-libregood-http
     ];
-    allowedUDPPorts = [ 53 ];
+    interfaces."ve-node-red@if2".allowedTCPPorts = [vars.ports.node-red];
+    allowedUDPPorts = [53];
     # filterForward = true;
     # extraCommands = ''
     #   nftables -t nat -A POSTROUTING --sport 636 -p tcp -m tcp --dport 3636 -j MASQUERADE";
