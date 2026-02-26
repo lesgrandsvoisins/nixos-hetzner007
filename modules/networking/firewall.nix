@@ -25,7 +25,7 @@ in {
       vars.ports.wiki-js-libregood-https
       vars.ports.wiki-js-libregood-http
     ];
-    interfaces."ve-node-red@if2".allowedTCPPorts = [vars.ports.node-red];
+    interfaces."ve-node-red".allowedTCPPorts = [vars.ports.node-red];
     allowedUDPPorts = [53];
     # filterForward = true;
     # extraCommands = ''
