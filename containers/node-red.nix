@@ -35,13 +35,13 @@ in {
   #   wantedBy = ["multi-user.target"];
   #   unitConfig = {
   #     Description = ''
-  #       Creating of /etc/node-red/red-node.local{,-key}.pem files
+  #       Creating of /etc/node-red/node-red.local{,-key}.pem files
   #     '';
   #   };
   #   serviceConfig = {
   #     User = "node-red";
   #     Group = "services";
-  #     ExecStart = "/run/current-system/sw/bin/mkcert red-node.local";
+  #     ExecStart = "/run/current-system/sw/bin/mkcert node-red.local";
   #     WorkingDirectory = "/etc/node-red";
   #     Type = "oneshot";
   #   };
@@ -54,8 +54,8 @@ in {
     hostAddress6 = "fa13::1";
     privateNetwork = true; # ve-wiki-js-www
     bindMounts = {
-      "/etc/red-node" = {
-        hostPath = "/etc/red-node";
+      "/etc/node-red" = {
+        hostPath = "/etc/node-red";
         isReadOnly = true;
       };
     };
