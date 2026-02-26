@@ -19,13 +19,17 @@ in {
       444 # Keycloak Forward
       587
       636
-      # vars.ports.node-red
+      vars.ports.node-red # should be in extraInputRules and not here
       3636
       5232
       vars.ports.wiki-js-libregood-https
       vars.ports.wiki-js-libregood-http
     ];
-    interfaces."ve-node-red".allowedTCPPorts = [vars.ports.node-red];
+    # interfaces."ve-node-red".allowedTCPPorts = [vars.ports.node-red];
+    extraInputRules = ''
+      ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
+      ip daddr ${builtins.toString vars.hosts.node-red.ipv6}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
+    '';
     allowedUDPPorts = [53];
     # filterForward = true;
     # extraCommands = ''
