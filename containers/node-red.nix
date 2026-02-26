@@ -107,9 +107,15 @@ in {
         };
       };
 
-      networking.hosts = {
-        "${vars.hosts.node-red.ipv4}" = ["node-red.cont"];
+      networking = {
+        hosts = {
+          "${vars.hosts.node-red.ipv4}" = ["node-red.cont"];
+        };
+        # Use systemd-resolved inside the container
+        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+        useHostResolvConf = lib.mkForce false;
       };
+      services.resolved.enable = true;
       users = {
         users.node-red = {
           # group = "services";
