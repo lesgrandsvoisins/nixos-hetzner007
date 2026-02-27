@@ -380,6 +380,25 @@ in {
           #   Vary "Origin"
           # }
 
+          @keepass {
+                header Origin https://keepass.gv.je
+          }
+          header @keepass {
+                Access-Control-Allow-Origin https://keepass.gv.je
+          }
+          @keeweb {
+                header Origin https://keeweb.gv.je
+          }
+          header @keeweb {
+                Access-Control-Allow-Origin https://keeweb.gv.je
+          }
+
+          header {
+              Access-Control-Allow-Methods GET,POST,OPTIONS,HEAD,PATCH,PUT,DELETE
+              Access-Control-Allow-Headers User-Agent,Content-Type,X-Api-Key
+              Access-Control-Max-Age 86400
+          }
+
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
