@@ -359,26 +359,26 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          # # Handle preflight requests
-          # @cors_preflight {
-          #   method OPTIONS
-          # }
+          # Handle preflight requests
+          @cors_preflight {
+            method OPTIONS
+          }
 
-          # header @cors_preflight {
-          #   Access-Control-Allow-Origin "https://keepass.gv.je"
-          #   Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-          #   Access-Control-Allow-Headers "Content-Type, Authorization"
-          #   Access-Control-Max-Age "86400"
-          #   Vary "Origin"
-          # }
+          header @cors_preflight {
+            Access-Control-Allow-Origin "https://keeweb.gv.je"
+            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers "Content-Type, Authorization"
+            Access-Control-Max-Age "86400"
+            Vary "Origin"
+          }
 
-          # respond @cors_preflight 204
+          respond @cors_preflight 204
 
-          # # For actual requests
-          # header {
-          #   Access-Control-Allow-Origin "https://keepass.gv.je"
-          #   Vary "Origin"
-          # }
+          # For actual requests
+          header {
+            Access-Control-Allow-Origin "https://keeweb.gv.je"
+            Vary "Origin"
+          }
 
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
