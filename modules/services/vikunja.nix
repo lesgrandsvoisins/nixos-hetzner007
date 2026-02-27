@@ -43,8 +43,11 @@ in {
       mailer = {
         enabled = true;
         host = "mail.lesgrandsvoisins.com";
+        port = "465";
         authtype = "login";
         username = "list@lesgrandsvoisins.com";
+        fromemail = "list@lesgrandsvoisins.com";
+        forcessl = true;
         password.file = "/etc/vikunja/.secrets/.list@lesgrandsvoisins.com";
       };
       defaultsettings = {
