@@ -360,45 +360,45 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          # Handle preflight requests
-          @cors_preflight {
-            method OPTIONS
-          }
-
-          # header @cors_preflight {
-          #   Access-Control-Allow-Origin "https://keeweb.gv.je"
-          #   Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-          #   Access-Control-Allow-Headers "Content-Type, Authorization"
-          #   Access-Control-Max-Age "86400"
-          #   Vary "Origin"
+          # # Handle preflight requests
+          # @cors_preflight {
+          #   method OPTIONS
           # }
 
-          respond @cors_preflight 204
+          # # header @cors_preflight {
+          # #   Access-Control-Allow-Origin "https://keeweb.gv.je"
+          # #   Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+          # #   Access-Control-Allow-Headers "Content-Type, Authorization"
+          # #   Access-Control-Max-Age "86400"
+          # #   Vary "Origin"
+          # # }
 
-          # # For actual requests
+          # respond @cors_preflight 204
+
+          # # # For actual requests
+          # # header {
+          # #   Access-Control-Allow-Origin "https://keeweb.gv.je"
+          # #   Vary "Origin"
+          # # }
+
+          # @keepass {
+          #       header Origin https://keepass.gv.je
+          # }
+          # header @keepass {
+          #       Access-Control-Allow-Origin https://keepass.gv.je
+          # }
+          # @keeweb {
+          #       header Origin https://keeweb.gv.je
+          # }
+          # header @keeweb {
+          #       Access-Control-Allow-Origin https://keeweb.gv.je
+          # }
+
           # header {
-          #   Access-Control-Allow-Origin "https://keeweb.gv.je"
-          #   Vary "Origin"
+          #     Access-Control-Allow-Methods GET,POST,OPTIONS,HEAD,PATCH,PUT,DELETE
+          #     Access-Control-Allow-Headers User-Agent,Content-Type,X-Api-Key
+          #     Access-Control-Max-Age 86400
           # }
-
-          @keepass {
-                header Origin https://keepass.gv.je
-          }
-          header @keepass {
-                Access-Control-Allow-Origin https://keepass.gv.je
-          }
-          @keeweb {
-                header Origin https://keeweb.gv.je
-          }
-          header @keeweb {
-                Access-Control-Allow-Origin https://keeweb.gv.je
-          }
-
-          header {
-              Access-Control-Allow-Methods GET,POST,OPTIONS,HEAD,PATCH,PUT,DELETE
-              Access-Control-Allow-Headers User-Agent,Content-Type,X-Api-Key
-              Access-Control-Max-Age 86400
-          }
 
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
