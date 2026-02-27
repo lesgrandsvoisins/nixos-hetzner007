@@ -350,9 +350,10 @@ in {
             transport http {
               tls
               tls_server_name sftpgo.gv.je
-                tls_trust_pool file {
-                  pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
-                }
+              tls_trust_pool file {
+                pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
+              }
+              proxy_protocol v2
             }
           }
         '';
@@ -409,6 +410,7 @@ in {
               tls_trust_pool file {
                 pem_file /var/lib/acme/webdav.gv.je/fullchain.pem
               }
+              proxy_protocol v2
             }
           }
         '';
