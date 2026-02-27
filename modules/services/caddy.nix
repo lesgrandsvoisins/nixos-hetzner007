@@ -12,7 +12,7 @@
   cors_any_gvje = ''
     # Validate multiple origins using regex
     @cors_origin_match {
-      header_regexp origin Origin ^https://[-A-z0-9]*\.)?gv\.je.*$
+      header_regexp origin Origin ^https://[-A-z0-9]*\.?gv\.je.*$
     }
 
     # Preflight for matched origins
@@ -204,7 +204,7 @@ in {
           file_server
           root * /var/www/keeweb
 
-          ${cors_any_gvje}
+          # ${cors_any_gvje}
         '';
       };
       "test.whowhatetc.com" = {
