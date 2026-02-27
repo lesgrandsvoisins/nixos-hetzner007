@@ -402,15 +402,15 @@ in {
 
                     ##############
 
-          header {
-              Access-Control-Allow-Headers *
-              Access-Control-Allow-Methods *
-              Access-Control-Allow-Origin *
-            }
-            @options {
-              method OPTIONS
-            }
-            respond @options 204
+          #  header {
+          #     Access-Control-Allow-Headers *
+          #     Access-Control-Allow-Methods *
+          #     Access-Control-Allow-Origin *
+          #   }
+          #   @options {
+          #     method OPTIONS
+          #   }
+          #   respond @options 204
 
                     ##############
 
