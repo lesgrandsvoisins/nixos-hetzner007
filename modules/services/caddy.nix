@@ -12,7 +12,7 @@
   cors_any_gvje = ''
     # Validate multiple origins using regex
     @cors_origin_match {
-      header_regexp origin Origin ^https://[-A-z0-9]*\.?gv\.je.*$
+      header_regexp origin Origin ^https://([-A-z0-9]*\.)*gv\.je.*$
     }
 
     # Preflight for matched origins
@@ -21,11 +21,14 @@
     }
 
     header @cors_preflight {
-      # Access-Control-Allow-Origin "https://gv.je"
       Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
       Access-Control-Allow-Headers "Content-Type, Authorization"
       Access-Control-Max-Age "86400"
-      # Vary "Origin"
+    }
+
+    header @cors_origin_match {
+      Access-Control-Allow-Origin "{http.request.header.Origin}"
+      Vary "Origin"
     }
 
     respond @cors_preflight 204
