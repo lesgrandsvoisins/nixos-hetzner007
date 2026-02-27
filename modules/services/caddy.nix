@@ -9,6 +9,7 @@
   # vars = ../../vars.nix;
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
+  caddy_host = "";
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -354,6 +355,7 @@ in {
                 pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
               }
               # proxy_protocol v2
+              # proxy_allowed 127.0.0.1
             }
           }
         '';
