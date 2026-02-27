@@ -461,11 +461,11 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
-      "je.0.grandsvoisins.org" = {
-        extraConfig = ''
-          reverse_proxy http://localhost:3000
-        '';
-      };
+      # "je.0.grandsvoisins.org" = {
+      #   extraConfig = ''
+      #     reverse_proxy http://localhost:3000
+      #   '';
+      # };
       "pcal.gv.je" = {
         # "pcal.grandsvoisins.org" = {
         extraConfig = ''
@@ -538,26 +538,26 @@ in {
           respond "Hello [2a01:4f8:a0:73ba::1]"
         '';
       };
-      "0.gv.je" = {
-        extraConfig = ''
-          respond "Hello [2a01:4f8:a0:73ba::]"
-        '';
-      };
-      "www.libregood.com" = {
-        extraConfig = ''
-          reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-https} {
-          # reverse_proxy http://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-http} {
+      # "0.gv.je" = {
+      #   extraConfig = ''
+      #     respond "Hello [2a01:4f8:a0:73ba::]"
+      #   '';
+      # };
+      # "www.libregood.com" = {
+      #   extraConfig = ''
+      #     reverse_proxy https://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-https} {
+      #     # reverse_proxy http://wiki-js-libregood.local:${builtins.toString vars.ports.wiki-js-libregood-http} {
 
-           transport http {
-                tls
-                tls_server_name wiki-js-libregood.local
-                tls_trust_pool file {
-                  pem_file /etc/wiki-js-libregood/certs/wiki-js-libregood.local.pem
-                }
-            }
-          }
-        '';
-      };
+      #      transport http {
+      #           tls
+      #           tls_server_name wiki-js-libregood.local
+      #           tls_trust_pool file {
+      #             pem_file /etc/wiki-js-libregood/certs/wiki-js-libregood.local.pem
+      #           }
+      #       }
+      #     }
+      #   '';
+      # };
       # "www.gv.je" = {
       #   extraConfig = ''
       #     reverse_proxy http://localhost:3000
