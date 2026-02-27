@@ -35,9 +35,9 @@ in {
         host = "localhost";
         database = "vikunja";
         password.file = "/etc/vikunja/.secrets/.vikunja@postgresql";
-        sslrootcert = "/etc/postgres/postgres.crt";
-        tls = true;
-        sslmode = "require";
+        # sslrootcert = "/etc/postgres/postgres.crt";
+        # tls = true;
+        # sslmode = "require";
       };
       mailer = {
         enabled = true;
