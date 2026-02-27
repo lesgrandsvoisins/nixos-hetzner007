@@ -32,7 +32,7 @@ in {
       database = {
         type = lib.mkForce "postgres";
         user = "vikunja";
-        host = "127.0.0.1:5434";
+        host = lib.mkForce "127.0.0.1:5434";
         database = "vikunja";
         password.file = "/etc/vikunja/.secrets/.vikunja@postgresql";
         # sslrootcert = "/etc/postgres/postgres.crt";
