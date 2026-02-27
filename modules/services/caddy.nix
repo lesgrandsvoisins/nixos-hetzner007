@@ -353,7 +353,7 @@ in {
               tls_trust_pool file {
                 pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
               }
-              proxy_protocol v2
+              # proxy_protocol v2
             }
           }
         '';
