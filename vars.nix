@@ -20,6 +20,7 @@
     syncin = 1505;
     sftpgo = 1506;
     node-red = 1507;
+    vikunja = 1508;
     named = 991;
   };
   ports = {
