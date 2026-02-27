@@ -81,6 +81,8 @@ in {
             # clientsecret.file = "/etc/vikunja/oidc_client_secret_keygvje";
             # usernamefallback = true;
             # emailfallback = true;
+            # forceuserinfo = false;
+            scope = "openid profile email";
           }
           # keycloakGDVoisins = {
           #   name = "keycloakGDVoisins";
