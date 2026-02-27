@@ -27,7 +27,7 @@ in {
   services.vikunja = {
     enable = true;
     frontendScheme = "https";
-    frontendHostname = "task.lesgrandsvoisins.com";
+    frontendHostname = "vikunja.gv.je";
     settings = {
       database = {
         type = lib.mkForce "postgres";
@@ -64,7 +64,7 @@ in {
         openid.enabled = true;
         # openid.redirecturl = "https://vikunja.village.ngo/auth/openid/";
         # openid.redirecturl = "https://vikunja.gv.coop/auth/openid/";
-        openid.redirecturl = "https://task.lesgrandsvoisins.com/auth/openid/";
+        openid.redirecturl = "https://task.gv.je/auth/openid/";
         openid.providers = {
           keygvje = {
             name = "key@gv.je";
