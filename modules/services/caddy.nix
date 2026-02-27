@@ -16,7 +16,7 @@
     }
 
     header @cors_preflight {
-      Access-Control-Allow-Origin "https://*.gv.je"
+      Access-Control-Allow-Origin "https://keepass.gv.je"
       Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
       Access-Control-Allow-Headers "Content-Type, Authorization"
       Access-Control-Max-Age "86400"
@@ -27,7 +27,7 @@
 
     # For actual requests
     header {
-      Access-Control-Allow-Origin "https://*.gv.je"
+      Access-Control-Allow-Origin "https://keepass.gv.je"
       Vary "Origin"
     }
   '';
@@ -200,7 +200,7 @@ in {
         '';
       };
       "keepass.gv.je" = {
-        serverAliases = ["keeweb.gv.je"];
+        # serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
           file_server
           root * /var/www/keeweb
