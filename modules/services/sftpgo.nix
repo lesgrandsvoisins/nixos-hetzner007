@@ -66,8 +66,8 @@ in {
           cmd = "/etc/sftpgo/sftpgo-plugin-auth";
           args = [
             "serve"
-            # "--config-file"
-            # "/etc/sftpgo/sftpgo-plugin-auth.json"
+            "--config-file"
+            "/etc/sftpgo/sftpgo-plugin-auth.json"
           ];
           auth_options.scope = 5;
           auto_mtls = true;
