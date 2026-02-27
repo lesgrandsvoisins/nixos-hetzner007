@@ -205,7 +205,7 @@ in {
 
           # For actual requests
           header {
-            Access-Control-Allow-Origin "https://example.com"
+            Access-Control-Allow-Origin "https://sftp.gv.je"
             Vary "Origin"
           }
         '';
@@ -385,6 +385,34 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
+
+
+          # Validate multiple origins using regex
+          @cors_origin_match {
+            header_regexp origin Origin ^https://[-A-z0-9]\.)?gv\.je.*$
+          }
+
+          # Preflight for matched origins
+          @cors_preflight {
+            method OPTIONS
+          }
+
+          header @cors_preflight {
+            # Access-Control-Allow-Origin "https://gv.je"
+            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers "Content-Type, Authorization"
+            Access-Control-Max-Age "86400"
+            # Vary "Origin"
+          }
+
+          respond @cors_preflight 204
+
+          # For actual requests
+          header {
+            Access-Control-Allow-Origin "https://webdav.gv.je"
+            Vary "Origin"
+          }
+
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
