@@ -60,6 +60,19 @@ in {
         create_default_admin = true;
         pre_login_hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
       };
+      plugins = [
+        {
+          type = "auth";
+          cmd = "/etc/sftpgo/sftpgo-plugin-auth";
+          args = [
+            "serve"
+            # "--config-file"
+            # "/etc/sftpgo/sftpgo-plugin-auth.json"
+          ];
+          auth_options.scope = 5;
+          auto_mtls = true;
+        }
+      ];
       sftpd.bindings = [
         {
           address = "${sftpgo_host}";
