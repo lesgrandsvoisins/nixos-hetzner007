@@ -10,28 +10,26 @@
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
   cors_any_gvje = ''
-    # Validate multiple origins using regex
-    @cors_origin_match {
-      header_regexp origin Origin ^https://([-A-z0-9]*\.)*gv\.je.*$
-    }
-
-    # Preflight for matched origins
+    # Handle preflight requests
     @cors_preflight {
       method OPTIONS
     }
 
     header @cors_preflight {
+      Access-Control-Allow-Origin "https://*.gv.je"
       Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
       Access-Control-Allow-Headers "Content-Type, Authorization"
       Access-Control-Max-Age "86400"
-    }
-
-    header @cors_origin_match {
-      Access-Control-Allow-Origin "{http.request.header.Origin}"
       Vary "Origin"
     }
 
     respond @cors_preflight 204
+
+    # For actual requests
+    header {
+      Access-Control-Allow-Origin "https://*.gv.je"
+      Vary "Origin"
+    }
   '';
 in {
   systemd.tmpfiles.rules = [
@@ -207,7 +205,7 @@ in {
           file_server
           root * /var/www/keeweb
 
-          # ${cors_any_gvje}
+          ${cors_any_gvje}
         '';
       };
       "test.whowhatetc.com" = {
