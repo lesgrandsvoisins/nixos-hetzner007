@@ -37,7 +37,7 @@ in {
         password.file = "/etc/vikunja/.secrets/.vikunja@postgresql";
         sslrootcert = "/etc/postgres/postgres.crt";
         tls = true;
-        sslmode = "enable";
+        sslmode = "require";
       };
       mailer = {
         enabled = true;
