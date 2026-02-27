@@ -595,6 +595,11 @@ in {
       #     reverse_proxy http://localhost:3000
       #   '';
       # };
+      "vikunja.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://[::1]:3456
+        '';
+      };
       "lesgv.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
