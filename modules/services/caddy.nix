@@ -178,9 +178,36 @@ in {
         '';
       };
       "keepass.gv.je" = {
+        serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
           file_server
           root * /var/www/keeweb
+
+          # Validate multiple origins using regex
+          @cors_origin_match {
+            header_regexp origin Origin ^https://[-A-z0-9]\.)?gv\.je.*$
+          }
+
+          # Preflight for matched origins
+          @cors_preflight {
+            method OPTIONS
+          }
+
+          header @cors_preflight {
+            # Access-Control-Allow-Origin "https://gv.je"
+            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers "Content-Type, Authorization"
+            Access-Control-Max-Age "86400"
+            # Vary "Origin"
+          }
+
+          respond @cors_preflight 204
+
+          # For actual requests
+          header {
+            Access-Control-Allow-Origin "https://example.com"
+            Vary "Origin"
+          }
         '';
       };
       "test.whowhatetc.com" = {
