@@ -62,20 +62,21 @@ in {
       ];
       auth = {
         local.enabled = true;
-        openid.enabled = false;
+        openid.enabled = true;
         # openid.redirecturl = "https://vikunja.village.ngo/auth/openid/";
         # openid.redirecturl = "https://vikunja.gv.coop/auth/openid/";
-        openid.redirecturl = "https://task.gv.je/auth/openid/";
+        # openid.redirecturl = "https://task.gv.je/auth/openid/";
         openid.providers = {
-          keygvje = {
-            name = "key@gv.je";
-            # key = "keygvje";
+          keycloak = {
+            name = "key.gv.je";
             authurl = "https://key.gv.je/realms/master";
             lougouturl = "https://key.gv.je/realms/master/protocol/openid-connect/logout";
             clientid = "vikunja";
             # clientsecret = "KEYGVJE_VIKUNJA_CLIENT_SECRET";
             # clientsecret = "$KEYGVJE_VIKUNJA_CLIENT_SECRET";
             clientsecret.file = "/etc/vikunja/oidc_client_secret_keygvje";
+            usernamefallback = true;
+            emailfallback = true;
           };
           # keycloakGDVoisins = {
           #   name = "keycloakGDVoisins";
