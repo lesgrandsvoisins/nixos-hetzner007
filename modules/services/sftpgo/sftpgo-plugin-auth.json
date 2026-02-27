@@ -18,6 +18,7 @@
         "require_groups": false,
         "sftpgo_user_requirements": 0,
         "base_dir": "",
-        "cache_time": 0
+        "cache_time": 0,
+        "sha256sum": "b0589337fe3ea5bb09e21bcc17922ab360260521ba2621632d1d31dbc1d22e95"
     }]
 }
