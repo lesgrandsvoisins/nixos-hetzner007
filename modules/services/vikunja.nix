@@ -10,6 +10,9 @@ in {
   systemd.tmpfiles.rules = [
     "d /etc/vikunja 0755 vikunja services"
     "f /etc/vikunja/.env 0600 vikunja services"
+    "d /etc/vikunja/.secrets 0750 vikunja services"
+    "f /etc/vikunja/.secrets/.list@lesgrandsvoisins.com 0600 vikunja services"
+    "f /etc/vikunja/.secrets/.vikunja@postgresql 0600 vikunja services"
   ];
   systemd.services.vikunja.serviceConfig.User = lib.mkForce "vikunja";
   systemd.services.vikunja.serviceConfig.DynamicUser = lib.mkForce false;
@@ -20,24 +23,28 @@ in {
     uid = vars.uid.vikunja;
   };
 
-  services.vikunja.package = unstable.vikunja;
+  services.vikunja.package = pkgs.unstable.vikunja;
   services.vikunja = {
     enable = true;
     frontendScheme = "https";
     frontendHostname = "task.lesgrandsvoisins.com";
-    # environmentFiles = [ config.age.secrets."vikunja.env".path ];
-    # frontendHostname = "vikunja.lesgrandsvoisins.com";
-    # frontendHostname = "vikunja.gv.coop";
-    # frontendHostname = "vikunja.village.ngo";
-    # database.type = "postgres";
-    # environmentFiles = ["/etc/vikunja/.env"];
     settings = {
+      database = {
+        type = lib.mkForce "postgres";
+        user = "vikunja";
+        host = "localhost";
+        database = "vikunja";
+        password.file = "/etc/vikunja/.secrets/.vikunja@postgresql";
+        sslrootcert = "/etc/postgres/postgres.crt";
+        tls = true;
+        sslmode = "enable";
+      };
       mailer = {
         enabled = true;
         host = "mail.lesgrandsvoisins.com";
         authtype = "login";
         username = "list@lesgrandsvoisins.com";
-        password.file = config.age.secrets."email.list".path;
+        password.file = "/etc/vikunja/.secrets/.list@lesgrandsvoisins.com";
       };
       defaultsettings = {
         week_start = 1;

@@ -19,6 +19,10 @@ in {
     };
     ensureUsers = [
       {
+        name = "vikunja";
+        ensureDBOwnership = true;
+      }
+      {
         name = "keygvje";
         ensureDBOwnership = true;
       }
@@ -27,6 +31,10 @@ in {
         ensureDBOwnership = true;
       }
     ];
-    ensureDatabases = ["keygvje" "sftpgo"];
+    ensureDatabases = [
+      "keygvje"
+      "sftpgo"
+      "vikunja"
+    ];
   };
 }
