@@ -9,28 +9,6 @@
   # vars = ../../vars.nix;
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
-  cors_any_gvje = ''
-    # Handle preflight requests
-    @cors_preflight {
-      method OPTIONS
-    }
-
-    header @cors_preflight {
-      Access-Control-Allow-Origin "https://keepass.gv.je"
-      Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-      Access-Control-Allow-Headers "Content-Type, Authorization"
-      Access-Control-Max-Age "86400"
-      Vary "Origin"
-    }
-
-    respond @cors_preflight 204
-
-    # For actual requests
-    header {
-      Access-Control-Allow-Origin "https://keepass.gv.je"
-      Vary "Origin"
-    }
-  '';
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -200,12 +178,10 @@ in {
         '';
       };
       "keepass.gv.je" = {
-        # serverAliases = ["keeweb.gv.je"];
+        serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
           file_server
           root * /var/www/keeweb
-
-          ${cors_any_gvje}
         '';
       };
       "test.whowhatetc.com" = {
@@ -383,7 +359,26 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-          ${cors_any_gvje}
+          # # Handle preflight requests
+          # @cors_preflight {
+          #   method OPTIONS
+          # }
+
+          # header @cors_preflight {
+          #   Access-Control-Allow-Origin "https://keepass.gv.je"
+          #   Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+          #   Access-Control-Allow-Headers "Content-Type, Authorization"
+          #   Access-Control-Max-Age "86400"
+          #   Vary "Origin"
+          # }
+
+          # respond @cors_preflight 204
+
+          # # For actual requests
+          # header {
+          #   Access-Control-Allow-Origin "https://keepass.gv.je"
+          #   Vary "Origin"
+          # }
 
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}

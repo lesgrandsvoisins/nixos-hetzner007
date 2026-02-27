@@ -75,6 +75,7 @@ in {
           certificate_file = "/var/lib/acme/webdav.gv.je/fullchain.pem";
           certificate_key_file = "/var/lib/acme/webdav.gv.je/key.pem";
           client_ip_proxy_header = "X-Forwarded-Host";
+          cors.allowed_origins = ["https://keepass.gv.je" "https://keeweb.gv.je"];
         }
       ];
       sftp.bindings = [
