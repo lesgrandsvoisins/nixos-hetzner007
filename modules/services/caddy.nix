@@ -9,6 +9,27 @@
   # vars = ../../vars.nix;
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
+  cors_any_gvje = ''
+    # Validate multiple origins using regex
+    @cors_origin_match {
+      header_regexp origin Origin ^https://[-A-z0-9]\.)?gv\.je.*$
+    }
+
+    # Preflight for matched origins
+    @cors_preflight {
+      method OPTIONS
+    }
+
+    header @cors_preflight {
+      # Access-Control-Allow-Origin "https://gv.je"
+      Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+      Access-Control-Allow-Headers "Content-Type, Authorization"
+      Access-Control-Max-Age "86400"
+      # Vary "Origin"
+    }
+
+    respond @cors_preflight 204
+  '';
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -182,32 +203,6 @@ in {
         extraConfig = ''
           file_server
           root * /var/www/keeweb
-
-          # Validate multiple origins using regex
-          @cors_origin_match {
-            header_regexp origin Origin ^https://[-A-z0-9]\.)?gv\.je.*$
-          }
-
-          # Preflight for matched origins
-          @cors_preflight {
-            method OPTIONS
-          }
-
-          header @cors_preflight {
-            # Access-Control-Allow-Origin "https://gv.je"
-            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-            Access-Control-Allow-Headers "Content-Type, Authorization"
-            Access-Control-Max-Age "86400"
-            # Vary "Origin"
-          }
-
-          respond @cors_preflight 204
-
-          # For actual requests
-          header {
-            Access-Control-Allow-Origin "https://sftp.gv.je"
-            Vary "Origin"
-          }
         '';
       };
       "test.whowhatetc.com" = {
@@ -385,33 +380,7 @@ in {
       };
       "webdav.gv.je" = {
         extraConfig = ''
-
-
-          # Validate multiple origins using regex
-          @cors_origin_match {
-            header_regexp origin Origin ^https://[-A-z0-9]\.)?gv\.je.*$
-          }
-
-          # Preflight for matched origins
-          @cors_preflight {
-            method OPTIONS
-          }
-
-          header @cors_preflight {
-            # Access-Control-Allow-Origin "https://gv.je"
-            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-            Access-Control-Allow-Headers "Content-Type, Authorization"
-            Access-Control-Max-Age "86400"
-            # Vary "Origin"
-          }
-
-          respond @cors_preflight 204
-
-          # For actual requests
-          header {
-            Access-Control-Allow-Origin "https://webdav.gv.je"
-            Vary "Origin"
-          }
+          ${cors_any_gvje}
 
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
             header_up Host {host}
