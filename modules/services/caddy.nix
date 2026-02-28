@@ -458,9 +458,14 @@ in {
       };
       "wiki.grandsvoisins.org" = {
         extraConfig = ''
-          root /gv/* /srv/sftpgo/public/static/web/wiki/
-          file_server
-          reverse_proxy http://[::1]:3480
+          handle_path /gv/* {
+            root /gv/* /srv/sftpgo/public/static/web/wiki/
+            file_server
+          }
+          handle {
+            reverse_proxy http://[::1]:3480
+          }
+
         '';
       };
       "www.ggvv.org" = {
