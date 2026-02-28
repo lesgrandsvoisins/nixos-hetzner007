@@ -50,7 +50,7 @@
     };
   };
   dirs = {
-    sftpgo-users = "/var/lib/sftpgo/users";
+    sftpgo-users = "/srv/sftpgo/users";
   };
   ips.wiki-js = "::1";
   domains.wiki-js = "wiki.ggvv.org";

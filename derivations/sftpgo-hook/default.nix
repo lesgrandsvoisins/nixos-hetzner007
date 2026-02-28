@@ -5,7 +5,7 @@ in
     name = "sftpgo-prelogin-hook";
     runtimeInputs = [pkgs.jq pkgs.coreutils pkgs.findutils pkgs.gnugrep];
     text = ''
-        set -euo pipefail
+      set -euo pipefail
 
       # Configurable base directory for user homes
       HOME_BASE="''${SFTPGO_HOME_BASE:-${vars.dirs.sftpgo-users}}"
