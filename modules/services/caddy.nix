@@ -458,7 +458,7 @@ in {
       };
       "wiki.grandsvoisins.org" = {
         extraConfig = ''
-          root /gv /srv/sftpgo/public/static/web/wiki
+          root /gv/* /srv/sftpgo/public/static/web/wiki/
           file_server
           reverse_proxy http://[::1]:3480
         '';
