@@ -459,7 +459,7 @@ in {
       "wiki.grandsvoisins.org" = {
         extraConfig = ''
           handle_path /gv/* {
-            root /gv/* /srv/sftpgo/public/static/web/wiki/
+            root * /srv/sftpgo/public/static/web/wiki
             file_server
           }
           handle {
