@@ -42,6 +42,7 @@ in {
     loadDataFile = null;
     settings = {
       # common.proxy_protocol = "1";
+      dataDir = "/srv/sftpgo";
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
