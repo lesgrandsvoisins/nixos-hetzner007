@@ -39,6 +39,7 @@ in {
       # "/etc/sftpgo"
     ];
     dataDir = "/srv/sftpgo";
+    extraReadWriteDirs = ["/srv/sftpgo" "/var/lib/sftpgo"];
     loadDataFile = null;
     settings = {
       # common.proxy_protocol = "1";
@@ -49,6 +50,7 @@ in {
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
         connection_string = "postgresql://:5434/sftpgo";
+        users_base_dir = "/srv/sftpgo/users";
         # password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
         # ssl-mode = 1;
         # root_cert = "/etc/postgres/root.crt";
