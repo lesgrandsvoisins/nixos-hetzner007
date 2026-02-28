@@ -493,6 +493,12 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
+      "public.gv.je" = {
+        extraConfig = ''
+          file_server
+          root * /srv/sftpgo/public
+        '';
+      };
       # "je.0.grandsvoisins.org" = {
       #   extraConfig = ''
       #     reverse_proxy http://localhost:3000
