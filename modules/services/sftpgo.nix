@@ -38,11 +38,10 @@ in {
       # "--config-dir"
       # "/etc/sftpgo"
     ];
-    dataDir = "/var/lib/sftpgo";
+    dataDir = "/srv/sftpgo";
     loadDataFile = null;
     settings = {
       # common.proxy_protocol = "1";
-      dataDir = "/srv/sftpgo";
       data_provider = {
         driver = "postgresql";
         name = "sftpgo";
