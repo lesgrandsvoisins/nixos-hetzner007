@@ -114,7 +114,6 @@ in {
           inject header "REMOTE_USER" from "userinfo|preferred_username"
           inject header "HTTP_REMOTE_USER" from "userinfo|preferred_username"
         }
-
       }
     '';
 
@@ -311,7 +310,7 @@ in {
               tls_trust_pool file {
                 pem_file /etc/gitea/certs/gitea.local.pem
               }
-          };
+          }
         '';
       };
 
