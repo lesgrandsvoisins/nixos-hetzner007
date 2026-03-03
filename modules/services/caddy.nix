@@ -634,28 +634,28 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
-      # "lldap.ggvv.org" = {
-      #   extraConfig = ''
-      #     reverse_proxy http://0.0.0.0:17170
-      #   '';
-      # };
-      # "forgejo.ggvv.org" = {
-      #   extraConfig = ''
-      #     reverse_proxy http://0.0.0.0:3003
-      #   '';
-      # };
-      # "dashy.ggvv.org" = {
-      #   extraConfig = ''
-      #     authorize with identifiedpolicy
-      #     reverse_proxy https://max.local:8443 {
-      #       transport http {
-      #         tls_server_name max.local
-      #         tls_insecure_skip_verify
-      #         tls_client_auth /var/lib/caddy/ssl/cert.pem /var/lib/caddy/ssl/key.pem
-      #       }
-      #     }
-      #   '';
-      # };
+      "lldap.ggvv.org" = {
+        extraConfig = ''
+          reverse_proxy http://0.0.0.0:17170
+        '';
+      };
+      "forgejo.ggvv.org" = {
+        extraConfig = ''
+          reverse_proxy http://0.0.0.0:3003
+        '';
+      };
+      "dashy.ggvv.org" = {
+        extraConfig = ''
+          authorize with identifiedpolicy
+          reverse_proxy https://max.local:8443 {
+            transport http {
+              tls_server_name max.local
+              tls_insecure_skip_verify
+              tls_client_auth /var/lib/caddy/ssl/cert.pem /var/lib/caddy/ssl/key.pem
+            }
+          }
+        '';
+      };
 
       "xcal.gv.je" = {
         # "xcal.grandsvoisins.org" = {
