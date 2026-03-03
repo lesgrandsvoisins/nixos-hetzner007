@@ -16,17 +16,16 @@ in {
     group = "services";
     database = {
       type = "postgres";
-      socket = "/var/run/postgresql/.s.PGSQL.5434"
+      socket = "/var/run/postgresql/.s.PGSQL.5434";
     };
     settings = {
       DISABLE_REGISTRATION = true;
       PROTOCOL = "https";
-      HTTP_PORT = vars.ports.gitea.https;
-      SSH_PORT = vars.ports.gitea.ssh;
+      HTTP_PORT = vars.ports.gitea-https;
+      SSH_PORT = vars.ports.gitea-ssh;
       oauth2 = {
         ENABLED = true;
         JWT_SECRET_URI = "file:/etc/gitea/oauth2_jwt_secret";
-
       };
       server = {
         ROOT_URL = "https://gitea.gv.je";
