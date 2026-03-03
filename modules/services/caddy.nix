@@ -164,21 +164,21 @@ in {
           redir https://wiki.ggvv.org
         '';
       };
-      "www.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://www.ggvv.org
-        '';
-      };
-      "whowhatetc.com" = {
-        extraConfig = ''
-          redir https://ggvv.org{uri}
-        '';
-      };
-      "auth.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
+      # "www.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://www.ggvv.org
+      #   '';
+      # };
+      # "whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://ggvv.org{uri}
+      #   '';
+      # };
+      # "auth.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
       "keepass.gv.je" = {
         serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
@@ -186,26 +186,26 @@ in {
           root * /var/www/keeweb
         '';
       };
-      "test.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://test.ggvv.org{uri}
-        '';
-      };
-      "maelanc.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://maelanc.ggvv.org{uri}
-        '';
-      };
-      "homarr.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
-      "homarr.ggvv.org" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
+      # "test.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://test.ggvv.org{uri}
+      #   '';
+      # };
+      # "maelanc.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://maelanc.ggvv.org{uri}
+      #   '';
+      # };
+      # "homarr.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
+      # "homarr.ggvv.org" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
       "www.gvois.com" = {
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
