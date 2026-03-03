@@ -30,8 +30,8 @@ in {
     database = {
       type = "postgres";
       # socket = "/var/run/postgresql";
-      host = "/var/run/postgresql:5434";
-      # port = 5434;
+      host = "/var/run/postgresql";
+      port = 5434;
     };
     settings = {
       # oauth2 = {
