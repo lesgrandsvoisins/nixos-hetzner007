@@ -553,37 +553,37 @@ in {
           redir https://www.gv.je{uri} 301
         '';
       };
-      # "www.quiquoietc.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org
-      #   '';
-      # };
-      # "quiquoietc.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org
-      #   '';
-      # };
-      # "auth.ggvv.org" = {
-      #   extraConfig = ''
-      #     authenticate with keygdvoisinscom
-      #     respond "auth.ggvv.org is running"
-      #   '';
-      # };
-      # "test.ggvv.org" = {
-      #   extraConfig = ''
-      #     reverse_proxy http://localhost:3000
-      #   '';
-      # };
-      # "maelanc.ggvv.org" = {
-      #   extraConfig = ''
-      #     reverse_proxy http://localhost:8090
-      #   '';
-      # };
-      # "maelanc.quiquoietc.com" = {
-      #   extraConfig = ''
-      #     reverse_proxy http://localhost:8090
-      #   '';
-      # };
+      "www.quiquoietc.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org
+        '';
+      };
+      "quiquoietc.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org
+        '';
+      };
+      "auth.ggvv.org" = {
+        extraConfig = ''
+          authenticate with keygdvoisinscom
+          respond "auth.ggvv.org is running"
+        '';
+      };
+      "test.ggvv.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "maelanc.ggvv.org" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:8090
+        '';
+      };
+      "maelanc.quiquoietc.com" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:8090
+        '';
+      };
       "gvois.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
