@@ -29,7 +29,8 @@ in {
     group = "services";
     database = {
       type = "postgres";
-      socket = "/var/run/postgresql/.s.PGSQL.5434";
+      socket = "/var/run/postgresql";
+      port = 5434;
     };
     settings = {
       # oauth2 = {

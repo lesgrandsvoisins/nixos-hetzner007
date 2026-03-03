@@ -307,7 +307,7 @@ in {
           reverse_proxy https://0.0.0.0:${builtins.toString vars.ports.gitea-https} {
             transport http {
               tls
-              tls_server_name gitea.gv.je
+              tls_server_name gitea.local
               tls_trust_pool file {
                 pem_file /etc/gitea/certs/gitea.local.pem
               }
