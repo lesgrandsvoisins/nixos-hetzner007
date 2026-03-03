@@ -47,7 +47,13 @@
               "filesystem": {
                 "provider": 0,
                 "osconfig": {}
-              }
+              },
+              "groups": [
+                {
+                  "type": 3,
+                  "name": "Public"
+                }
+              ]
             }
             EOF
           '';
