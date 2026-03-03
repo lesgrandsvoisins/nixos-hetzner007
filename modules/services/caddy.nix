@@ -302,6 +302,19 @@ in {
 
       ############################
 
+      "gitea.gv.je" = {
+        extraConfig = ''
+          reverse_proxy https://0.0.0.0:${builtins.toString vars.ports.gitea-https} {
+            transport http {
+              tls
+              tls_server_name gitea.gv.je
+              tls_trust_pool file {
+                pem_file /etc/gitea/certs/gitea.local.pem
+              }
+          };
+        '';
+      };
+
       "key.gv.je" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem

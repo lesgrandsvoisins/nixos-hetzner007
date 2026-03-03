@@ -7,6 +7,10 @@
 }: let
 in {
   users.users.gitea.uid = vars.uid.gitea;
+  networking.hosts = {
+    # "::1" = [ "radicale.local" ];
+    "0.0.0.0" = ["radicale.local"];
+  };
   services.postgresql = {
     ensureUsers = [
       {
@@ -28,9 +32,14 @@ in {
       socket = "/var/run/postgresql/.s.PGSQL.5434";
     };
     settings = {
-      oauth2 = {
-        ENABLED = true;
-        JWT_SECRET_URI = "file:/etc/gitea/oauth2_jwt_secret";
+      # oauth2 = {
+      #   ENABLED = true;
+      #   JWT_SECRET_URI = "file:/etc/gitea/oauth2_jwt_secret";
+      # };
+      service = {
+        ENABLE_REVERSE_PROXY_AUTHENTICATION = true;
+        REVERSE_PROXY_AUTHENTICATION_USER = "X_REMOTE_USER"; # Otherwise X-WEBAUTH-USER
+        ENABLE_REVERSE_PROXY_AUTO_REGISTRATION = true;
       };
       server = {
         ROOT_URL = "https://gitea.gv.je";
@@ -38,6 +47,8 @@ in {
         PROTOCOL = "https";
         HTTP_PORT = vars.ports.gitea-https;
         SSH_PORT = vars.ports.gitea-ssh;
+        CERT_FILE = "/etc/gitea/certs/gitea.local.pem";
+        KEY_FILE = "/etc/gitea/certs/gitea.local-key.pem";
       };
       "cron.sync_external_users" = {
         RUN_AT_START = true;
