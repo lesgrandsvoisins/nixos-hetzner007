@@ -159,11 +159,11 @@ in {
           }
         '';
       };
-      "wiki.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://wiki.ggvv.org
-        '';
-      };
+      # "wiki.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://wiki.ggvv.org
+      #   '';
+      # };
       # "www.whowhatetc.com" = {
       #   extraConfig = ''
       #     redir https://www.ggvv.org
@@ -283,21 +283,21 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "lldap.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://lldap.ggvv.org{uri}
-        '';
-      };
-      "forgejo.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://forgejo.ggvv.org{uri}
-        '';
-      };
-      "dashy.whowhatetc.com" = {
-        extraConfig = ''
-          redir https://dashy.ggvv.org{uri}
-        '';
-      };
+      # "lldap.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://lldap.ggvv.org{uri}
+      #   '';
+      # };
+      # "forgejo.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://forgejo.ggvv.org{uri}
+      #   '';
+      # };
+      # "dashy.whowhatetc.com" = {
+      #   extraConfig = ''
+      #     redir https://dashy.ggvv.org{uri}
+      #   '';
+      # };
 
       ############################
 
