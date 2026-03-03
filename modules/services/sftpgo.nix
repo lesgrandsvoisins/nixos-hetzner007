@@ -162,7 +162,7 @@ in {
         templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
       };
       common = {
-        umask = "026";
+        umask = "027";
       };
     };
   };
