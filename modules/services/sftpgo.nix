@@ -161,6 +161,9 @@ in {
         auth_type = 1; # 1 Login 0 Plain 2 CRAM-MD5
         templates_path = "${pkgs.sftpgo}/share/sftpgo/templates";
       };
+      common = {
+        umask = "026";
+      };
     };
   };
 }
