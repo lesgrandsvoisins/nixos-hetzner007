@@ -36,6 +36,8 @@ in {
     group = "services";
   };
 
+  users.users.caddy.extraGroups = ["services"];
+
   services.caddy = {
     enable = true;
     # group = "services";
