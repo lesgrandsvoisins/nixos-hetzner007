@@ -21,6 +21,7 @@
     sftpgo = 1506;
     node-red = 1507;
     vikunja = 1508;
+    gitea = 1509;
     named = 991;
   };
   ports = {
@@ -42,6 +43,8 @@
     sfptgo-sftp = 1282;
     sfptgo-webdav = 1281;
     node-red = 1507;
+    gitea-https = 3446;
+    gitea-ssh = 3022;
   };
   hosts = {
     node-red = {

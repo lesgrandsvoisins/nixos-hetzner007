@@ -10,6 +10,7 @@ in {
   imports = [
     ./services/bind.nix
     ./services/caddy.nix
+    ./services/gitea.nix
     ./services/keycloak.nix
     ./services/lldap.nix
     ./services/postgresql.nix
