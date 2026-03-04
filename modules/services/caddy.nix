@@ -50,89 +50,89 @@ in {
     environmentFile = "/etc/caddy/caddy.env";
     email = "hostmaster@lesgrandsvoisins.com";
 
-    globalConfig = ''
-      order authenticate before respond
-      order authorize before basicauth
+    # globalConfig = ''
+    #   order authenticate before respond
+    #   order authorize before basicauth
 
-      security {
-      	oauth identity provider keygvje {
-      		driver generic
-          realm key@gv.je
-      		client_id {env.KEYGVJE_CLIENT_ID}
-      		client_secret {env.KEYGVJE_CLIENT_SECRET}
-      		scopes profile openid email
-          extract all from userinfo
-      		metadata_url https://key.gv.je/realms/master/.well-known/openid-configuration
-      	}
+    #   security {
+    #   	oauth identity provider keygvje {
+    #   		driver generic
+    #       realm key@gv.je
+    #   		client_id {env.KEYGVJE_CLIENT_ID}
+    #   		client_secret {env.KEYGVJE_CLIENT_SECRET}
+    #   		scopes profile openid email
+    #       extract all from userinfo
+    #   		metadata_url https://key.gv.je/realms/master/.well-known/openid-configuration
+    #   	}
 
-        authentication portal keygvjeportal {
-      		crypto default token lifetime 3600
-      		crypto key sign-verify {env.JWT_SHARED_KEY}
-      		enable identity provider keygvje
-      		cookie domain gv.je
-      		ui {
-      			links {
-              # "Copyparty" https://cp.roses.gv.je icon "las floppy-disk"
-              "Gitea" https://cp.roses.gv.je icon "lab la-git"
-              "Moi" "/whoami" icon "las la-user"
-            }
-            # custom html header path "${caddy-ui-lesgrandsvoisins}/assets/html/header-lesgrandsvoisins.html"
-            # template generic "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/generic.template"
-            template login "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/login.template"
-            logo url "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
-            logo description "Les Grands Voisins"
-            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/css/lesgrandsvoisins.css" "text/css" "assets/css/lesgrandsvoisins.css"
-            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png" "text/css" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
-            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/favicon.png" "image/png" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
-            static_asset "assets/images/logo-lesgrandsvoisins-800-400-white.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
-            static_asset "assets/images/favicon.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
-            static_asset "assets/images/favicon.ico" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
-      		}
+    #     authentication portal keygvjeportal {
+    #   		crypto default token lifetime 3600
+    #   		crypto key sign-verify {env.JWT_SHARED_KEY}
+    #   		enable identity provider keygvje
+    #   		cookie domain gv.je
+    #   		ui {
+    #   			links {
+    #           # "Copyparty" https://cp.roses.gv.je icon "las floppy-disk"
+    #           "Gitea" https://cp.roses.gv.je icon "lab la-git"
+    #           "Moi" "/whoami" icon "las la-user"
+    #         }
+    #         # custom html header path "${caddy-ui-lesgrandsvoisins}/assets/html/header-lesgrandsvoisins.html"
+    #         # template generic "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/generic.template"
+    #         template login "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/login.template"
+    #         logo url "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #         logo description "Les Grands Voisins"
+    #         # static_asset "${caddy-ui-lesgrandsvoisins}/assets/css/lesgrandsvoisins.css" "text/css" "assets/css/lesgrandsvoisins.css"
+    #         # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png" "text/css" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #         # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/favicon.png" "image/png" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #         static_asset "assets/images/logo-lesgrandsvoisins-800-400-white.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #         static_asset "assets/images/favicon.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #         static_asset "assets/images/favicon.ico" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+    #   		}
 
-          transform user {
-            match origin keycloak
-            action add role authp/user
-          }
-        }
+    #       transform user {
+    #         match origin keycloak
+    #         action add role authp/user
+    #       }
+    #     }
 
-        authorization policy identifiedpolicy {
-      		set auth url https://auth.gv.je
-      		allow roles guest authp/admin authp/user
-      		crypto key verify {env.JWT_SHARED_KEY}
-           set user identity subject
-           inject headers with claims
-           inject header "X-Username" from "userinfo|preferred_username"
-      	}
+    #     authorization policy identifiedpolicy {
+    #   		set auth url https://auth.gv.je
+    #   		allow roles guest authp/admin authp/user
+    #   		crypto key verify {env.JWT_SHARED_KEY}
+    #        set user identity subject
+    #        inject headers with claims
+    #        inject header "X-Username" from "userinfo|preferred_username"
+    #   	}
 
-        authorization policy userpolicy {
-          set auth url https://auth.gv.je
-          allow roles authp/admin authp/user
-          crypto key verify {env.JWT_SHARED_KEY}
-          inject headers with claims
-        }
+    #     authorization policy userpolicy {
+    #       set auth url https://auth.gv.je
+    #       allow roles authp/admin authp/user
+    #       crypto key verify {env.JWT_SHARED_KEY}
+    #       inject headers with claims
+    #     }
 
-        authorization policy httpxpolicy {
-          set auth url https://auth.gv.je
-          crypto key verify {env.JWT_SHARED_KEY}
-          allow roles guest authp/admin authp/user
-          # acl default allow
-          # acl default allow
-          # allow any
-          # allow roles anonymous guest
-          # default allow
-          inject headers with claims
-          inject header "HTTP_X_REMOTE_USER" from "userinfo|preferred_username"
-          inject header "X_REMOTE_USER" from "userinfo|preferred_username"
-          inject header "REMOTE_USER" from "userinfo|preferred_username"
-          inject header "HTTP_REMOTE_USER" from "userinfo|preferred_username"
-        }
-      }
-    '';
+    #     authorization policy httpxpolicy {
+    #       set auth url https://auth.gv.je
+    #       crypto key verify {env.JWT_SHARED_KEY}
+    #       allow roles guest authp/admin authp/user
+    #       # acl default allow
+    #       # acl default allow
+    #       # allow any
+    #       # allow roles anonymous guest
+    #       # default allow
+    #       inject headers with claims
+    #       inject header "HTTP_X_REMOTE_USER" from "userinfo|preferred_username"
+    #       inject header "X_REMOTE_USER" from "userinfo|preferred_username"
+    #       inject header "REMOTE_USER" from "userinfo|preferred_username"
+    #       inject header "HTTP_REMOTE_USER" from "userinfo|preferred_username"
+    #     }
+    #   }
+    # '';
 
     virtualHosts = {
       "auth.gv.je" = {
         extraConfig = ''
-          authenticate with keygvjeportal
+          # authenticate with keygvjeportal
           respond "auth.gv.je is running"
         '';
       };
@@ -582,7 +582,7 @@ in {
       };
       "auth.ggvv.org" = {
         extraConfig = ''
-          authenticate with keygvjeportal
+          # authenticate with keygvjeportal
           respond "auth.ggvv.org is running"
         '';
       };
