@@ -10,7 +10,7 @@
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
   caddy_host = "127.0.0.1";
-  caddy-ui-lesgrandsvoisins = pkgs.callPackage ../derivations/caddy-ui-lesgrandsvoisins.nix {};
+  caddy-ui-lesgrandsvoisins = pkgs.callPackage ../../derivations/caddy-ui-lesgrandsvoisins.nix {};
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
