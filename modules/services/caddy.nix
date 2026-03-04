@@ -321,7 +321,7 @@ in {
 
       "gitea.gv.je" = {
         extraConfig = ''
-          authorize with identifiedpolicy
+          # authorize with identifiedpolicy
           reverse_proxy https://0.0.0.0:${builtins.toString vars.ports.gitea-https} {
             transport http {
               tls
@@ -663,7 +663,7 @@ in {
       };
       "dashy.ggvv.org" = {
         extraConfig = ''
-          authorize with identifiedpolicy
+          # authorize with identifiedpolicy
           reverse_proxy https://max.local:8443 {
             transport http {
               tls_server_name max.local
@@ -677,7 +677,7 @@ in {
       "xcal.gv.je" = {
         # "xcal.grandsvoisins.org" = {
         extraConfig = ''
-          authorize with identifiedpolicy
+          # authorize with identifiedpolicy
           reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
         '';
       };
