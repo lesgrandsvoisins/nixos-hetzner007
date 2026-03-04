@@ -10,6 +10,7 @@
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
   caddy_host = "127.0.0.1";
+  caddy-ui-lesgrandsvoisins = pkgs.callPackage ../derivations/caddy-ui-lesgrandsvoisins.nix {};
 in {
   systemd.tmpfiles.rules = [
     "d /etc/caddy 0755 caddy users"
@@ -54,27 +55,39 @@ in {
       order authorize before basicauth
 
       security {
-        oauth identity provider keycloak {
-          driver generic
-          realm keycloak
-          client_id {env.KEYCLOAK_CLIENT_ID}
-          client_secret {env.KEYCLOAK_CLIENT_SECRET}
-          scopes profile openid email
+      	oauth identity provider keygvje {
+      		driver generic
+          realm key@gv.je
+      		client_id {env.KEYGVJE_CLIENT_ID}
+      		client_secret {env.KEYGVJE_CLIENT_SECRET}
+      		scopes profile openid email
           extract all from userinfo
-          metadata_url https://keycloak.gdvoisins.com/realms/master/.well-known/openid-configuration
-        }
+      		metadata_url https://key.gv.je/realms/master/.well-known/openid-configuration
+      	}
 
-        authentication portal keygdvoisinscom {
-          crypto default token lifetime 3600
-          crypto key sign-verify {env.JWT_SHARED_KEY}
-          enable identity provider keycloak
-          cookie domain ggvv.org
-          ui {
-            links {
-              "Dashy" https://ggvv.org:443/ icon "las la-star"
+        authentication portal keygvjeportal {
+      		crypto default token lifetime 3600
+      		crypto key sign-verify {env.JWT_SHARED_KEY}
+      		enable identity provider keygvje
+      		cookie domain gv.je
+      		ui {
+      			links {
+              # "Copyparty" https://cp.roses.gv.je icon "las floppy-disk"
+              "Gitea" https://cp.roses.gv.je icon "lab la-git"
               "Moi" "/whoami" icon "las la-user"
             }
-          }
+            # custom html header path "${caddy-ui-lesgrandsvoisins}/assets/html/header-lesgrandsvoisins.html"
+            # template generic "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/generic.template"
+            template login "${caddy-ui-lesgrandsvoisins}/assets/portal/templates/lesgrandsvoisins/login.template"
+            logo url "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+            logo description "Les Grands Voisins"
+            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/css/lesgrandsvoisins.css" "text/css" "assets/css/lesgrandsvoisins.css"
+            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png" "text/css" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
+            # static_asset "${caddy-ui-lesgrandsvoisins}/assets/images/favicon.png" "image/png" "assets/images/logo-lesgrandsvoisins-800-400-white.png"
+            static_asset "assets/images/logo-lesgrandsvoisins-800-400-white.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+            static_asset "assets/images/favicon.png" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+            static_asset "assets/images/favicon.ico" "image/png" "${caddy-ui-lesgrandsvoisins}/assets/images/logo-lesgrandsvoisins-800-400-white.png"
+      		}
 
           transform user {
             match origin keycloak
@@ -83,24 +96,23 @@ in {
         }
 
         authorization policy identifiedpolicy {
-          set auth url https://auth.ggvv.org
-          allow roles guest authp/admin authp/user
-          crypto key verify {env.JWT_SHARED_KEY}
-          set user identity subject
-          inject headers with claims
-          inject header "X-Useremail" from "email"
-          inject header "X-Username" from "userinfo|preferred_username"
-        }
+      		set auth url https://auth.gv.je
+      		allow roles guest authp/admin authp/user
+      		crypto key verify {env.JWT_SHARED_KEY}
+           set user identity subject
+           inject headers with claims
+           inject header "X-Username" from "userinfo|preferred_username"
+      	}
 
         authorization policy userpolicy {
-          set auth url https://auth.ggvv.org
+          set auth url https://auth.gv.je
           allow roles authp/admin authp/user
           crypto key verify {env.JWT_SHARED_KEY}
           inject headers with claims
         }
 
         authorization policy httpxpolicy {
-          set auth url https://auth.ggvv.org
+          set auth url https://auth.gv.je
           crypto key verify {env.JWT_SHARED_KEY}
           allow roles guest authp/admin authp/user
           # acl default allow
@@ -118,6 +130,12 @@ in {
     '';
 
     virtualHosts = {
+      "auth.gv.je" = {
+        extraConfig = ''
+          authenticate with keygvjeportal
+          respond "auth.gv.je is running"
+        '';
+      };
       "node-red.gv.je" = {
         extraConfig = ''
 
@@ -159,26 +177,26 @@ in {
           }
         '';
       };
-      # "wiki.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://wiki.ggvv.org
-      #   '';
-      # };
-      # "www.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://www.ggvv.org
-      #   '';
-      # };
-      # "whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://ggvv.org{uri}
-      #   '';
-      # };
-      # "auth.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
+      "wiki.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://wiki.ggvv.org
+        '';
+      };
+      "www.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://www.ggvv.org
+        '';
+      };
+      "whowhatetc.com" = {
+        extraConfig = ''
+          redir https://ggvv.org{uri}
+        '';
+      };
+      "auth.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
       "keepass.gv.je" = {
         serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
@@ -186,26 +204,26 @@ in {
           root * /var/www/keeweb
         '';
       };
-      # "test.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://test.ggvv.org{uri}
-      #   '';
-      # };
-      # "maelanc.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://maelanc.ggvv.org{uri}
-      #   '';
-      # };
-      # "homarr.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
-      # "homarr.ggvv.org" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
+      "test.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://test.ggvv.org{uri}
+        '';
+      };
+      "maelanc.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://maelanc.ggvv.org{uri}
+        '';
+      };
+      "homarr.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
+      "homarr.ggvv.org" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
       "www.gvois.com" = {
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
@@ -253,26 +271,26 @@ in {
         ];
         extraConfig = "redir https://www.gdvoisins.org{uri} 301";
       };
-      # "lesgv.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
-      # "www.lesgv.com" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
-      # "lesgv.org" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
-      # "www.lesgv.org" = {
-      #   extraConfig = ''
-      #     redir https://www.gdvoisins.org{uri} 301
-      #   '';
-      # };
+      "lesgv.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
+      "www.lesgv.com" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
+      "lesgv.org" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
+      "www.lesgv.org" = {
+        extraConfig = ''
+          redir https://www.gdvoisins.org{uri} 301
+        '';
+      };
       "www.gvois.org" = {
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
@@ -283,21 +301,21 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      # "lldap.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://lldap.ggvv.org{uri}
-      #   '';
-      # };
-      # "forgejo.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://forgejo.ggvv.org{uri}
-      #   '';
-      # };
-      # "dashy.whowhatetc.com" = {
-      #   extraConfig = ''
-      #     redir https://dashy.ggvv.org{uri}
-      #   '';
-      # };
+      "lldap.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://lldap.ggvv.org{uri}
+        '';
+      };
+      "forgejo.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://forgejo.ggvv.org{uri}
+        '';
+      };
+      "dashy.whowhatetc.com" = {
+        extraConfig = ''
+          redir https://dashy.ggvv.org{uri}
+        '';
+      };
 
       ############################
 
@@ -337,7 +355,6 @@ in {
           }
         '';
       };
-
       "admin.key.gv.je" = {
         extraConfig = ''
           #  caddy trust /etc/keycloak/certs/keycloak.local.pem
