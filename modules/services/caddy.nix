@@ -582,7 +582,7 @@ in {
       };
       "auth.ggvv.org" = {
         extraConfig = ''
-          authenticate with keygdvoisinscom
+          authenticate with keygvjeportal
           respond "auth.ggvv.org is running"
         '';
       };
