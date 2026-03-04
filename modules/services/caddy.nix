@@ -249,6 +249,26 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
+      "moi.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "yo.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "me.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
+      "i.gv.je" = {
+        extraConfig = ''
+          reverse_proxy http://localhost:3000
+        '';
+      };
       "gvplace.com" = {
         serverAliases = ["www.gvplace.com"];
         extraConfig = ''
