@@ -7,7 +7,6 @@
     named = 989;
     sftpgo = 1506;
     node-red = 1507;
-    openldap = 1508;
   };
   uid = {
     caddy = 239;
@@ -23,6 +22,7 @@
     node-red = 1507;
     vikunja = 1508;
     gitea = 1509;
+    openldap = 1510;
     named = 991;
   };
   ports = {

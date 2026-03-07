@@ -23,7 +23,7 @@ in {
   #   # "::1" = [ "radicale.local" ];
   #   # "${builtins.elemAt vars.ip6s.hosts 1}" = [ldapDomainName];
   # };
-  acme.certs."${ldapDomainName}" = {
+  security.acme.certs."${ldapDomainName}" = {
     dnsProvider = "clouddns";
     # environmentFile = "/etc/.secrets/.cloudns.auth";
     credentialFiles = {
@@ -36,9 +36,9 @@ in {
   services.cron.systemCronJobs = ["0 0 1 * *  root systemctl restart openldap"];
   services.openldap = {
     enable = true;
-    urlList = ["ldap://${dapDomainName}:14389/ ldaps://${dapDomainName}:14636/ ldapi:///"];
-    group = services;
-    # urlList = ["ldap://${dapDomainName}:14389/ ldaps://${dapDomainName}:14636/ ldapi:///"];
+    urlList = ["ldap://${ldapDomainName}:14389/ ldaps://${ldapDomainName}:14636/ ldapi:///"];
+    group = "services";
+    # urlList = ["ldap://${ldapDomainName}:14389/ ldaps://${ldapDomainName}:14636/ ldapi:///"];
     settings = {
       attrs = {
         olcLogLevel = "conns config";
@@ -73,11 +73,11 @@ in {
           ];
           olcDatabase = "{1}mdb";
           olcDbDirectory = "/var/lib/openldap/data";
-          olcSuffix = "${dapBaseDN}";
+          olcSuffix = "${ldapBaseDN}";
           /*
           your admin account, do not use writeText on a production system
           */
-          olcRootDN = "cn=admin,${dapBaseDN}";
+          olcRootDN = "cn=admin,${ldapBaseDN}";
           # olcRootPW = "${bindSlappasswd}";
           olcAccess = [
             /*
@@ -86,37 +86,37 @@ in {
             /*
             allow read on anything else
             */
-            ''              {0}to dn.subtree="ou=newusers,${dapBaseDN}"
-                                    by dn.exact="cn=newuser,ou=users,${dapBaseDN}" write
-                                    by group.exact="cn=administration,ou=groups,${dapBaseDN}" write
+            ''              {0}to dn.subtree="ou=newusers,${ldapBaseDN}"
+                                    by dn.exact="cn=newuser,ou=users,${ldapBaseDN}" write
+                                    by group.exact="cn=administration,ou=groups,${ldapBaseDN}" write
                                     by self write
                                     by anonymous auth
                                     by * read''
-            ''              {1}to dn.subtree="ou=invitations,${dapBaseDN}"
-                                    by dn.exact="cn=newuser,ou=users,${dapBaseDN}" write
-                                    by group.exact="cn=administration,ou=groups,${dapBaseDN}" write
+            ''              {1}to dn.subtree="ou=invitations,${ldapBaseDN}"
+                                    by dn.exact="cn=newuser,ou=users,${ldapBaseDN}" write
+                                    by group.exact="cn=administration,ou=groups,${ldapBaseDN}" write
                                     by self write
                                     by anonymous auth
                                     by * read''
-            # ''                    {2}to dn.subtree="ou=users,${dapBaseDN}"
-            ''              {2}to dn.subtree="${dapBaseDN}"
-                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${dapBaseDN}" manage
-                                    by dn.exact="cn=newuser,ou=users,${dapBaseDN}" write
-                                    by dn.exact="uid=reader,ou=users,${dapBaseDN}" read
-                                    by group.exact="cn=administration,ou=groups,${dapBaseDN}" write
+            # ''                    {2}to dn.subtree="ou=users,${ldapBaseDN}"
+            ''              {2}to dn.subtree="${ldapBaseDN}"
+                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${ldapBaseDN}" manage
+                                    by dn.exact="cn=newuser,ou=users,${ldapBaseDN}" write
+                                    by dn.exact="uid=reader,ou=users,${ldapBaseDN}" read
+                                    by group.exact="cn=administration,ou=groups,${ldapBaseDN}" write
                                     by self write
                                     by anonymous auth
                                     by * read''
             ''              {3}to attrs=userPassword
-                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${dapBaseDN}" manage
+                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${ldapBaseDN}" manage
                                     by self write
                                     by anonymous auth
                                     by * none''
             ''              {4}to *
-                                    by dn.exact="cn=sogo@lesgrandsvoisins.com,ou=users,${dapBaseDN}" manage
-                                    by dn.exact="cn=chris@lesgrandsvoisins.com,ou=users,${dapBaseDN}" manage
-                                    by dn.exact="cn=chris@mann.fr,ou=users,${dapBaseDN}" manage
-                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${dapBaseDN}" manage
+                                    by dn.exact="cn=sogo@lesgrandsvoisins.com,ou=users,${ldapBaseDN}" manage
+                                    by dn.exact="cn=chris@lesgrandsvoisins.com,ou=users,${ldapBaseDN}" manage
+                                    by dn.exact="cn=chris@mann.fr,ou=users,${ldapBaseDN}" manage
+                                    by dn.exact="cn=admin@lesgrandsvoisins.com,ou=users,${ldapBaseDN}" manage
                                     by self write
                                     by anonymous auth''
             /*
