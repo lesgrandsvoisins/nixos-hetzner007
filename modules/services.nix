@@ -13,6 +13,7 @@ in {
     ./services/gitea.nix
     ./services/keycloak.nix
     ./services/lldap.nix
+    ./services/openldap.nix
     ./services/postgresql.nix
     ./services/radicale.nix
     ./services/sftpgo.nix

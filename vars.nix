@@ -7,6 +7,7 @@
     named = 989;
     sftpgo = 1506;
     node-red = 1507;
+    openldap = 1508;
   };
   uid = {
     caddy = 239;
@@ -128,4 +129,10 @@
     }
   ];
   hetzner.interface = "enp0s31f6";
+  domains = {
+    ldap = "ldap.gv.je";
+  };
+  ldap = {
+    baseDN = "dc=lesgrandsvoisins,dc=com";
+  };
 }
