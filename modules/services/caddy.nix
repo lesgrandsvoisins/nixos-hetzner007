@@ -397,6 +397,7 @@ in {
       };
       "sftpgo.gv.je" = {
         extraConfig = ''
+          redir /web/client/login /web/client/oidclogin
           reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-httpd} {
             header_up Host {host}
             header_up X-Forwarded-Proto {scheme}
