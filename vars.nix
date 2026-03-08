@@ -46,6 +46,8 @@
     node-red = 1507;
     gitea-https = 3446;
     gitea-ssh = 3022;
+    ldap = 389;
+    ldaps = 636;
   };
   hosts = {
     node-red = {

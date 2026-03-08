@@ -11,6 +11,7 @@
 in {
   systemd.tmpfiles.rules = [
     "d /etc/.secrets/ 0750 root:services"
+    # "d /etc/openldap/.tls/ 0750 root:services"
     "f /etc/.secrets/.cloudns.auth.id 0640 root:services"
     "f /etc/.secrets/.cloudns.auth.password 0640 root:services"
     "f /etc/.secrets/.cloudns.auth.email 0640 root:services"
@@ -36,7 +37,7 @@ in {
   services.cron.systemCronJobs = ["0 0 1 * *  root systemctl restart openldap"];
   services.openldap = {
     enable = true;
-    urlList = ["ldap://${ldapDomainName}:14389/ ldaps://${ldapDomainName}:14636/ ldapi:///"];
+    urlList = ["ldap://${ldapDomainName}:${builtins.toString vars.ports.ldap}/ ldaps://${ldapDomainName}:${builtins.toString vars.ports.ldaps}/ ldapi:///"];
     group = "services";
     # urlList = ["ldap://${ldapDomainName}:14389/ ldaps://${ldapDomainName}:14636/ ldapi:///"];
     settings = {
@@ -46,9 +47,9 @@ in {
           tls
         settings for acme ssl
         */
-        olcTLSCACertificateFile = "/etc/openldap/.tls/cert.pem";
-        olcTLSCertificateFile = "/etc/openldap/.tls/cert.pem";
-        olcTLSCertificateKeyFile = "/etc/openldap/.tls/key.pem";
+        olcTLSCACertificateFile = "//var/lib/acme/${ldapDomainName}/fullchain.pem";
+        olcTLSCertificateFile = "//var/lib/acme/${ldapDomainName}/cert.pem";
+        olcTLSCertificateKeyFile = "//var/lib/acme/${ldapDomainName}/key.pem";
         olcTLSCipherSuite = "HIGH:MEDIUM:+3DES:+RC4:+aNULL";
         olcTLSCRLCheck = "none";
         olcTLSVerifyClient = "never";
