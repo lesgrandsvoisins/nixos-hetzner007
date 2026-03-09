@@ -47,7 +47,7 @@ in {
       };
       sslCertificate = "/var/lib/acme/key.gv.je/fullchain.pem";
       sslCertificateKey = "/var/lib/acme/key.gv.je/key.pem";
-      initialAdminPassword = "lksajdlkgh579821asfsdfksf4dskjhgfkjsahf";
+      # initialAdminPassword = "lksajdlkgh579821asfsdfksf4dskjhgfkjsahf";
       # themes = {lesgv = (pkgs.callPackage "/etc/nixos/keycloaktheme/derivation.nix" {});};
     };
   };
