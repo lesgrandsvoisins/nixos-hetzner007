@@ -1,0 +1,127 @@
+dn: cn=gv,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: gv
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.1
+  NAME 'mainMail'
+  DESC 'Primary email address for a gvUserAccount'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.2
+  NAME 'gvMail'
+  DESC 'Mailbox or alias email address'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.3
+  NAME 'gvUserDN'
+  DESC 'DN of owning user entry'
+  EQUALITY distinguishedNameMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.12
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.4
+  NAME 'gvMailQuota'
+  DESC 'Mailbox quota in bytes'
+  EQUALITY integerMatch
+  ORDERING integerOrderingMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.5
+  NAME 'gvMailSend'
+  DESC 'Whether sending is enabled'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.6
+  NAME 'gvMailReceive'
+  DESC 'Whether receiving is enabled'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.7
+  NAME 'gvIMAP'
+  DESC 'Whether IMAP is enabled'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.8
+  NAME 'gvPOP3'
+  DESC 'Whether POP3 is enabled'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.9
+  NAME 'gvMailForward'
+  DESC 'Forward target email addresses'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.10
+  NAME 'domainName'
+  DESC 'Managed mail domain name'
+  EQUALITY caseIgnoreIA5Match
+  SUBSTR caseIgnoreIA5SubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.11
+  NAME 'disabled'
+  DESC 'Whether the entry is disabled'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcAttributeTypes: ( 1.3.6.1.4.1.11811.1.12
+  NAME 'validated'
+  DESC 'Whether the entry is validated'
+  EQUALITY booleanMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+  SINGLE-VALUE )
+
+olcObjectClasses: ( 1.3.6.1.4.1.11811.2.1
+  NAME 'disvalidated'
+  DESC 'Auxiliary flags for validation and disablement'
+  SUP top
+  AUXILIARY
+  MAY ( disabled $ validated ) )
+
+olcObjectClasses: ( 1.3.6.1.4.1.11811.2.2
+  NAME 'gvUserAccount'
+  DESC 'Additional attributes for inetOrgPerson-based user accounts'
+  SUP top
+  AUXILIARY
+  MUST ( mainMail ) )
+
+olcObjectClasses: ( 1.3.6.1.4.1.11811.2.3
+  NAME 'gvMailbox'
+  DESC 'Hosted mailbox'
+  SUP top
+  STRUCTURAL
+  MUST ( gvMail $ gvUserDN )
+  MAY ( gvMailQuota $ gvMailSend $ gvMailReceive $ gvIMAP $ gvPOP3 ) )
+
+olcObjectClasses: ( 1.3.6.1.4.1.11811.2.4
+  NAME 'gvMailAlias'
+  DESC 'Mail alias with forwarding targets'
+  SUP top
+  STRUCTURAL
+  MUST ( gvMail $ gvUserDN $ gvMailForward) )
+
+olcObjectClasses: ( 1.3.6.1.4.1.11811.2.5
+  NAME 'gvMailDomain'
+  DESC 'Managed mail domain'
+  SUP top
+  STRUCTURAL
+  MUST ( domainName ) )

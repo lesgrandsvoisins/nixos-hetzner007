@@ -1,0 +1,12 @@
+# /etc/dovecot/dovecot-oauth2.conf.ext
+oauth2 {
+  # realm-specific OIDC/OAuth2 endpoints from Keycloak
+  tokeninfo_url = https://sso.lesgrandsvoisins.com/realms/lgv/protocol/openid-connect/userinfo
+  introspection_url = https://sso.lesgrandsvoisins.com/realms/lgv/protocol/openid-connect/token/introspect
+  client_id = dovecot
+  client_secret = CHANGE_ME
+
+  # Example claim mapping idea
+  username_attribute = preferred_username
+  active_attribute = active
+}

@@ -1,0 +1,13 @@
+server_host = ldaps://127.0.0.1
+version = 3
+bind = yes
+bind_dn = cn=postfix,dc=lesgrandsvoisins,dc=com
+bind_pw = CHANGE_ME
+
+search_base = ou=aliases,ou=mail,dc=lesgrandsvoisins,dc=com
+scope = sub
+query_filter = (&(objectClass=gvMailAlias)(gvMail=%s)(!(disabled=TRUE)))
+result_attribute = gvMailForward
+
+start_tls = no
+tls_require_cert = yes

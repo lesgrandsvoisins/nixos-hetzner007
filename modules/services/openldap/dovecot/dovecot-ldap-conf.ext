@@ -1,0 +1,35 @@
+ldap_uris = ldaps://127.0.0.1
+ldap_version = 3
+
+dn = cn=dovecot,dc=lesgrandsvoisins,dc=com
+dnpass = CHANGE_ME
+
+auth_bind = no
+
+base = ou=users,dc=lesgrandsvoisins,dc=com
+scope = subtree
+deref = never
+
+# Login by uid or by mainMail
+pass_filter = (&
+  (objectClass=inetOrgPerson)
+  (objectClass=gvUserAccount)
+  (!(disabled=TRUE))
+  (|(uid=%u)(mainMail=%u))
+)
+
+pass_attrs = \
+  uid=user, \
+  userPassword=password
+
+# Minimal userdb. Adjust mail location to your storage layout.
+user_filter = (&
+  (objectClass=inetOrgPerson)
+  (objectClass=gvUserAccount)
+  (!(disabled=TRUE))
+  (|(uid=%u)(mainMail=%u))
+)
+
+user_attrs = \
+  =home=/var/vmail/%Ln, \
+  =mail=maildir:/var/vmail/%Ln/Maildir

@@ -1,0 +1,52 @@
+myhostname = mail.lesgrandsvoisins.com
+myorigin = /etc/mailname
+inet_interfaces = all
+inet_protocols = all
+
+smtpd_banner = $myhostname ESMTP
+biff = no
+append_dot_mydomain = no
+readme_directory = no
+compatibility_level = 3.6
+
+# TLS
+smtpd_tls_cert_file = /etc/letsencrypt/live/mail.lesgrandsvoisins.com/fullchain.pem
+smtpd_tls_key_file = /etc/letsencrypt/live/mail.lesgrandsvoisins.com/privkey.pem
+smtpd_tls_security_level = may
+smtp_tls_security_level = may
+
+# Domains handled by this server
+virtual_mailbox_domains = ldap:/etc/postfix/ldap-domains.cf
+
+# Aliases first, then real mailboxes
+virtual_alias_maps = ldap:/etc/postfix/ldap-aliases.cf
+virtual_mailbox_maps = ldap:/etc/postfix/ldap-mailboxes.cf
+
+# Delivery to Dovecot LMTP
+virtual_transport = lmtp:unix:private/dovecot-lmtp
+
+# SMTP AUTH via Dovecot SASL
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_local_domain =
+
+# Submission policy
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+
+# Sender authorization: user may send only as owned mailbox/alias
+smtpd_sender_login_maps =
+    ldap:/etc/postfix/ldap-sender-mailboxes.cf,
+    ldap:/etc/postfix/ldap-sender-aliases.cf
+
+smtpd_sender_restrictions =
+    reject_sender_login_mismatch
+
+# Recipient sanity checks
+smtpd_recipient_restrictions =
+    reject_non_fqdn_recipient,
+    reject_unknown_recipient_domain,
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    reject_unauth_destination

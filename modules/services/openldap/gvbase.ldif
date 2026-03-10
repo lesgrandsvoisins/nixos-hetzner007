@@ -1,0 +1,35 @@
+dn: ou=users,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=groups,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=mail,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: mail
+
+dn: ou=mailboxes,ou=mail,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: mailboxes
+
+dn: ou=aliases,ou=mail,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: aliases
+
+dn: ou=domains,ou=mail,dc=lesgrandsvoisins,dc=com
+objectClass: organizationalUnit
+ou: domains
+
+dn: cn=gvadmin,ou=groups,dc=lesgrandsvoisins,dc=com
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: gvadmin
+uniqueMember: cn=admin,dc=lesgrandsvoisins,dc=com
+
+dn: cn=newusers,ou=groups,dc=lesgrandsvoisins,dc=com
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: newusers
+uniqueMember: cn=admin,dc=lesgrandsvoisins,dc=com
