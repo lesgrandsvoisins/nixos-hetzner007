@@ -41,6 +41,7 @@
             "username",
             "uid"
         ]);
+        usernameInput.readOnly = true;
 
         if (!familyInput || !givenInput) return;
 
@@ -58,8 +59,8 @@
             '</p>'
         ].join("");
 
-        const anchor = givenInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
-        anchor.parentElement.insertAfter(container, anchor.nextSibling);
+        const anchor = usernameInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
+        anchor.parentElement.insertBefore(container, anchor.nextSibling);
 
         const previewValue = container.querySelector("#gv-identifier-preview-value");
         const update = function() {
