@@ -41,7 +41,7 @@
             "username",
             "uid"
         ]);
-        usernameInput.readOnly = true;
+        usernameInput.readOnly = false; /* The end user should increment his or herself */
 
         if (!familyInput || !givenInput) return;
 
