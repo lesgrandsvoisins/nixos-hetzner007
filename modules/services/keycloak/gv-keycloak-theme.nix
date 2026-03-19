@@ -3,7 +3,7 @@ stdenv.mkDerivation rec {
   name = "gv-keycloak-theme";
   version = "1.0";
 
-  src = ./gv-keycloak-theme;
+  src = ./gv-keycloak-theme/theme/gv-login;
 
   nativeBuildInputs = [];
   buildInputs = [];
