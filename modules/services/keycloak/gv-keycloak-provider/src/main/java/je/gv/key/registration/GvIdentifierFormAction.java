@@ -83,7 +83,6 @@ public final class GvIdentifierFormAction implements FormAction {
 
         // Keep the generated username around for the success() phase and for optional template preview.
         formData.putSingle("gv_generated_identifier", identifier);
-        formData.putSingle("gv_short_username", shortUsername);
         
         context.success();
     }
@@ -112,7 +111,7 @@ public final class GvIdentifierFormAction implements FormAction {
         );
 
         if (!isBlank(shortUsername)) {
-            user.setSingleAttribute("shortUsername",shortUsername);
+            user.setSingleAttribute("shortUsername",shortUsername.trim());
         }
         if (!isBlank(identifier)) {
             user.setUsername(identifier);
