@@ -91,8 +91,8 @@ in {
         # hostname-admin = "https://admin.key.gv.je";
         # db-url-port = lib.mkForce vars.ports.postgresql;
         # db-url = lib.mkForce "postgresql:///dbname?host=/var/lib/postgresql?port=${builtins.toString vars.ports.postgresql}";
-        "spi-gv-keycloak-registration-theme--provider" = "gv-identifier-form-action";
-        "spi-gv-keycloak-registration-theme--provider--enabled" = true;
+        # "spi-gv-keycloak-registration-theme--provider" = "gv-identifier-form-action";
+        # "spi-gv-keycloak-registration-theme--provider--enabled" = true;
       };
       sslCertificate = "/var/lib/acme/key.gv.je/fullchain.pem";
       sslCertificateKey = "/var/lib/acme/key.gv.je/key.pem";
