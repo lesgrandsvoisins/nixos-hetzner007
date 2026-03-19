@@ -41,11 +41,11 @@
       runHook postInstall
     '';
   };
-  keycloakWithGv = pkgs.keycloak.override {
-    plugins =
-      pkgs.keycloak.enabledPlugins
-      ++ [gvKeycloakProvider];
-  };
+  # keycloakWithGv = pkgs.keycloak.override {
+  #   plugins =
+  #     pkgs.keycloak.enabledPlugins
+  #     ++ [gvKeycloakProvider];
+  # };
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
@@ -64,7 +64,7 @@ in {
   services = {
     keycloak = {
       enable = true;
-      package = keycloakWithGv;
+      # package = keycloakWithGv;
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
       };
