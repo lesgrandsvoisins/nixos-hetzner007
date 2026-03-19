@@ -41,6 +41,7 @@
             "username",
             "uid"
         ]);
+        usernameInput.tabIndex = 100;
         // usernameInput.readOnly = false; /* The end user should increment his or herself */
 
         if (!familyInput || !givenInput) return;
