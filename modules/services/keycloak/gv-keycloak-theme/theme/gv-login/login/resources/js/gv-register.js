@@ -59,14 +59,14 @@
         ].join("");
 
         const anchor = givenInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
-        anchor.parentElement.insertBefore(container, anchor.nextSibling);
+        anchor.parentElement.insertAfter(container, anchor.nextSibling);
 
         const previewValue = container.querySelector("#gv-identifier-preview-value");
         const update = function() {
             const family = normalize(familyInput.value).slice(0, 4);
             const given = normalize(givenInput.value).slice(0, 4);
 
-            const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
+            const suggestedUsername = family || given ? family + given + "1@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
             previewValue.textContent = suggestedUsername;
             usernameInput.value = suggestedUsername;
         };
