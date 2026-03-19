@@ -65,9 +65,9 @@ in {
     keycloak = {
       enable = true;
       # package = keycloakWithGv;
-      themes = {
-        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
-      };
+      # themes = {
+      #   gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+      # };
       plugins = [gvKeycloakProvider];
       database = {
         username = "keygvje";

@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>je.gv</groupId>
-  <artifactId>gv-keycloak-registration-theme</artifactId>
-  <version>0.1.6</version>
+  <artifactId>gv-key-registration-action</artifactId>
+  <version>0.1.7</version>
   <packaging>jar</packaging>
 
   <properties>
