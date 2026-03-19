@@ -52,6 +52,7 @@ in {
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
       };
+      plugins = [gvKeycloakProvider];
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
