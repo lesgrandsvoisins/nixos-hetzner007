@@ -146,7 +146,7 @@ public final class GvIdentifierFormAction implements FormAction {
         }
 
         for (int counter = 2; counter <= 9999; counter++) {
-            String candidate = base + counter;
+            String candidate = base + counter + "@gv.je";
             if (containsBlockedSubstring(candidate)) {
                 continue;
             }
