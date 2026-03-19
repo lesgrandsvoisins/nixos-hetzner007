@@ -45,31 +45,31 @@
 
         if (!familyInput || !givenInput) return;
 
-        const container = document.createElement("div");
-        container.className = "gv-identifier-preview";
-        container.innerHTML = [
-            '<div class="gv-identifier-preview__label">GV account identifier</div>',
-            '<div class="gv-identifier-preview__value" id="gv-identifier-preview-value">—</div>',
-            '<p class="gv-identifier-preview__help">',
-            'Generated from ',
-            '<strong>' + labelOf(familyInput) + '</strong>',
-            ' + <strong>' + labelOf(givenInput) + '</strong>',
-            ' using the rule <code>family[:4] + given[:4] + counter</code>. ',
-            'The final number is assigned server-side to keep the identifier unique.',
-            '</p>'
-        ].join("");
+        // const container = document.createElement("div");
+        // container.className = "gv-identifier-preview";
+        // container.innerHTML = [
+        //     '<div class="gv-identifier-preview__label">GV account identifier</div>',
+        //     '<div class="gv-identifier-preview__value" id="gv-identifier-preview-value">—</div>',
+        //     '<p class="gv-identifier-preview__help">',
+        //     'Generated from ',
+        //     '<strong>' + labelOf(familyInput) + '</strong>',
+        //     ' + <strong>' + labelOf(givenInput) + '</strong>',
+        //     ' using the rule <code>family[:4] + given[:4] + counter</code>. ',
+        //     'The final number is assigned server-side to keep the identifier unique.',
+        //     '</p>'
+        // ].join("");
 
         const anchor = usernameInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
         anchor.parentElement.insertBefore(container, anchor.nextSibling);
 
-        const previewValue = container.querySelector("#gv-identifier-preview-value");
+        // const previewValue = container.querySelector("#gv-identifier-preview-value");
         const update = function() {
             const family = normalize(familyInput.value).slice(0, 4);
             const given = normalize(givenInput.value).slice(0, 4);
 
             // const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
             const suggestedUsername = family || given ? family + given + "2@gv.je" : "@gv.je";
-            previewValue.textContent = suggestedUsername;
+            // previewValue.textContent = suggestedUsername;
             usernameInput.value = suggestedUsername;
         };
 
