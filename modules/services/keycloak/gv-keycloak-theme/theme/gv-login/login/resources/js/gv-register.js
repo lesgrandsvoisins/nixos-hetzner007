@@ -36,6 +36,11 @@
             "given_name_for_id",
             "firstName"
         ]);
+        const usernameInput = pickField([
+            "user.attributes.username",
+            "username",
+            "uid"
+        ]);
 
         if (!familyInput || !givenInput) return;
 
@@ -60,12 +65,15 @@
         const update = function() {
             const family = normalize(familyInput.value).slice(0, 4);
             const given = normalize(givenInput.value).slice(0, 4);
-            previewValue.textContent = family || given ? family + given + "1@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
+
+            const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
+            previewValue.textContent = suggestedUsername;
+            usernameInput.value = suggestedUsername;
         };
 
         familyInput.addEventListener("input", update);
         givenInput.addEventListener("input", update);
-        document.getElementById("username", update)
+        usernameInput.addEventListener("input", update);
         update();
     }
 

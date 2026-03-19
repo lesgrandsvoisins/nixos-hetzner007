@@ -142,7 +142,7 @@ public final class GvIdentifierFormAction implements FormAction {
             return null;
         }
 
-        for (int counter = 1; counter <= 9999; counter++) {
+        for (int counter = 2; counter <= 9999; counter++) {
             String candidate = base + counter;
             if (containsBlockedSubstring(candidate)) {
                 continue;
