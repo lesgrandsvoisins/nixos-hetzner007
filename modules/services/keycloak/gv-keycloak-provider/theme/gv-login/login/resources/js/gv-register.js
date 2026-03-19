@@ -41,7 +41,7 @@
             "username",
             "uid"
         ]);
-        usernameInput.readOnly = false; /* The end user should increment his or herself */
+        // usernameInput.readOnly = false; /* The end user should increment his or herself */
 
         if (!familyInput || !givenInput) return;
 
@@ -59,8 +59,8 @@
         //     '</p>'
         // ].join("");
 
-        const anchor = usernameInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
-        anchor.parentElement.insertBefore(container, anchor.nextSibling);
+        // const anchor = usernameInput.closest(".pf-v5-c-form__group, .pf-c-form__group") || givenInput.parentElement;
+        // anchor.parentElement.insertBefore(container, anchor.nextSibling);
 
         // const previewValue = container.querySelector("#gv-identifier-preview-value");
         const update = function() {
@@ -75,7 +75,7 @@
 
         familyInput.addEventListener("input", update);
         givenInput.addEventListener("input", update);
-        update();
+        // update();
     }
 
     if (document.readyState === "loading") {
