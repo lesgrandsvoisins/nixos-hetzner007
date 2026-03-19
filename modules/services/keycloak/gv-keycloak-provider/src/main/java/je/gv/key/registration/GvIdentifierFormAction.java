@@ -1,4 +1,4 @@
-package org.lesgrandsvoisins.keycloak.registration;
+package je.gv.key.registration;
 
 import jakarta.ws.rs.core.MultivaluedMap;
 import java.text.Normalizer;

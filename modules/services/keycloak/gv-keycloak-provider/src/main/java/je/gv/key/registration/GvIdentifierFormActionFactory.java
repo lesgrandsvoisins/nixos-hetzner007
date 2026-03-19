@@ -1,4 +1,4 @@
-package org.lesgrandsvoisins.keycloak.registration;
+package je.gv.key.registration;
 
 import java.util.List;
 import org.keycloak.Config;
