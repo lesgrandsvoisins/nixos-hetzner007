@@ -50,7 +50,7 @@ in {
       enable = true;
       package = keycloakWithGv;
       themes = {
-        gv-login = pkgs.callPackage ../../derivations/gv-keycloak-theme/gv-keycloak-theme.nix {};
+        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
       };
       database = {
         username = "keygvje";
