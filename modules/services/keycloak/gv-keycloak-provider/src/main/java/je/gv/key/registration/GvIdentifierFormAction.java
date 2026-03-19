@@ -89,13 +89,10 @@ public final class GvIdentifierFormAction implements FormAction {
 
     @Override
     public void success(FormContext context) {
-        UserModel user = context.getUser();
-        if (user == null) {
-            return;
-        }
+
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
 
-        String identifier = firstNonBlank(field(formData, "gv_generated_identifier"), user.getUsername());
+        String identifier = field(formData, "gv_generated_identifier");
         String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
 
 
@@ -109,7 +106,10 @@ public final class GvIdentifierFormAction implements FormAction {
             field(formData, ATTR_GIVEN_NAME_FOR_ID),
             field(formData, "firstName")
         );
-
+        UserModel user = context.getUser();
+        if (user == null) {
+            return;
+        }
         if (!isBlank(shortUsername)) {
             user.setSingleAttribute("shortUsername",shortUsername.trim());
         }
@@ -123,6 +123,7 @@ public final class GvIdentifierFormAction implements FormAction {
         if (!isBlank(family)) {
             user.setSingleAttribute(ATTR_FAMILY_NAME_FOR_ID, family.trim());
         }
+
     }
 
     @Override
