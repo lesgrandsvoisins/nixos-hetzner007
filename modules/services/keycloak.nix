@@ -42,10 +42,16 @@ in {
     group = "services";
     extraDomainNames = ["admin.key.gv.je"];
   };
+  imports = [
+    ../../derivations/gv-keycloak-theme
+  ];
   services = {
     keycloak = {
       enable = true;
       package = keycloakWithGv;
+      themes = {
+        gv-login = pkgs.callPackage ../../derivations/gv-keycloak-theme/gv-keycloak-theme.nix {};
+      };
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
