@@ -102,7 +102,8 @@ olcObjectClasses: ( 1.3.6.1.4.1.11811.2.2
   DESC 'Additional attributes for inetOrgPerson-based user accounts'
   SUP top
   AUXILIARY
-  MUST ( mainMail ) )
+  MUST ( mainMail ) 
+  MAY (gvMail) )
 
 olcObjectClasses: ( 1.3.6.1.4.1.11811.2.3
   NAME 'gvMailbox'

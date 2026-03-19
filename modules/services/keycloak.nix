@@ -4,8 +4,32 @@
   lib,
   config,
   vars,
+  keycloakWithGv,
   ...
 }: let
+  # 1) Your custom provider/theme jar as a derivation.
+  # Put the jar in your repo, for example:
+  #   ./keycloak/gv-keycloak.jar
+  gvKeycloakProvider = pkgs.stdenvNoCC.mkDerivation {
+    pname = "gv-keycloak-provider";
+    version = "1.0.0";
+
+    src = ./keycloak/gv-keycloak-registration-theme-0.1.0.jar;
+
+    dontUnpack = true;
+
+    installPhase = ''
+      mkdir -p $out
+      cp $src $out/gv-keycloak.jar
+    '';
+  };
+
+  # 2) Keycloak package with the extra provider baked in.
+  keycloakWithGv = pkgs.keycloak.override {
+    plugins =
+      pkgs.keycloak.enabledPlugins
+      ++ [gvKeycloakProvider];
+  };
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
@@ -21,7 +45,7 @@ in {
   services = {
     keycloak = {
       enable = true;
-
+      package = keycloakWithGv;
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
