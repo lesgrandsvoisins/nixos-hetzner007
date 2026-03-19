@@ -67,7 +67,8 @@
             const family = normalize(familyInput.value).slice(0, 4);
             const given = normalize(givenInput.value).slice(0, 4);
 
-            const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
+            // const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
+            const suggestedUsername = family || given ? family + given : "";
             previewValue.textContent = suggestedUsername;
             usernameInput.value = suggestedUsername;
         };
