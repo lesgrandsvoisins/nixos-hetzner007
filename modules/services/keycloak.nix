@@ -58,16 +58,16 @@ in {
     group = "services";
     extraDomainNames = ["admin.key.gv.je"];
   };
-  imports = [
-    ../../derivations/gv-keycloak-theme
-  ];
+  # imports = [
+  #   ../../derivations/gv-keycloak-theme
+  # ];
   services = {
     keycloak = {
       enable = true;
       # package = keycloakWithGv;
-      # themes = {
-      #   gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
-      # };
+      themes = {
+        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+      };
       plugins = [gvKeycloakProvider];
       database = {
         username = "keygvje";
