@@ -30,7 +30,7 @@
     pname = "gv-keycloak-provider";
     version = "0.1.3";
 
-    src = ./keycloak/gv-keyloak-provider/src; # folder next to this .nix file
+    src = ./keycloak/gv-keycloak-provider/src; # folder next to this .nix file
 
     mvnHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
