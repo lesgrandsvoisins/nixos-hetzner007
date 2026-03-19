@@ -14,7 +14,7 @@
     pname = "gv-keycloak-provider";
     version = "1.0.0";
 
-    src = ./keycloak/gv-keycloak-registration-theme-0.1.1.jar;
+    src = ./keycloak/gv-keycloak-theme/gv-keycloak-registration-theme-0.1.2.jar;
 
     dontUnpack = true;
 
