@@ -75,7 +75,6 @@
 
         familyInput.addEventListener("input", update);
         givenInput.addEventListener("input", update);
-        usernameInput.addEventListener("input", update);
         update();
     }
 
