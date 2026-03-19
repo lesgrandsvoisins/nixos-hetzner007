@@ -21,7 +21,9 @@ import org.keycloak.models.utils.FormMessage;
 
 public final class GvIdentifierFormAction implements FormAction {
 
-    private static final String ATTR_GIVEN_NAME_FOR_ID = "given_name_for_id";
+    // private static final String ATTR_GIVEN_NAME_FOR_ID = "given_name_for_id";
+    // private static final String ATTR_FAMILY_NAME_FOR_ID = "family_name_for_id";    
+    private static final String ATTR_GIVEN_NAME_FOR_ID = "firstName";
     private static final String ATTR_FAMILY_NAME_FOR_ID = "family_name_for_id";
     private static final int NAME_SLICE = 4;
     private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
