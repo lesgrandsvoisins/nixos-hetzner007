@@ -28,7 +28,7 @@
   # };
   gvKeycloakProvider = pkgs.maven.buildMavenPackage {
     pname = "gv-keycloak-provider";
-    version = "0.1.5";
+    version = "0.1.6";
 
     src = ./keycloak/gv-keycloak-provider; # folder next to this .nix file
 
