@@ -10,25 +10,36 @@
   # 1) Your custom provider/theme jar as a derivation.
   # Put the jar in your repo, for example:
   #   ./keycloak/gv-keycloak.jar
-  gvKeycloakProvider = pkgs.stdenvNoCC.mkDerivation {
+  # gvKeycloakProvider = pkgs.stdenvNoCC.mkDerivation {
+  #   pname = "gv-keycloak-provider";
+  #   version = "1.0.0";
+  #   src = ./keycloak/gv-keycloak-theme/gv-keycloak-registration-theme-0.1.2.jar;
+  #   dontUnpack = true;
+  #   installPhase = ''
+  #     mkdir -p $out
+  #     cp $src $out/gv-keycloak.jar
+  #   '';
+  # };
+  # # 2) Keycloak package with the extra provider baked in.
+  # keycloakWithGv = pkgs.keycloak.override {
+  #   plugins =
+  #     pkgs.keycloak.enabledPlugins
+  #     ++ [gvKeycloakProvider];
+  # };
+  gvKeycloakProvider = pkgs.maven.buildMavenPackage {
     pname = "gv-keycloak-provider";
-    version = "1.0.0";
+    version = "0.1.3";
 
-    src = ./keycloak/gv-keycloak-theme/gv-keycloak-registration-theme-0.1.2.jar;
+    src = ./keycloak/gv-keyloak-provider/src; # folder next to this .nix file
 
-    dontUnpack = true;
+    mvnHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
     installPhase = ''
+      runHook preInstall
       mkdir -p $out
-      cp $src $out/gv-keycloak.jar
+      cp target/*.jar $out/
+      runHook postInstall
     '';
-  };
-
-  # 2) Keycloak package with the extra provider baked in.
-  keycloakWithGv = pkgs.keycloak.override {
-    plugins =
-      pkgs.keycloak.enabledPlugins
-      ++ [gvKeycloakProvider];
   };
 in {
   users.users.keycloak = {
@@ -48,7 +59,7 @@ in {
   services = {
     keycloak = {
       enable = true;
-      package = keycloakWithGv;
+      # package = keycloakWithGv;
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
       };
@@ -75,6 +86,7 @@ in {
         # hostname-admin = "https://admin.key.gv.je";
         # db-url-port = lib.mkForce vars.ports.postgresql;
         # db-url = lib.mkForce "postgresql:///dbname?host=/var/lib/postgresql?port=${builtins.toString vars.ports.postgresql}";
+        "spi-gv-provider" = "gv-keycloak-provider";
       };
       sslCertificate = "/var/lib/acme/key.gv.je/fullchain.pem";
       sslCertificateKey = "/var/lib/acme/key.gv.je/key.pem";
