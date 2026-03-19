@@ -82,7 +82,8 @@ public final class GvIdentifierFormAction implements FormAction {
         }
 
         // Keep the generated username around for the success() phase and for optional template preview.
-        formData.putSingle("gv_generated_identifier", identifier);
+        formData.putSingle("username", identifier);
+        
         context.success();
     }
 
@@ -94,7 +95,7 @@ public final class GvIdentifierFormAction implements FormAction {
         }
 
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
-        String identifier = firstNonBlank(field(formData, "gv_generated_identifier"), user.getUsername());
+        String identifier = firstNonBlank(field(formData, "username"), user.getUsername());
 
         String family = firstNonBlank(
             field(formData, "user.attributes." + ATTR_FAMILY_NAME_FOR_ID),
