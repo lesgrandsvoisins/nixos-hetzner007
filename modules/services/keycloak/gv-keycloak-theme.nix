@@ -1,7 +1,7 @@
 {stdenv}:
 stdenv.mkDerivation rec {
   name = "gv-keycloak-theme";
-  version = "0.1.12";
+  version = "0.1.13";
 
   src = ./gv-keycloak-provider/theme/gv-login;
 
