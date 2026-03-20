@@ -41,9 +41,9 @@
             "username",
             "uid"
         ]);
-        usernameInput.tabIndex = 100;
-        usernameInput.readOnly = true; /* The end user should increment his or herself */
-        usernameInput.style = "color:var(--pf-v5-c-form__label--m-disabled--Color);font-weight:bold;";
+        // usernameInput.tabIndex = 100;
+        // usernameInput.readOnly = true; /* The end user should increment his or herself */
+        // usernameInput.style = "color:var(--pf-v5-c-form__label--m-disabled--Color);font-weight:bold;";
 
         if (!familyInput || !givenInput) return;
 
