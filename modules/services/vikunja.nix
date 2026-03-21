@@ -69,10 +69,10 @@ in {
         # openid.redirecturl = "https://vikunja.village.ngo/auth/openid/";
         # openid.redirecturl = "https://vikunja.gv.coop/auth/openid/";
         # openid.redirecturl = "https://task.gv.je/auth/openid/";
-        openid.providers = [
-          # keycloak = {
-          {
-            name = "gv";
+        openid.providers = {
+          key = {
+          # {
+            name = "key.gv.je";
             authurl = "https://key.gv.je/realms/master";
             lougouturl = "https://key.gv.je/realms/master/protocol/openid-connect/logout";
             clientid = "vikunja";
@@ -119,7 +119,7 @@ in {
           #   # clientsecret.file = config.age.secrets."keycloak.vikunja".path;
           #   # clientsecret = keycloakVikunja;
           # }
-        ];
+        };
       };
     };
   };

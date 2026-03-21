@@ -16,3 +16,6 @@ check:
 garbage-collect:
 	nix-collect-garbage --delete-older-than 7d
 	nix-store --gc
+
+flake-update:
+	nix flake update
