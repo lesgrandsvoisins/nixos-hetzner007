@@ -18,6 +18,10 @@ in {
     ./users.nix
   ];
 
+  # https://discourse.nixos.org/t/machine-shell-connection-to-the-local-host-terminated/75816/3
+  # Temporary Workaround
+  security.pam.services.login.updateWtmp = lib.mkForce false;
+
   environment.systemPackages = [
     unstable.nodejs_25
     (unstable.pnpm_10.override {nodejs = unstable.nodejs_25;})
