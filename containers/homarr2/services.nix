@@ -7,6 +7,7 @@
 }: let
   vars = import ../../vars.nix;
 in {
+  boot.isNspawnContainer = true;
   services = {
     redis.servers.homarr.enable = true;
     postgresql = {
