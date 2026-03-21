@@ -21,8 +21,8 @@ in {
         node apps/tasks/tasks.cjs
       '';
       path = with pkgs; [
-        nodejs_24
-        (pnpm_9.override {nodejs = nodejs_24;})
+        nodejs_25
+        (pnpm_10.override {nodejs = nodejs_25;})
         pnpmConfigHook
       ];
       serviceConfig = {
@@ -46,8 +46,8 @@ in {
       };
       requires = ["homarr-tasks.service"];
       path = with pkgs; [
-        nodejs_24
-        (pnpm_9.override {nodejs = nodejs_24;})
+        nodejs_25
+        (pnpm_10.override {nodejs = nodejs_25;})
         pnpmConfigHook
       ];
       serviceConfig = {
@@ -82,8 +82,8 @@ in {
       # environment = "/etc/homarr/homarr.env";
       # script = "/home/homarr/homarr/start.sh";
       path = with pkgs; [
-        nodejs_24
-        (pnpm_9.override {nodejs = nodejs_24;})
+        nodejs_25
+        (pnpm_10.override {nodejs = nodejs_25;})
         pnpmConfigHook
       ];
 
