@@ -19,3 +19,4 @@ garbage-collect:
 
 flake-update:
 	nix flake update
+	make -C ./containers/homarr flake-update

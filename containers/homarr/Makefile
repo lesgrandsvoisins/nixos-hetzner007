@@ -3,3 +3,6 @@ update:
 
 check:
 	nix flake check
+
+flake-update:
+	nix flake update
