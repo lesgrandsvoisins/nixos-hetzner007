@@ -36,9 +36,17 @@
   };
 
   fileSystems."/srv" = {
-    device = "/dev/md0";
+    # device = "/dev/md127";
+    device = "UUID=3f2f16ce-f0a4-4b24-8606-dea5614c65f6";
     fsType = "ext4";
-    enable = false;
+    enable = true;
+    depends = ["/srv"];
+    mountPoint = "/srv";
+    options = [
+      "defaults"
+      "nofail"
+    ];
+    neededForBoot = false;
   };
 
   swapDevices = [

@@ -21,5 +21,9 @@ in {
         "homarr"
       ];
     };
+    postgresqlBackup = {
+      enable = true;
+      backupAll = true;
+    };
   };
 }
