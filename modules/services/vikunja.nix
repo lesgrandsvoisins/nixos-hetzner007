@@ -71,7 +71,7 @@ in {
         # openid.redirecturl = "https://task.gv.je/auth/openid/";
         openid.providers = {
           key = {
-          # {
+            # {
             name = "key.gv.je";
             authurl = "https://key.gv.je/realms/master";
             lougouturl = "https://key.gv.je/realms/master/protocol/openid-connect/logout";
@@ -83,7 +83,7 @@ in {
             # emailfallback = true;
             # forceuserinfo = false;
             scope = "openid profile email";
-          }
+          };
           # keycloakGDVoisins = {
           #   name = "keycloakGDVoisins";
 
