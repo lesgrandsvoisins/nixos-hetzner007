@@ -15,4 +15,5 @@ in {
   };
   users.groups.users.gid = vars.gid.users;
   users.groups.caddy.gid = vars.gid.caddy;
+  users.groups.services.gid = vars.gid.services;
 }

@@ -44,6 +44,33 @@
           ];
 
           system.stateVersion = "25.11";
+          console.enable = true;
+
+          systemd.tmpfiles.rules = [
+            "d /etc/homarr2 0755 homarr services"
+          ];
+          networking = {
+            hostName = vars.containers.homarr2.network.hostName;
+            domain = vars.containers.homarr2.network.domain;
+            hosts = {
+              "${vars.containers.homarr2.network.ipv6.local}" = [vars.containers.homarr2.network.domain];
+            };
+            useHostResolvConf = false;
+            interfaces."eth0".useDHCP = true;
+            firewall = {
+              enable = true;
+              allowedTCPPorts = [
+                80
+                443
+              ];
+            };
+          };
+
+          services = {
+            resolved = {
+              enable = true;
+            };
+          };
         })
       ];
     };

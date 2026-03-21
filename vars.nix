@@ -55,6 +55,22 @@
       ipv6 = "fa13::101";
     };
   };
+  containers = {
+    homarr2 = {
+      network = {
+        ipv4 = {
+          host = "10.0.14.100";
+          local = "10.0.14.101";
+        };
+        ipv6 = {
+          host = "fa14::100";
+          local = "fa14::101";
+        };
+        hostName = "homarr2";
+        domain = "homarr2.lan";
+      };
+    };
+  };
   dirs = {
     sftpgo-users = "/srv/sftpgo/users";
   };
