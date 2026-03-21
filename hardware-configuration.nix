@@ -38,6 +38,7 @@
   fileSystems."/srv" = {
     device = "/dev/md0";
     fsType = "ext4";
+    enable = false;
   };
 
   swapDevices = [
