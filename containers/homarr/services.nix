@@ -9,17 +9,17 @@
 in {
   services = {
     redis.servers.homarr.enable = true;
-    postgresql = {
-      enable = true;
-      ensureUsers = [
-        {
-          name = "homarr";
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [
-        "homarr"
-      ];
-    };
+    # postgresql = {
+    #   enable = true;
+    #   ensureUsers = [
+    #     {
+    #       name = "homarr";
+    #       ensureDBOwnership = true;
+    #     }
+    #   ];
+    #   ensureDatabases = [
+    #     "homarr"
+    #   ];
+    # };
   };
 }
