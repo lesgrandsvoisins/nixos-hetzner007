@@ -14,6 +14,6 @@ in {
     bindMounts = {
     };
     autoStart = true;
-    flake = "file:///home/mannchri/nixos-hetzner007/containers/homarr2.tgz";
+    flake = "file://./homarr2.tgz";
   };
 }
