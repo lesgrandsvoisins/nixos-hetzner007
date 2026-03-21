@@ -44,7 +44,7 @@ in {
     # group = "services";
     package = pkgs.caddy.withPlugins {
       plugins = ["github.com/greenpau/caddy-security@v1.1.31"];
-      hash = "sha256-aM5UdzmqOwGcdQUzDAEEP30CC1W2UPD10QhF0i7GwQE=";
+      hash = "sha256-6nGON4KkUaqrWsKepVRcI3g80LxYGQVYs25kD4U8l74=";
     };
 
     environmentFile = "/etc/caddy/caddy.env";
