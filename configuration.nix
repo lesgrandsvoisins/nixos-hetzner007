@@ -36,6 +36,11 @@ in {
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
+  # Not sure aboute the following
+  # https://discourse.nixos.org/t/a-start-job-is-runnning-for-dev-tpmr0/56089
+  # systemd.tpm2.enable = false;
+  # boot.initrd.systemd.tpm2.enable = false;
+
   boot.swraid.mdadmConf = ''
     MAILADDR chris@lesgrandsvoisins.com
   '';

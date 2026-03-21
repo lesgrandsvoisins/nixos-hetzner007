@@ -4,8 +4,7 @@
   lib,
   vars,
   ...
-}:
-let
+}: let
   vars = import ../vars.nix;
   # external-mac = "90:1b:0e:9e:ec:37";
   # ext-if = "enx901b0e9eec37";
@@ -18,8 +17,7 @@ let
   # external-ip6 = "2a01:4f8:a0:73ba::";
   # external-gw6 = "fe80::1";
   # external-netmask6 = "64";
-in
-{
+in {
   imports = [
     ./networking/firewall.nix
   ];
@@ -30,7 +28,7 @@ in
     hostName = "hetzner007";
     domain = "hetzner007.gdvoisins.org";
     hosts = {
-      "fa01::2" = [ "keycloak.local" ];
+      "fa01::2" = ["keycloak.local"];
     };
     useNetworkd = true;
     enableIPv6 = true;
@@ -39,8 +37,6 @@ in
     #     interfaces = ["${vars.hetzner.interface}" ];
     #   };
     # };
-
-
 
     defaultGateway6 = {
       address = "fe80::1"; # fe80::4f9:2bff:fe32:2571
@@ -51,57 +47,57 @@ in
     #   useDHCP = true;
     # };
     # interfaces."br0" = {
-    interfaces."${vars.hetzner.interface}" = {
-      useDHCP = true;
-      ipv6 = {
-        addresses = [
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 0).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 0).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 1).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 1).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 2).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 2).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 3).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 3).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 4).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 4).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 5).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 5).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 6).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 6).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 7).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 7).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 8).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 8).netmask;
-          }
-          {
-            address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
-            prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
-          }
-        ];
-      };
-    };
+    # interfaces."${vars.hetzner.interface}" = {
+    #   useDHCP = true;
+    # ipv6 = {
+    #   addresses = [
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 0).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 0).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 1).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 1).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 2).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 2).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 3).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 3).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 4).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 4).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 5).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 5).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 6).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 6).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 7).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 7).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 8).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 8).netmask;
+    #     }
+    #     {
+    #       address = (builtins.elemAt vars.hetzner.ipv6 9).addr;
+    #       prefixLength = (builtins.elemAt vars.hetzner.ipv6 9).netmask;
+    #     }
+    #   ];
+    # };
+    # };
 
     nat = {
       enable = true;
-      internalInterfaces = [ "ve-*" ];
+      internalInterfaces = ["ve-*"];
       # internalInterfaces = ["ve-*" "br0"];
       # externalInterface = "br0";
       externalInterface = "${vars.hetzner.interface}";
