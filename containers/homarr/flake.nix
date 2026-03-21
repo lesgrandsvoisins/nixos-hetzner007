@@ -1,6 +1,6 @@
 {
-  # inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
-  inputs.nixpkgs.url = "nixpkgs/nixos-25.11";
+  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
+  # inputs.nixpkgs.url = "nixpkgs/nixos-25.11";
 
   outputs = {
     self,
