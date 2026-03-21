@@ -14,6 +14,6 @@ in {
     bindMounts = {
     };
     autoStart = true;
-    flake = "path:/home/mannchri/hetzner007-nixos/containers/homarr2";
+    flake = "path:homarr2";
   };
 }
