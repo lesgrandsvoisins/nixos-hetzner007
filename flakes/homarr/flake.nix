@@ -2,8 +2,8 @@
   description = "Homarr Dashboard";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -17,7 +17,7 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
         nodejs = pkgs.nodejs_24;
-        pnpm = pkgs.pnpm_9.override {nodejs = nodejs;};
+        pnpm = pkgs.pnpm_10.override {nodejs = nodejs;};
         fetchPnpmDeps = pkgs.fetchPnpmDeps;
         stdenv = pkgs.stdenv;
         pnpmConfigHook = pkgs.pnpmConfigHook;
@@ -25,7 +25,7 @@
       in {
         packages.default = stdenv.mkDerivation (finalAttrs: {
           pname = "homarr";
-          version = "1.48.0";
+          version = "1.56.1";
 
           src = pkgs.fetchFromGitHub {
             owner = "homarr-labs";
