@@ -1,5 +1,5 @@
 update:
-	sudo nixos-container update homarr --flake .
+	sudo nixos-container update homarr2 --flake .
 
 check:
 	nix flake check
