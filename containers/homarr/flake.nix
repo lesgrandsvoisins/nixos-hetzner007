@@ -1,6 +1,5 @@
 {
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
-  # inputs.nixpkgs.url = "nixpkgs/nixos-25.11";
 
   outputs = {
     self,
@@ -38,8 +37,8 @@
             ./users.nix
           ];
           environment.systemPackages = [
-            pkgs.nodejs_24
-            (pkgs.pnpm_9.override {nodejs = pkgs.nodejs_24;})
+            pkgs.nodejs_25
+            (pkgs.pnpm_10.override {nodejs = pkgs.nodejs_25;})
             pkgs.pnpmConfigHook
             # homarr
           ];

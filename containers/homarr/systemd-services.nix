@@ -6,7 +6,7 @@
   # vars,
   ...
 }: let
-  unstable = import <nixpkgs-unstable>;
+  # unstable = import <nixpkgs-unstable>;
   vars = import ../../vars.nix;
 in {
   systemd.services = {
