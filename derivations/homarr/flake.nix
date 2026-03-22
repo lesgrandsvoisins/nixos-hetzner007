@@ -62,6 +62,11 @@
       ...
     }: let
       cfg = config.services.homarr;
+      yaml = pkgs.formats.yaml {};
+      configFile =
+        if cfg.settings != {}
+        then yaml.generate "homarr-config.yaml" cfg.settings
+        else cfg.settingsFile;
     in {
       options.services.homarr = {
         enable = lib.mkEnableOption "Homarr";
@@ -79,9 +84,21 @@
           description = "User account under which Homarr runs.";
         };
 
+        settings = lib.mkOption {
+          type = lib.types.attrs;
+          default = {};
+          description = "Homarr configuration as an attribute set (converted to YAML).";
+        };
+
+        settingsFile = lib.mkOption {
+          type = lib.types.nullOr lib.types.path;
+          default = "/etc/homarr/config.yaml";
+          description = "Path to Homarr YAML config file.";
+        };
+
         group = lib.mkOption {
           type = lib.types.str;
-          default = "homarr";
+          default = "services";
           description = "Group under which Homarr runs.";
         };
 
@@ -128,17 +145,19 @@
         };
       };
 
-      settingsFormat = pkgs.formats.json {};
+      # settingsFormat = pkgs.formats.json {};
 
       # configFile = pkgs.writeTextDir "package.yaml" ''
       #   Yoohoo
       # '';
-      configFileFormatted = pkgs.runCommand "configFileFormatted" {} ''
-        mkdir -p $out
-        cp --no-preserve=mode ${cfg.package}/app/homarr.env $out/homarr.env
-      '';
+      # configFile = pkgs.runCommand "configFileFormatted" {} ''
+      #   mkdir -p $out
+      #   cp --no-preserve=mode ${cfg.package}/app/homarr.env $out/homarr.env
+      # '';
 
       config = lib.mkIf cfg.enable {
+        # configFile = "${cfg.package}/app/homarr.env";
+
         users.users = lib.mkIf (cfg.user == "homarr") {
           homarr = {
             isSystemUser = true;
@@ -182,6 +201,7 @@
             StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
             CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
             EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
+            settingsFile = "/etc/homarr/config.yaml";
             ExecStart = "${cfg.package}/nodejs/bin/node ${cfg.package}/share/homarr/apps/tasks/tasks.cjs";
             Restart = "on-failure";
             RestartSec = 5;

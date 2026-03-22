@@ -104,6 +104,9 @@
             port = 7575;
             host = "0.0.0.0";
             environmentFile = "/etc/homarr/homarr.env";
+            settings = {
+              test = true;
+            };
           };
 
           system.stateVersion = "25.11";

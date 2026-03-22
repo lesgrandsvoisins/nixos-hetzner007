@@ -10,7 +10,7 @@ in {
   users.users.homarr = {
     # isNormalUser = true;
     uid = vars.uid.homarr;
-    # group = "users";
+    # group = "services";
     extraGroups = ["caddy"];
   };
   users.groups.users.gid = vars.gid.users;
