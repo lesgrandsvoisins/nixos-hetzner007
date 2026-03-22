@@ -123,7 +123,8 @@
             };
           };
           systemd.tmpfiles.rules = [
-            "d /etc/homarr2 0755 homarr services"
+            "d /etc/homarr 0755 homarr services"
+            "f /etc/homarr/homarr.env 0755 homarr services"
           ];
           networking = {
             hostName = vars.containers.homarr2.network.hostName;

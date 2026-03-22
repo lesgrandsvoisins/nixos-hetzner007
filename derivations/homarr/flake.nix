@@ -128,6 +128,16 @@
         };
       };
 
+      settingsFormat = pkgs.formats.json {};
+
+      # configFile = pkgs.writeTextDir "package.yaml" ''
+      #   Yoohoo
+      # '';
+      configFileFormatted = pkgs.runCommand "configFileFormatted" {} ''
+        mkdir -p $out
+        cp --no-preserve=mode ${cfg.package}/app/homarr.env $out/homarr.env
+      '';
+
       config = lib.mkIf cfg.enable {
         users.users = lib.mkIf (cfg.user == "homarr") {
           homarr = {
@@ -138,8 +148,8 @@
           };
         };
 
-        users.groups = lib.mkIf (cfg.group == "homarr") {
-          homarr = {};
+        users.groups = lib.mkIf (cfg.group == "services") {
+          services = {};
         };
 
         systemd.tmpfiles.rules = [
@@ -151,14 +161,14 @@
         networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [cfg.port];
 
         systemd.services.homarr-tasks = {
-          description = "Homarr Dashboard";
+          description = "Homarr Tasks";
           after = ["network.target"];
           wantedBy = ["multi-user.target"];
 
           environment =
             {
-              HOSTNAME = cfg.host;
-              PORT = toString cfg.port;
+              # HOSTNAME = cfg.host;
+              # PORT = toString cfg.port;
               NODE_ENV = "production";
               NIXPKGS_HOMARR_CACHE_DIR = toString cfg.cacheDir;
             }
@@ -178,14 +188,14 @@
           };
         };
         systemd.services.homarr-websocket = {
-          description = "Homarr Dashboard";
+          description = "Homarr Websocket";
           after = ["network.target"];
           wantedBy = ["multi-user.target"];
 
           environment =
             {
-              HOSTNAME = cfg.host;
-              PORT = toString cfg.port;
+              # HOSTNAME = cfg.host;
+              # PORT = toString cfg.port;
               NODE_ENV = "production";
               NIXPKGS_HOMARR_CACHE_DIR = toString cfg.cacheDir;
             }
@@ -205,14 +215,14 @@
           };
         };
         systemd.services.homarr-nextjs = {
-          description = "Homarr Dashboard";
+          description = "Homarr Dashboard via NexJS";
           after = ["network.target"];
           wantedBy = ["multi-user.target"];
 
           environment =
             {
-              HOSTNAME = cfg.host;
-              PORT = toString cfg.port;
+              # HOSTNAME = cfg.host;
+              # PORT = toString cfg.port;
               NODE_ENV = "production";
               NIXPKGS_HOMARR_CACHE_DIR = toString cfg.cacheDir;
             }

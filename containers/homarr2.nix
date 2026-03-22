@@ -12,12 +12,13 @@
 in {
   systemd.tmpfiles.rules = [
     "d /etc/homarr2 0755 homarr services"
+    "f /etc/homarr2/homarr.env 0755 homarr services"
   ];
   containers.homarr2 = {
     bindMounts = {
-      "/etc/homarr2" = {
+      "/etc/homarr" = {
         hostPath = "/etc/homarr2";
-        isReadOnly = true;
+        isReadOnly = false;
       };
     };
     autoStart = true;
