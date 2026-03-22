@@ -22,11 +22,6 @@ in
     pname = "homarr";
     version = "1.56.1";
 
-    outputs = [
-      "out"
-      # "man"
-    ];
-
     src = fetchFromGitHub {
       owner = "homarr-labs";
       repo = "homarr";
@@ -53,7 +48,7 @@ in
 
     buildInputs = [
       gnused
-      pkgs.openssl
+      unstable.openssl
     ];
 
     preBuild = ''

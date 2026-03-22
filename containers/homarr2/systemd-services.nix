@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable,
   lib,
   config,
   # unstable,
@@ -8,11 +9,26 @@
 }: let
   # unstable = import <nixpkgs-unstable>;
   vars = import ../../vars.nix;
+  # homarr = pkgs.callPackage ../../derivations/homarr/package.nix;
 in {
+  # environment.systemPackages = [homarr];
   systemd.services = {
-    homarr-tasks = {
+    homarr-setup = {
       enable = true;
       wantedBy = ["multi-user.target"];
+      unitConfig = {
+        Type = "oneshot";
+      };
+      serviceConfig = {
+        User = "homarr";
+        Group = "services";
+      };
+      script = "${homarr}/bin/install.sh";
+    };
+    homarr-tasks = {
+      enable = false;
+      wantedBy = ["multi-user.target"];
+      wants = ["homarr-setup.service"];
       unitConfig = {
         Type = "simple";
         # ...
@@ -20,11 +36,11 @@ in {
       script = ''
         node apps/tasks/tasks.cjs
       '';
-      path = with pkgs; [
-        nodejs_25
-        (pnpm_10.override {nodejs = nodejs_25;})
-        pnpmConfigHook
-      ];
+      # path = with pkgs; [
+      #   nodejs_25
+      #   (pnpm.override {nodejs = nodejs_25;})
+      #   pnpmConfigHook
+      # ];
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr/";
         User = "homarr";
@@ -35,8 +51,9 @@ in {
       };
     };
     homarr-websocket = {
-      enable = true;
+      enable = false;
       wantedBy = ["multi-user.target"];
+      wants = ["homarr-setup.service"];
       script = ''
         node apps/websocket/wssServer.cjs
       '';
@@ -45,11 +62,11 @@ in {
         # ...
       };
       requires = ["homarr-tasks.service"];
-      path = with pkgs; [
-        nodejs_25
-        (pnpm_10.override {nodejs = nodejs_25;})
-        pnpmConfigHook
-      ];
+      # path = with pkgs; [
+      #   nodejs_25
+      #   (pnpm.override {nodejs = nodejs_25;})
+      #   pnpmConfigHook
+      # ];
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr/";
         User = "homarr";
@@ -60,13 +77,14 @@ in {
       };
     };
     homarr-nextjs = {
-      enable = true;
+      enable = false;
       requires = ["homarr-websocket.service"];
       unitConfig = {
         Type = "simple";
         # ...
       };
       wantedBy = ["multi-user.target"];
+      wants = ["homarr-setup.service"];
       description = "Système de tableaux de bords Homarr";
       # script = "/home/homarr/homarr/start.sh";
       # script = ''
@@ -81,11 +99,11 @@ in {
       '';
       # environment = "/etc/homarr/homarr.env";
       # script = "/home/homarr/homarr/start.sh";
-      path = with pkgs; [
-        nodejs_25
-        (pnpm_10.override {nodejs = nodejs_25;})
-        pnpmConfigHook
-      ];
+      # path = with pkgs; [
+      #   nodejs_25
+      #   (pnpm.override {nodejs = nodejs_25;})
+      #   pnpmConfigHook
+      # ];
 
       serviceConfig = {
         WorkingDirectory = "/home/homarr/homarr/";

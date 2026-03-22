@@ -1,12 +1,30 @@
 {
-  inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+  };
 
-  outputs = {
-    self,
+  # outputs = {
+  #   self,
+  #   nixpkgs,
+  #   nixpkgs-unstable,
+  #   unstable-packages,
+  #   ...
+  outputs = inputs @ {
     nixpkgs,
+    nixpkgs-unstable,
+    ...
   }: let
     vars = import ../../vars.nix;
-    # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     nixosConfigurations.container = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -19,7 +37,8 @@
           # vars,
           ...
         }: let
-          # vars = import ../../vars.nix;
+          vars = import ../../vars.nix;
+          # homarr = homarr;
           # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
         in {
           boot.isContainer = true;
@@ -29,17 +48,37 @@
           # networking.hostname = "homarr";
 
           nix.settings.experimental-features = ["nix-command flakes"];
+
           imports = [
-            ../../modules/packages/vim.nix
-            ../../modules/packages/common.nix
+            # ../../modules/packages/vim.nix
+            # ../../modules/packages/common.nix
             ./services.nix
-            ./systemd-services.nix
+            # ./systemd-services.nix
             ./users.nix
           ];
           environment.systemPackages = [
-            pkgs.nodejs_25
-            (pkgs.pnpm_10.override {nodejs = pkgs.nodejs_25;})
-            pkgs.pnpmConfigHook
+            # (import ../../derivations/homarr/package.nix)
+            (import ../../derivations/homarr/package.nix {
+              unstable = unstable;
+              pkgs = pkgs;
+              fetchFromGitHub = pkgs.fetchFromGitHub;
+              nodePackages = pkgs.nodePackages;
+              makeWrapper = pkgs.makeWrapper;
+              nodejs = pkgs.nodejs_24;
+              pnpm = unstable.pnpm.override {nodejs = pkgs.nodejs_24;};
+              fetchPnpmDeps = pkgs.fetchPnpmDeps;
+              pnpmConfigHook = pkgs.pnpmConfigHook;
+              python3 = pkgs.python3;
+              stdenv = pkgs.stdenv;
+              unixtools = pkgs.unixtools;
+              cctools = pkgs.cctools;
+              lib = pkgs.lib;
+              nixosTests = pkgs.nixosTests;
+              gnused = pkgs.gnused;
+            })
+            # pkgs.nodejs_25
+            # (pkgs.pnpm.override {nodejs = pkgs.nodejs_25;})
+            # pkgs.pnpmConfigHook
             # homarr
           ];
 

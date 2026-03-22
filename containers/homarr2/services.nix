@@ -6,8 +6,10 @@
   ...
 }: let
   vars = import ../../vars.nix;
+  # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
 in {
   boot.isNspawnContainer = true;
+  # environment.systemPackages = [homarr];
   services = {
     redis.servers.homarr.enable = true;
     postgresql = {
