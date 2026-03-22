@@ -1,22 +1,36 @@
 {
   pkgs ? import <nixpkgs> {},
   unstable ? import <nixpkgs-unstable> {config = {allowUnfree = true;};},
-  fetchFromGitHub ? pkgs.fetchFromGitHub,
-  nodePackages ? pkgs.nodePackages,
-  makeWrapper ? pkgs.makeWrapper,
-  nodejs ? pkgs.nodejs_24,
-  pnpm ? unstable.pnpm.override {nodejs = nodejs;},
-  fetchPnpmDeps ? pkgs.fetchPnpmDeps,
-  pnpmConfigHook ? pkgs.pnpmConfigHook,
-  python3 ? pkgs.python3,
-  stdenv ? pkgs.stdenv,
-  unixtools ? pkgs.unixtools,
-  cctools ? pkgs.cctools,
-  lib ? pkgs.lib,
-  nixosTests ? pkgs.nixosTests,
-  gnused ? pkgs.gnused,
+  # fetchFromGitHub ? pkgs.fetchFromGitHub,
+  # nodePackages ? pkgs.nodePackages,
+  # makeWrapper ? pkgs.makeWrapper,
+  # nodejs ? pkgs.nodejs_24,
+  # pnpm ? unstable.pnpm.override {nodejs = nodejs;},
+  # fetchPnpmDeps ? pkgs.fetchPnpmDeps,
+  # pnpmConfigHook ? pkgs.pnpmConfigHook,
+  # python3 ? pkgs.python3,
+  # stdenv ? pkgs.stdenv,
+  # unixtools ? pkgs.unixtools,
+  # cctools ? pkgs.cctools,
+  # lib ? pkgs.lib,
+  # nixosTests ? pkgs.nixosTests,
+  # gnused ? pkgs.gnused,
 }: let
   homarrAssets = ./assets;
+  fetchFromGitHub = pkgs.fetchFromGitHub;
+  nodePackages = pkgs.nodePackages;
+  makeWrapper = pkgs.makeWrapper;
+  nodejs = pkgs.nodejs_24;
+  pnpm = unstable.pnpm.override {nodejs = nodejs;};
+  fetchPnpmDeps = pkgs.fetchPnpmDeps;
+  pnpmConfigHook = pkgs.pnpmConfigHook;
+  python3 = pkgs.python3;
+  # stdenv = pkgs.stdenv;
+  unixtools = pkgs.unixtools;
+  cctools = pkgs.cctools;
+  lib = pkgs.lib;
+  nixosTests = pkgs.nixosTests;
+  gnused = pkgs.gnused;
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "homarr";
