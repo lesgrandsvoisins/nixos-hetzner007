@@ -15,8 +15,8 @@
     systems = [
       "x86_64-linux"
       "aarch64-linux"
-      "x86_64-darwin"
-      "aarch64-darwin"
+      # "x86_64-darwin"
+      # "aarch64-darwin"
     ];
 
     forAllSystems = f:
@@ -47,6 +47,7 @@
       nodejs = pkgs.unstable.nodejs_25;
       pnpm = pkgs.unstable.pnpm.override {inherit nodejs;};
       homarrAssets = ./assets;
+      unstable = pkgs.unstable;
     in
       stdenv.mkDerivation (finalAttrs: {
         pname = "homarr";
@@ -157,17 +158,23 @@
       config,
       lib,
       pkgs,
+      # unstable,
       ...
     }: let
       cfg = config.services.homarr;
+      unstable = import nixpkgs-unstable {
+        # inherit system;
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
     in {
       options.services.homarr = {
         enable = lib.mkEnableOption "Homarr";
 
         package = lib.mkOption {
           type = lib.types.package;
-          default = self.packages.${pkgs.system}.homarr;
-          defaultText = lib.literalExpression "self.packages.\${pkgs.system}.homarr";
+          default = self.packages.${pkgs.pkgs.stdenv.hostPlatform.system}.homarr;
+          defaultText = lib.literalExpression "self.packages.\${pkgs.stdenv.hostPlatform.system}.homarr";
           description = "The Homarr package to use.";
         };
 
@@ -270,7 +277,7 @@
             StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
             CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
             EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
-            ExecStart = "${pkgs.unstable.nodejs_25}/bin/node ${cfg.package}/share/homarr/apps/nextjs/server.js";
+            # ExecStart = "${unstable.nodejs_25}/bin/node ${cfg.package}/share/homarr/apps/nextjs/server.js";
             Restart = "on-failure";
             RestartSec = 5;
           };

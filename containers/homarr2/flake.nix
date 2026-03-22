@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    homarr.url = "path:/work/mannchri/git/hetzner007/derivations/homarr";
+    homarr-flake.url = "path:../../derivations/homarr";
   };
 
   # outputs = {
@@ -14,7 +14,7 @@
   outputs = inputs @ {
     nixpkgs,
     nixpkgs-unstable,
-    homarr,
+    homarr-flake,
     ...
   }: let
     vars = import ../../vars.nix;
@@ -31,6 +31,8 @@
           ...
         }: let
           # homarr = import homarr {inherit system;};
+          # homarr-package = import homarr-flake.packages.${system}.homarr;
+          # homarr-module = import homarr-flake.nixosModules.${system}.homarr;
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
@@ -40,7 +42,7 @@
                   inherit system;
                   config.allowUnfree = true;
                 };
-                homarr = homarr;
+                # homarr = homarr;
                 # homarr = import homarr {
                 #   inherit system;
                 # };
@@ -85,11 +87,22 @@
             ./services.nix
             ./systemd-services.nix
             ./users.nix
+            homarr-flake.nixosModules.default
           ];
           environment.systemPackages = [
-            pkgs.homarr
+            # pkgs.homarr
             # homarr
+            # homarr-pkgs.homarr
+            # homarr-package
           ];
+
+          services.homarr = {
+            enable = true;
+            openFirewall = true;
+            port = 7575;
+            host = "0.0.0.0";
+            environmentFile = "/etc/homarr/homarr.env";
+          };
 
           system.stateVersion = "25.11";
           console.enable = true;
@@ -104,7 +117,7 @@
                 User = "homarr";
                 Group = "services";
               };
-              script = "${pkgs.homarr}/bin/install.sh";
+              # script = "${homarr-flake.packages.homarr}/bin/install.sh";
             };
           };
           systemd.tmpfiles.rules = [

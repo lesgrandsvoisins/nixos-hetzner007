@@ -8,9 +8,9 @@
   vars = import ../../vars.nix;
 in {
   users.users.homarr = {
-    isNormalUser = true;
+    # isNormalUser = true;
     uid = vars.uid.homarr;
-    group = "users";
+    # group = "users";
     extraGroups = ["caddy"];
   };
   users.groups.users.gid = vars.gid.users;

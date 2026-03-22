@@ -1,20 +1,19 @@
 {
   "nodes": {
-    "homarr": {
+    "homarr-flake": {
       "inputs": {
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1774180430,
-        "narHash": "sha256-ciHvfkDBGR/LGjBocJFnSwI9WvBujnt4dS6kZ33AluI=",
-        "path": "/work/mannchri/git/hetzner007/derivations/homarr",
+        "path": "../../derivations/homarr",
         "type": "path"
       },
       "original": {
-        "path": "/work/mannchri/git/hetzner007/derivations/homarr",
+        "path": "../../derivations/homarr",
         "type": "path"
-      }
+      },
+      "parent": []
     },
     "nixpkgs": {
       "locked": {
@@ -82,7 +81,7 @@
     },
     "root": {
       "inputs": {
-        "homarr": "homarr",
+        "homarr-flake": "homarr-flake",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable_2"
       }
