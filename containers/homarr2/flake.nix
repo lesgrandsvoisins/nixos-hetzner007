@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    homarr.url = "path:/work/mannchri/git/hetzner007/derivations/homarr";
   };
 
   # outputs = {
@@ -13,40 +14,11 @@
   outputs = inputs @ {
     nixpkgs,
     nixpkgs-unstable,
+    homarr,
     ...
   }: let
     vars = import ../../vars.nix;
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-        (final: prev: {
-          unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        })
-      ];
-    };
-    homarr = import ../../derivations/homarr/package.nix {
-      unstable = pkgs.unstable;
-      pkgs = pkgs;
-      fetchFromGitHub = pkgs.fetchFromGitHub;
-      nodePackages = pkgs.nodePackages;
-      makeWrapper = pkgs.makeWrapper;
-      nodejs = pkgs.nodejs_24;
-      pnpm = pkgs.unstable.pnpm.override {nodejs = pkgs.nodejs_24;};
-      fetchPnpmDeps = pkgs.fetchPnpmDeps;
-      pnpmConfigHook = pkgs.pnpmConfigHook;
-      python3 = pkgs.python3;
-      stdenv = pkgs.stdenv;
-      unixtools = pkgs.unixtools;
-      cctools = pkgs.cctools;
-      lib = pkgs.lib;
-      nixosTests = pkgs.nixosTests;
-      gnused = pkgs.gnused;
-    };
   in {
     nixosConfigurations.container = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -58,6 +30,46 @@
           config,
           ...
         }: let
+          # homarr = import homarr {inherit system;};
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              (final: prev: {
+                unstable = import nixpkgs-unstable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
+                homarr = homarr;
+                # homarr = import homarr {
+                #   inherit system;
+                # };
+              })
+              # (final: prev: {
+              #   homarr = import homarr {
+              #     inherit system;
+              #   };
+              # })
+            ];
+          };
+          # homarr = import ../../derivations/homarr/package.nix {
+          #   unstable = pkgs.unstable;
+          #   pkgs = pkgs;
+          #   fetchFromGitHub = pkgs.fetchFromGitHub;
+          #   nodePackages = pkgs.nodePackages;
+          #   makeWrapper = pkgs.makeWrapper;
+          #   nodejs = pkgs.nodejs_24;
+          #   pnpm = pkgs.unstable.pnpm.override {nodejs = pkgs.nodejs_24;};
+          #   fetchPnpmDeps = pkgs.fetchPnpmDeps;
+          #   pnpmConfigHook = pkgs.pnpmConfigHook;
+          #   python3 = pkgs.python3;
+          #   stdenv = pkgs.stdenv;
+          #   unixtools = pkgs.unixtools;
+          #   cctools = pkgs.cctools;
+          #   lib = pkgs.lib;
+          #   nixosTests = pkgs.nixosTests;
+          #   gnused = pkgs.gnused;
+          # };
         in {
           boot.isContainer = true;
           boot.isNspawnContainer = true;
@@ -75,7 +87,8 @@
             ./users.nix
           ];
           environment.systemPackages = [
-            homarr
+            pkgs.homarr
+            # homarr
           ];
 
           system.stateVersion = "25.11";
@@ -91,7 +104,7 @@
                 User = "homarr";
                 Group = "services";
               };
-              script = "${homarr}/bin/install.sh";
+              script = "${pkgs.homarr}/bin/install.sh";
             };
           };
           systemd.tmpfiles.rules = [
