@@ -68,7 +68,6 @@
         then yaml.generate "homarr-config.yaml" cfg.settings
         else cfg.settingsFile;
     in {
-      environment.etc."homarr/config.yaml".source = configFile;
       options.services.homarr = {
         enable = lib.mkEnableOption "Homarr";
 
@@ -157,6 +156,8 @@
       # '';
 
       config = lib.mkIf cfg.enable {
+        environment.etc."homarr/config.yaml".source = configFile;
+
         # configFile = "${cfg.package}/app/homarr.env";
 
         users.users = lib.mkIf (cfg.user == "homarr") {
