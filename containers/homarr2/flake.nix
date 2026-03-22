@@ -31,14 +31,16 @@
           ...
         }: let
           # homarr = import homarr {inherit system;};
-          # homarr-package = import homarr-flake.packages.${system}.homarr;
-          # homarr-module = import homarr-flake.nixosModules.${system}.homarr;
+          # homarr-package = import homarr-flake.packages.${stdenv.hostPlatform.system}.homarr;
+          # homarr-module = import homarr-flake.nixosModules.${stdenv.hostPlatform.system}.homarr;
           pkgs = import nixpkgs {
+            # system = pkgs.stdenv.hostPlatform.system;
             inherit system;
             config.allowUnfree = true;
             overlays = [
               (final: prev: {
                 unstable = import nixpkgs-unstable {
+                  # system = pkgs.stdenv.hostPlatform.system;
                   inherit system;
                   config.allowUnfree = true;
                 };
@@ -85,7 +87,7 @@
             ../../modules/packages/vim.nix
             ../../modules/packages/common.nix
             ./services.nix
-            ./systemd-services.nix
+            # ./systemd-services.nix
             ./users.nix
             homarr-flake.nixosModules.default
           ];

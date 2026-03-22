@@ -89,6 +89,9 @@ in
         echo $i
         cp -r $i $out/share/homarr/$i
       done
+      # cp -a ${nodejs}/ $out/nodejs
+      ln -s ${nodejs} $out/nodejs
+      ln -s ${pnpm} $out/pnpm
 
       cp ${homarrAssets}/homarr-install.sh $out/bin/homarr-install.sh
       cp ${homarrAssets}/homarr.env $out/bin/homarr.env

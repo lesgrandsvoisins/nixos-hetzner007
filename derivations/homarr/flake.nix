@@ -40,6 +40,10 @@
               # })
             ];
           };
+          # unstable = import nixpkgs-unstable {
+          #   inherit system;
+          #   config.allowUnfree = true;
+          # };
         });
   in {
     packages = forAllSystems ({pkgs}: rec {
@@ -64,8 +68,8 @@
 
         package = lib.mkOption {
           type = lib.types.package;
-          default = self.packages.${pkgs.system}.homarr;
-          defaultText = lib.literalExpression "self.packages.\${pkgs.system}.homarr";
+          default = self.packages.${pkgs.stdenv.hostPlatform.system}.homarr;
+          defaultText = lib.literalExpression "self.packages.\${pkgs.stdenv.hostPlatform.system}.homarr";
           description = "The Homarr package to use.";
         };
 
@@ -146,7 +150,7 @@
 
         networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [cfg.port];
 
-        systemd.services.homarr = {
+        systemd.services.homarr-tasks = {
           description = "Homarr Dashboard";
           after = ["network.target"];
           wantedBy = ["multi-user.target"];
@@ -168,7 +172,61 @@
             StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
             CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
             EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
-            ExecStart = "${pkgs.unstable.nodejs_25}/bin/node ${cfg.package}/share/homarr/apps/nextjs/server.js";
+            ExecStart = "${cfg.package}/nodejs/bin/node ${cfg.package}/share/homarr/apps/tasks/tasks.cjs";
+            Restart = "on-failure";
+            RestartSec = 5;
+          };
+        };
+        systemd.services.homarr-websocket = {
+          description = "Homarr Dashboard";
+          after = ["network.target"];
+          wantedBy = ["multi-user.target"];
+
+          environment =
+            {
+              HOSTNAME = cfg.host;
+              PORT = toString cfg.port;
+              NODE_ENV = "production";
+              NIXPKGS_HOMARR_CACHE_DIR = toString cfg.cacheDir;
+            }
+            // cfg.extraEnvironment;
+
+          serviceConfig = {
+            Type = "simple";
+            User = cfg.user;
+            Group = cfg.group;
+            WorkingDirectory = "${cfg.package}/share/homarr";
+            StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
+            CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
+            EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
+            ExecStart = "${cfg.package}/nodejs/bin/node ${cfg.package}/share/homarr/apps/websocket/wssServer.cjs";
+            Restart = "on-failure";
+            RestartSec = 5;
+          };
+        };
+        systemd.services.homarr-nextjs = {
+          description = "Homarr Dashboard";
+          after = ["network.target"];
+          wantedBy = ["multi-user.target"];
+
+          environment =
+            {
+              HOSTNAME = cfg.host;
+              PORT = toString cfg.port;
+              NODE_ENV = "production";
+              NIXPKGS_HOMARR_CACHE_DIR = toString cfg.cacheDir;
+            }
+            // cfg.extraEnvironment;
+
+          serviceConfig = {
+            Type = "simple";
+            User = cfg.user;
+            Group = cfg.group;
+            WorkingDirectory = "${cfg.package}/share/homarr";
+            StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
+            CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
+            EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
+            ExecStart = "${cfg.package}/pnpm/bin/pnpm next start ${cfg.package}/share/homarr/apps/nextjs/";
             Restart = "on-failure";
             RestartSec = 5;
           };
