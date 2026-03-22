@@ -20,26 +20,44 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [
+        (final: prev: {
+          unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        })
+      ];
     };
-    unstable = import nixpkgs-unstable {
-      inherit system;
-      config.allowUnfree = true;
+    homarr = import ../../derivations/homarr/package.nix {
+      unstable = pkgs.unstable;
+      pkgs = pkgs;
+      fetchFromGitHub = pkgs.fetchFromGitHub;
+      nodePackages = pkgs.nodePackages;
+      makeWrapper = pkgs.makeWrapper;
+      nodejs = pkgs.nodejs_24;
+      pnpm = pkgs.unstable.pnpm.override {nodejs = pkgs.nodejs_24;};
+      fetchPnpmDeps = pkgs.fetchPnpmDeps;
+      pnpmConfigHook = pkgs.pnpmConfigHook;
+      python3 = pkgs.python3;
+      stdenv = pkgs.stdenv;
+      unixtools = pkgs.unixtools;
+      cctools = pkgs.cctools;
+      lib = pkgs.lib;
+      nixosTests = pkgs.nixosTests;
+      gnused = pkgs.gnused;
     };
   in {
     nixosConfigurations.container = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
 
       modules = [
         ({
           pkgs,
           lib,
           config,
-          # vars,
           ...
         }: let
-          vars = import ../../vars.nix;
-          # homarr = homarr;
-          # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
         in {
           boot.isContainer = true;
           boot.isNspawnContainer = true;
@@ -53,38 +71,29 @@
             ../../modules/packages/vim.nix
             ../../modules/packages/common.nix
             ./services.nix
-            # ./systemd-services.nix
+            ./systemd-services.nix
             ./users.nix
           ];
           environment.systemPackages = [
-            # (import ../../derivations/homarr/package.nix)
-            (import ../../derivations/homarr/package.nix {
-              unstable = unstable;
-              pkgs = pkgs;
-              fetchFromGitHub = pkgs.fetchFromGitHub;
-              nodePackages = pkgs.nodePackages;
-              makeWrapper = pkgs.makeWrapper;
-              nodejs = pkgs.nodejs_24;
-              pnpm = unstable.pnpm.override {nodejs = pkgs.nodejs_24;};
-              fetchPnpmDeps = pkgs.fetchPnpmDeps;
-              pnpmConfigHook = pkgs.pnpmConfigHook;
-              python3 = pkgs.python3;
-              stdenv = pkgs.stdenv;
-              unixtools = pkgs.unixtools;
-              cctools = pkgs.cctools;
-              lib = pkgs.lib;
-              nixosTests = pkgs.nixosTests;
-              gnused = pkgs.gnused;
-            })
-            # pkgs.nodejs_25
-            # (pkgs.pnpm.override {nodejs = pkgs.nodejs_25;})
-            # pkgs.pnpmConfigHook
-            # homarr
+            homarr
           ];
 
           system.stateVersion = "25.11";
           console.enable = true;
-
+          systemd.services = {
+            homarr-setup = {
+              enable = true;
+              wantedBy = ["multi-user.target"];
+              unitConfig = {
+                Type = "oneshot";
+              };
+              serviceConfig = {
+                User = "homarr";
+                Group = "services";
+              };
+              script = "${homarr}/bin/install.sh";
+            };
+          };
           systemd.tmpfiles.rules = [
             "d /etc/homarr2 0755 homarr services"
           ];

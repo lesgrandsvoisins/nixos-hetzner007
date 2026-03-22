@@ -1,30 +1,17 @@
 {
   pkgs,
-  unstable,
+  # unstable,
   lib,
   config,
-  # unstable,
+  # homarr,
   # vars,
   ...
 }: let
   # unstable = import <nixpkgs-unstable>;
   vars = import ../../vars.nix;
-  # homarr = pkgs.callPackage ../../derivations/homarr/package.nix;
 in {
   # environment.systemPackages = [homarr];
   systemd.services = {
-    homarr-setup = {
-      enable = true;
-      wantedBy = ["multi-user.target"];
-      unitConfig = {
-        Type = "oneshot";
-      };
-      serviceConfig = {
-        User = "homarr";
-        Group = "services";
-      };
-      script = "${homarr}/bin/install.sh";
-    };
     homarr-tasks = {
       enable = false;
       wantedBy = ["multi-user.target"];
