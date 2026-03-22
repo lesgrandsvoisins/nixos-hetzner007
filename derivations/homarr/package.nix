@@ -1,39 +1,40 @@
 {
   pkgs ? import <nixpkgs> {},
-  fetchFromGitHub ? pkgs.fetchFromGitHub,
-  nodePackages ? pkgs.nodePackages,
-  makeWrapper ? pkgs.makeWrapper,
-  nodejs ? pkgs.nodejs_25,
-  pnpm_10 ? pkgs.pnpm_10.override {nodejs = nodejs;},
-  fetchPnpmDeps ? pkgs.fetchPnpmDeps,
-  pnpmConfigHook ? pkgs.pnpmConfigHook,
-  python3 ? pkgs.python3,
-  stdenv ? pkgs.stdenv,
-  unixtools ? pkgs.unixtools,
-  cctools ? pkgs.cctools,
-  lib ? pkgs.lib,
-  nixosTests ? pkgs.nixosTests,
-  gnused ? pkgs.gnused,
+  unstable ? import <nixpkgs-unstable> {config = {allowUnfree = true;};},
+  fetchFromGitHub ? unstable.fetchFromGitHub,
+  nodePackages ? unstable.nodePackages,
+  makeWrapper ? unstable.makeWrapper,
+  nodejs ? unstable.nodejs_25,
+  pnpm ? unstable.pnpm.override {nodejs = nodejs;},
+  fetchPnpmDeps ? unstable.fetchPnpmDeps,
+  pnpmConfigHook ? unstable.pnpmConfigHook,
+  python3 ? unstable.python3,
+  stdenv ? unstable.stdenv,
+  unixtools ? unstable.unixtools,
+  cctools ? unstable.cctools,
+  lib ? unstable.lib,
+  nixosTests ? unstable.nixosTests,
+  gnused ? unstable.gnused,
 }: let
   homarrAssets = ./assets;
 in
   stdenv.mkDerivation (finalAttrs: {
     pname = "homarr";
-    version = "1.48.0";
+    version = "1.56.1";
 
     src = fetchFromGitHub {
       owner = "homarr-labs";
       repo = "homarr";
       tag = "v${finalAttrs.version}";
-      hash = "sha256-iWdaQv+aTPB+4uDCgkoLMq7tVfCFN8kv+acRo9Oby5g=";
+      hash = "sha256-hUWE689K/HMhDc48Ft+HiaP2O1xe7QGQjiN602wrNK8=";
     };
 
     pnpmDeps = fetchPnpmDeps {
       inherit (finalAttrs) pname version src;
-      pnpm = pnpm_10;
+      pnpm = pnpm;
       nodejs = nodejs;
       fetcherVersion = 3;
-      hash = "sha256-GVjNQ3uS4K5AhWbJFlghHiaHjReaQjdOJJxfFLehLlM=";
+      hash = "";
     };
 
     nativeBuildInputs =
@@ -41,13 +42,13 @@ in
         makeWrapper
         nodejs
         pnpmConfigHook
-        pnpm_10
+        pnpm
       ]
       ++ lib.optionals stdenv.hostPlatform.isDarwin [cctools];
 
     buildInputs = [
       gnused
-      pkgs.openssl
+      unstable.openssl
     ];
 
     preBuild = ''
