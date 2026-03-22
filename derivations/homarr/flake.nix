@@ -277,7 +277,7 @@
             StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
             CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
             EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
-            # ExecStart = "${unstable.nodejs_25}/bin/node ${cfg.package}/share/homarr/apps/nextjs/server.js";
+            ExecStart = "${unstable.nodejs_25}/bin/node ${cfg.package}/share/homarr/apps/nextjs/server.js";
             Restart = "on-failure";
             RestartSec = 5;
           };
