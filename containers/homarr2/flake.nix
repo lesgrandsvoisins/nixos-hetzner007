@@ -50,8 +50,8 @@
           nix.settings.experimental-features = ["nix-command flakes"];
 
           imports = [
-            # ../../modules/packages/vim.nix
-            # ../../modules/packages/common.nix
+            ../../modules/packages/vim.nix
+            ../../modules/packages/common.nix
             ./services.nix
             # ./systemd-services.nix
             ./users.nix

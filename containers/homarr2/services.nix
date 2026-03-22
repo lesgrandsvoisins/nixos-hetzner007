@@ -9,6 +9,9 @@
   # homarr = pkgs.callPackage ../../derivations/homarr/package.nix {};
 in {
   boot.isNspawnContainer = true;
+  systemd.tmpfiles.rules = [
+    "d /etc/homarr2 0755 homarr services"
+  ];
   # environment.systemPackages = [homarr];
   services = {
     redis.servers.homarr.enable = true;
