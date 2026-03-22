@@ -68,6 +68,7 @@
         then yaml.generate "homarr-config.yaml" cfg.settings
         else cfg.settingsFile;
     in {
+      environment.etc."homarr/config.yaml".source = configFile;
       options.services.homarr = {
         enable = lib.mkEnableOption "Homarr";
 
@@ -201,7 +202,7 @@
             StateDirectory = lib.mkIf (cfg.dataDir == "/var/lib/homarr") "homarr";
             CacheDirectory = lib.mkIf (cfg.cacheDir == "/var/cache/homarr") "homarr";
             EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
-            settingsFile = "/etc/homarr/config.yaml";
+
             ExecStart = "${cfg.package}/nodejs/bin/node ${cfg.package}/share/homarr/apps/tasks/tasks.cjs";
             Restart = "on-failure";
             RestartSec = 5;
