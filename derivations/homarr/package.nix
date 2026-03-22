@@ -34,7 +34,7 @@ in
       pnpm = pnpm;
       nodejs = nodejs;
       fetcherVersion = 3;
-      hash = "";
+      hash = "sha256-KLKQ0EmyMbpPq4tAHmPVciCXQKU0hMFmMqROPaLyfhM=";
     };
 
     nativeBuildInputs =
