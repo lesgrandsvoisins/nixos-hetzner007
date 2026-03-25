@@ -37,7 +37,7 @@ in {
     };
     "www.gv.je" = {
       extraConfig = ''
-        reverse_proxy http://${vars.containers.homarr.network.ipv6.local}:${builtins.toString vars.ports.homarr}
+        reverse_proxy http://${vars.containers.homarr.network.ipv4.local}:${builtins.toString vars.ports.homarr}
       '';
     };
   };
