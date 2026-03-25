@@ -23,6 +23,7 @@
     vikunja = 1508;
     gitea = 1509;
     openldap = 1510;
+    memos = 1511;
     named = 991;
   };
   ports = {
@@ -48,6 +49,7 @@
     gitea-ssh = 3022;
     ldap = 389;
     ldaps = 636;
+    memos = 5230;
   };
   hosts = {
     node-red = {
@@ -149,6 +151,7 @@
   hetzner.interface = "enp0s31f6";
   domains = {
     ldap = "ldap.gv.je";
+    memos = "memos.gv.je";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";
