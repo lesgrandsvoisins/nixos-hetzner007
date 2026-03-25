@@ -29,7 +29,7 @@ in {
       MEMOS_DATA = config.services.memos.dataDir;
       # Better to configure MEMOS_DRIVER and MEMOS_DSN in /etc/memos/memos.env
       MEMOS_DRIVER = "sqlite"; # sqlite, mysql, postgresql
-      # MEMOS_DSN = config.services.memos.dataDir + "/memos_prod.db";
+      MEMOS_DSN = config.services.memos.dataDir + "/memos_prod.db";
       # MEMOS_UNIX_SOCK=/var/run/memos.sock
       MEMOS_INSTANCE_URL = "https://${vars.domains.memos}";
       MEMOS_DEMO = true;
@@ -37,6 +37,6 @@ in {
     user = "memos";
     group = "services";
     openFirewall = false;
-    dataDir = "/var/lib/memos/";
+    dataDir = "/var/lib/memos";
   };
 }
