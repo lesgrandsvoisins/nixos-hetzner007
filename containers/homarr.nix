@@ -14,16 +14,16 @@ in {
     "d /etc/homarr 0755 homarr services"
     "f /etc/homarr/homarr.env 0755 homarr services"
   ];
-  networking.hosts = {
-    "${vars.containers.homarr.network.ipv4.local}" = [
-      "${vars.containers.homarr.network.lanName}"
-      "${vars.containers.homarr.network.hostName}"
-    ];
-    "${vars.containers.homarr.network.ipv6.local}" = [
-      "${vars.containers.homarr.network.lanName}"
-      "${vars.containers.homarr.network.hostName}"
-    ];
-  };
+  # networking.hosts = {
+  #   "${vars.containers.homarr.network.ipv4.local}" = [
+  #     "${vars.containers.homarr.network.lanName}"
+  #     "${vars.containers.homarr.network.hostName}"
+  #   ];
+  #   "${vars.containers.homarr.network.ipv6.local}" = [
+  #     "${vars.containers.homarr.network.lanName}"
+  #     "${vars.containers.homarr.network.hostName}"
+  #   ];
+  # };
   services.caddy.virtualHosts = {
     "je.grandsvoisins.org" = {
       extraConfig = ''

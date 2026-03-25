@@ -42,9 +42,10 @@
             pkgs.pnpmConfigHook
             # homarr
           ];
-          networking.firewall.enable = false;
+          # networking.firewall.enable = false;
           # networking.useHostResolvConf = lib.mkForce true;
-
+          networking.firewall.trustedInterfaces = ["eth0" "eth0@if12"];
+          networking.firewall.allowedTCPPorts = [vars.ports.homarr];
           system.stateVersion = "25.11";
         })
       ];
