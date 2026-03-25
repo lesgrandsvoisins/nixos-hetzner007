@@ -26,7 +26,7 @@ in {
       vars.ports.wiki-js-libregood-https
       vars.ports.wiki-js-libregood-http
     ];
-    # interfaces."ve-node-red".allowedTCPPorts = [vars.ports.node-red];
+    interfaces."ve-homarr@if2".allowedTCPPorts = [vars.ports.homarr];
     extraInputRules = ''
       ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
       ip6 daddr ${builtins.toString vars.hosts.node-red.ipv6}/96 tcp dport ${builtins.toString vars.ports.node-red} accept
