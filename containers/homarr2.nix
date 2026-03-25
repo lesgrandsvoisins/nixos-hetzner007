@@ -27,6 +27,7 @@ in {
     localAddress = vars.containers.homarr2.network.ipv4.local;
     hostAddress6 = vars.containers.homarr2.network.ipv6.host;
     localAddress6 = vars.containers.homarr2.network.ipv6.local;
-    flake = "file://./homarr2.tgz";
+    # flake = "file://./homarr2.tgz";
+    flake = "path:/home/mannchri/hetzner007-nixos/containers/homarr2";
   };
 }
