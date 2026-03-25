@@ -49,6 +49,11 @@
           services = {
             resolved = {
               enable = true;
+              fallbackDns = [
+                "8.8.8.8"
+                "8.8.4.4"
+                "1.1.1.1"
+              ];
             };
           };
           # networking.firewall.allowedTCPPorts = [vars.ports.homarr];
