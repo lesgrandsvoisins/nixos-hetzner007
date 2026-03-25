@@ -41,21 +41,21 @@
             pkgs.pnpmConfigHook
             # homarr
           ];
-          networking.firewall.enable = false;
-          networking.useHostResolvConf = lib.mkForce false;
-          networking.firewall.allowedTCPPorts = [80 443 vars.ports.homarr 53 22];
-          networking.firewall.trustedInterfaces = ["eth0" "eth0@if12"];
+          # networking.firewall.enable = false;
+          # networking.useHostResolvConf = lib.mkForce false;
+          # networking.firewall.allowedTCPPorts = [80 443 vars.ports.homarr 53 22];
+          # networking.firewall.trustedInterfaces = ["eth0" "eth0@if12"];
 
-          services = {
-            resolved = {
-              enable = true;
-              fallbackDns = [
-                "8.8.8.8"
-                "8.8.4.4"
-                "1.1.1.1"
-              ];
-            };
-          };
+          # services = {
+          #   resolved = {
+          #     enable = true;
+          #     fallbackDns = [
+          #       "8.8.8.8"
+          #       "8.8.4.4"
+          #       "1.1.1.1"
+          #     ];
+          #   };
+          # };
           # networking.firewall.allowedTCPPorts = [vars.ports.homarr];
           system.stateVersion = "25.11";
         })

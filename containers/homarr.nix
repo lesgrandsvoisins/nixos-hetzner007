@@ -37,13 +37,13 @@ in {
     };
     "www.gv.je" = {
       extraConfig = ''
-        reverse_proxy http://${vars.containers.homarr.network.ipv4.local}:${builtins.toString vars.ports.homarr}
+        reverse_proxy http://localhost:${builtins.toString vars.ports.homarr}
       '';
     };
   };
   containers.homarr = {
     autoStart = true;
-    privateNetwork = true;
+    privateNetwork = false;
     hostAddress = vars.containers.homarr.network.ipv4.host;
     localAddress = vars.containers.homarr.network.ipv4.local;
     hostAddress6 = vars.containers.homarr.network.ipv6.host;
