@@ -25,7 +25,6 @@
           boot.isContainer = true;
           boot.isNspawnContainer = true;
 
-          networking.firewall.allowedTCPPorts = [80 443 vars.ports.homarr 53 22];
           # networking.hostname = "homarr";
 
           nix.settings.experimental-features = ["nix-command flakes"];
@@ -44,7 +43,14 @@
           ];
           # networking.firewall.enable = false;
           networking.useHostResolvConf = lib.mkForce true;
-          # networking.firewall.trustedInterfaces = ["eth0" "eth0@if12"];
+          networking.firewall.allowedTCPPorts = [80 443 vars.ports.homarr 53 22];
+          networking.firewall.trustedInterfaces = ["eth0" "eth0@if12"];
+
+          services = {
+            resolved = {
+              enable = true;
+            };
+          };
           # networking.firewall.allowedTCPPorts = [vars.ports.homarr];
           system.stateVersion = "25.11";
         })
