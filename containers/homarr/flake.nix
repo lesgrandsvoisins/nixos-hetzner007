@@ -43,7 +43,7 @@
             # homarr
           ];
           networking.firewall.enable = false;
-          networking.useHostResolvConf = lib.mkForce false;
+          networking.useHostResolvConf = lib.mkForce true;
 
           system.stateVersion = "25.11";
         })
