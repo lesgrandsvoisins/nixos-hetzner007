@@ -24,6 +24,7 @@ in {
       ensureDatabases = [
         "homarr"
       ];
+      enableTCPIP = false;
     };
     postgresqlBackup = {
       enable = true;
