@@ -26,13 +26,13 @@ in {
       MEMOS_MODE = "prod";
       MEMOS_ADDR = "127.0.0.1";
       MEMOS_PORT = "5230";
-      MEMOS_DATA = config.services.memos.dataDir;
+      # MEMOS_DATA = config.services.memos.dataDir;
       # Better to configure MEMOS_DRIVER and MEMOS_DSN in /etc/memos/memos.env
-      MEMOS_DRIVER = "sqlite"; # sqlite, mysql, postgresql
-      MEMOS_DSN = config.services.memos.dataDir + "/memos_prod.db";
+      # MEMOS_DRIVER = "sqlite"; # sqlite, mysql, postgresql
+      # MEMOS_DSN = config.services.memos.dataDir + "/memos_prod.db";
       # MEMOS_UNIX_SOCK=/var/run/memos.sock
       MEMOS_INSTANCE_URL = "https://${vars.domains.memos}";
-      MEMOS_DEMO = true;
+      # MEMOS_DEMO = true;
     };
     user = "memos";
     group = "services";
