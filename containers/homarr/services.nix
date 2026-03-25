@@ -8,7 +8,11 @@
   vars = import ../../vars.nix;
 in {
   services = {
-    redis.servers.homarr.enable = true;
+    redis.servers.homarr = {
+      enable = true;
+      bind = null;
+      openFirewall = true;
+    };
     postgresql = {
       enable = true;
       ensureUsers = [
