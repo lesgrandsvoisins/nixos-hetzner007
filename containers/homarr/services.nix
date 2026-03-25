@@ -26,9 +26,9 @@ in {
       ];
       enableTCPIP = false;
     };
-    postgresqlBackup = {
-      enable = true;
-      backupAll = true;
-    };
+    # postgresqlBackup = {
+    #   enable = true;
+    #   backupAll = true;
+    # };
   };
 }
