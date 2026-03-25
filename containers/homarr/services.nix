@@ -11,7 +11,7 @@ in {
     redis.servers.homarr = {
       enable = true;
       bind = null;
-      openFirewall = true;
+      # openFirewall = true;
     };
     postgresql = {
       enable = true;

@@ -42,6 +42,8 @@
             pkgs.pnpmConfigHook
             # homarr
           ];
+          networking.firewall.enable = false;
+          networking.useHostResolvConf = lib.mkForce false;
 
           system.stateVersion = "25.11";
         })
