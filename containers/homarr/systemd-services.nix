@@ -31,6 +31,7 @@ in {
         Group = "users";
         Restart = "always";
         # Type = "simple";
+        TimeoutSec = "40";
         EnvironmentFile = "/etc/homarr/homarr.env";
       };
     };
@@ -56,6 +57,7 @@ in {
         Group = "users";
         Restart = "always";
         # Type = "simple";
+        TimeoutSec = "40";
         EnvironmentFile = "/etc/homarr/homarr.env";
       };
     };
@@ -94,6 +96,7 @@ in {
         Restart = "always";
         # Type = "simple";
         EnvironmentFile = "/etc/homarr/homarr.env";
+        TimeoutSec = "40";
       };
     };
   };
