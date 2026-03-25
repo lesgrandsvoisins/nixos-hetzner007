@@ -239,16 +239,6 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "gv.je" = {
-        extraConfig = ''
-          redir https://www.gv.je{uri} 301
-        '';
-      };
-      "www.gv.je" = {
-        extraConfig = ''
-          reverse_proxy http://localhost:3000
-        '';
-      };
       "moi.gv.je" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
@@ -583,12 +573,6 @@ in {
       "info.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
-        '';
-      };
-      "je.grandsvoisins.org" = {
-        extraConfig = ''
-          # reverse_proxy http://localhost:3000
-          redir https://www.gv.je{uri} 301
         '';
       };
       "www.quiquoietc.com" = {

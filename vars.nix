@@ -27,7 +27,7 @@
     named = 991;
   };
   ports = {
-    postgresql = 5434;
+    postgresql = 5432;
     wiki-js-www-https = 3443;
     wiki-js-www-http = 3480;
     wiki-js-libregood-https = 3445;
@@ -50,6 +50,7 @@
     ldap = 389;
     ldaps = 636;
     memos = 5230;
+    homarr = 3000;
   };
   hosts = {
     node-red = {
@@ -70,6 +71,21 @@
         };
         hostName = "homarr2";
         domain = "homarr2.lan";
+      };
+    };
+    homarr = {
+      network = {
+        ipv4 = {
+          host = "10.0.15.100";
+          local = "10.0.15.101";
+        };
+        ipv6 = {
+          host = "fa15::100";
+          local = "fa15::101";
+        };
+        hostName = "homarr";
+        lanName = "homarr.lan";
+        wanName = "www.gv.je";
       };
     };
   };

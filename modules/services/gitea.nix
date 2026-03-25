@@ -24,7 +24,7 @@ in {
     "d /etc/gitea 0755 gitea services"
     "d /etc/gitea/certs 0755 gitea services"
     "f /etc/gitea/oauth2_jwt_secret 0640 gitea services"
-    "L /var/run/postgresql/.s.PGSQL.5434                  -    -    -     -           /var/run/postgresql/.s.PGSQL.5432"
+    # "L /var/run/postgresql/.s.PGSQL.5434                  -    -    -     -           /var/run/postgresql/.s.PGSQL.5432"
     "L+  ${pkgs.gitea}/bin/gitea - - - - /tmp/gitea"
   ];
   services.gitea = {
@@ -34,7 +34,8 @@ in {
       type = "postgres";
       # socket = "/var/run/postgresql";
       host = "/var/run/postgresql";
-      port = 5434;
+      # port = 5434;
+      port = vars.ports.postgresql;
     };
     settings = {
       # oauth2 = {

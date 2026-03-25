@@ -4,13 +4,11 @@
   lib,
   vars,
   ...
-}:
-let
+}: let
   # vars = import ../vars.nix;
-in
-{
+in {
   networking.hosts = {
-    "10.0.12.102" = [ "wiki-js-libregood.local" ];
+    "10.0.12.102" = ["wiki-js-libregood.local"];
     # "fa12::102" = [ "wiki-js-libregood.local" ];
   };
   # networking.macvlans = {
@@ -39,13 +37,13 @@ in
     "d /etc/wiki-js-libregood/certs/postgresql/ 0755 postgres services"
     # "d /etc/wiki-js-libregood/certs/ 0755 wiki-js services"
   ];
-  users.users.postgres.extraGroups = [ "services" ];
+  users.users.postgres.extraGroups = ["services"];
   containers.wiki-js-libregood = {
     localAddress = "10.0.12.102";
     localAddress6 = "fa12::102";
     hostAddress = "10.0.12.1";
     hostAddress6 = "fa12::1";
-    # privateNetwork = true; # ve-wiki-js-libregood
+    privateNetwork = true; # ve-wiki-js-libregood
     # hostBridge = "br0";
     # forwardPorts = [
     #   {
@@ -70,7 +68,7 @@ in
       system.stateVersion = "25.11";
 
       networking.hosts = {
-        "10.0.12.102" = [ "wiki-js-libregood.local" ];
+        "10.0.12.102" = ["wiki-js-libregood.local"];
         # "fa12::102" = [ "wiki-js-libregood.local" ];
       };
       # networking.interfaces."enp0s31f6".ipv6.routes = [
@@ -100,7 +98,7 @@ in
         "f /etc/wiki-js-libregood/.env 0640 wiki-js services"
         # "L /run/postgresql/.s.PGSQL.5432 /run/postgresql/.s.PGSQL.5434" # Strange fix
       ];
-      services.cron.systemCronJobs = [ "0 0 1 * *  root systemctl restart wiki-js" ];
+      services.cron.systemCronJobs = ["0 0 1 * *  root systemctl restart wiki-js"];
 
       systemd.services."postgresql".serviceConfig.EnvironmentFile = "/etc/wiki-js-libregood/.env";
 

@@ -49,7 +49,7 @@ in {
         host = "${sftpgo_host}";
         port = builtins.toString vars.ports.postgresql;
         username = "sftpgo";
-        connection_string = "postgresql://:5434/sftpgo";
+        connection_string = "postgresql://:${builtins.toString vars.ports.postgresql}/sftpgo";
         users_base_dir = "/srv/sftpgo/users";
         # password = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";
         # ssl-mode = 1;

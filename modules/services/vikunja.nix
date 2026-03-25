@@ -32,8 +32,8 @@ in {
       database = {
         type = lib.mkForce "postgres";
         user = "vikunja";
-        host = lib.mkForce "/var/run/postgresql:5434";
-        # host = lib.mkForce "127.0.0.1:5434";
+        host = lib.mkForce "/var/run/postgresql:${builtins.toString vars.ports.postgresql}";
+        # host = lib.mkForce "127.0.0.1:${builtins.toString vars.ports.postgresql}";
         database = "vikunja";
         password.file = "/etc/vikunja/.secrets/.vikunja@postgresql";
         # sslrootcert = "/etc/postgres/postgres.crt";
