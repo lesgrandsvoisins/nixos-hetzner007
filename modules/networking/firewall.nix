@@ -31,9 +31,11 @@ in {
     extraInputRules = ''
       ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
       ip6 daddr ${builtins.toString vars.hosts.node-red.ipv6}/96 tcp dport ${builtins.toString vars.ports.node-red} accept
-      ip daddr ${builtins.toString vars.containers.homarr.network.ipv4.local}/24 tcp dport ${builtins.toString vars.ports.homarr} accept
-      ip6 daddr ${builtins.toString vars.containers.homarr.network.ipv6.local}/96 tcp dport ${builtins.toString vars.ports.homarr} accept
     '';
+
+    #   ip daddr ${builtins.toString vars.containers.homarr.network.ipv4.local}/24 tcp dport ${builtins.toString vars.ports.homarr} accept
+    #   ip6 daddr ${builtins.toString vars.containers.homarr.network.ipv6.local}/96 tcp dport ${builtins.toString vars.ports.homarr} accept
+    # '';
     allowedUDPPorts = [53];
     # filterForward = true;
     # extraCommands = ''
