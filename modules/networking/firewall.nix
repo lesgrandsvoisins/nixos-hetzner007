@@ -20,6 +20,7 @@ in {
       587
       636
       vars.ports.node-red # should be in extraInputRules and not here
+      vars.ports.homarr # should be in extraInputRules and not here
       3636
       5232
       vars.ports.wiki-js-libregood-https
