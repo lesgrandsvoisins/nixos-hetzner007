@@ -61,6 +61,10 @@ in {
     hostAddress6 = vars.containers.homarr.network.ipv6.host;
     localAddress6 = vars.containers.homarr.network.ipv6.local;
     bindMounts = {
+      "/etc/homarr" = {
+        hostPath = "/etc/homarr";
+        isReadOnly = true;
+      };
     };
     flake = "path:/home/mannchri/hetzner007-nixos/containers/homarr";
   };
