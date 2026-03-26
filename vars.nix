@@ -58,22 +58,7 @@
       ipv6 = "fa13::101";
     };
     memos = {
-      addr = vars.hosts.memos.local.ipv4;
-      local = {
-        name = "";
-        ipv4 = "127.0.0.1";
-        ipv6 = "";
-      };
-      lan = {
-        name = "";
-        ipv4 = "";
-        ipv6 = "";
-      };
-      wan = {
-        name = vars.domains.memos;
-        ipv4 = "";
-        ipv6 = "";
-      };
+      addr = "127.0.0.1";
     };
   };
   postgresql = {
