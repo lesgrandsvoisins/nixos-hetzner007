@@ -14,7 +14,19 @@ in {
   users.users.memos.uid = vars.uid.memos;
   imports = [
     ./memos/caddy-memos.nix
+    ./memos/users-memos.nix
   ];
+  services.postgresql = {
+    ensureUsers = [
+      {
+        name = "memos";
+        ensureDBOwnership = true;
+      }
+    ];
+    ensureDatabases = [
+      "memos"
+    ];
+  };
   services.memos = {
     enable = true;
     environmentFile = "/etc/memos/memos.env";
