@@ -57,6 +57,36 @@
       ipv4 = "10.0.13.101";
       ipv6 = "fa13::101";
     };
+    memos = {
+      addr = vars.hosts.memos.local.ipv4;
+      local = {
+        name = "";
+        ipv4 = "127.0.0.1";
+        ipv6 = "";
+      };
+      lan = {
+        name = "";
+        ipv4 = "";
+        ipv6 = "";
+      };
+      wan = {
+        name = vars.domains.memos;
+        ipv4 = "";
+        ipv6 = "";
+      };
+    };
+  };
+  postgresql = {
+    memos = {
+      database = "memos";
+      user = "memos";
+      envFile = "/etc/memos/memos.env";
+    };
+    homarr = {
+      database = "homarr";
+      user = "homarr";
+      envFile = "/etc/homarr/homarr.env";
+    };
   };
   containers = {
     homarr2 = {
@@ -93,81 +123,83 @@
     sftpgo-users = "/srv/sftpgo/users";
   };
   ips.wiki-js = "::1";
-  domains.wiki-js = "wiki.ggvv.org";
-  hetzner.interfaces = [
-    {
-      mac = "90:1b:0e:9e:ec:37";
-    }
-  ];
-  hetzner.ipv4 = [
-    {
-      interface = "enx901b0e9eec37";
-      addr = "213.239.216.138";
-      gw = "213.239.216.159";
-      netmask = "27";
-    }
-    {
-      addr = "213.239.217.187";
-      gw = "213.239.217.161";
-      netmask = "27";
-    }
-  ];
-  hetzner.ipv6 = [
-    {
-      addr = "2a01:4f8:a0:73ba::";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::1";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::2";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::3";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::4";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::5";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::6";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::7";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::8";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-    {
-      addr = "2a01:4f8:a0:73ba::9";
-      gw = "fe80::1";
-      netmask = 64;
-    }
-  ];
-  hetzner.interface = "enp0s31f6";
+  hetzner = {
+    interfaces = [
+      {
+        mac = "90:1b:0e:9e:ec:37";
+      }
+    ];
+    ipv4 = [
+      {
+        interface = "enx901b0e9eec37";
+        addr = "213.239.216.138";
+        gw = "213.239.216.159";
+        netmask = "27";
+      }
+      {
+        addr = "213.239.217.187";
+        gw = "213.239.217.161";
+        netmask = "27";
+      }
+    ];
+    ipv6 = [
+      {
+        addr = "2a01:4f8:a0:73ba::";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::1";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::2";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::3";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::4";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::5";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::6";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::7";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::8";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+      {
+        addr = "2a01:4f8:a0:73ba::9";
+        gw = "fe80::1";
+        netmask = 64;
+      }
+    ];
+    interface = "enp0s31f6";
+  };
   domains = {
     ldap = "ldap.gv.je";
     memos = "memos.gv.je";
+    wiki-js = "wiki.ggvv.org";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";

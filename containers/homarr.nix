@@ -10,6 +10,7 @@
   # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   # unstable = import <nixpkgs-unstable>;
 in {
+  imports = [./homarr/users.nix];
   systemd.tmpfiles.rules = [
     "d /etc/homarr 0755 homarr services"
     "f /etc/homarr/homarr.env 0755 homarr services"
@@ -40,6 +41,17 @@ in {
         reverse_proxy http://localhost:${builtins.toString vars.ports.homarr}
       '';
     };
+  };
+  services.postgresql = {
+    ensureUsers = [
+      {
+        name = "homarr";
+        ensureDBOwnership = true;
+      }
+    ];
+    ensureDatabases = [
+      "homarr"
+    ];
   };
   containers.homarr = {
     autoStart = true;

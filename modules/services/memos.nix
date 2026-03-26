@@ -24,8 +24,8 @@ in {
     # These settings are command-line arguments and take precedence over .env file
     settings = {
       MEMOS_MODE = "prod";
-      MEMOS_ADDR = "127.0.0.1";
-      MEMOS_PORT = "5230";
+      MEMOS_ADDR = vars.hosts.memos.addr;
+      MEMOS_PORT = builtins.toString vars.ports.memos;
       # MEMOS_DATA = config.services.memos.dataDir;
       # Better to configure MEMOS_DRIVER and MEMOS_DSN in /etc/memos/memos.env
       # MEMOS_DRIVER = "sqlite"; # sqlite, mysql, postgresql
@@ -33,6 +33,8 @@ in {
       # MEMOS_UNIX_SOCK=/var/run/memos.sock
       MEMOS_INSTANCE_URL = "https://${vars.domains.memos}";
       # MEMOS_DEMO = true;
+      MEMOS_DRIVER = "postgresql";
+      MEMOS_DSN = "postgresql:///memos";
     };
     user = "memos";
     group = "services";

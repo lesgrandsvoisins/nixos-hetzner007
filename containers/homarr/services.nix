@@ -13,22 +13,5 @@ in {
       bind = null;
       # openFirewall = true;
     };
-    postgresql = {
-      enable = true;
-      ensureUsers = [
-        {
-          name = "homarr";
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [
-        "homarr"
-      ];
-      enableTCPIP = false;
-    };
-    # postgresqlBackup = {
-    #   enable = true;
-    #   backupAll = true;
-    # };
   };
 }
