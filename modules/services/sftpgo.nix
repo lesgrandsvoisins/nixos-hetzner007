@@ -102,58 +102,60 @@ in {
           port = vars.ports.sfptgo-sftp;
         }
       ];
-      httpd.bindings = [
-        {
-          address = "${sftpgo_host}";
-          port = vars.ports.sfptgo-httpd;
-          enable_web_client = true;
-          enable_web_admin = true;
-          # disabled_login_methods = 0;
-          disabled_login_methods = 9;
-          enable_https = true;
-          # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
-          # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
-          certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
-          certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
-          # proxy_mode = 1;
-          # proxy_allowed = ["${sftpgo_host}"];
-          client_ip_proxy_header = "X-Forwarded-Host";
-          # languages = ["fr" "en" "es"];
-          languages = ["fr"];
-          oidc = {
-            config_url = "https://key.gv.je/realms/master";
-            client_id = "sftpgo";
-            client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
-            username_field = "preferred_username";
-            redirect_base_url = "https://sftpgo.gv.je";
-            implicit_roles = true;
-            # scopes = [
-            #   "openid"
-            #   "profile"
-            #   "email"
-            #   "username"
-            # ];
-            # security = {
-            #   https_proxy_headers = [
-            #     {
-            #       "key" = "X-Forwarded-Proto";
-            #       "value" = "https";
-            #     }
-            #   ];
-            #   hosts_proxy_headers = ["X-Forwarded-Host"];
-            #   enabled = true;
-            #   allowed_hosts = ["sftpgo.gv.je"];
-            # };
-            # custom_fields = ["sftpgo_home_dir"];
-          };
-          branding = {
-            name = "Casiers électroniques GV.je : SFTPgo";
-            short_name = "Casiers sftpgo.GV.je";
-          };
-          web_root = "https://sftpgo.gv.je";
-          templates_path = "${sftpgo-ui-gv}/templates";
-        }
-      ];
+      httpd = {
+        bindings = [
+          {
+            address = "${sftpgo_host}";
+            port = vars.ports.sfptgo-httpd;
+            enable_web_client = true;
+            enable_web_admin = true;
+            # disabled_login_methods = 0;
+            disabled_login_methods = 9;
+            enable_https = true;
+            # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
+            # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
+            certificate_file = "/var/lib/acme/sftpgo.gv.je/fullchain.pem";
+            certificate_key_file = "/var/lib/acme/sftpgo.gv.je/key.pem";
+            # proxy_mode = 1;
+            # proxy_allowed = ["${sftpgo_host}"];
+            client_ip_proxy_header = "X-Forwarded-Host";
+            # languages = ["fr" "en" "es"];
+            languages = ["fr"];
+            oidc = {
+              config_url = "https://key.gv.je/realms/master";
+              client_id = "sftpgo";
+              client_secret_file = "/etc/sftpgo/.secret.oidcpassword";
+              username_field = "preferred_username";
+              redirect_base_url = "https://sftpgo.gv.je";
+              implicit_roles = true;
+              # scopes = [
+              #   "openid"
+              #   "profile"
+              #   "email"
+              #   "username"
+              # ];
+              # security = {
+              #   https_proxy_headers = [
+              #     {
+              #       "key" = "X-Forwarded-Proto";
+              #       "value" = "https";
+              #     }
+              #   ];
+              #   hosts_proxy_headers = ["X-Forwarded-Host"];
+              #   enabled = true;
+              #   allowed_hosts = ["sftpgo.gv.je"];
+              # };
+              # custom_fields = ["sftpgo_home_dir"];
+            };
+            branding = {
+              name = "Casiers électroniques GV.je : SFTPgo";
+              short_name = "Casiers sftpgo.GV.je";
+            };
+            web_root = "https://sftpgo.gv.je";
+          }
+        ];
+        templates_path = "${sftpgo-ui-gv}/templates";
+      };
       smtp = {
         user = "list@lesgrandsvoisins.com";
         port = 465;
