@@ -26,21 +26,18 @@
   #     pkgs.keycloak.enabledPlugins
   #     ++ [gvKeycloakProvider];
   # };
-  gvKeycloakProvider = pkgs.maven.buildMavenPackage {
-    pname = "gv-keycloak-provider";
-    version = "0.1.6";
-
-    src = ./keycloak/gv-keycloak-provider; # folder next to this .nix file
-
-    mvnHash = "sha256-Kr4sk1IjaLoGIdU6CwgPcKhqRWCnZcm0uBvIr4Qam6Y=";
-
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out
-      cp target/*.jar $out/
-      runHook postInstall
-    '';
-  };
+  # gvKeycloakProvider = pkgs.maven.buildMavenPackage {
+  #   pname = "gv-keycloak-provider";
+  #   version = "0.1.6";
+  #   src = ./keycloak/gv-keycloak-provider; # folder next to this .nix file
+  #   mvnHash = "sha256-Kr4sk1IjaLoGIdU6CwgPcKhqRWCnZcm0uBvIr4Qam6Y=";
+  #   installPhase = ''
+  #     runHook preInstall
+  #     mkdir -p $out
+  #     cp target/*.jar $out/
+  #     runHook postInstall
+  #   '';
+  # };
   # keycloakWithGv = pkgs.keycloak.override {
   #   plugins =
   #     pkgs.keycloak.enabledPlugins
@@ -66,9 +63,9 @@ in {
       enable = true;
       # package = keycloakWithGv;
       themes = {
-        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
       };
-      plugins = [gvKeycloakProvider];
+      plugins = [(pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})];
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
