@@ -1,0 +1,6 @@
+{
+    "themes": [{
+        "name" : "gv-login",
+        "types": [ "login"]
+    }]
+}
