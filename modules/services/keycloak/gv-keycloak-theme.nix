@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs>}:
 pkgs.stdenv.mkDerivation {
   name = "gv-keycloak-theme";
-  version = "0.1.14";
+  version = "0.1.15";
 
   src = ./gv-keycloak-provider/theme/gv-login;
 
