@@ -4,7 +4,6 @@
   lib,
   config,
   vars,
-  keycloakWithGv,
   ...
 }: let
   # 1) Your custom provider/theme jar as a derivation.
@@ -38,11 +37,14 @@
   #     runHook postInstall
   #   '';
   # };
-  # keycloakWithGv = pkgs.keycloak.override {
-  #   plugins =
-  #     pkgs.keycloak.enabledPlugins
-  #     ++ [gvKeycloakProvider];
-  # };
+  keycloakWithGv = pkgs.keycloak.override {
+    plugins =
+      pkgs.keycloak.enabledPlugins
+      ++ [
+        (pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})
+        (pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;})
+      ];
+  };
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
@@ -61,15 +63,15 @@ in {
   services = {
     keycloak = {
       enable = true;
-      # package = keycloakWithGv;
+      package = keycloakWithGv;
       # themes = {
-      #   gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
       #   gv-login2 = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
+      # gv-login2 = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
       # };
-      plugins = [
-        (pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})
-        (pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;})
-      ];
+      # plugins = [
+
+      #   # (pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;})
+      # ];
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
