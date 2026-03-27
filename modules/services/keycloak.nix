@@ -64,6 +64,7 @@ in {
       # package = keycloakWithGv;
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
+        gv-login2 = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
       };
       plugins = [(pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})];
       database = {
