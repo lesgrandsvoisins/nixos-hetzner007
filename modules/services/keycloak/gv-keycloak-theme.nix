@@ -19,15 +19,17 @@ pkgs.stdenv.mkDerivation {
     "cp -a login $out"
     ''
       mkdir -p "$out/login/templates"
-      mkdir -p "$out/login/resources"
-
+    ''
+    # mkdir -p "$out/login/resources"
+    ''
       themeJar="$(find ${pkgs.keycloak}/lib/lib/main -name 'org.keycloak.keycloak-themes-*.jar' | head -n 1)"
 
       if [ -z "$themeJar" ]; then
         echo "Could not find keycloak themes jar"
         exit 1
       fi
-
+    ''
+    ''
       tmpdir="$(mktemp -d)"
       unzip -q "$themeJar" 'theme/base/login/*' -d "$tmpdir"
 
