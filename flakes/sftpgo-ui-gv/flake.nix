@@ -21,7 +21,7 @@
   in {
     packages."x86_64-linux".default = pkgs.stdenv.mkDerivation {
       pname = "sftpgo-ui-gv";
-      version = "1.0.0";
+      version = "1.0.2";
 
       buildInputs = with pkgs; [
         sftpgo
@@ -41,7 +41,7 @@
         ''
         (pkgs.lib.strings.concatMapStrings (x: ''
             sed -i 's/<\/head>/<link type="text\/css" rel="stylesheet" href="https:\/\/public.gv.je\/static\/web\/gvbtn\/gvbtn.css">\n<\/head>/' ${x}
-            sed -i 's/<\/body>/<a href="https:\/\/www.gv.je" class="site-action-button" aria-label="Open action">\n<img src="https:\/\/public.gv.je\/static\/web\/logo\/gv-logo-512x512.png" class="site-action-button-img">\n<\/a>\n<\/body>/' ${x}
+            sed -i 's/<\/body>/<a href="https:\/\/www.gv.je" class="site-action-button" aria-label="Open action">\n<img src="https:\/\/public.gv.je\/static\/web\/gvbtn\/gv-logo-512x512.png" class="site-action-button-img">\n<\/a>\n<\/body>/' ${x}
 
           '') [
             "$out/templates/common/base.html"
