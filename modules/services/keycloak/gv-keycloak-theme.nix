@@ -32,13 +32,14 @@ pkgs.stdenv.mkDerivation {
     ''
       tmpdir="$(mktemp -d)"
       unzip -q "$themeJar" 'theme/base/login/*' -d "$tmpdir"
-
-      cp "$tmpdir/theme/base/login/template.ftl" \
-        "$out/login/templates/template.ftl"
     ''
-    ''
-      sed -i 's/<\/body>/<a href="https:\/\/www.gv.je" class="site-action-button" aria-label="Open action">\n<img src="https:\/\/public.gv.je\/static\/web\/gvbtn\/gv-logo-512x512.png" class="site-action-button-img">\n<\/a>\n<\/body>/' $out/login/templates/template.ftl
-    ''
+    # ''
+    #   cp "$tmpdir/theme/base/login/template.ftl" \
+    #     "$out/login/templates/template.ftl"
+    # ''
+    # ''
+    #   sed -i 's/<\/body>/<a href="https:\/\/www.gv.je" class="site-action-button" aria-label="Open action">\n<img src="https:\/\/public.gv.je\/static\/web\/gvbtn\/gv-logo-512x512.png" class="site-action-button-img">\n<\/a>\n<\/body>/' $out/login/templates/template.ftl
+    # ''
     "runHook postInstall"
   ];
 }
