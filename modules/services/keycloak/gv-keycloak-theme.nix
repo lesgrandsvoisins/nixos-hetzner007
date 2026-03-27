@@ -57,8 +57,8 @@ in
       ''
       ''
         ${pkgs.openjdk}/bin/jar cf $out/${pname}-${version}.jar -C $tmpdir/src .
-        cp -a $tmpdir/src/gv-login/login $out
       ''
+      # cp -a $tmpdir/src/gv-login/login $out
       "runHook postInstall"
     ];
   }

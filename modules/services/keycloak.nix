@@ -62,11 +62,14 @@ in {
     keycloak = {
       enable = true;
       # package = keycloakWithGv;
-      themes = {
-        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
-        gv-login2 = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
-      };
-      plugins = [(pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})];
+      # themes = {
+      #   gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
+      #   gv-login2 = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;};
+      # };
+      plugins = [
+        (pkgs.callPackage ./keycloak/gv-keycloak-provider.nix {inherit pkgs;})
+        (pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {inherit pkgs;})
+      ];
       database = {
         username = "keygvje";
         # name = "keycloaklesgv";
