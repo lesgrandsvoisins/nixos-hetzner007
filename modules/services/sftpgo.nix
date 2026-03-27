@@ -8,6 +8,8 @@
   sftpgo-prelogin-hook = pkgs.callPackage ../../derivations/sftpgo-hook/default.nix {};
   # sftpgo_host = builtins.toString (builtins.elemAt vars.hetzner.ipv4 0).addr;
   sftpgo_host = "127.0.0.1";
+  sftpgo-ui-gv = pkgs.callPackage sftpgo/sftpgo-ui-gv.nix {};
+  # sftpgo-ui-gv = sftpgo-ui-gv-flake{};
 in {
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
@@ -149,6 +151,7 @@ in {
             short_name = "Casiers sftpgo.GV.je";
           };
           web_root = "https://sftpgo.gv.je";
+          templates_path = "${sftpgo-ui-gv}/templates";
         }
       ];
       smtp = {
