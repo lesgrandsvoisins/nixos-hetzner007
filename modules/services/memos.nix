@@ -34,6 +34,7 @@ in {
     # https://search.nixos.org/options?channel=unstable&query=memos
     # CLI flag “–unix-sock” converts to MEMOS_UNIX_SOCK.
     # These settings are command-line arguments and take precedence over .env file
+    package = pkgs.callPackage ./memos/package-memos.nix {inherit pkgs;};
     settings = {
       MEMOS_MODE = "prod";
       MEMOS_ADDR = vars.hosts.memos.addr;
