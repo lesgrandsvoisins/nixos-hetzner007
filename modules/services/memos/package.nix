@@ -1,0 +1,30 @@
+{
+  pkgs ? import <nixpkgs> {},
+  lib ? pkgs.lib,
+  stdenv ? pkgs.stdenv,
+  fetchurl ? pkgs.fetchurl,
+  autoPatchelfHook ? pkgs.autoPatchelfHook,
+  makeWrapper ? pkgs.makeWrapper,
+  glibc ? pkgs.glibc,
+  go_1_26 ? pkgs.go_1_26,
+  fetchFromGitHub ? pkgs.fetchFromGitHub,
+  buildGoModule ? pkgs.buildGoModule,
+  ...
+}:
+buildGoModule rec {
+  pname = "memos";
+  version = "0.0.2-gv1";
+
+  src = fetchFromGitHub {
+    owner = "usememos";
+    repo = "memos";
+    rev = "main";
+    hash = lib.fakeHash;
+  };
+
+  buildInputs = [
+    go_1_26
+  ];
+
+  vendorHash = lib.fakeHash;
+}
