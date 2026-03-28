@@ -3,13 +3,13 @@ pkgs.stdenv.mkDerivation rec {
   pname = "memos";
   version = "0.0.1-gv";
 
-  src = pkgs.fetchurl {
-    url = "https://github.com/chris2fr/memos/releases/download/v-${version}/memos";
-    # fill this in with:
-    # nix store prefetch-file --json <url>
-    hash = "sha256-rcdTHFww8X+B3DM8ncqdeZq0GBxNIAwQp1mqfPmtGRc=";
-    executable = true;
-  };
+  # src = pkgs.fetchurl {
+  #   # url = "https://github.com/chris2fr/memos/releases/download/v-${version}/memos";
+  #   # fill this in with:
+  #   # nix store prefetch-file --json <url>
+  #   # hash = "sha256-rcdTHFww8X+B3DM8ncqdeZq0GBxNIAwQp1mqfPmtGRc=";
+  #   # executable = true;
+  # };
 
   # nativeBuildInputs = [
   #   # autoPatchelfHook
