@@ -38,16 +38,16 @@ in {
     ensureDatabases = ["lemmy"];
   };
   # Initialize passwords
-  systemd.services.lemmy-pwdinit = {
-    wantedBy = ["multi-user.target"];
-    before = ["lemmy.service" "lemmy-ui.service"];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.openssl}/bin/openssl rand -base64 32 > /etc/lemmy/.secret.admin;";
-      User = "lemmy";
-      Group = "services";
-    };
-  };
+  # systemd.services.lemmy-pwdinit = {
+  #   wantedBy = ["multi-user.target"];
+  #   before = ["lemmy.service" "lemmy-ui.service"];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${pkgs.openssl}/bin/openssl rand -base64 32 > /etc/lemmy/.secret.admin";
+  #     User = "lemmy";
+  #     Group = "services";
+  #   };
+  # };
   services.lemmy = {
     enable = true;
     caddy.enable = true;
