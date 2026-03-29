@@ -12,6 +12,7 @@ in {
     ./services/caddy.nix
     ./services/gitea.nix
     ./services/keycloak.nix
+    ./services/lemmy.nix
     ./services/lldap.nix
     ./services/memos.nix
     ./services/openldap.nix

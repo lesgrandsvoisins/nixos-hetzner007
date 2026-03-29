@@ -15,17 +15,18 @@ in {
   ];
   users.users.lemmy = {
     uid = vars.uid.lemmy;
-    group = ["services"];
+    group = "services";
+    isSystemUser = true;
   };
   systemd.services.lemmy.serviceConfig = {
-    DynamicUser = pkgs.mkForce false;
-    User = lemmy;
-    Group = services;
+    DynamicUser = lib.mkForce false;
+    User = "lemmy";
+    Group = "services";
   };
   systemd.services.lemmy-ui.serviceConfig = {
-    DynamicUser = pkgs.mkForce false;
-    User = lemmy;
-    Group = services;
+    DynamicUser = lib.mkForce false;
+    User = "lemmy";
+    Group = "services";
   };
   services.postgresql = {
     ensureUsers = [
@@ -36,15 +37,15 @@ in {
     ];
     ensureDatabases = ["lemmy"];
   };
-  Initialize passwords
-  systemd.service.lemmy-pwdinit = {
-    User = lemmy;
-    Group = services;
-    wantedBy = [ "multi-user.target" ];
+  # Initialize passwords
+  systemd.services.lemmy-pwdinit = {
+    wantedBy = ["multi-user.target"];
     before = ["lemmy.service" "lemmy-ui.service"];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "for i in admin database; do ${pkgs.openssl}/bin/openssl rand -base64 32 > /etc/lemmy/.secret.$i;done;";
+      User = "lemmy";
+      Group = "services";
     };
   };
   services.lemmy = {
@@ -57,9 +58,15 @@ in {
       uri = "postgresql:///lemmy?user=lemmy&host=/var/run/postgresql";
       createLocally = false;
     };
-    hostname = vars.domains.lemmy;
     settings = {
+      hostname = vars.domains.lemmy;
       port = vars.ports.lemmy-server;
+      tls_enabled = true;
+      email = {
+        smtp_server = "mail.lesgrandsvoisins.com:465";
+        smtp_login = "list@lesgrandsvoisins.com";
+        tls_type = "tls";
+      };
     };
     ui = {
       port = vars.ports.lemmy-ui;
