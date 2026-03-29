@@ -43,7 +43,7 @@ in {
     before = ["lemmy.service" "lemmy-ui.service"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "for i in admin database; do ${pkgs.openssl}/bin/openssl rand -base64 32 > /etc/lemmy/.secret.$i;done;";
+      ExecStart = "${pkgs.openssl}/bin/openssl rand -base64 32 > /etc/lemmy/.secret.admin;";
       User = "lemmy";
       Group = "services";
     };
