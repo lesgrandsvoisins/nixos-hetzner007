@@ -16,15 +16,15 @@ buildGoModule rec {
   version = "0.0.2-gv1";
 
   src = fetchFromGitHub {
-    owner = "usememos";
+    owner = "chris2fr";
     repo = "memos";
     rev = "main";
-    hash = lib.fakeHash;
+    hash = "sha256-q+BVKCTwGe+RRSZUFhW/b8/qHt4r9LL2CMZKdG2Zpoc=";
   };
 
   buildInputs = [
     go_1_26
   ];
 
-  vendorHash = lib.fakeHash;
+  vendorHash = "sha256-e5KGQv80ky2tDW4nqC3aZuc9AWTfiNiYlaBf++IgCO4=";
 }
