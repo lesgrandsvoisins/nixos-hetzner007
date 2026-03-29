@@ -62,6 +62,10 @@ in {
       hostname = vars.domains.lemmy;
       port = vars.ports.lemmy-server;
       tls_enabled = true;
+      setup = {
+        admin_username = "lemmyadmin";
+        site_name = "Lemmy des GV";
+      };
       email = {
         smtp_server = "mail.lesgrandsvoisins.com:465";
         smtp_login = "list@lesgrandsvoisins.com";
