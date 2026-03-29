@@ -53,7 +53,7 @@
     memos = 5230;
     homarr = 3000;
     lemmy-ui = 1234;
-    lemmy-server = 8536
+    lemmy-server = 8536;
   };
   hosts = {
     node-red = {
