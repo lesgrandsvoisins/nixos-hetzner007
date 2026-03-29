@@ -25,6 +25,7 @@
     openldap = 1510;
     memos = 1511;
     named = 991;
+    lemmy = 1512;
   };
   ports = {
     postgresql = 5432;
@@ -51,6 +52,8 @@
     ldaps = 636;
     memos = 5230;
     homarr = 3000;
+    lemmy-ui = 1234;
+    lemmy-server = 8536
   };
   hosts = {
     node-red = {
@@ -185,6 +188,7 @@
     ldap = "ldap.gv.je";
     memos = "memos.gv.je";
     wiki-js = "wiki.ggvv.org";
+    lemmy = "lemmy.gv.je";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";
