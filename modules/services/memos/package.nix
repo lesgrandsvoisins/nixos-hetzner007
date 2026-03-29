@@ -19,7 +19,7 @@ buildGoModule rec {
     owner = "chris2fr";
     repo = "memos";
     rev = "main";
-    hash = "sha256-q+BVKCTwGe+RRSZUFhW/b8/qHt4r9LL2CMZKdG2Zpoc=";
+    hash = "sha256-eWDTR9j4kSmBiMxaWp0ZgsLEjd3QPAjoR8MXtQ9J/eU=";
   };
 
   buildInputs = [
