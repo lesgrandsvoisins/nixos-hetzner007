@@ -13,20 +13,20 @@
 }:
 buildGoModule rec {
   pname = "memos";
-  version = "0.0.2-gv1";
+  version = "gv0.25.3";
 
   meta.mainProgram = "memos";
 
   src = fetchFromGitHub {
-    owner = "chris2fr";
+    owner = "lesgrandsvoisins";
     repo = "memos";
-    rev = "main";
-    hash = "sha256-eWDTR9j4kSmBiMxaWp0ZgsLEjd3QPAjoR8MXtQ9J/eU=";
+    rev = "gv0.25.3";
+    hash = "sha256-yWWcNOpMmcEfOiUdQcixpg9nNmFJ5BvNqkTLOZ+0LGg=";
   };
 
   buildInputs = [
     go_1_26
   ];
 
-  vendorHash = "sha256-e5KGQv80ky2tDW4nqC3aZuc9AWTfiNiYlaBf++IgCO4=";
+  vendorHash = "sha256-BoJxFpfKS/LByvK4AlTNc4gA/aNIvgLzoFOgyal+aF8=";
 }
