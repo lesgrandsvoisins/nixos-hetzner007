@@ -15,6 +15,8 @@ buildGoModule rec {
   pname = "memos";
   version = "0.0.2-gv1";
 
+  meta.mainProgram = "$out/bin/memos";
+
   src = fetchFromGitHub {
     owner = "chris2fr";
     repo = "memos";
