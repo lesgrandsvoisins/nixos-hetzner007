@@ -66,6 +66,7 @@ in {
         smtp_server = "mail.lesgrandsvoisins.com:465";
         smtp_login = "list@lesgrandsvoisins.com";
         tls_type = "tls";
+        smtp_from_address = "list@lesgrandsvoisins.com";
       };
     };
     ui = {
