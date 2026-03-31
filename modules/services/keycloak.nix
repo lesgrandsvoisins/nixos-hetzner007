@@ -51,7 +51,7 @@
 
     src = ./keycloak/gv-keycloak-provider; # folder next to this .nix file
 
-    mvnHash = lib.fakeHash;
+    mvnHash = "sha256-Kr4sk1IjaLoGIdU6CwgPcKhqRWCnZcm0uBvIr4Qam6Y=";
 
     installPhase = ''
       runHook preInstall
