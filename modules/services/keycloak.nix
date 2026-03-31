@@ -81,6 +81,7 @@ in {
       # package = keycloakWithGv;
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+        gv-keycloakify = pkgs.callPackage ./keycloak/gv-keycloakify.nix {};
       };
       plugins = [
         gvKeycloakProvider
