@@ -60,6 +60,7 @@
       runHook postInstall
     '';
   };
+  gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
@@ -81,10 +82,10 @@ in {
       # package = keycloakWithGv;
       themes = {
         gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
-        gv-keycloakify = pkgs.callPackage ./keycloak/gv-keycloakify.nix {};
       };
       plugins = [
         gvKeycloakProvider
+        "${gvKeycloakify}/gv-keycloakify.jar"
       ];
       database = {
         username = "keygvje";

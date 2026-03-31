@@ -9,6 +9,7 @@ pkgs.stdenv.mkDerivation rec {
   buildInputs = [];
 
   installPhase = ''
-    cp -a keycloak-theme-for-kc-26.2-and-above.jar $out
+    mkdir $out
+    cp -a keycloak-theme-for-kc-26.2-and-above.jar $out/gv-keycloakify.jar
   '';
 }
