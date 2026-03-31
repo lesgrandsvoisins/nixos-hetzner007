@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs>}:
 pkgs.maven.buildMavenPackage {
   pname = "gv-keycloak-provider";
-  version = "0.1.6";
+  version = "0.1.18";
 
   src = ./gv-keycloak-provider; # folder next to this .nix file
 
