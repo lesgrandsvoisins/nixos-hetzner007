@@ -5,7 +5,7 @@
 
   <groupId>je.gv</groupId>
   <artifactId>gv-key-registration-action</artifactId>
-  <version>0.1.13</version>
+  <version>0.1.21</version>
   <packaging>jar</packaging>
 
   <properties>
