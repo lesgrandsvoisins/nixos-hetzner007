@@ -5,10 +5,10 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+// import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
-import org.keycloak.Config;
+// import org.keycloak.Config;
 import org.keycloak.authentication.FormAction;
 import org.keycloak.authentication.FormContext;
 import org.keycloak.authentication.ValidationContext;
@@ -83,7 +83,8 @@ public final class GvIdentifierFormAction implements FormAction {
     // template preview.
     formData.putSingle("gv_generated_identifier", identifier);
     formData.putSingle("username", identifier);
-    // formData.putSingle("shortName", Pattern.compile("@gv.je").matcher(identifier).replaceAll(""));
+    // formData.putSingle("shortName",
+    // Pattern.compile("@gv.je").matcher(identifier).replaceAll(""));
 
     context.success();
   }
