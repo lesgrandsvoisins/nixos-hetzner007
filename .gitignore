@@ -9,3 +9,5 @@ result-*
 node_modules
 work
 dist
+
+/.vscode
