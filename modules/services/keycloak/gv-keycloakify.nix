@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.stdenv.mkDerivation rec {
   name = "gv-keyclaokify";
-  version = "0.1.21";
+  version = "0.1.22";
 
   src = ./gv-keycloakify;
 
