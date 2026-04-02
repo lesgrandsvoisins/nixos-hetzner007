@@ -60,7 +60,7 @@
       runHook postInstall
     '';
   };
-  gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
+  # gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
   gvKeyRegistration = pkgs.callPackage keycloak/gv-key-registration.nix {inherit pkgs;};
 in {
   users.users.keycloak = {

@@ -83,8 +83,8 @@ public final class GvIdentifierAuthenticator implements Authenticator {
             
             formData.putSingle("gv_given_name", given);
             formData.putSingle("gv_family_name", family);
-            formData.putSingle("firstName", given);
-            formData.putSingle("lastName", family);
+            // formData.putSingle("firstName", given);
+            // formData.putSingle("lastName", family);
             
 
             context.success();
