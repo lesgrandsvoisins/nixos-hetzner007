@@ -11,6 +11,8 @@ pkgs.maven.buildMavenPackage {
     runHook preInstall
     mkdir -p $out
     cp target/*.jar $out/
+    mkdir -p $out/themes/gv-registration/login
+    cp resources/theme-resources/templates/gv-identifier-step $out/themes/gv-registration/login
     runHook postInstall
   '';
 }
