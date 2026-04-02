@@ -1,11 +1,11 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.maven.buildMavenPackage {
   pname = "gv-key-registration";
-  version = "0.0.2";
+  version = "0.0.3";
 
   src = ./gv-key-registration; # folder next to this .nix file
 
-  mvnHash = "sha256-E1r3p14Rv7O4l+MYLaPOmMtbLLzEFnAQ5VkLoTxzRZw=";
+  mvnHash = "sha256-F94cD2IebTVZgVh183P8mhdtkDGk7y/DBNfmkqpeCNs=";
 
   installPhase = ''
     runHook preInstall
