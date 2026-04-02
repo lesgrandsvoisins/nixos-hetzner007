@@ -41,6 +41,9 @@
             pkgs.pnpmConfigHook
             # homarr
           ];
+
+          services.postgresql.enable = false;
+
           # networking.firewall.enable = false;
           # networking.useHostResolvConf = lib.mkForce false;
           # networking.firewall.allowedTCPPorts = [80 443 vars.ports.homarr 53 22];

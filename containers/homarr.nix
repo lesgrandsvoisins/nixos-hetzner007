@@ -66,6 +66,6 @@ in {
         isReadOnly = true;
       };
     };
-    flake = "path:/home/mannchri/hetzner007-nixos/containers/homarr";
+    flake = "path:./homarr";
   };
 }
