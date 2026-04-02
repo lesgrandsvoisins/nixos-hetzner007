@@ -1,9 +1,9 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.maven.buildMavenPackage {
-  pname = "g-v-authenticator";
-  version = "0.0.1";
+  pname = "gv-key-registration";
+  version = "0.0.2";
 
-  src = ./g-v-authenticator; # folder next to this .nix file
+  src = ./gv-key-registration; # folder next to this .nix file
 
   mvnHash = "sha256-E1r3p14Rv7O4l+MYLaPOmMtbLLzEFnAQ5VkLoTxzRZw=";
 

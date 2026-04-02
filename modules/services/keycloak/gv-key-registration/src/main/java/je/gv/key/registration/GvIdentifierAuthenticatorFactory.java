@@ -1,4 +1,4 @@
-package je.gv.key.authenticator;
+package je.gv.key.registration;
 
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticatorFactory;
@@ -6,14 +6,14 @@ import org.keycloak.models.AuthenticationExecutionModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
-import java.util.List;
 import org.keycloak.Config;
+import java.util.List;
 
-public class GVAuthenticatorFactory implements AuthenticatorFactory {
+public class GvIdentifierAuthenticatorFactory implements AuthenticatorFactory {
 
-    public static final String PROVIDER_ID = "custom-invite-authenticator";
-    private static final String DISPLAY_TYPE = "Invite Code Authenticator";
-    private static final String HELP_TEXT = "Validates an invite code during registration flow";
+    public static final String PROVIDER_ID = "gv-identifier-authenticator";
+    private static final String DISPLAY_TYPE = "GV Identifier Generator";
+    private static final String HELP_TEXT = "Generates a unique username from first and last names";
 
     @Override
     public String getId() {
@@ -32,12 +32,12 @@ public class GVAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getReferenceCategory() {
-        return "invite-validation";
+        return "gv-identifier";
     }
 
     @Override
     public boolean isConfigurable() {
-        return true;
+        return false; // No configuration properties needed
     }
 
     @Override
@@ -61,15 +61,21 @@ public class GVAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return new GVAuthenticator(session);
+        return new GvIdentifierAuthenticator(session);
     }
 
     @Override
-    public void init(Config.Scope config) {}
+    public void init(Config.Scope config) {
+        // Initialization if needed
+    }
 
     @Override
-    public void postInit(KeycloakSessionFactory factory) {}
+    public void postInit(KeycloakSessionFactory factory) {
+        // Post-initialization if needed
+    }
 
     @Override
-    public void close() {}
+    public void close() {
+        // Cleanup if needed
+    }
 }
