@@ -38,79 +38,62 @@ public final class GvIdentifierAuthenticator implements Authenticator {
     public void authenticate(AuthenticationFlowContext context) {
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
         
-        // Check if we already have a generated identifier (from a previous step)
+        // Check if we already have generated values (after successful generation)
         String existingIdentifier = context.getAuthenticationSession().getAuthNote("gv_generated_identifier");
         
         if (existingIdentifier != null) {
-            // Already generated, proceed
+            // We've already generated the identifier, proceed to main registration
             context.success();
             return;
         }
 
-        String family = firstNonBlank(
-            field(formData, "user.attributes." + ATTR_FAMILY_NAME_FOR_ID),
-            field(formData, ATTR_FAMILY_NAME_FOR_ID),
-            field(formData, "lastName"));
-        String given = firstNonBlank(
-            field(formData, "user.attributes." + ATTR_GIVEN_NAME_FOR_ID),
-            field(formData, ATTR_GIVEN_NAME_FOR_ID),
-            field(formData, "firstName"));
+        // Get form values - they might come from the main registration form
+        String family = getFormValue(formData, ATTR_FAMILY_NAME_FOR_ID);
+        String given = getFormValue(formData, ATTR_GIVEN_NAME_FOR_ID);
 
-        // If we don't have the names yet, show the form
-        if (isBlank(family) || isBlank(given)) {
-            Response challenge = context.form()
-                .setAttribute("gvIdentifierRule", "family[:4] + given[:4] + counter")
-                .setAttribute("gvIdentifierFields", List.of(ATTR_FAMILY_NAME_FOR_ID, ATTR_GIVEN_NAME_FOR_ID))
-                .createForm("gv-identifier.ftl");
-            context.challenge(challenge);
+        // If we have both names, generate the identifier and continue
+        if (!isBlank(family) && !isBlank(given)) {
+            List<FormMessage> errors = new ArrayList<>();
+
+            String base = normalizedSlice(family, NAME_SLICE) + normalizedSlice(given, NAME_SLICE);
+            String identifier = nextAvailableIdentifier(context.getSession(), context.getRealm(), base);
+
+            if (identifier == null) {
+                errors.add(new FormMessage(null, "gvNoIdentifierAvailable"));
+                context.getEvent().error(Errors.INVALID_REGISTRATION);
+                Response challenge = context.form()
+                    .setErrors(errors)
+                    .setAttribute("gvIdentifierRule", "family[:4] + given[:4] + counter")
+                    .createForm("gv-identifier.ftl");
+                context.failureChallenge(AuthenticationFlowError.GENERIC_AUTHENTICATION_ERROR, challenge);
+                return;
+            }
+
+            // Store the generated identifier in auth session
+            context.getAuthenticationSession().setAuthNote("gv_generated_identifier", identifier);
+            
+            // CRITICAL: Store the identifier in a place where the main form can find it
+            // We'll add it to the form data that gets passed to the next steps
+            formData.putSingle("username", identifier);
+            formData.putSingle("gv_generated_identifier", identifier);
+            
+            // Also store original names for reference
+            context.getAuthenticationSession().setAuthNote("gv_given_name", given);
+            context.getAuthenticationSession().setAuthNote("gv_family_name", family);
+            
+            context.success();
             return;
         }
 
-        // Validate and generate identifier
-        List<FormMessage> errors = new ArrayList<>();
-
-        if (isBlank(family)) {
-            errors.add(new FormMessage("user.attributes." + ATTR_FAMILY_NAME_FOR_ID, "gvMissingFamilyNameForId"));
-        }
-        if (isBlank(given)) {
-            errors.add(new FormMessage("user.attributes." + ATTR_GIVEN_NAME_FOR_ID, "gvMissingGivenNameForId"));
-        }
-
-        if (!errors.isEmpty()) {
-            context.getEvent().error(Errors.INVALID_REGISTRATION);
-            Response challenge = context.form()
-                .setErrors(errors)
-                .setAttribute("gvIdentifierRule", "family[:4] + given[:4] + counter")
-                .setAttribute("gvIdentifierFields", List.of(ATTR_FAMILY_NAME_FOR_ID, ATTR_GIVEN_NAME_FOR_ID))
-                .createForm("gv-identifier.ftl");
-            context.failureChallenge(AuthenticationFlowError.INVALID_USER, challenge);
-            return;
-        }
-
-        String base = normalizedSlice(family, NAME_SLICE) + normalizedSlice(given, NAME_SLICE);
-        String identifier = nextAvailableIdentifier(context.getSession(), context.getRealm(), base);
-
-        if (identifier == null) {
-            errors.add(new FormMessage(null, "gvNoIdentifierAvailable"));
-            context.getEvent().error(Errors.INVALID_REGISTRATION);
-            Response challenge = context.form()
-                .setErrors(errors)
-                .createForm("gv-identifier.ftl");
-            context.failureChallenge(AuthenticationFlowError.GENERIC_AUTHENTICATION_ERROR, challenge);
-            return;
-        }
-
-        // Store the generated identifier in the auth session
-        context.getAuthenticationSession().setAuthNote("gv_generated_identifier", identifier);
-        context.getAuthenticationSession().setAuthNote("gv_given_name", given);
-        context.getAuthenticationSession().setAuthNote("gv_family_name", family);
-        
-        // Also store in formData for the success phase
-        MultivaluedMap<String, String> currentForm = context.getHttpRequest().getDecodedFormParameters();
-        currentForm.putSingle("gv_generated_identifier", identifier);
-        currentForm.putSingle("username", identifier);
-        
-        context.success();
+        // If we don't have the names yet, show our form
+        Response challenge = context.form()
+            .setAttribute("gvIdentifierRule", "family[:4] + given[:4] + counter")
+            .setAttribute("gvIdentifierFields", List.of(ATTR_FAMILY_NAME_FOR_ID, ATTR_GIVEN_NAME_FOR_ID))
+            // Pass any existing values back to the form
+            .setAttribute("firstName", family)
+            .setAttribute("lastName", given)
+            .createForm("gv-identifier.ftl");
+        context.challenge(challenge);
     }
 
     @Override
@@ -121,7 +104,7 @@ public final class GvIdentifierAuthenticator implements Authenticator {
 
     @Override
     public boolean requiresUser() {
-        return false; // User doesn't exist yet during registration
+        return false;
     }
 
     @Override
@@ -139,7 +122,28 @@ public final class GvIdentifierAuthenticator implements Authenticator {
         // No-op
     }
 
-    // ========== Helper Methods (copied from original) ==========
+    // ========== Helper Methods ==========
+
+    private String getFormValue(MultivaluedMap<String, String> formData, String fieldName) {
+        // Try multiple possible field names that the main form might use
+        String value = field(formData, "user.attributes." + fieldName);
+        if (!isBlank(value)) return value;
+        
+        value = field(formData, fieldName);
+        if (!isBlank(value)) return value;
+        
+        if ("firstName".equals(fieldName)) {
+            value = field(formData, "givenName");
+            if (!isBlank(value)) return value;
+        }
+        
+        if ("lastName".equals(fieldName)) {
+            value = field(formData, "familyName");
+            if (!isBlank(value)) return value;
+        }
+        
+        return null;
+    }
 
     static String nextAvailableIdentifier(KeycloakSession session, RealmModel realm, String base) {
         if (isBlank(base)) {
@@ -178,15 +182,6 @@ public final class GvIdentifierAuthenticator implements Authenticator {
 
     private static String field(MultivaluedMap<String, String> formData, String key) {
         return formData == null ? null : formData.getFirst(key);
-    }
-
-    private static String firstNonBlank(String... values) {
-        for (String value : values) {
-            if (!isBlank(value)) {
-                return value;
-            }
-        }
-        return null;
     }
 
     static boolean isBlank(String value) {

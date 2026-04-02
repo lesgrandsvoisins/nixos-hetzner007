@@ -19,7 +19,7 @@
                 <div class="${properties.kcInputWrapperClass!}">
                     <input type="text" id="firstName" name="firstName"
                            class="${properties.kcInputClass!}"
-                           value="${(firstName!'')}"
+                           value="${(firstName!'')}"  <-- This preserves the value
                            autofocus
                            aria-invalid="<#if messagesPerField.existsError('firstName')>true</#if>"/>
                     <#if messagesPerField.existsError('firstName')>
@@ -39,7 +39,7 @@
                 <div class="${properties.kcInputWrapperClass!}">
                     <input type="text" id="lastName" name="lastName"
                            class="${properties.kcInputClass!}"
-                           value="${(lastName!'')}"
+                           value="${(lastName!'')}"  <-- This preserves the value
                            aria-invalid="<#if messagesPerField.existsError('lastName')>true</#if>"/>
                     <#if messagesPerField.existsError('lastName')>
                         <span class="${properties.kcInputErrorMessageClass!}">
