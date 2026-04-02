@@ -14,6 +14,13 @@ in {
     "d /etc/homarr2 0755 homarr services"
     "f /etc/homarr2/homarr.env 0755 homarr services"
   ];
+  services.caddy.virtualHosts = {
+    "h2.gv.je" = {
+      extraConfig = ''
+        reverse_proxy http://localhost:${builtins.toString vars.ports.homarr}
+      '';
+    };
+  };
   containers.homarr2 = {
     bindMounts = {
       "/etc/homarr" = {
