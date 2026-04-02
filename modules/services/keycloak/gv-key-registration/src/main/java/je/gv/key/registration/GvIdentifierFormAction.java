@@ -26,8 +26,8 @@ public final class GvIdentifierFormAction implements FormAction {
     private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
 
     private static final Set<String> BLOCKED_SUBSTRINGS = Set.of(
-        "admin", "root", "support", "owner", "test", "demo",
-        "sex", "anal", "puta", "mier", "fuck", "shit", "cunt");
+            "admin", "root", "support", "owner", "test", "demo",
+            "sex", "anal", "puta", "mier", "fuck", "shit", "cunt");
 
     @Override
     public void buildPage(FormContext context, LoginFormsProvider form) {
@@ -35,20 +35,13 @@ public final class GvIdentifierFormAction implements FormAction {
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
         String existingFirstName = formData.getFirst(ATTR_GIVEN_NAME_FOR_ID);
         String existingLastName = formData.getFirst(ATTR_FAMILY_NAME_FOR_ID);
-        
-        // Set attributes for the template
+
+        // Set form attributes
+        form.setAttribute("firstName", existingFirstName);
+        form.setAttribute("lastName", existingLastName);
         form.setAttribute("gvIdentifierRule", "family[:4] + given[:4] + counter");
-        form.setAttribute("gvIdentifierFields", List.of(ATTR_FAMILY_NAME_FOR_ID, ATTR_GIVEN_NAME_FOR_ID));
-        
-        // Preserve any already entered values
-        if (existingFirstName != null) {
-            form.setAttribute(ATTR_GIVEN_NAME_FOR_ID, existingFirstName);
-        }
-        if (existingLastName != null) {
-            form.setAttribute(ATTR_FAMILY_NAME_FOR_ID, existingLastName);
-        }
-        
-        // Check if we have a generated identifier from a previous attempt
+
+        // If we have a generated username from a previous attempt, show it
         String generatedId = context.getAuthenticationSession().getAuthNote("gv_generated_identifier");
         if (generatedId != null) {
             form.setAttribute("generatedUsername", generatedId);
@@ -91,14 +84,28 @@ public final class GvIdentifierFormAction implements FormAction {
 
         // Store the generated username in the auth session
         context.getAuthenticationSession().setAuthNote("gv_generated_identifier", identifier);
-        
+
         // Store the names for later use
         context.getAuthenticationSession().setAuthNote("gv_given_name", given);
         context.getAuthenticationSession().setAuthNote("gv_family_name", family);
-        
+
         // Store the identifier in the form data so it gets passed to the next steps
         formData.putSingle("username", identifier);
         formData.putSingle("gv_generated_identifier", identifier);
+
+        // if (identifier != null) {
+        // // Set the username
+        // formData.putSingle("username", identifier);
+
+        // // CRITICAL: Set a flag that this was auto-generated
+        // formData.putSingle("gv_generated_identifier", identifier);
+
+        // // Also store in auth session for persistence across steps
+        // context.getAuthenticationSession().setAuthNote("gv_generated_identifier",
+        // identifier);
+
+        // context.success();
+        // }
 
         context.success();
     }
@@ -106,24 +113,24 @@ public final class GvIdentifierFormAction implements FormAction {
     @Override
     public void success(FormContext context) {
         // This runs after all validation succeeds, before user creation
-        
+
         // Get the stored values
         String identifier = context.getAuthenticationSession().getAuthNote("gv_generated_identifier");
         String family = context.getAuthenticationSession().getAuthNote("gv_family_name");
         String given = context.getAuthenticationSession().getAuthNote("gv_given_name");
-        
+
         if (identifier == null) {
             return;
         }
-        
+
         // The UserModel doesn't exist yet at this point in FormAction
         // We'll set attributes on the authentication session for the user creation step
         context.getAuthenticationSession().setAuthNote("username", identifier);
-        
+
         // Store the short version without domain if needed
         String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
         context.getAuthenticationSession().setAuthNote("shortUsername", shortUsername);
-        
+
         // These will be picked up by the user profile form
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
         formData.putSingle("username", identifier);
@@ -179,11 +186,11 @@ public final class GvIdentifierFormAction implements FormAction {
             return "";
         }
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-            .replaceAll("\\p{M}+", "")
-            .toLowerCase(Locale.ROOT)
-            .replace("'", "")
-            .replace("-", "")
-            .replace(" ", "");
+                .replaceAll("\\p{M}+", "")
+                .toLowerCase(Locale.ROOT)
+                .replace("'", "")
+                .replace("-", "")
+                .replace(" ", "");
         normalized = NON_ASCII.matcher(normalized).replaceAll("");
         return normalized.length() <= maxLen ? normalized : normalized.substring(0, maxLen);
     }

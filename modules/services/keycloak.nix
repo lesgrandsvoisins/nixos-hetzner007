@@ -82,7 +82,7 @@ in {
       enable = true;
       # package = keycloakWithGv;
       themes = {
-        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+        # gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
       };
       plugins = [
         # gvKeycloakProvider
