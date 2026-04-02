@@ -81,6 +81,12 @@ public final class GvIdentifierAuthenticator implements Authenticator {
             context.getAuthenticationSession().setAuthNote("gv_given_name", given);
             context.getAuthenticationSession().setAuthNote("gv_family_name", family);
             
+            formData.putSingle("gv_given_name", given);
+            formData.putSingle("gv_family_name", family);
+            formData.putSingle("firstName", given);
+            formData.putSingle("lastName", family);
+            
+
             context.success();
             return;
         }
