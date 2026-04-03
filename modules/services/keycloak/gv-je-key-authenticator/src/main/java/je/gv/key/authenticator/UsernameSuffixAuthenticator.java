@@ -22,6 +22,10 @@ public class UsernameSuffixAuthenticator implements Authenticator {
             username = username + SUFFIX;
         }
 
+        if (username != null && !username.endsWith("@@")) {
+            username = username.substring(0, username.length() - 2);
+        }
+
         UserModel user = context.getSession()
                 .users()
                 .getUserByUsername(context.getRealm(), username);

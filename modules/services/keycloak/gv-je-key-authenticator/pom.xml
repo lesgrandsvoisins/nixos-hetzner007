@@ -6,7 +6,7 @@
 
   <groupId>je.gv.key</groupId>
   <artifactId>gv-je-key-authenticator</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
 
   <name>Username suffixe adder of @GV.je</name>
   <!-- FIXME change it to the project's website -->
