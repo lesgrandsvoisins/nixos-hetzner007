@@ -1,0 +1,27 @@
+.gv-identifier-preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--pf-v5-global--BorderColor--100, #d2d2d2);
+  border-radius: 0.5rem;
+  background: var(--pf-v5-global--BackgroundColor--200, #f5f5f5);
+}
+
+.gv-identifier-preview__label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.gv-identifier-preview__value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.gv-identifier-preview__help {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* @import url(https://public.gv.je/static/web/gvbtn/gvbtn.css); */
