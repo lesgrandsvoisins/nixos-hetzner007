@@ -59,6 +59,7 @@
   };
   gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
   gvKeyRegistration = pkgs.callPackage keycloak/gv-key-registration.nix {inherit pkgs;};
+  gvJeKeyAuth = pkgs.callPackage ./keycloak/gv-je-key-authenticator.nix {inherit pkgs;};
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
@@ -86,7 +87,7 @@ in {
         gvKeycloakProvider
         "${gvKeycloakify}/gv-keycloakify.jar"
         gvKeyRegistration
-        (pkgs.callPackage ./keycloak/gv-je-key-authenticator.nix {inherit pkgs;})
+        gvJeKeyAuth
       ];
       database = {
         username = "keygvje";
