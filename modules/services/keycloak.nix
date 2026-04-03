@@ -86,6 +86,7 @@ in {
         gvKeycloakProvider
         "${gvKeycloakify}/gv-keycloakify.jar"
         gvKeyRegistration
+        (pkgs.callPackage ./keycloak/gv-je-key-authenticator.nix {inherit pkgs;})
       ];
       database = {
         username = "keygvje";
