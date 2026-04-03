@@ -9,7 +9,7 @@ import org.keycloak.authentication.AuthenticationFlowError;
 
 import jakarta.ws.rs.core.MultivaluedMap;
 
-public class UsernameSuffixAuthenticator implements Authenticator {
+public class GvJeKeyAuthenticator implements Authenticator {
 
     private static final String SUFFIX = "@gv.je";
 

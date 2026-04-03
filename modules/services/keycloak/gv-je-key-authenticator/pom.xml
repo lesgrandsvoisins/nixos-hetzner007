@@ -4,11 +4,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>je.gv.key</groupId>
+  <groupId>je.gv.key.authenticator</groupId>
   <artifactId>gv-je-key-authenticator</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
 
-  <name>Username suffixe adder of @GV.je</name>
+  <name>GV je key authenticator add @GV.je to username</name>
   <!-- FIXME change it to the project's website -->
   <url>http://key.gv.je</url>
 

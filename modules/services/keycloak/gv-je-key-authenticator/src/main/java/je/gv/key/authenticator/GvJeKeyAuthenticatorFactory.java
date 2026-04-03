@@ -1,6 +1,6 @@
 package je.gv.key.authenticator;
 
-import je.gv.key.authenticator.UsernameSuffixAuthenticator;
+import je.gv.key.authenticator.GvJeKeyAuthenticator;
 import org.keycloak.authentication.Authenticator;
 import org.keycloak.authentication.AuthenticatorFactory;
 import org.keycloak.models.KeycloakSession;
@@ -11,13 +11,13 @@ import org.keycloak.models.AuthenticationExecutionModel;
 
 import java.util.List;
 
-public class UsernameSuffixAuthenticatorFactory implements AuthenticatorFactory {
+public class GvJeKeyAuthenticatorFactory implements AuthenticatorFactory {
 
-    public static final String ID = "username-suffix-authenticator";
+    public static final String ID = "gv-je-key-authenticator";
 
     @Override
     public Authenticator create(KeycloakSession session) {
-        return new UsernameSuffixAuthenticator();
+        return new GvJeKeyAuthenticator();
     }
 
     @Override
