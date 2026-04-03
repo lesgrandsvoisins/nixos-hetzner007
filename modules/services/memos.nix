@@ -40,6 +40,7 @@ in {
       MEMOS_ADDR = vars.hosts.memos.addr;
       MEMOS_PORT = builtins.toString vars.ports.memos;
       # MEMOS_DATA = config.services.memos.dataDir;
+      MEMOS_DATA = config.services.memos.dataDir;
       # Better to configure MEMOS_DRIVER and MEMOS_DSN in /etc/memos/memos.env
       # MEMOS_DRIVER = "sqlite"; # sqlite, mysql, postgresql
       # MEMOS_DSN = config.services.memos.dataDir + "/memos_prod.db";
@@ -47,7 +48,7 @@ in {
       MEMOS_INSTANCE_URL = "https://${vars.domains.memos}";
       # MEMOS_DEMO = true;
       MEMOS_DRIVER = "postgresql";
-      MEMOS_DSN = "postgresql:///memos";
+      MEMOS_DSN = "postgresql:///memos2";
     };
     user = "memos";
     group = "services";
