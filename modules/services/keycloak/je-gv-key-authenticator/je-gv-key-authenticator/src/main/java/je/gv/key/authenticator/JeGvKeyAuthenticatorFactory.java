@@ -13,11 +13,9 @@ import java.util.List;
 
 public class JeGvKeyAuthenticatorFactory implements AuthenticatorFactory {
 
-
     public static final String PROVIDER_ID = "gv-je-key-authenticator";
     private static final String DISPLAY_TYPE = "GV.je @gv.je append suffixe";
     private static final String HELP_TEXT = "Adds @gv.je before validating";
-
 
     @Override
     public Authenticator create(KeycloakSession session) {

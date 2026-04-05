@@ -13,23 +13,22 @@ public class JeGvKeyAuthenticator implements Authenticator {
 
     private static final String SUFFIX = "@gv.je";
 
-
-
     @Override
     public void authenticate(AuthenticationFlowContext context) {
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
 
         String username = formData.getFirst("username");
 
-
         if (username != null && !username.endsWith(SUFFIX) && !username.contains("@")) {
             username = username + SUFFIX;
             formData.putSingle("username", username);
         }
+
         if (username != null && username.endsWith("@@")) {
             username = username.substring(0, username.length() - 2);
             formData.putSingle("username", username);
         }
+
 
         context.success();
     }
@@ -38,9 +37,6 @@ public class JeGvKeyAuthenticator implements Authenticator {
     // public void authenticate(AuthenticationFlowContext context) {
     //     MultivaluedMap<String, String> params = context.getHttpRequest().getDecodedFormParameters();
     //     String username = params.getFirst("username");
-
-
-
 
     //     UserModel user = context.getSession()
     //             .users()
