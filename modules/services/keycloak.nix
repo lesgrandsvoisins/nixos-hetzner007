@@ -58,7 +58,7 @@
     '';
   };
   gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
-  gvKeyRegistration = pkgs.callPackage keycloak/gv-key-registration.nix {inherit pkgs;};
+  jeGvKeyRegistration = pkgs.callPackage keycloak/je-gv-key-registration/package.nix {inherit pkgs;};
   jeGvKeyAuthenticator = pkgs.callPackage ./keycloak/je-gv-key-authenticator/package.nix {inherit pkgs;};
   jeGvKeyInitials = pkgs.callPackage ./keycloak/je-gv-key-initials/package.nix {inherit pkgs;};
 in {
@@ -81,13 +81,13 @@ in {
       enable = true;
       # package = keycloakWithGv;
       themes = {
-        gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
-        gv-key-registration = pkgs.callPackage ./keycloak/gv-key-registration-theme.nix {};
+        # gv-login = pkgs.callPackage ./keycloak/gv-keycloak-theme.nix {};
+        gv-key-registration = pkgs.callPackage ./keycloak/je-gv-key-registration/theme.nix {};
       };
       plugins = [
         gvKeycloakProvider
         "${gvKeycloakify}/gv-keycloakify.jar"
-        gvKeyRegistration
+        "${jeGvKeyRegistration}/je-gv-key-username-formaction.jar"
         "${jeGvKeyAuthenticator}/je-gv-key-authenticator.jar"
         "${jeGvKeyInitials}/je-gv-key-initials.jar"
         # gvKeyInitials
