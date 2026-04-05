@@ -89,7 +89,7 @@ in {
         "${gvKeycloakify}/gv-keycloakify.jar"
         "${jeGvKeyRegistration}/je-gv-key-username-formaction.jar"
         "${jeGvKeyAuthenticator}/je-gv-key-authenticator.jar"
-        "${jeGvKeyInitials}/je-gv-key-initials.jar"
+        # "${jeGvKeyInitials}/je-gv-key-initials.jar"
         # gvKeyInitials
       ];
       database = {

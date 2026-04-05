@@ -6,7 +6,7 @@
 
   <groupId>je.gv.key.username</groupId>
   <artifactId>je-gv-key-username-formaction</artifactId>
-  <version>0.0.22</version>
+  <version>0.0.23</version>
   <packaging>jar</packaging>
 
   <name>GV.je Username Registration FormAction</name>
