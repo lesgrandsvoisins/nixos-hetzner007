@@ -60,7 +60,7 @@
   gvKeycloakify = pkgs.callPackage keycloak/gv-keycloakify.nix {};
   gvKeyRegistration = pkgs.callPackage keycloak/gv-key-registration.nix {inherit pkgs;};
   jeGvKeyAuthenticator = pkgs.callPackage ./keycloak/je-gv-key-authenticator/package.nix {inherit pkgs;};
-  jeGvKeyInitials = pkgs.callPackage ./keycloak/gv-key-initials/package.nix {inherit pkgs;};
+  jeGvKeyInitials = pkgs.callPackage ./keycloak/je-gv-key-initials/package.nix {inherit pkgs;};
 in {
   users.users.keycloak = {
     uid = vars.uid.keycloak;
