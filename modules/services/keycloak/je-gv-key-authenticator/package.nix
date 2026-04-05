@@ -5,7 +5,7 @@ pkgs.maven.buildMavenPackage {
 
   src = ./je-gv-key-authenticator; # folder next to this .nix file
 
-  mvnHash = "";
+  mvnHash = "sha256-g9+ASiLN5pPOKfN1vIoU1AbonBfeTM8H8Me2SBM/yt4=";
 
   installPhase = ''
     runHook preInstall
