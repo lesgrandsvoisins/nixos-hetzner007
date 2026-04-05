@@ -1,11 +1,11 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.maven.buildMavenPackage {
   pname = "gv-je-key-authenticator";
-  version = "0.0.8";
+  version = "0.0.9";
 
   src = ./je-gv-key-authenticator; # folder next to this .nix file
 
-  mvnHash = "sha256-qwu1FftrzP6+73SEe1uznOEvq7BLbziVS5+IchPzNX8=";
+  mvnHash = "sha256-LH28BsYgeCkuLBaq+F56SzVlJuvkMwlR5rnCE3XOcbM=";
 
   installPhase = ''
     runHook preInstall

@@ -8,7 +8,7 @@ import je.gv.key.authenticator.JeGvKeyUsernamePasswordForm;
 
 public class JeGvKeyUsernamePasswordFormFactory extends UsernamePasswordFormFactory {
 
-    public static final String ID = "je-gv-key-authenticator-username-password-form";
+    public static final String ID = "je-gv-auth-form";
 
     @Override
     public Authenticator create(KeycloakSession session) {
