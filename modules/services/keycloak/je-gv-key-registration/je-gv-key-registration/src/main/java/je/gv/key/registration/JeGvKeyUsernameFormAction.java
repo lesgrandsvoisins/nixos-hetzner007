@@ -24,6 +24,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
     private static final String ATTR_FAMILY_NAME_FOR_ID = "lastName";
     private static final int NAME_SLICE = 4;
     private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
+    private static final String DOMAIN = "@gv.je";
 
     private static final Set<String> BLOCKED_SUBSTRINGS = Set.of(
             "admin", "root", "support", "owner", "test", "demo",
@@ -39,7 +40,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
         // Set form attributes
         form.setAttribute("firstName", existingFirstName);
         form.setAttribute("lastName", existingLastName);
-        form.setAttribute("jeGvKeyUsernameRule", "family[:4] + given[:4] + counter");
+        form.setAttribute("jeGvKeyUsernameRule", "family[:4] + given[:4] + counter + @gv.je");
 
         // If we have a generated username from a previous attempt, show it
         String generatedId = context.getAuthenticationSession().getAuthNote("gv_generated_identifier");
@@ -127,9 +128,9 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
         // We'll set attributes on the authentication session for the user creation step
         context.getAuthenticationSession().setAuthNote("username", identifier);
 
-        // Store the short version without domain if needed
-        String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
-        context.getAuthenticationSession().setAuthNote("shortUsername", shortUsername);
+        // // Store the short version without domain if needed
+        // String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
+        // context.getAuthenticationSession().setAuthNote("shortUsername", shortUsername);
 
         // These will be picked up by the user profile form
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
@@ -170,7 +171,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
         }
 
         for (int counter = 2; counter <= 9999; counter++) {
-            String candidate = base + counter;
+            String candidate = base + counter + DOMAIN;
             if (containsBlockedSubstring(candidate)) {
                 continue;
             }
