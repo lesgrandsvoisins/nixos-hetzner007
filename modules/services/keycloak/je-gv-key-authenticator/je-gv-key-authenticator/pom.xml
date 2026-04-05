@@ -6,7 +6,7 @@
 
   <groupId>je.gv.key.authenticator</groupId>
   <artifactId>je-gv-key-authenticator</artifactId>
-  <version>0.0.10</version>
+  <version>0.0.11</version>
 
   <name>GV je key authenticator add @GV.je to username</name>
   <!-- FIXME change it to the project's website -->
