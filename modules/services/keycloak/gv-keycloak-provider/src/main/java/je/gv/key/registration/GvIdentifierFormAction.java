@@ -27,6 +27,7 @@ public final class GvIdentifierFormAction implements FormAction {
   private static final String ATTR_FAMILY_NAME_FOR_ID = "lastName";
   private static final int NAME_SLICE = 4;
   private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
+  private static final String ATDOMAIN = "@gv.je";
 
   /**
    * Keep this short and editable. The goal is just to avoid obviously awkward
@@ -84,7 +85,7 @@ public final class GvIdentifierFormAction implements FormAction {
     formData.putSingle("gv_generated_identifier", identifier);
     formData.putSingle("username", identifier);
     // formData.putSingle("shortName",
-    // Pattern.compile("@gv.je").matcher(identifier).replaceAll(""));
+    // Pattern.compile(ATDOMAIN).matcher(identifier).replaceAll(""));
 
     context.success();
   }
@@ -95,7 +96,7 @@ public final class GvIdentifierFormAction implements FormAction {
     MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
 
     String identifier = field(formData, "gv_generated_identifier");
-    String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
+    String shortUsername = Pattern.compile(ATDOMAIN).matcher(identifier).replaceAll("");
 
     String family = firstNonBlank(
         field(formData, "user.attributes." + ATTR_FAMILY_NAME_FOR_ID),
@@ -151,7 +152,7 @@ public final class GvIdentifierFormAction implements FormAction {
     }
 
     for (int counter = 2; counter <= 9999; counter++) {
-      String candidate = base + counter; /* + "@gv.je"; */
+      String candidate = base + counter+ ATDOMAIN;
       if (containsBlockedSubstring(candidate)) {
         continue;
       }

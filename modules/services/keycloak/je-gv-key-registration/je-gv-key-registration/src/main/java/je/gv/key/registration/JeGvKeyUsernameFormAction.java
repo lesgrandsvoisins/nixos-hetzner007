@@ -24,7 +24,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
     private static final String ATTR_FAMILY_NAME_FOR_ID = "lastName";
     private static final int NAME_SLICE = 4;
     private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
-    private static final String DOMAIN = "@gv.je";
+    private static final String ATDOMAIN = "@gv.je";
 
     private static final Set<String> BLOCKED_SUBSTRINGS = Set.of(
             "admin", "root", "support", "owner", "test", "demo",
@@ -93,19 +93,23 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
         // Store the identifier in the form data so it gets passed to the next steps
         formData.putSingle("username", identifier);
         formData.putSingle("gv_generated_identifier", identifier);
+        formData.putSingle("initials", identifier.split("@")[0]);
 
-        // if (identifier != null) {
-        // // Set the username
-        // formData.putSingle("username", identifier);
+        // Also store in auth session for persistence across steps
+        context.getAuthenticationSession().setAuthNote("gv_generated_identifier", identifier);
+        context.getAuthenticationSession().setAuthNote("gv_generated_initials", identifier.split("@")[0]);
 
-        // // CRITICAL: Set a flag that this was auto-generated
-        // formData.putSingle("gv_generated_identifier", identifier);
+        // String shortUsername = Pattern.compile(ATDOMAIN).matcher(identifier).replaceAll("");
+        // context.getAuthenticationSession().setAuthNote("initials", shortUsername);
 
-        // // Also store in auth session for persistence across steps
-        // context.getAuthenticationSession().setAuthNote("gv_generated_identifier",
-        // identifier);
-
-        // context.success();
+        // These will be picked up by the user profile form
+        // 
+        
+        // if (given != null) {
+        //     formData.putSingle(ATTR_GIVEN_NAME_FOR_ID, given);
+        // }
+        // if (family != null) {
+        //     formData.putSingle(ATTR_FAMILY_NAME_FOR_ID, family);
         // }
 
         context.success();
@@ -117,6 +121,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
 
         // Get the stored values
         String identifier = context.getAuthenticationSession().getAuthNote("gv_generated_identifier");
+        String initials = context.getAuthenticationSession().getAuthNote("gv_generated_initials");
         String family = context.getAuthenticationSession().getAuthNote("gv_family_name");
         String given = context.getAuthenticationSession().getAuthNote("gv_given_name");
 
@@ -124,23 +129,6 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
             return;
         }
 
-        // The UserModel doesn't exist yet at this point in FormAction
-        // We'll set attributes on the authentication session for the user creation step
-        context.getAuthenticationSession().setAuthNote("username", identifier);
-
-        // // Store the short version without domain if needed
-        // String shortUsername = Pattern.compile("@gv.je").matcher(identifier).replaceAll("");
-        // context.getAuthenticationSession().setAuthNote("shortUsername", shortUsername);
-
-        // These will be picked up by the user profile form
-        MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
-        formData.putSingle("username", identifier);
-        if (given != null) {
-            formData.putSingle(ATTR_GIVEN_NAME_FOR_ID, given);
-        }
-        if (family != null) {
-            formData.putSingle(ATTR_FAMILY_NAME_FOR_ID, family);
-        }
     }
 
     @Override
@@ -171,7 +159,7 @@ public final class JeGvKeyUsernameFormAction implements FormAction {
         }
 
         for (int counter = 2; counter <= 9999; counter++) {
-            String candidate = base + counter + DOMAIN;
+            String candidate = base + counter + ATDOMAIN;
             if (containsBlockedSubstring(candidate)) {
                 continue;
             }
