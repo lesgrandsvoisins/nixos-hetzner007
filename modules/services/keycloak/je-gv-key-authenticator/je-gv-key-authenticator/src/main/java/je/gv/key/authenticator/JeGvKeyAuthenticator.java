@@ -6,11 +6,13 @@ import org.keycloak.models.UserModel;
 import org.keycloak.services.messages.Messages;
 import org.keycloak.authentication.AuthenticationFlowError;
 // import org.keycloak.events.Errors;
+import org.jboss.logging.Logger;
 
 import jakarta.ws.rs.core.MultivaluedMap;
 
 public class JeGvKeyAuthenticator implements Authenticator {
 
+    private static final Logger LOG = Logger.getLogger(JeGvKeyAuthenticator.class);
     private static final String SUFFIX = "@gv.je";
 
     @Override
@@ -18,15 +20,18 @@ public class JeGvKeyAuthenticator implements Authenticator {
         MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
 
         String username = formData.getFirst("username");
+        LOG.infof("Original username: %s", username);
 
         if (username != null && !username.endsWith(SUFFIX) && !username.contains("@")) {
-            username = username + SUFFIX;
-            formData.putSingle("username", username);
+            String updated = username + SUFFIX;
+            formData.putSingle("username", updated);
+            LOG.infof("Updated username: %s", updated);
         }
 
         if (username != null && username.endsWith("@@")) {
-            username = username.substring(0, username.length() - 2);
-            formData.putSingle("username", username);
+            String updated = username + SUFFIX;
+            formData.putSingle("username", updated);
+            LOG.infof("Updated username: %s", updated);
         }
 
 
