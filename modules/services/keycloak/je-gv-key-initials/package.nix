@@ -5,7 +5,7 @@ pkgs.maven.buildMavenPackage {
 
   src = ./je-gv-key-initials; # folder next to this .nix file
 
-  mvnHash = "";
+  mvnHash = "sha256-FzoOJXQdR37merf7Amgwr/a4qTbBYp5rNpl/El7+cDM=";
 
   installPhase = ''
     runHook preInstall
