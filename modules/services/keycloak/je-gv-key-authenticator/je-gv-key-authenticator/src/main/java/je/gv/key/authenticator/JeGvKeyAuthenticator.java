@@ -9,7 +9,7 @@ import org.keycloak.authentication.AuthenticationFlowError;
 
 import jakarta.ws.rs.core.MultivaluedMap;
 
-public class GvJeKeyAuthenticator implements Authenticator {
+public class JeGvKeyAuthenticator implements Authenticator {
 
     private static final String SUFFIX = "@gv.je";
 
@@ -22,7 +22,7 @@ public class GvJeKeyAuthenticator implements Authenticator {
             username = username + SUFFIX;
         }
 
-        if (username != null && !username.endsWith("@@")) {
+        if (username != null && username.endsWith("@@")) {
             username = username.substring(0, username.length() - 2);
         }
 
