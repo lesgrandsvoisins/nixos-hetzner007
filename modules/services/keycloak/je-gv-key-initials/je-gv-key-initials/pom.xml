@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>je.gv.key.initials</groupId>
-  <artifactId>gv-key-initials</artifactId>
-  <version>0.0.1</version>
+  <artifactId>je-gv-key-initials</artifactId>
+  <version>0.0.2</version>
   <packaging>jar</packaging>
 
   <name>GV Initials FormAction</name>

@@ -1,11 +1,11 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.maven.buildMavenPackage {
-  pname = "gv-key-initials";
-  version = "0.0.1";
+  pname = "je-gv-key-initials";
+  version = "0.0.2";
 
-  src = ./gv-key-initials; # folder next to this .nix file
+  src = ./je-gv-key-initials; # folder next to this .nix file
 
-  mvnHash = "sha256-Ai7Cg7yQpqHmJRtMdTpn1tC2upgBOlHdkzf/ieelHoU=";
+  mvnHash = "";
 
   installPhase = ''
     runHook preInstall

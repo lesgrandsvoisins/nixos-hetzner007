@@ -13,7 +13,11 @@ import java.util.List;
 
 public class JeGvKeyAuthenticatorFactory implements AuthenticatorFactory {
 
-    public static final String ID = "gv-je-key-authenticator";
+
+    public static final String PROVIDER_ID = "gv-je-key-authenticator";
+    private static final String DISPLAY_TYPE = "GV.je @gv.je append suffixe";
+    private static final String HELP_TEXT = "Adds @gv.je before validating";
+
 
     @Override
     public Authenticator create(KeycloakSession session) {
@@ -31,7 +35,7 @@ public class JeGvKeyAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getId() {
-        return ID;
+        return PROVIDER_ID;
     }
 
     @Override
@@ -46,18 +50,18 @@ public class JeGvKeyAuthenticatorFactory implements AuthenticatorFactory {
 
     @Override
     public String getReferenceCategory() {
-        return ID;
+        return PROVIDER_ID;
     }
 
 
     @Override
     public String getDisplayType() {
-        return "Append @gv.je to Username";
+        return DISPLAY_TYPE;
     }
 
     @Override
     public String getHelpText() {
-        return "Automatically appends @gv.je to the username before authentication.";
+        return HELP_TEXT;
     }
 
     @Override

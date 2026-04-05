@@ -8,13 +8,13 @@ import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.Config;
 import java.util.List;
-import je.gv.key.initials.GvInitialsFormAction;
+import je.gv.key.initials.JeGvInitialsFormAction;
 
-public class GvInitialsFormActionFactory implements FormActionFactory {
+public class JeGvInitialsFormActionFactory implements FormActionFactory {
 
-    public static final String PROVIDER_ID = "gv-identifier-form-action";
-    private static final String DISPLAY_TYPE = "GV Identifier Generation";
-    private static final String HELP_TEXT = "Generates a unique username from first and last names";
+    public static final String PROVIDER_ID = "je-gv-initials-form-action";
+    private static final String DISPLAY_TYPE = "GV.je initials Generation";
+    private static final String HELP_TEXT = "Generates initials from username initials@gv.je";
 
     @Override
     public String getId() {
@@ -33,7 +33,7 @@ public class GvInitialsFormActionFactory implements FormActionFactory {
 
     @Override
     public String getReferenceCategory() {
-        return "gv-identifier";
+        return "je-gv-key-initials";
     }
 
     @Override
@@ -62,7 +62,7 @@ public class GvInitialsFormActionFactory implements FormActionFactory {
 
     @Override
     public FormAction create(KeycloakSession session) {
-        return new GvInitialsFormAction();
+        return new JeGvInitialsFormAction();
     }
 
     @Override

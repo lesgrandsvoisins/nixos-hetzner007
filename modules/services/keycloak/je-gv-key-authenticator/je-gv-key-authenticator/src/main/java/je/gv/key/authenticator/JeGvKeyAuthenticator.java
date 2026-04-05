@@ -13,34 +13,53 @@ public class JeGvKeyAuthenticator implements Authenticator {
 
     private static final String SUFFIX = "@gv.je";
 
+
+
     @Override
     public void authenticate(AuthenticationFlowContext context) {
-        MultivaluedMap<String, String> params = context.getHttpRequest().getDecodedFormParameters();
-        String username = params.getFirst("username");
+        MultivaluedMap<String, String> formData = context.getHttpRequest().getDecodedFormParameters();
+
+        String username = formData.getFirst("username");
+
 
         if (username != null && !username.endsWith(SUFFIX) && !username.contains("@")) {
             username = username + SUFFIX;
+            formData.putSingle("username", username);
         }
-
         if (username != null && username.endsWith("@@")) {
             username = username.substring(0, username.length() - 2);
+            formData.putSingle("username", username);
         }
 
-        UserModel user = context.getSession()
-                .users()
-                .getUserByUsername(context.getRealm(), username);
-
-        if (user == null) {
-            context.failure(AuthenticationFlowError.INVALID_USER);
-            return;
-        }
-
-        context.setUser(user);
         context.success();
     }
 
+    // @Override
+    // public void authenticate(AuthenticationFlowContext context) {
+    //     MultivaluedMap<String, String> params = context.getHttpRequest().getDecodedFormParameters();
+    //     String username = params.getFirst("username");
+
+
+
+
+    //     UserModel user = context.getSession()
+    //             .users()
+    //             .getUserByUsername(context.getRealm(), username);
+
+    //     if (user == null) {
+    //         context.failure(AuthenticationFlowError.INVALID_USER);
+    //         return;
+    //     }
+
+    //     context.setUser(user);
+    //     context.success();
+    // }
+
     @Override
-    public void action(AuthenticationFlowContext context) {}
+    public void action(AuthenticationFlowContext context) {
+        // Not used
+        context.success();
+    }
 
     @Override
     public boolean requiresUser() {

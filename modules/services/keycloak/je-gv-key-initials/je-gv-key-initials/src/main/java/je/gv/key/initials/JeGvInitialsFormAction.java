@@ -18,7 +18,7 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.utils.FormMessage;
 
-public final class GvInitialsFormAction implements FormAction {
+public final class JeGvInitialsFormAction implements FormAction {
 
     private static final String ATTR_USERNAME_FOR_ID = "username";
     private static final Pattern NON_ASCII = Pattern.compile("[^a-z0-9]");
