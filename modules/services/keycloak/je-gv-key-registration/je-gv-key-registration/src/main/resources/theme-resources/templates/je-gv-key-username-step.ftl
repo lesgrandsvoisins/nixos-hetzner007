@@ -103,7 +103,7 @@
                     
                     if (firstName && lastName) {
                         const base = slugify(lastName) + slugify(firstName);
-                        const preview = base + '2'; // Simple preview
+                        const preview = base + '2@gv.je'; // Simple preview
                         
                         let previewDiv = document.querySelector('.generated-username-preview');
                         if (!previewDiv) {

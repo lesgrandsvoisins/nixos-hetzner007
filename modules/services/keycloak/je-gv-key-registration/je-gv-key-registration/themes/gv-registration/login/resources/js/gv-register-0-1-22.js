@@ -73,7 +73,7 @@
             const given = normalize(givenInput.value).slice(0, 4);
 
             // const suggestedUsername = family || given ? family + given + "2@" + window.location.hostname.split('.').slice(-2).join('.') : "—";
-            const suggestedUsername = family || given ? family + given + "2" : ""; // @gv.je" : "@gv.je";
+            const suggestedUsername = family || given ? family + given + "2@gv.je" : ""; // @gv.je" : "@gv.je";
             // previewValue.textContent = suggestedUsername;
             usernameInput.value = suggestedUsername;
         };
