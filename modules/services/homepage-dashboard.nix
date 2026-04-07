@@ -82,7 +82,7 @@ in {
           }
           {
             "Memos, le Twitter des Grands Voisins" = {
-              href = "https://memos.gv.je";
+              href = "https://memos.gv.je/explore";
               description = "Permet le fait de noter des memos privés, protégés (pour tous les utilisateurs identifiés) et publics";
               noticon = "sh-memos";
               icon = "mdi-bird";
