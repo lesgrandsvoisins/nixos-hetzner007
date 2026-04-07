@@ -686,6 +686,13 @@ in {
           reverse_proxy http://localhost:${builtins.toString vars.ports.xandikos}
         '';
       };
+      "fr.gv.je" = {
+        # "xcal.grandsvoisins.org" = {
+        extraConfig = ''
+          # authorize with identifiedpolicy
+          reverse_proxy http://localhost:8082
+        '';
+      };
       "rcal.gv.je" = {
         # "rcal.grandsvoisins.org" = {
         extraConfig = ''
