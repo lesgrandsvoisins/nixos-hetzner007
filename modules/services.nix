@@ -11,6 +11,7 @@ in {
     ./services/bind.nix
     ./services/caddy.nix
     ./services/gitea.nix
+    ./services/homepage-dashboard.nix
     ./services/keycloak.nix
     ./services/lemmy.nix
     ./services/lldap.nix
