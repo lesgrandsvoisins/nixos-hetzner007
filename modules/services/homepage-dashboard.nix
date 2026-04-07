@@ -8,6 +8,7 @@
 in {
   services.homepage-dashboard = {
     enable = true;
+    allowedHosts = ["localhost" "fr.gv.je"];
 
     settings = {
       title = "GV.je Tableau de bord !";
