@@ -26,7 +26,11 @@ in {
       };
     };
     widgets = [
-      {logo = {icon = "https://public.gv.je/static/web/fr.gv.je/gv1.png";};}
+      {
+        logo = {
+          icon = "https://public.gv.je/static/web/fr.gv.je/gv1.png";
+        };
+      }
       {
         greeting = {
           text_size = "l";
@@ -125,7 +129,7 @@ in {
         ];
       }
       {
-        Nouvelles = [
+        "Nouvelles" = [
           {
             "Memos, le Twitter des Grands Voisins" = {
               href = "https://memos.gv.je/explore";
@@ -184,13 +188,6 @@ in {
               description = "Un serveur de documents en format Markdown pouvant être modifiés par plusieurs personnes en même temps.";
             };
           }
-          {
-            "Miniflux : Lecture RSS (consolidation d'informations)" = {
-              href = "https://miniflux.gv.je";
-              icon = "mdi-alpha-m";
-              description = "Vous pouvez consolider vos flux rss";
-            };
-          }
         ];
       }
       {
@@ -220,6 +217,13 @@ in {
       }
       {
         "Nouveaux services des GV" = [
+          {
+            "Miniflux : Lecture RSS (consolidation d'informations)" = {
+              href = "https://miniflux.gv.je";
+              icon = "mdi-alpha-m";
+              description = "Vous pouvez consolider vos flux rss";
+            };
+          }
           {
             "Vikunja gestionnaire des tâches à faire en équipe" = {
               href = "https://vikunja.gv.je";
