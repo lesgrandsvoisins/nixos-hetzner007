@@ -91,7 +91,7 @@ in {
                 url = "https://miniflux.gv.je/v1/feeds/2/entries?limit=5&order=id&direction=asc";
                 display = "dynamic-list";
                 headers = {
-                  X-API-TOKEN = "3421d3702a8784ea19d7d94f5ef40f6e86b4af02cb6a8362f5492a4ad7203efb";
+                  X-AUTH-TOKEN = "3421d3702a8784ea19d7d94f5ef40f6e86b4af02cb6a8362f5492a4ad7203efb";
                 };
                 mappings = {
                   items = "entries";
