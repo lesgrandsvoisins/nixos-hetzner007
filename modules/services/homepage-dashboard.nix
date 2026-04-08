@@ -120,7 +120,7 @@ in {
     ];
     services = [
       {
-        "Votre compte @gv.je unifié" = [
+        "VOTRE compte @gv.je unifié" = [
           {
             "CREER & GERER votre compte unifié @GV.je" = {
               href = "https://key.gv.je/realms/master/account";
@@ -154,7 +154,7 @@ in {
         ];
       }
       {
-        "Accès ouverts" = [
+        "OUVERTS sans compte" = [
           {
             "VISIO : Passez nous voir en virtual" = {
               href = "https://meet.lesgrandsvoisins.com/";
@@ -215,7 +215,7 @@ in {
         ];
       }
       {
-        "VOIR les nouvelles" = [
+        "NOUVELLES des Grands Voisins (partie memos)" = [
           {
             "Memos, le Twitter des Grands Voisins" = {
               href = "https://memos.gv.je/explore";
@@ -238,6 +238,31 @@ in {
                   target = "{url}";
                 };
               };
+            };
+          }
+        ];
+      }
+      {
+        "PROFITEZ des nouveaux services des GV" = [
+          {
+            "CONSOLIDER vos flux RSS" = {
+              href = "https://miniflux.gv.je";
+              icon = "mdi-alpha-m";
+              description = "Vous pouvez consolider vos flux rss";
+            };
+          }
+          {
+            "GERER des tâches avec Vikunja" = {
+              href = "https://vikunja.gv.je";
+              icon = "si-vikunja";
+              description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
+            };
+          }
+          {
+            "GERER du code source avec Forgejo" = {
+              description = "Serveur de développement et de codes sources";
+              href = "https://forgejo.roses.gv.je/user/login";
+              icon = "si-forgejo";
             };
           }
         ];
@@ -268,39 +293,14 @@ in {
         ];
       }
       {
-        "Nouveaux services des GV" = [
-          {
-            "CONSOLIDER vos flux RSS" = {
-              href = "https://miniflux.gv.je";
-              icon = "mdi-alpha-m";
-              description = "Vous pouvez consolider vos flux rss";
-            };
-          }
-          {
-            "GERER des tâches avec Vikunja" = {
-              href = "https://vikunja.gv.je";
-              icon = "si-vikunja";
-              description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
-            };
-          }
-          {
-            "GERER du code source avec Forgejo" = {
-              description = "Serveur de développement et de codes sources";
-              href = "https://forgejo.roses.gv.je/user/login";
-              icon = "si-forgejo";
-            };
-          }
-        ];
-      }
-      {
-        "Agenda des GV" = [
+        "AGENDA des GV" = [
           {
             Agenda = {
               icon = "mdi-calendar-month";
               href = "https://www.lesgrandsvoisins.com/fr/";
-              description = "Calendrier Radicale par pcal.gv.je (public) et par rcal.gv.je";
+              description = "Calendrier ";
               widget = {
-                type = "calendar";
+                type = "agenda";
                 firstDayInWeek = "monday";
                 view = "monthly";
                 maxEvents = 25;
@@ -325,7 +325,7 @@ in {
         ];
       }
       {
-        "Média sociaux des GV" = [
+        "MEDIAS SOCIAUX des GV" = [
           {
             "DEV Github" = {
               description = "lesgrandsvoisins sur GitHub";
@@ -350,7 +350,7 @@ in {
         ];
       }
       {
-        "Dons et souscriptions aux Grands Voisins" = [
+        "DONS aux Grands Voisins" = [
           {
             "Dons via HelloAsso" = {
               description = "Dons HelloAsso pour Les Grands Voisins";
