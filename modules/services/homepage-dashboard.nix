@@ -234,6 +234,10 @@ in {
               icon = "si-forgejo";
             };
           }
+        ];
+      }
+      {
+        "Agenda des GV" = [
           {
             Agenda = {
               icon = "mdi-calendar-month";
