@@ -10,10 +10,10 @@ in {
     "d /etc/miniflux 0755 miniflux services"
     "f /etc/miniflux/.secret 0600 miniflux services"
   ];
-  users.users.miniflux = {
-    uid = vars.uid.miniflux;
-    group = "services";
-  };
+  # users.users.miniflux = {
+  #   uid = vars.uid.miniflux;
+  #   group = "services";
+  # };
   services.caddy.virtualHosts."miniflux.gv.je" = {
     extraConfig = ''
       reverse_proxy http://localhost:${builtins.toString vars.ports.miniflux}
