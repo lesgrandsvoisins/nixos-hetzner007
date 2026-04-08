@@ -6,6 +6,13 @@
   ...
 }: let
 in {
+  services.caddy.virtualHosts."www.gv.je" = {
+    # "xcal.grandsvoisins.org" = {
+    extraConfig = ''
+      # authorize with identifiedpolicy
+      reverse_proxy http://localhost:8082
+    '';
+  };
   services.homepage-dashboard = {
     enable = true;
     allowedHosts = "localhost:8082,localhost,fr.gv.je,fr.gv.je:8082";
@@ -411,7 +418,7 @@ in {
           {
             Login = {
               description = "Identifiez-vous pour avoir votre propre tableau de bord personalisé.";
-              href = "https://www.gv.je/auth/login";
+              href = "https:homarr.gv.je/auth/login";
               icon = "si-wagtail";
             };
           }
@@ -432,14 +439,14 @@ in {
           {
             "Admin des GV" = {
               description = "Accès pour les administrateurs des GV";
-              href = "https://www.gv.je/boards/Admin";
+              href = "https://homarr.gv.je/boards/Admin";
               icon = "si-homarr";
             };
           }
           {
             "Applications des GV.je" = {
               description = "Tous les comptes GV.je disposent de ces services";
-              href = "https://www.gv.je/boards/Compte";
+              href = "https://homarr.gv.je/boards/Compte";
               icon = "mdi-account";
             };
           }

@@ -36,7 +36,7 @@ in {
         redir https://www.gv.je{uri} 301
       '';
     };
-    "www.gv.je" = {
+    "homarr.gv.je" = {
       extraConfig = ''
         reverse_proxy http://localhost:${builtins.toString vars.ports.homarr}
       '';
