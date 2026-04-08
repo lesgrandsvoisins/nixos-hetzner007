@@ -300,9 +300,9 @@ in {
               href = "https://www.lesgrandsvoisins.com/fr/";
               description = "Calendrier ";
               widget = {
-                type = "agenda";
+                type = "calendar";
                 firstDayInWeek = "monday";
-                view = "monthly";
+                view = "agenda";
                 maxEvents = 25;
                 showTime = true;
                 timezone = "Europe/Paris";
