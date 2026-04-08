@@ -89,7 +89,6 @@ in {
               widget = {
                 type = "freshrss";
                 url = "https://freshrss.gv.je";
-                display = "dynamic-list";
                 username = "homepage";
                 password = "9mWGu7G";
               };
