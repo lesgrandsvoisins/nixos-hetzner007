@@ -5,13 +5,48 @@
   vars,
   ...
 }: let
-  homepage = pkgs.homepage-dashboard.overrideAttrs (old: {
-    postInstall =
-      (old.postInstall or "")
-      + ''
-        mkdir -p $out/public/widgets
-        cp ${./homepage-dashboard/gvbtn.html} $out/public/widgets/
-      '';
+  homepage = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: rec {
+    pname = "homepage-dashboard-with-gv-widget";
+    version = "v0.8.0";
+
+    # Include your custom widget files in the source
+    src = pkgs.lib.cleanSource ./homepage-dashboard;
+
+    # Add post-install step to copy widget into Homepage static widgets folder
+    installPhase = ''
+      mkdir -p $out/widgets/custom
+      cp -r ${src}/component.jsx $out/widgets/gvbtn/
+      cp -r ${src}/widget.js $out/widgets/gvbtn/
+      cp -r ${src}/gvbtn.css $out/widgets/gvbtn/
+      # mkdir -p $out/config
+      # SERVICES_YAML=$out/config/services.yaml
+      # if [ ! -f "$SERVICES_YAML" ]; then
+      #   echo "# Auto-generated services.yaml" > $SERVICES_YAML
+      #   echo "services:" >> $SERVICES_YAML
+      # fi
+
+      # # Append the GV.je widget if not already present
+      # if ! grep -q "GV.je" $SERVICES_YAML; then
+      #   cat <<EOF >> $SERVICES_YAML
+      #   - My Services:
+      #     - GV.je:
+      #         icon: https://public.gv.je/static/web/gvbtn/gv-logo-512x512.png
+      #         href: https://www.gv.je
+      #         description: GV.je
+      #         widget:
+      #           type: custom
+      #           component: widgets/custom/component.jsx
+      #           css: widgets/custom/custom.css
+      #   EOF
+      # fi
+    '';
+
+    meta = with pkgs.lib; {
+      description = "Homepage Dashboard with a custom GV.je static widget";
+      homepage = "https://github.com/gethomepage/homepage";
+      license = licenses.mit;
+      maintainers = with maintainers; [];
+    };
   });
 in {
   services.caddy.virtualHosts."www.gv.je" = {
@@ -47,9 +82,9 @@ in {
           icon = "https://public.gv.je/static/web/fr.gv.je/gv1.png";
         };
       }
-      {
-        gvbtn = {};
-      }
+      # {
+      #   gvbtn = {};
+      # }
       {
         greeting = {
           text_size = "l";
@@ -108,10 +143,11 @@ in {
               href = "https://www.gv.je";
               description = "Tableau de bord des Grands Voisins";
               icon = "si-homepage";
-              # widget = {
-              #   type = "gvbtn";
-              #   url = "https://www.gv.je";
-              # };
+              widget = {
+                type = "custom";
+                component = "wigets/gvbtn/component.jsx";
+                css = "wigets/gvbtn/gvbtn.css";
+              };
             };
           }
         ];
