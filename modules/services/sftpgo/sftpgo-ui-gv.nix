@@ -8,6 +8,7 @@ pkgs.stdenv.mkDerivation {
     ''
       mkdir -p $out/templates
       mkdir -p $out/templates/common
+      mkdir -p $out/templates/webadmin
       mkdir -p $out/images
     ''
     ''
