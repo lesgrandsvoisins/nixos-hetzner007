@@ -81,34 +81,6 @@ in {
             };
           }
           {
-            "Memos, le Twitter des Grands Voisins" = {
-              href = "https://memos.gv.je/explore";
-              description = "Permet le fait de noter des memos privés, protégés (pour tous les utilisateurs identifiés) et publics";
-              noticon = "sh-memos";
-              icon = "mdi-bird";
-              widget = {
-                type = "customapi";
-                url = "https://miniflux.gv.je/v1/feeds/2/entries?limit=5&order=published_at&direction=desc";
-                display = "dynamic-list";
-                headers = {
-                  X-AUTH-TOKEN = "3421d3702a8784ea19d7d94f5ef40f6e86b4af02cb6a8362f5492a4ad7203efb";
-                };
-                mappings = {
-                  items = "entries";
-                  name = "title";
-                  label = "published_at";
-                  limit = "6";
-                  format = "date";
-                  target = "{url}";
-                };
-                # display = "block";
-                # mappings = {
-
-                # };
-              };
-            };
-          }
-          {
             "Ce fr.gv.je, votre tableau de bord" = {
               href = "https://fr.gv.je";
               description = "Tableau de bord des Grands Voisins";
@@ -153,6 +125,34 @@ in {
         ];
       }
       {
+        "Memos, le Twitter des Grands Voisins" = {
+          href = "https://memos.gv.je/explore";
+          description = "Permet le fait de noter des memos privés, protégés (pour tous les utilisateurs identifiés) et publics";
+          noticon = "sh-memos";
+          icon = "mdi-bird";
+          widget = {
+            type = "customapi";
+            url = "https://miniflux.gv.je/v1/feeds/2/entries?limit=5&order=published_at&direction=desc";
+            display = "dynamic-list";
+            headers = {
+              X-AUTH-TOKEN = "3421d3702a8784ea19d7d94f5ef40f6e86b4af02cb6a8362f5492a4ad7203efb";
+            };
+            mappings = {
+              items = "entries";
+              name = "title";
+              label = "published_at";
+              limit = "6";
+              format = "date";
+              target = "{url}";
+            };
+            # display = "block";
+            # mappings = {
+
+            # };
+          };
+        };
+      }
+      {
         "Votre compte @gv.je unifié" = [
           {
             "Keycloak pour la connexion unifiée" = {
@@ -189,8 +189,7 @@ in {
               href = "https://miniflux.gv.je";
               icon = "mdi-alpha-m";
               description = "Vous pouvez consolider vos flux rss";
-              
-            }
+            };
           }
         ];
       }
