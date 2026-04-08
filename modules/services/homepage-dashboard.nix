@@ -105,10 +105,10 @@ in {
               href = "https://www.gv.je";
               description = "Tableau de bord des Grands Voisins";
               icon = "si-homepage";
-              # widget = {
-              #   type = "gvbtn";
-              #   url = "https://fr.gv.je";
-              # };
+              widget = {
+                type = "gvbtn";
+                url = "https://www.gv.je";
+              };
             };
           }
         ];
