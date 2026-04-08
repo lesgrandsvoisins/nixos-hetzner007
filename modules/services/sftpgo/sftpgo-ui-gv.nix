@@ -13,6 +13,8 @@ pkgs.stdenv.mkDerivation {
     ''
       cp -a ${pkgs.sftpgo}/share/sftpgo/templates/common/base.html $out/templates/common/base.html
       cp -a ${pkgs.sftpgo}/share/sftpgo/templates/common/base.html $out/templates/common/baselogin.html
+      cp -a ${pkgs.sftpgo}/share/sftpgo/templates/webadmin/base.html $out/templates/webadmin/base.html
+      cp -a ${pkgs.sftpgo}/share/sftpgo/templates/webadmin/base.html $out/templates/webadmin/baselogin.html
     ''
     (pkgs.lib.strings.concatMapStrings (x: ''
         sed -i 's/<\/head>/<link type="text\/css" rel="stylesheet" href="https:\/\/public.gv.je\/static\/web\/gvbtn\/gvbtn.css">\n<\/head>/' ${x}
