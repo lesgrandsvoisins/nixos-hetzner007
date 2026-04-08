@@ -76,6 +76,7 @@ in {
       {
         logo = {
           icon = "https://public.gv.je/static/web/fr.gv.je/gv1.png";
+          href = "https://www.gv.je";
         };
       }
       # {
@@ -139,11 +140,11 @@ in {
               href = "https://www.gv.je";
               description = "Tableau de bord des Grands Voisins";
               icon = "si-homepage";
-              widget = {
-                type = "custom";
-                component = "wigets/gvbtn/component.jsx";
-                css = "wigets/gvbtn/gvbtn.css";
-              };
+              # widget = {
+              #   type = "custom";
+              #   component = "wigets/gvbtn/component.jsx";
+              #   css = "wigets/gvbtn/gvbtn.css";
+              # };
             };
           }
         ];
