@@ -110,7 +110,7 @@ in {
             enable_web_client = true;
             enable_web_admin = true;
             # disabled_login_methods = 0;
-            disabled_login_methods = 9;
+            # disabled_login_methods = 9;
             enable_https = true;
             # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
             # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";
