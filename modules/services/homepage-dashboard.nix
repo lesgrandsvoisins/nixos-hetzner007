@@ -87,16 +87,11 @@ in {
               noticon = "sh-memos";
               icon = "mdi-bird";
               widget = {
-                type = "customapi";
-                url = "https://memos.gv.je/api/v1/memos?pageSize=10";
+                type = "freshrss";
+                url = "https://freshrss.gv.je";
                 display = "dynamic-list";
-                mappings = {
-                  items = "memos";
-                  name = "name";
-                  label = "content";
-                  target = "https://memos.gv.je/{name}";
-                  limit = 5;
-                };
+                username = "homepage";
+                password = "9mWGu7G";
               };
             };
           }
