@@ -89,15 +89,17 @@ in {
               widget = {
                 type = "customapi";
                 url = "https://miniflux.gv.je/v1/feeds/2/entries?limit=5&order=id&direction=asc";
-                username = "minifluxhomepage";
-                password = "6DYVyRhZG4QTNsx6rhMj";
                 display = "dynamic-list";
+                headers = {
+                  X-API-TOKEN = "3421d3702a8784ea19d7d94f5ef40f6e86b4af02cb6a8362f5492a4ad7203efb";
+                };
                 mappings = {
                   items = "entries";
                   name = "title";
                   label = "published_at";
                   limit = "6";
                   format = "date";
+                  target = "{url}"
                 };
                 # display = "block";
                 # mappings = {
