@@ -28,9 +28,9 @@ pkgs.stdenv.mkDerivation {
         "$out/templates/webadmin/baselogin.html"
       ])
     (pkgs.lib.strings.concatMapStrings (x: "ln -s ${pkgs.sftpgo}/share/sftpgo/templates/${x} $out/templates/${x}\n") [
-      "email/*"
-      "webadmin/*"
-      "webclient/*"
+      # "email/*"
+      # "webadmin/*"
+      # "webclient/*"
       "common/changepassword.html"
       "common/forgot-password.html"
       "common/login.html"
