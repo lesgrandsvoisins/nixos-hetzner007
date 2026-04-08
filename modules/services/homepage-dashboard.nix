@@ -246,7 +246,7 @@ in {
         "PROFITEZ des nouveaux services des GV" = [
           {
             "CONSOLIDER vos flux RSS" = {
-              href = "https://miniflux.gv.je";
+              href = "https://miniflux.gv.je/oauth2/oidc/redirect";
               icon = "mdi-alpha-m";
               description = "Vous pouvez consolider vos flux rss";
             };
