@@ -26,6 +26,7 @@
     memos = 1511;
     named = 991;
     lemmy = 1512;
+    freshrss = 1513;
   };
   ports = {
     postgresql = 5432;
