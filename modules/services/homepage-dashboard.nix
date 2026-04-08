@@ -184,6 +184,14 @@ in {
               description = "Un serveur de documents en format Markdown pouvant être modifiés par plusieurs personnes en même temps.";
             };
           }
+          {
+            "Miniflux : Lecture RSS (consolidation d'informations)" = {
+              href = "https://miniflux.gv.je";
+              icon = "mdi-alpha-m";
+              description = "Vous pouvez consolider vos flux rss";
+              
+            }
+          }
         ];
       }
       {
