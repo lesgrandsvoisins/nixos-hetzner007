@@ -87,10 +87,9 @@ in {
               noticon = "sh-memos";
               icon = "mdi-bird";
               widget = {
-                type = "freshrss";
-                url = "https://freshrss.gv.je";
-                username = "homepage";
-                password = "9mWGu7G";
+                type = "miniflux";
+                url = "https://miniflux.gv.je";
+                key = "c7c923bab3944a712162a54db5a1a42c850a2b10b79c0c8c80e107ac74f6fd75";
               };
             };
           }
