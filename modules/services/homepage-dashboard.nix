@@ -311,7 +311,7 @@ in {
                     type = "ical";
                     url = "https://pcal.gv.je/public/public";
                     name = "Agenda Les Grands Voisins par Radicale";
-                    params = {showName = true;};
+                    params = {showName = false;};
                   }
                   {
                     type = "ical";
