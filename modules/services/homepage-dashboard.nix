@@ -129,7 +129,7 @@ in {
             };
           }
           {
-            "SFTP casiers numériques individuels" = {
+            "STOCKERvos fichiers dans votre casier électronique SFTP" = {
               href = "https://sftpgo.gv.je/";
               icon = "mdi-folder-key-network";
               noticon = "sh-sftpgo";
@@ -137,18 +137,18 @@ in {
             };
           }
           {
-            "Favoris (Linkding)" = {
+            "MARQUEZ les pages webs et les retrouver" = {
               description = "Partager des fichiers et des dossiers";
               href = "https://linkding.lesgrandsvoisins.com/";
               icon = "mdi-paperclip";
             };
           }
           {
-            "HedgeDoc carnets collaboratifs en markdown" = {
+            "EDITEZ des carnets collaboratifs en markdown" = {
               href = "https://mark.lesgrandsvoisins.com/auth/oauth2";
               noticon = "https://mark.lesgrandsvoisins.com/banner/banner_vertical_color.svg";
               icon = "si-hedgedoc";
-              description = "Un serveur de documents en format Markdown pouvant être modifiés par plusieurs personnes en même temps.";
+              description = "Notre serveur Hedgedoc fournit documents en format Markdown pouvant être modifiés par plusieurs personnes en même temps.";
             };
           }
         ];
@@ -163,28 +163,28 @@ in {
             };
           }
           {
-            "Documentation sur les Grands Voisins (Civisme, Arts plastiques, Numérique)" = {
+            "DOCUMETNATION sur les Grands Voisins (Civisme, Arts plastiques, Numérique)" = {
               href = "https://wiki.grandsvoisins.org";
               description = "Voici toute la documentation sur Les Grands Voisins (voir numérique pour l'usage de nos services auto-hébergés)";
               icon = "si-wikidotjs";
             };
           }
-          {
-            "Ce @GV.je, votre tableau de bord" = {
-              href = "https://www.gv.je";
-              description = "Tableau de bord des Grands Voisins";
-              icon = "si-homepage";
-              # widget = {
-              #   type = "custom";
-              #   component = "wigets/gvbtn/component.jsx";
-              #   css = "wigets/gvbtn/gvbtn.css";
-              # };
-            };
-          }
+          # {
+          #   "TABLEAU DE BORD @GV.je, votre tableau de bord" = {
+          #     href = "https://www.gv.je";
+          #     description = "Tableau de bord des Grands Voisins";
+          #     icon = "si-homepage";
+          #     # widget = {
+          #     #   type = "custom";
+          #     #   component = "wigets/gvbtn/component.jsx";
+          #     #   css = "wigets/gvbtn/gvbtn.css";
+          #     # };
+          #   };
+          # }
         ];
       }
       {
-        "Sites webs publics" = [
+        "VISITEZ nos sites webs publics" = [
           {
             "LesGrandsVoisins.fr est notre portail" = {
               href = "https://www.lesgrandsvoisins.com/";
@@ -215,7 +215,7 @@ in {
         ];
       }
       {
-        "Nouvelles" = [
+        "VOIR les nouvelles" = [
           {
             "Memos, le Twitter des Grands Voisins" = {
               href = "https://memos.gv.je/explore";
@@ -243,26 +243,26 @@ in {
         ];
       }
       {
-        "En lien avec votre compte @gv.je unifié" = [
+        "GERER vos services unifiés @gv.je" = [
           {
-            "Roundcube Webmail" = {
+            "ENVOYER ET RECEVOIR vos emails @gv.je" = {
               href = "https://mail.lesgrandsvoisins.com";
-              description = "Consulter vos courriels des comptes des GV avec pour login le courriel du compte GV et le mot de passe de votre compte des GV.";
+              description = "Roundcube Webmail : Consulter vos courriels des comptes des GV avec pour login le courriel du compte GV et le mot de passe de votre compte des GV.";
               icon = "si-roundcube";
             };
           }
           {
-            "Edit web et annuaire" = {
+            "EDITER votre fiche annuaire sur le web avec Wagtail" = {
               description = "Administration du portail Wagtail";
               href = "https://www.lesgrandsvoisins.com/cms-admin/";
               icon = "si-wagtail";
             };
           }
           {
-            "Guichet du profil et du mot de passe" = {
+            "GERE Votre compte avec Guichet " = {
               href = "https://guichet.resdigita.com/user";
               icon = "https://guichet.resdigita.com/static/image/outilsinformatiques.svg";
-              description = "Depuis Guichet, vous pouvez ajouter et supprimer des boîtes-aux-lettres de courriel.";
+              description = "Depuis Guichet du profil et du mot de passe, vous pouvez ajouter et supprimer des boîtes-aux-lettres de courriel.";
             };
           }
         ];
@@ -270,21 +270,21 @@ in {
       {
         "Nouveaux services des GV" = [
           {
-            "Miniflux : Lecture RSS (consolidation d'informations)" = {
+            "CONSOLIDER vos flux RSS" = {
               href = "https://miniflux.gv.je";
               icon = "mdi-alpha-m";
               description = "Vous pouvez consolider vos flux rss";
             };
           }
           {
-            "Vikunja gestionnaire des tâches à faire en équipe" = {
+            "GERER des tâches avec Vikunja" = {
               href = "https://vikunja.gv.je";
               icon = "si-vikunja";
               description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
             };
           }
           {
-            "Forgejo.roses.gv.je" = {
+            "GERER du code source avec Forgejo" = {
               description = "Serveur de développement et de codes sources";
               href = "https://forgejo.roses.gv.je/user/login";
               icon = "si-forgejo";
