@@ -191,7 +191,7 @@ in {
         ];
       }
       {
-        "Services en lien avec votre compte @gv.je unifié" = [
+        "En lien avec votre compte @gv.je unifié" = [
           {
             "Roundcube Webmail" = {
               href = "https://mail.lesgrandsvoisins.com";
