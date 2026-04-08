@@ -94,8 +94,8 @@ in {
                 display = "dynamic-list";
                 mappings = {
                   items = "entries";
-                  label = "title";
-                  name = "published_at";
+                  name = "title";
+                  label = "published_at";
                   limit = "6";
                   format = "date";
                 };
