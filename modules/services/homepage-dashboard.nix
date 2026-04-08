@@ -129,7 +129,7 @@ in {
             };
           }
           {
-            "STOCKERvos fichiers dans votre casier électronique SFTP" = {
+            "STOCKER vos fichiers dans votre casier électronique SFTP" = {
               href = "https://sftpgo.gv.je/";
               icon = "mdi-folder-key-network";
               noticon = "sh-sftpgo";
@@ -163,7 +163,7 @@ in {
             };
           }
           {
-            "DOCUMETNATION sur les Grands Voisins (Civisme, Arts plastiques, Numérique)" = {
+            "DOCUMENTER-VOUS sur les Grands Voisins (Civisme, Arts plastiques, Numérique)" = {
               href = "https://wiki.grandsvoisins.org";
               description = "Voici toute la documentation sur Les Grands Voisins (voir numérique pour l'usage de nos services auto-hébergés)";
               icon = "si-wikidotjs";
@@ -297,7 +297,7 @@ in {
           {
             Agenda = {
               icon = "mdi-calendar-month";
-              href = "https://rcal..gv.je";
+              href = "https://www.lesgrandsvoisins.com/fr/";
               description = "Calendrier Radicale par pcal.gv.je (public) et par rcal.gv.je";
               widget = {
                 type = "calendar";
