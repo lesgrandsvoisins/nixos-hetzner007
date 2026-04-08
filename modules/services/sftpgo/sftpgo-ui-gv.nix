@@ -8,11 +8,14 @@ pkgs.stdenv.mkDerivation {
     ''
       mkdir -p $out/templates
       mkdir -p $out/templates/common
+      mkdir -p $out/templates/webadmin
       mkdir -p $out/images
     ''
     ''
       cp -a ${pkgs.sftpgo}/share/sftpgo/templates/common/base.html $out/templates/common/base.html
       cp -a ${pkgs.sftpgo}/share/sftpgo/templates/common/base.html $out/templates/common/baselogin.html
+      cp -a ${pkgs.sftpgo}/share/sftpgo/templates/webadmin/base.html $out/templates/webadmin/base.html
+      cp -a ${pkgs.sftpgo}/share/sftpgo/templates/webadmin/base.html $out/templates/webadmin/baselogin.html
     ''
     (pkgs.lib.strings.concatMapStrings (x: ''
         sed -i 's/<\/head>/<link type="text\/css" rel="stylesheet" href="https:\/\/public.gv.je\/static\/web\/gvbtn\/gvbtn.css">\n<\/head>/' ${x}
@@ -21,11 +24,13 @@ pkgs.stdenv.mkDerivation {
       '') [
         "$out/templates/common/base.html"
         "$out/templates/common/baselogin.html"
+        "$out/templates/webadmin/base.html"
+        "$out/templates/webadmin/baselogin.html"
       ])
     (pkgs.lib.strings.concatMapStrings (x: "ln -s ${pkgs.sftpgo}/share/sftpgo/templates/${x} $out/templates/${x}\n") [
-      "email"
-      "webadmin"
-      "webclient"
+      "email/*"
+      "webadmin/*"
+      "webclient/*"
       "common/changepassword.html"
       "common/forgot-password.html"
       "common/login.html"
