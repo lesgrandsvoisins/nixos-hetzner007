@@ -284,7 +284,7 @@ in {
             };
           }
           {
-            "GERE Votre compte avec Guichet " = {
+            "GERER Votre compte avec Guichet " = {
               href = "https://guichet.resdigita.com/user";
               icon = "https://guichet.resdigita.com/static/image/outilsinformatiques.svg";
               description = "Depuis Guichet du profil et du mot de passe, vous pouvez ajouter et supprimer des boîtes-aux-lettres de courriel.";
