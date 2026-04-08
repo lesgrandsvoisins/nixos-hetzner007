@@ -10,6 +10,7 @@ in {
     "d /etc/miniflux 0755 miniflux services"
     "f /etc/miniflux/.secret 0600 miniflux services"
     "f /etc/miniflux/.oidc.secret 0600 miniflux services"
+    "f /etc/miniflux/.env 0600 miniflux services"
   ];
   # users.users.miniflux = {
   #   uid = vars.uid.miniflux;
@@ -23,7 +24,7 @@ in {
   systemd.services.miniflux.serviceConfig.EnvironmentFile = "/etc/miniflux/.env";
   services.miniflux = {
     enable = true;
-    adminCredentialsFile = "/etc/miniflux/.secret";
+    # adminCredentialsFile = "/etc/miniflux/.secret";
     config = {
       LISTEN_ADDR = "localhost:${builtins.toString vars.ports.miniflux}";
       BASE_URL = "https://miniflux.gv.je";
@@ -32,7 +33,7 @@ in {
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_OIDC_PROVIDER_NAME = "key@gv.je";
       OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://key.gv.je/realms/master";
-      OAUTH2_CLIENT_SECRET_FILE = "/etc/miniflux/.oidc.secret";
+      # OAUTH2_CLIENT_SECRET_FILE = "/etc/miniflux/.oidc.secret";
       OAUTH2_CLIENT_ID = "miniflux";
       OAUTH2_REDIRECT_URL = "https://miniflux.gv.je/oauth2/google/callback";
     };
