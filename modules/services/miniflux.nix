@@ -20,7 +20,7 @@ in {
       reverse_proxy http://localhost:${builtins.toString vars.ports.miniflux}
     '';
   };
-  systemd.services.minflux.systemConfig.EnvironmentFile = "/etc/miniflux/.env";
+  systemd.services.miniflux.systemConfig.EnvironmentFile = "/etc/miniflux/.env";
   services.miniflux = {
     enable = true;
     adminCredentialsFile = "/etc/miniflux/.secret";
