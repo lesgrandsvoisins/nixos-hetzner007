@@ -15,18 +15,18 @@ in {
   };
   services.homepage-dashboard = {
     enable = true;
-    allowedHosts = "localhost:8082,localhost,fr.gv.je,fr.gv.je:8082";
+    allowedHosts = "localhost:8082,localhost,fr.gv.je,fr.gv.je:8082,www.gv.je,www.gv.je:8082,homepage-dashboard.gv.je,homepage-dashboard.gv.je:8082,gv.je,gv.je:8082";
 
     settings = {
       title = "GV.je Tableau de bord !";
       useEqualHeights = true;
       language = "fr";
-      startUrl = "https://fr.gv.je";
-      baseUrl = "https://fr.gv.je";
+      startUrl = "https://www.gv.je";
+      baseUrl = "https://www.gv.je";
       color = "zinc";
       favicon = "https://public.gv.je/static/web/fr.gv.je/favicon/favicon.ico";
       target = "_blank";
-      instanceName = "fr.gv.je";
+      instanceName = "www.gv.je";
       providers = {
         openweathermap = "openweathermapapikey";
         weatherapi = "weatherapiapikey";
@@ -92,8 +92,8 @@ in {
             };
           }
           {
-            "Ce fr.gv.je, votre tableau de bord" = {
-              href = "https://fr.gv.je";
+            "Ce @GV.je, votre tableau de bord" = {
+              href = "https://www.gv.je";
               description = "Tableau de bord des Grands Voisins";
               icon = "si-homepage";
               # widget = {
