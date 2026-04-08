@@ -48,6 +48,9 @@ in {
         };
       }
       {
+        gvbtn = {};
+      }
+      {
         greeting = {
           text_size = "l";
           text = "GV.je. Ce tableau de bord fournit des liens vers toutes les ressources nyumériques des GV.";
@@ -105,10 +108,10 @@ in {
               href = "https://www.gv.je";
               description = "Tableau de bord des Grands Voisins";
               icon = "si-homepage";
-              widget = {
-                type = "gvbtn";
-                url = "https://www.gv.je";
-              };
+              # widget = {
+              #   type = "gvbtn";
+              #   url = "https://www.gv.je";
+              # };
             };
           }
         ];
