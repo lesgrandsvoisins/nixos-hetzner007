@@ -99,7 +99,7 @@ in {
                   label = "published_at";
                   limit = "6";
                   format = "date";
-                  target = "{url}"
+                  target = "{url}";
                 };
                 # display = "block";
                 # mappings = {
