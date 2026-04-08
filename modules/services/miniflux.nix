@@ -30,9 +30,10 @@ in {
       OAUTH2_USER_CREATION = 1;
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_OIDC_PROVIDER_NAME = "key@gv.je";
-      OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://key.gv.je/realms/master/";
+      OAUTH2_OIDC_DISCOVERY_ENDPOINT = "https://key.gv.je/realms/master";
       OAUTH2_CLIENT_SECRET_FILE = "/etc/miniflux/.oidc.secret";
       OAUTH2_CLIENT_ID = "miniflux";
+      OAUTH2_REDIRECT_URL = "https://miniflux.gv.je/oauth2/google/callback";
     };
   };
 }
