@@ -5,49 +5,45 @@
   vars,
   ...
 }: let
-  homepage = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: rec {
-    pname = "homepage-dashboard-with-gv-widget";
-    version = "v0.8.0";
-
-    # Include your custom widget files in the source
-    src = pkgs.lib.cleanSource ./homepage-dashboard;
-
-    # Add post-install step to copy widget into Homepage static widgets folder
-    installPhase = ''
-      mkdir -p $out/widgets/custom
-      cp -r ${src}/component.jsx $out/widgets/gvbtn/
-      cp -r ${src}/widget.js $out/widgets/gvbtn/
-      cp -r ${src}/gvbtn.css $out/widgets/gvbtn/
-      # mkdir -p $out/config
-      # SERVICES_YAML=$out/config/services.yaml
-      # if [ ! -f "$SERVICES_YAML" ]; then
-      #   echo "# Auto-generated services.yaml" > $SERVICES_YAML
-      #   echo "services:" >> $SERVICES_YAML
-      # fi
-
-      # # Append the GV.je widget if not already present
-      # if ! grep -q "GV.je" $SERVICES_YAML; then
-      #   cat <<EOF >> $SERVICES_YAML
-      #   - My Services:
-      #     - GV.je:
-      #         icon: https://public.gv.je/static/web/gvbtn/gv-logo-512x512.png
-      #         href: https://www.gv.je
-      #         description: GV.je
-      #         widget:
-      #           type: custom
-      #           component: widgets/custom/component.jsx
-      #           css: widgets/custom/custom.css
-      #   EOF
-      # fi
-    '';
-
-    meta = with pkgs.lib; {
-      description = "Homepage Dashboard with a custom GV.je static widget";
-      homepage = "https://github.com/gethomepage/homepage";
-      license = licenses.mit;
-      maintainers = with maintainers; [];
-    };
-  });
+  # homepage = pkgs.homepage-dashboard.overrideAttrs (oldAttrs: rec {
+  #   pname = "homepage-dashboard-with-gv-widget";
+  #   version = "v0.8.0";
+  #   # Include your custom widget files in the source
+  #   src = pkgs.lib.cleanSource ./homepage-dashboard;
+  #   # Add post-install step to copy widget into Homepage static widgets folder
+  #   installPhase = ''
+  #     mkdir -p $out/widgets/custom
+  #     cp -r ${src}/component.jsx $out/widgets/gvbtn/
+  #     cp -r ${src}/widget.js $out/widgets/gvbtn/
+  #     cp -r ${src}/gvbtn.css $out/widgets/gvbtn/
+  #     # mkdir -p $out/config
+  #     # SERVICES_YAML=$out/config/services.yaml
+  #     # if [ ! -f "$SERVICES_YAML" ]; then
+  #     #   echo "# Auto-generated services.yaml" > $SERVICES_YAML
+  #     #   echo "services:" >> $SERVICES_YAML
+  #     # fi
+  #     # # Append the GV.je widget if not already present
+  #     # if ! grep -q "GV.je" $SERVICES_YAML; then
+  #     #   cat <<EOF >> $SERVICES_YAML
+  #     #   - My Services:
+  #     #     - GV.je:
+  #     #         icon: https://public.gv.je/static/web/gvbtn/gv-logo-512x512.png
+  #     #         href: https://www.gv.je
+  #     #         description: GV.je
+  #     #         widget:
+  #     #           type: custom
+  #     #           component: widgets/custom/component.jsx
+  #     #           css: widgets/custom/custom.css
+  #     #   EOF
+  #     # fi
+  #   '';
+  #   meta = with pkgs.lib; {
+  #     description = "Homepage Dashboard with a custom GV.je static widget";
+  #     homepage = "https://github.com/gethomepage/homepage";
+  #     license = licenses.mit;
+  #     maintainers = with maintainers; [];
+  #   };
+  # });
 in {
   services.caddy.virtualHosts."www.gv.je" = {
     # "xcal.grandsvoisins.org" = {
@@ -58,7 +54,7 @@ in {
   };
   services.homepage-dashboard = {
     enable = true;
-    package = homepage;
+    # package = homepage;
     allowedHosts = "localhost:8082,localhost,fr.gv.je,fr.gv.je:8082,www.gv.je,www.gv.je:8082,homepage-dashboard.gv.je,homepage-dashboard.gv.je:8082,gv.je,gv.je:8082";
 
     settings = {
