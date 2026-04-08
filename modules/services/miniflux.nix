@@ -20,13 +20,14 @@ in {
       reverse_proxy http://localhost:${builtins.toString vars.ports.miniflux}
     '';
   };
+  systemd.services.minflux.systemConfig.EnvironmentFile = "/etc/miniflux/.env";
   services.miniflux = {
     enable = true;
     adminCredentialsFile = "/etc/miniflux/.secret";
     config = {
       LISTEN_ADDR = "localhost:${builtins.toString vars.ports.miniflux}";
       BASE_URL = "https://miniflux.gv.je";
-      CREATE_SDMIN = 1;
+      CREATE_ADMIN = 1;
       OAUTH2_USER_CREATION = 1;
       OAUTH2_PROVIDER = "oidc";
       OAUTH2_OIDC_PROVIDER_NAME = "key@gv.je";
