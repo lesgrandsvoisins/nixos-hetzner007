@@ -86,6 +86,18 @@ in {
               description = "Permet le fait de noter des memos privés, protégés (pour tous les utilisateurs identifiés) et publics";
               noticon = "sh-memos";
               icon = "mdi-bird";
+              widget = {
+                type = "customapi";
+                url = "https://memos.gv.je/api/v1/memos?pageSize=10";
+                display = "dynamic-list";
+                mappings = {
+                  items = "memos";
+                  name = "name";
+                  label = "content";
+                  target = "https://memos.gv.je/{name}";
+                  limit = 5;
+                };
+              };
             };
           }
           {
