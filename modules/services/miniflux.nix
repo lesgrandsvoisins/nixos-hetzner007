@@ -21,10 +21,10 @@ in {
       reverse_proxy http://localhost:${builtins.toString vars.ports.miniflux}
     '';
   };
-  systemd.services.miniflux.serviceConfig.EnvironmentFile = "/etc/miniflux/.env";
+  # systemd.services.miniflux.serviceConfig.EnvironmentFile = "/etc/miniflux/.env";
   services.miniflux = {
     enable = true;
-    # adminCredentialsFile = "/etc/miniflux/.secret";
+    adminCredentialsFile = "/etc/miniflux/.env";
     config = {
       LISTEN_ADDR = "localhost:${builtins.toString vars.ports.miniflux}";
       BASE_URL = "https://miniflux.gv.je";
