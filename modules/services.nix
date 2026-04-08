@@ -17,6 +17,7 @@ in {
     ./services/lemmy.nix
     ./services/lldap.nix
     ./services/memos.nix
+    ./services/miniflux.nix
     ./services/openldap.nix
     ./services/postgresql.nix
     ./services/radicale.nix

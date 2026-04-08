@@ -27,6 +27,7 @@
     named = 991;
     lemmy = 1512;
     freshrss = 1513;
+    miniflux = 1514;
   };
   ports = {
     postgresql = 5432;
@@ -55,6 +56,7 @@
     homarr = 3000;
     lemmy-ui = 1234;
     lemmy-server = 8536;
+    miniflux = 8088;
   };
   hosts = {
     node-red = {
