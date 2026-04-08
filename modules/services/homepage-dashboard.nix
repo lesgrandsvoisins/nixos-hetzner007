@@ -88,7 +88,7 @@ in {
               icon = "mdi-bird";
               widget = {
                 type = "customapi";
-                url = "https://miniflux.gv.je/v1/feeds/1/entries?limit=5&order=id&direction=asc";
+                url = "https://miniflux.gv.je/v1/feeds/2/entries?limit=5&order=id&direction=asc";
                 username = "minifluxhomepage";
                 password = "6DYVyRhZG4QTNsx6rhMj";
                 display = "dynamic-list";
