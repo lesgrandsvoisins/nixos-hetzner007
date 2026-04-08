@@ -89,7 +89,7 @@ in {
               widget = {
                 type = "customapi";
                 url = "https://miniflux.gv.je/v1/feeds/1/entries?limit=5&order=id&direction=asc";
-                username = "minifluxadmin";
+                # username = "minifluxadmin";
                 password = "c7c923bab3944a712162a54db5a1a42c850a2b10b79c0c8c80e107ac74f6fd75";
                 display = "dynamic-list";
                 mappings = {
