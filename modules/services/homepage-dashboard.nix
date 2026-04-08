@@ -5,6 +5,14 @@
   vars,
   ...
 }: let
+  homepage = pkgs.homepage-dashboard.overrideAttrs (old: {
+    postInstall =
+      (old.postInstall or "")
+      + ''
+        mkdir -p $out/public/widgets
+        cp ${./homepage-dashboard/gvbtn.html} $out/public/widgets/
+      '';
+  });
 in {
   services.caddy.virtualHosts."www.gv.je" = {
     # "xcal.grandsvoisins.org" = {
@@ -15,6 +23,7 @@ in {
   };
   services.homepage-dashboard = {
     enable = true;
+    package = homepage;
     allowedHosts = "localhost:8082,localhost,fr.gv.je,fr.gv.je:8082,www.gv.je,www.gv.je:8082,homepage-dashboard.gv.je,homepage-dashboard.gv.je:8082,gv.je,gv.je:8082";
 
     settings = {
