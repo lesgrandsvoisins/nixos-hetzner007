@@ -10,6 +10,7 @@
   sftpgo_host = "127.0.0.1";
   sftpgo-ui-gv = pkgs.callPackage sftpgo/sftpgo-ui-gv.nix {};
   # sftpgo-ui-gv = sftpgo-ui-gv-flake{};
+  sftpgo-plugin-auth = pkgs.callPackage sftpgo-plugin-auth-ldap/package.nix {};
 in {
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
@@ -25,7 +26,8 @@ in {
     "f /etc/sftpgo/.secret.postgresqlpassword 0660 sftpgo root"
     "f /etc/sftpgo/.secret.oidcpassword 0660 sftpgo root"
     "d /etc/sftpgo/env.d 0770 sftpgo root"
-    "d ${vars.dirs.sftpgo-users} 0770 sftpgo root"
+    "d ${vars.dirs.sftpgo-users} 0750 sftpgo services"
+    "f /etc/sftpgo/ldap-lesgrandsvoisins.json 0660 sftpgo root"
   ];
   systemd.services.sftpgo.serviceConfig.Environment = [
     "SFTPGO_HOME_BASE=${vars.dirs.sftpgo-users}"
@@ -76,6 +78,17 @@ in {
           auth_options.scope = 5;
           auto_mtls = true;
         }
+        {
+          type = "auth";
+          cmd = "${sftpgo-plugin-auth}/bin/sftpgo-plugin-auth";
+          args = [
+            "serve"
+            "--config-file"
+            "/etc/sftpgo/ldap-lesgrandsvoisins.json"
+          ];
+          auth_options.scope = 5;
+          auto_mtls = true;
+        }
       ];
       sftpd.bindings = [
         {
@@ -110,7 +123,7 @@ in {
             enable_web_client = true;
             enable_web_admin = true;
             # disabled_login_methods = 0;
-            # disabled_login_methods = 9;
+            disabled_login_methods = 9;
             enable_https = true;
             # certificate_file = "/etc/sftpgo/127.0.0.1.pem";
             # certificate_key_file = "/etc/sftpgo/127.0.0.1-key.pem";

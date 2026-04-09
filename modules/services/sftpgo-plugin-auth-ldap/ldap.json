@@ -1,0 +1,16 @@
+{
+    "cache_size": 100,
+    "configs": [
+        {
+            "dial_urls": [
+                "ldap://ldap.lesgrandsvoisins.com:14389"
+            ],
+            "base_dn": "dc=lesgrandsvoisins,dc=com",
+            "bind_dn": "cn=admin,ou=users,dc=lesgrandsvoisins,dc=com",
+            "password": "super secret",
+            "start_tls": 1,
+            "skip_tls_verify": false,
+            "search_query": "(|(uid=%username%)(telephone=%username%)(cn=%username%)(initials=%username%))"
+        }
+    ]
+}
