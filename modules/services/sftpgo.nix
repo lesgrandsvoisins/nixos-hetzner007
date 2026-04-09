@@ -75,7 +75,7 @@ in {
             "--config-file"
             "/etc/sftpgo/sftpgo-plugin-auth.json"
           ];
-          auth_options.scope = 5;
+          # auth_options.scope = 5;
           auto_mtls = true;
         }
         {
