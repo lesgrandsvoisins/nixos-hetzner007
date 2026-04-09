@@ -67,7 +67,7 @@ in {
         pre_login_hook = "${sftpgo-prelogin-hook}/bin/sftpgo-prelogin-hook";
       };
       plugins = [
-        {
+        # {
         #   type = "auth";
         #   cmd = "/etc/sftpgo/sftpgo-plugin-auth";
         #   args = [
