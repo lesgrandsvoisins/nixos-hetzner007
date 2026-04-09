@@ -169,6 +169,17 @@ in {
               icon = "si-wikidotjs";
             };
           }
+
+      {
+        "NOUVELLES des Grands Voisins (partie memos)" = [
+          {
+            "Memos, le Twitter des Grands Voisins" = {
+              href = "https://memos.gv.je/explore";
+              description = "Permet le fait de noter des memos privés, protégés (pour tous les utilisateurs identifiés) et publics";
+              noticon = "sh-memos";
+              icon = "mdi-bird";
+            };
+          }
           # {
           #   "TABLEAU DE BORD @GV.je, votre tableau de bord" = {
           #     href = "https://www.gv.je";

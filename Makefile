@@ -20,3 +20,6 @@ garbage-collect:
 flake-update:
 	nix flake update
 	make -C ./containers/homarr flake-update
+
+rollback:
+	sudo nixos-rebuild switch --rollback --flake ./#hetzner007

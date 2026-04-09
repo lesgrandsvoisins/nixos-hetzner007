@@ -17,6 +17,7 @@
     wiki-js = 502;
     keycloak = 503;
     radicale = 504;
+    services = 500;
     syncin = 1505;
     sftpgo = 1506;
     node-red = 1507;
