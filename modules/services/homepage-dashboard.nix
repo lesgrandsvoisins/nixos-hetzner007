@@ -169,9 +169,6 @@ in {
               icon = "si-wikidotjs";
             };
           }
-
-      {
-        "NOUVELLES des Grands Voisins (partie memos)" = [
           {
             "Memos, le Twitter des Grands Voisins" = {
               href = "https://memos.gv.je/explore";
