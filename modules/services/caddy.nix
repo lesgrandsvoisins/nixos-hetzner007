@@ -26,17 +26,6 @@ in {
     group = "services";
   };
 
-  security.acme.certs."sftpgo.gv.je" = {
-    dnsProvider = "porkbun";
-    environmentFile = "/etc/caddy/caddy.env";
-    group = "services";
-  };
-  security.acme.certs."webdav.gv.je" = {
-    dnsProvider = "porkbun";
-    environmentFile = "/etc/caddy/caddy.env";
-    group = "services";
-  };
-
   users.users.caddy.extraGroups = ["services"];
 
   services.caddy = {
@@ -383,96 +372,6 @@ in {
                 # header_up X-Forwarded-Proto {scheme}
             }
           }
-        '';
-      };
-      "sftpgo.gv.je" = {
-        extraConfig = ''
-          redir /web/client/login /web/client/oidclogin
-          reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-httpd} {
-            header_up Host {host}
-            header_up X-Forwarded-Proto {scheme}
-            header_up X-Forwarded-Host {host}
-            transport http {
-              tls
-              tls_server_name sftpgo.gv.je
-              tls_trust_pool file {
-                pem_file /var/lib/acme/sftpgo.gv.je/fullchain.pem
-              }
-              # proxy_protocol v2
-              # proxy_allowed 127.0.0.1
-            }
-          }
-        '';
-      };
-      "webdav.gv.je" = {
-        extraConfig = ''
-                   # # Handle preflight requests
-                   # @cors_preflight {
-                   #   method OPTIONS
-                   # }
-
-                   # # header @cors_preflight {
-                   # #   Access-Control-Allow-Origin "https://keeweb.gv.je"
-                   # #   Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-                   # #   Access-Control-Allow-Headers "Content-Type, Authorization"
-                   # #   Access-Control-Max-Age "86400"
-                   # #   Vary "Origin"
-                   # # }
-
-                   # respond @cors_preflight 204
-
-                   # # # For actual requests
-                   # # header {
-                   # #   Access-Control-Allow-Origin "https://keeweb.gv.je"
-                   # #   Vary "Origin"
-                   # # }
-
-                   # @keepass {
-                   #       header Origin https://keepass.gv.je
-                   # }
-                   # header @keepass {
-                   #       Access-Control-Allow-Origin https://keepass.gv.je
-                   # }
-                   # @keeweb {
-                   #       header Origin https://keeweb.gv.je
-                   # }
-                   # header @keeweb {
-                   #       Access-Control-Allow-Origin https://keeweb.gv.je
-                   # }
-
-                   # header {
-                   #     Access-Control-Allow-Methods GET,POST,OPTIONS,HEAD,PATCH,PUT,DELETE
-                   #     Access-Control-Allow-Headers User-Agent,Content-Type,X-Api-Key
-                   #     Access-Control-Max-Age 86400
-                   # }
-
-                   ##############
-
-          header {
-             Access-Control-Allow-Headers *
-             Access-Control-Allow-Methods *
-             Access-Control-Allow-Origin *
-           }
-           @options {
-             method OPTIONS
-           }
-           respond @options 204
-
-                   ##############
-
-                   reverse_proxy https://${sftpgo_host}:${builtins.toString vars.ports.sfptgo-webdav}{
-                     header_up Host {host}
-                     header_up X-Forwarded-Proto {scheme}
-                     header_up X-Forwarded-Host {host}
-                     transport http {
-                       tls
-                       tls_server_name webdav.gv.je
-                       tls_trust_pool file {
-                         pem_file /var/lib/acme/webdav.gv.je/fullchain.pem
-                       }
-                      #  proxy_protocol v2
-                     }
-                   }
         '';
       };
       "keycloak.grandsvoisins.org" = {
