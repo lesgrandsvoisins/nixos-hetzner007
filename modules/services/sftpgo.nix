@@ -68,16 +68,16 @@ in {
       };
       plugins = [
         {
-          type = "auth";
-          cmd = "/etc/sftpgo/sftpgo-plugin-auth";
-          args = [
-            "serve"
-            "--config-file"
-            "/etc/sftpgo/sftpgo-plugin-auth.json"
-          ];
-          # auth_options.scope = 5;
-          auto_mtls = true;
-        }
+        #   type = "auth";
+        #   cmd = "/etc/sftpgo/sftpgo-plugin-auth";
+        #   args = [
+        #     "serve"
+        #     "--config-file"
+        #     "/etc/sftpgo/sftpgo-plugin-auth.json"
+        #   ];
+        #   auth_options.scope = 5;
+        #   auto_mtls = true;
+        # }
         {
           type = "auth";
           cmd = "${sftpgo-plugin-auth}/bin/sftpgo-plugin-auth";
