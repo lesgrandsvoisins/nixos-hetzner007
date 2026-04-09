@@ -76,8 +76,6 @@ in {
             authurl = "https://key.gv.je/realms/master";
             lougouturl = "https://key.gv.je/realms/master/protocol/openid-connect/logout";
             clientid = "vikunja";
-            # clientsecret = "KEYGVJE_VIKUNJA_CLIENT_SECRET";
-            clientsecret = "$KEYGVJE_VIKUNJA_CLIENT_SECRET";
             # clientsecret.file = "/etc/vikunja/oidc_client_secret_keygvje";
             # usernamefallback = true;
             # emailfallback = true;
