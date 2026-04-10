@@ -17,20 +17,20 @@ in {
           group = "users";
           listenHTTP = ":80";
         };
-        "gdvoisins.com" = {
-          dnsProvider = "clouddns";
-          # environmentFile = "/etc/.secrets/.cloudns.auth";
-          credentialFiles = {
-            "CLOUDDNS_CLIENT_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
-            "CLOUDDNS_EMAIL_FILE" = "/etc/.secrets/.cloudns.auth.email";
-            "CLOUDDNS_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
-            "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
-            "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
-            "CLOUDNS_AUTH_EMAIL_FILE" = "/etc/.secrets/.cloudns.auth.email";
-          };
-          extraDomainNames = ["www.gdvoisins.com"];
-          group = "users";
-        };
+        # "gdvoisins.com" = {
+        #   dnsProvider = "clouddns";
+        #   # environmentFile = "/etc/.secrets/.cloudns.auth";
+        #   credentialFiles = {
+        #     "CLOUDDNS_CLIENT_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
+        #     "CLOUDDNS_EMAIL_FILE" = "/etc/.secrets/.cloudns.auth.email";
+        #     "CLOUDDNS_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
+        #     "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
+        #     "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
+        #     "CLOUDNS_AUTH_EMAIL_FILE" = "/etc/.secrets/.cloudns.auth.email";
+        #   };
+        #   extraDomainNames = ["www.gdvoisins.com"];
+        #   group = "users";
+        # };
         "keycloak.grandsvoisins.org" = {
           dnsProvider = "clouddns";
           credentialFiles = {
