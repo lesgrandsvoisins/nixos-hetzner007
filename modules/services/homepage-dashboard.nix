@@ -84,8 +84,8 @@ in {
       # }
       {
         greeting = {
-          text_size = "l";
-          text = "GV.je. Ce tableau de bord fournit des liens vers toutes les ressources numériques des GV.";
+          text_size = "xl";
+          text = "Ce tableau de bord fournit des liens vers toutes les ressources numériques des GV.";
         };
       }
       {
