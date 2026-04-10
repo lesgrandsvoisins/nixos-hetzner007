@@ -260,13 +260,6 @@ in {
             };
           }
           {
-            "GERER des tâches avec Vikunja" = {
-              href = "https://vikunja.gv.je";
-              icon = "si-vikunja";
-              description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
-            };
-          }
-          {
             "GERER du code source avec Forgejo" = {
               description = "Serveur de développement et de codes sources";
               href = "https://forgejo.roses.gv.je/user/login";
@@ -282,6 +275,13 @@ in {
               href = "https://mail.lesgrandsvoisins.com";
               description = "Roundcube Webmail : Consulter vos courriels des comptes des GV avec pour login le courriel du compte GV et le mot de passe de votre compte des GV.";
               icon = "si-roundcube";
+            };
+          }
+          {
+            "GERER des tâches avec Vikunja" = {
+              href = "https://task.lesgrandsvoisins.com";
+              icon = "si-vikunja";
+              description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
             };
           }
           {
@@ -565,6 +565,13 @@ in {
               description = "Phylum vous permet de garder en sécurité vos fichiers et vos dossiers, puis de les partager aussi !";
               href = "https://phylum.roses.gdvoisins.com";
               icon = "mdi-folder";
+            };
+          }
+          {
+            "GERER des tâches avec Vikunja" = {
+              href = "https://vikunja.gv.je";
+              icon = "si-vikunja";
+              description = "Vikunja nous permet de gérer les tâches à faire dans nos équipes.";
             };
           }
         ];
