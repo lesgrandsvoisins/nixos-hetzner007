@@ -32,13 +32,13 @@ in {
       user = "immich";
       name = "immich";
     };
-    mediaLocation = "/srv/immich";
+    # mediaLocation = "/srv/immich";
     group = "services";
     secretsFile = "/etc/immich/.secrets";
-    settings = {
-      server = {
-        externalDomain = "immich.gv.je";
-      };
-    };
+    # settings = {
+    #   server = {
+    #     externalDomain = "immich.gv.je";
+    #   };
+    # };
   };
 }
