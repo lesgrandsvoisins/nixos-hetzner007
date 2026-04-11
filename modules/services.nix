@@ -13,6 +13,7 @@ in {
     ./services/freshrss.nix
     ./services/gitea.nix
     ./services/homepage-dashboard.nix
+    ./services/immich.nix
     ./services/keycloak.nix
     ./services/lemmy.nix
     ./services/lldap.nix
