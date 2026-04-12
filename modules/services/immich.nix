@@ -32,7 +32,7 @@ in {
       user = "immich";
       name = "immich";
     };
-    # mediaLocation = "/srv/immich";
+    mediaLocation = "/srv/immich";
     group = "services";
     secretsFile = "/etc/immich/.secrets";
     # settings = {
