@@ -253,6 +253,13 @@ in {
       {
         "PROFITEZ des nouveaux services des GV" = [
           {
+            "Vos PHOTOS via IMMICH" = {
+              href = "https://immich.gv.je";
+              icon = "si-immich";
+              description = "Vos photos et vidéos sur Immich";
+            };
+          }
+          {
             "CONSOLIDER vos flux RSS" = {
               href = "https://miniflux.gv.je/oauth2/oidc/redirect";
               icon = "mdi-alpha-m";
