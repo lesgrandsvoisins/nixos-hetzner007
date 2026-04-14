@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  var,
+  vars,
   ...
 }: let
 in {
@@ -11,13 +11,13 @@ in {
   ];
   users.users.cherryldap = {
     isNormalUser = true;
-    uid = var.uid.cherryldap;
+    uid = vars.uid.cherryldap;
   };
-  containers.cherryldap.localAddress = var.containers.cherryldap.localAddress;
-  containers.cherryldap.hostAddress = var.containers.cherryldap.hostAddress;
-  containers.cherryldap.localAddress6 = var.containers.cherryldap.localAddress6;
-  containers.cherryldap.hostAddress6 = var.containers.cherryldap.hostAddress6;
-  containers.cherryldap.bindMounts = var.containers.cherryldap.bindMounts;
+  containers.cherryldap.localAddress = vars.containers.cherryldap.localAddress;
+  containers.cherryldap.hostAddress = vars.containers.cherryldap.hostAddress;
+  containers.cherryldap.localAddress6 = vars.containers.cherryldap.localAddress6;
+  containers.cherryldap.hostAddress6 = vars.containers.cherryldap.hostAddress6;
+  containers.cherryldap.bindMounts = vars.containers.cherryldap.bindMounts;
   containers.cherryldap = {
     autoStart = true;
     privateNetwork = true;
@@ -25,6 +25,7 @@ in {
     config = {
       config,
       pkgs,
+      vars,
       ...
     }: {
       imports = [
@@ -144,7 +145,7 @@ in {
       services.resolved.enable = true;
       users.users.cherryldap = {
         isNormalUser = true;
-        uid = 11111;
+        uid = vars.uid.cherryldap;
       };
       systemd.tmpfiles.rules = [
         "d /var/local/cherryldap 0755 cherryldap users"
