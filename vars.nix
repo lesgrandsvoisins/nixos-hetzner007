@@ -114,8 +114,8 @@
       };
     };
     cherryldap = {
-      hostAddress = "192,168.106.1";
-      localAddress = "192,168.106.2";
+      hostAddress = "192.168.106.1";
+      localAddress = "192.168.106.2";
       hostAddress6 = "fc00::6:1";
       localAddress6 = "fc00::6:2";
       bindMounts = {
