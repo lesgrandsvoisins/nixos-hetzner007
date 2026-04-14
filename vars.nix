@@ -30,6 +30,7 @@
     freshrss = 1513;
     miniflux = 1514;
     immich = 1514;
+    cherryldap = 11111;
   };
   ports = {
     postgresql = 5432;
@@ -112,6 +113,36 @@
         wanName = "www.gv.je";
       };
     };
+    cherryldap = {
+      hostAddress = "192,168.106.1";
+      localAddress = "192,168.106.2";
+      hostAddress6 = "fc00::6:1";
+      localAddress6 = "fc00::6:2";
+      bindMounts = {
+        "/var/local/cherryldap" = {
+          hostPath = "/var/local/cherryldap";
+          isReadOnly = false;
+        };
+      };
+    };
+    discourse = {};
+    discourseparis14cc = {};
+    haproxy = {};
+    keycloakkeycloakgdvox = {};
+    keycloakgvoiscom = {};
+    keycloaklesgv = {};
+    kecloakparis14cc = {};
+    keycloakparisgv = {};
+    keyresdigita = {};
+    lgvldap = {};
+    mm = {};
+    openldap = {};
+    silverbullet = {};
+    triliumnext = {};
+    vikunjaresdigita = {};
+    wagtail = {};
+    wiki-js = {};
+    wordpress = {};
   };
   dirs = {
     sftpgo-users = "/srv/sftpgo/users";

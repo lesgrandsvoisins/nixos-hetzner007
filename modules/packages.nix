@@ -46,5 +46,7 @@ in {
     # keeweb
     jq
     mdadm
+
+    btrfs-progs
   ];
 }
