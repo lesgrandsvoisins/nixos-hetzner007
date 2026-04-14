@@ -2,9 +2,9 @@
   config,
   pkgs,
   lib,
-  vars,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /var/local/cherryldap 0755 cherryldap users"
@@ -25,7 +25,6 @@ in {
     config = {
       config,
       pkgs,
-      vars,
       ...
     }: {
       imports = [
