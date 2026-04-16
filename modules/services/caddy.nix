@@ -119,6 +119,11 @@ in {
     # '';
 
     virtualHosts = {
+      "meet.gv.je" = {
+        extraConfig = ''
+          redir https://meet.lgv.info
+        '';
+      };
       "auth.gv.je" = {
         extraConfig = ''
           # authenticate with keygvjeportal

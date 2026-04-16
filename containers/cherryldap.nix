@@ -19,7 +19,7 @@ in {
   containers.cherryldap.hostAddress6 = vars.containers.cherryldap.hostAddress6;
   containers.cherryldap.bindMounts = vars.containers.cherryldap.bindMounts;
   containers.cherryldap = {
-    autoStart = true;
+    autoStart = false;
     privateNetwork = true;
     # path = lib.mkForce "/mnt/btrfs/containers/cherryldap";
     config = {

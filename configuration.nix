@@ -16,7 +16,7 @@ in {
   ];
   nix.settings.experimental-features = ["nix-command flakes"];
   imports = [
-    ./containers/cherryldap.nix
+    # ./containers/cherryldap.nix
     ./containers/homarr.nix
     ./containers/homarr2.nix
     # ./containers/keycloak.nix
