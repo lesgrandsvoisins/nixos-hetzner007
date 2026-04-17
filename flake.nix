@@ -2,6 +2,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    oxicloud.url = "path:./modules/services/oxicloud";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # caddy-ui-grandsvoisins.url = "path:./flakes/caddy-ui";
     # homarr.url = "path:./flakes/homarr";
@@ -19,6 +20,7 @@
     flake-utils,
     home-manager,
     agenix,
+    oxicloud,
     ...
   } @ inputs:
   # flake-utils.lib.eachDefaultSystem (system:
@@ -39,8 +41,9 @@
           ./configuration.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
+          oxicloud.nixosModules.oxicloud
         ];
-        specialArgs = {inherit vars secrets inputs;};
+        specialArgs = {inherit vars secrets inputs oxicloud;};
       };
     };
   };

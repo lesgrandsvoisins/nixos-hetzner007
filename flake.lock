@@ -151,13 +151,44 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1776221942,
+        "narHash": "sha256-FbQAeVNi7G4v3QCSThrSAAvzQTmrmyDLiHNPvTF2qFM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1766437c5509f444c1b15331e82b8b6a9b967000",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "oxicloud": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "path": "./modules/services/oxicloud",
+        "type": "path"
+      },
+      "original": {
+        "path": "./modules/services/oxicloud",
+        "type": "path"
+      },
+      "parent": []
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "oxicloud": "oxicloud"
       }
     },
     "systems": {

@@ -30,6 +30,7 @@
     freshrss = 1513;
     miniflux = 1514;
     immich = 1514;
+    oxicloud = 1515;
     cherryldap = 11111;
   };
   ports = {

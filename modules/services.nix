@@ -10,6 +10,7 @@ in {
   imports = [
     ./services/bind.nix
     ./services/caddy.nix
+    ./services/collabora-online.nix
     ./services/freshrss.nix
     ./services/gitea.nix
     ./services/homepage-dashboard.nix
@@ -20,6 +21,7 @@ in {
     ./services/memos.nix
     ./services/miniflux.nix
     ./services/openldap.nix
+    ./services/oxicloud.nix
     ./services/postgresql.nix
     ./services/radicale.nix
     ./services/sftpgo.nix
