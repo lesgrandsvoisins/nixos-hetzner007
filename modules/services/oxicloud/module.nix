@@ -286,8 +286,9 @@ in {
     ];
 
     systemd.services.oxicloud.serviceConfig.ExecStartPre = ''
-      cp ${generatedEnv} /run/oxicloud/generated.env
-      chmod 644 /run/oxicloud/generated.env
+      cp ${generatedEnv} /run/oxicloud/.env
+      chmod 644 /run/oxicloud/.env
+      cat /etc/oxicloud/oxicloud.env >> /run/oxicloud/.env
     '';
 
     # Create user/group only if using defaults
@@ -352,7 +353,8 @@ in {
         ];
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
-        WorkingDirectory = cfg.dataDir;
+        WorkingDirectory = "/var/lib/oxicloud";
+        ReadWritePaths = ["/var/lib/oxicloud" cfg.dataDir];
 
         # 🔒 hardening
         # ProtectSystem = "strict";
