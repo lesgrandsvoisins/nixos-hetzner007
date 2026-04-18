@@ -36,7 +36,7 @@ in {
 
     port = lib.mkOption {
       type = lib.types.int;
-      default = 8085;
+      default = 8086;
       description = "Server port";
     };
 
