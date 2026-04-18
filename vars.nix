@@ -62,6 +62,7 @@
     lemmy-server = 8536;
     miniflux = 8088;
     immich = 2283;
+    oxicloud = 8085;
   };
   hosts = {
     node-red = {
