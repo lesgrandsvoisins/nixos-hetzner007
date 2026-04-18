@@ -16,7 +16,7 @@ in {
   services.postgresql.ensureDatabases = ["oxicloud"];
   services.caddy = {
     virtualHosts."oxicloud.gv.je".extraConfig = ''
-      reverse_proxy http://localhost:${builtins.toString vars.ports.oxicloud}
+      reverse_proxy http://${builtins.toString vars.hosts.oxicloud.addr}:${builtins.toString vars.ports.oxicloud}
     '';
   };
   systemd.tmpfiles.rules = [
