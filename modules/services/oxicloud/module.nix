@@ -240,18 +240,6 @@ in {
       default = "services";
       description = "Group to run OxiCloud service";
     };
-
-    # dataDir = lib.mkOption {
-    #   type = lib.types.path;
-    #   default = "/var/lib/oxicloud";
-    #   description = "Directory for OxiCloud data";
-    # };
-
-    # databaseUrl = lib.mkOption {
-    #   type = lib.types.str;
-    #   default = "";
-    #   description = "PostgreSQL connection string";
-    # };
   };
 
   config = lib.mkIf cfg.enable {
