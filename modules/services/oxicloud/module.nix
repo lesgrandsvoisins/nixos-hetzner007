@@ -18,18 +18,18 @@
     OXICLOUD_DB_MAX_CONNECTIONS=${builtins.toString cfg.database.maxConnections}
     OXICLOUD_DB_MIN_CONNECTIONS=${builtins.toString cfg.database.minConnections}
 
-    OXICLOUD_ENABLE_AUTH=${builtins.toString cfg.auth.enable}
+    OXICLOUD_ENABLE_AUTH=${lib.boolToString cfg.auth.enable}
     OXICLOUD_JWT_SECRET=${cfg.auth.jwtSecret}
 
     OXICLOUD_ACCESS_TOKEN_EXPIRY_SECS=${builtins.toString cfg.auth.accessTokenExpirySecs}
     OXICLOUD_REFRESH_TOKEN_EXPIRY_SECS=${builtins.toString cfg.auth.refreshTokenExpirySecs}
 
-    OXICLOUD_ENABLE_USER_STORAGE_QUOTAS=${builtins.toString cfg.features.userStorageQuotas}
-    OXICLOUD_ENABLE_FILE_SHARING=${builtins.toString cfg.features.fileSharing}
-    OXICLOUD_ENABLE_TRASH=${builtins.toString cfg.features.trash}
-    OXICLOUD_ENABLE_SEARCH=${builtins.toString cfg.features.search}
+    OXICLOUD_ENABLE_USER_STORAGE_QUOTAS=${lib.boolToString cfg.features.userStorageQuotas}
+    OXICLOUD_ENABLE_FILE_SHARING=${lib.boolToString cfg.features.fileSharing}
+    OXICLOUD_ENABLE_TRASH=${lib.boolToString cfg.features.trash}
+    OXICLOUD_ENABLE_SEARCH=${lib.boolToString cfg.features.search}
 
-    OXICLOUD_OIDC_ENABLED=${builtins.toString cfg.sso.enable}
+    OXICLOUD_OIDC_ENABLED=${lib.boolToString cfg.sso.enable}
     OXICLOUD_OIDC_ISSUER_URL=${cfg.sso.issuerUrl}
     OXICLOUD_OIDC_CLIENT_ID=${cfg.sso.clientId}
     OXICLOUD_OIDC_CLIENT_SECRET=${cfg.sso.clientSecret}
@@ -37,7 +37,7 @@
     OXICLOUD_OIDC_SCOPES=${cfg.sso.scopes}
     OXICLOUD_OIDC_FRONTEND_URL=${cfg.sso.frontendUrl}
 
-    OXICLOUD_WOPI_ENABLED=${builtins.toString cfg.wopi.enable}
+    OXICLOUD_WOPI_ENABLED=${lib.boolToString cfg.wopi.enable}
     OXICLOUD_WOPI_DISCOVERY_URL=${cfg.wopi.discoveryUrl}
     OXICLOUD_WOPI_SECRET=${cfg.wopi.secret}
   '';

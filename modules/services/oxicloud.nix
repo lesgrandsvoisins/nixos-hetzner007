@@ -30,5 +30,6 @@ in {
     group = "services";
     dataDir = "/srv/oxicloud";
     port = vars.ports.oxicloud;
+    baseUrl = "https://oxicloud.gv.je";
   };
 }
