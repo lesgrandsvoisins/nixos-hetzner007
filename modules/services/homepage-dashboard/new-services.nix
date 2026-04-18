@@ -1,9 +1,16 @@
 {
   "PROFITEZ des nouveaux services des GV" = [
     {
+      "Vos FICHIERS via casiers IXICLOUD" = {
+        href = "https://ocicloud.gv.je";
+        icon = "si-ocicloud";
+        description = "Vos fichiers avec votre casier Oxicloud";
+      };
+    }
+    {
       "Vos PHOTOS via IMMICH" = {
         href = "https://immich.gv.je";
-        icon = "si-immich";
+        icon = "si-sunrise";
         description = "Vos photos et vidéos sur Immich";
       };
     }
