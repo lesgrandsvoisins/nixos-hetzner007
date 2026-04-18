@@ -348,13 +348,14 @@ in {
         User = cfg.user;
         Group = cfg.group;
         EnvironmentFile = [
-          "/run/oxicloud/generated.env"
+          "-/run/oxicloud/.env"
+          "-${generatedEnv}"
           "-${cfg.envFile}"
         ];
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
-        WorkingDirectory = "/var/lib/oxicloud";
-        ReadWritePaths = ["/var/lib/oxicloud" cfg.dataDir];
+        WorkingDirectory = "/run/oxicloud";
+        ReadWritePaths = ["/var/lib/oxicloud" "/run/oxicloud" cfg.dataDir];
 
         # 🔒 hardening
         # ProtectSystem = "strict";
