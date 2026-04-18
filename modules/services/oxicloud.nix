@@ -24,7 +24,7 @@ in {
   ];
   services.oxicloud = {
     enable = true;
-    databaseUrl = "postgres://user:pass@localhost/oxicloud";
+    database.url = "postgres://user:pass@localhost/oxicloud";
     user = "oxicloud";
     group = "services";
     dataDir = "/srv/oxicloud";

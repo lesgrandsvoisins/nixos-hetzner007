@@ -72,6 +72,12 @@
     memos = {
       addr = "127.0.0.1";
     };
+    oxicloud = {
+      addr = "127.0.0.1";
+      hostName = "oxicloud";
+      lanName = "oxicloud.lan";
+      wanName = "oxicloud.gv.je";
+    };
   };
   postgresql = {
     memos = {
@@ -228,6 +234,7 @@
     memos = "memos.gv.je";
     wiki-js = "wiki.ggvv.org";
     lemmy = "lemmy.gv.je";
+    oxicloud = "oxicloud.gv.je";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";
