@@ -121,9 +121,9 @@ in {
     services = [
       (import ./homepage-dashboard/compte-unifie.nix)
       (import ./homepage-dashboard/ouverts-all.nix)
+      (import ./homepage-dashboard/new-services.nix)
       (import ./homepage-dashboard/sites-publics.nix)
       (import ./homepage-dashboard/nouvelles-memos.nix)
-      (import ./homepage-dashboard/new-services.nix)
       (import ./homepage-dashboard/admin-compte.nix)
       (import ./homepage-dashboard/agenda-gv.nix)
       (import ./homepage-dashboard/medias-sociaux.nix)
