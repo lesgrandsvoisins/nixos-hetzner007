@@ -10,10 +10,6 @@ pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-Nn8qgLdiw7w4PZIMCiI+UHZGNW64fjWZ5mErTJifRZU=";
   };
 
-  # cargoBuildFlags = [
-  #   "--release"
-  # ];
-
   cargoHash = "sha256-4KfrKL2AKkTt3cOXdl9Xr2qed+qy8WSWuqYfN8WJ0bQ=";
 
   # Required for common Rust deps (very likely needed here)
@@ -21,18 +17,20 @@ pkgs.rustPlatform.buildRustPackage rec {
   buildInputs = [pkgs.openssl];
 
   # If tests fail due to DB, disable:
-  doCheck = false;
+  # doCheck = false;
 
   # Install binary
   postInstall = ''
     mkdir -p $out/bin
 
     # main server
-    if [ -f target/release/oxicloud ]; then
-      cp target/release/oxicloud $out/bin/
+    if [ -f target/release/ ]; then
+      cp -a target/release/oxicloud $out/bin/oxicloud
+      cp -a target/release/generate-openapi $out/bin/generate-openapi
     fi
 
-    cp -r static $out/
+    cp -a static $out/static
+    cp -a static-dist $out/static-dist
   '';
 
   meta = with pkgs.lib; {
