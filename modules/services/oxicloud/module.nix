@@ -102,9 +102,9 @@ in {
         ReadWritePaths = [cfg.dataDir];
 
         # Non-secret config still inline
-        environment = {
-          PORT = toString cfg.port;
-        };
+        # environment = {
+        #   PORT = toString cfg.port;
+        # };
       };
     };
   };
