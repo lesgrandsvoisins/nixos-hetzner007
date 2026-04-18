@@ -75,7 +75,6 @@ in {
       wantedBy = ["multi-user.target"];
 
       environment = {
-        DATABASE_URL = cfg.databaseUrl;
         PORT = toString cfg.port;
       };
 
