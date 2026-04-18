@@ -267,38 +267,38 @@ in {
       wantedBy = ["multi-user.target"];
 
       environment = {
-        STORAGE_PATH = cfg.storagePath;
-        STATIC_PATH = cfg.staticPath;
-        SERVER_PORT = builtins.toString cfg.port;
-        SERVER_HOST = cfg.host;
-        BASE_URL = cfg.baseUrl;
-        DB_CONNECTION_STRING = cfg.database.url;
-        DB_MAX_CONNECTIONS = builtins.toString cfg.database.maxConnections;
-        DB_MIN_CONNECTIONS = builtins.toString cfg.database.minConnections;
-        JWT_SECRET = cfg.auth.jwtSecret;
-        ACCESS_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.accessTokenExpirySecs;
-        REFRESH_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.refreshTokenExpirySecs;
-        ENABLE_AUTH = builtins.toString cfg.auth.enable;
-        ENABLE_USER_STORAGE_QUOTAS = builtins.toString cfg.features.userStorageQuotas;
-        ENABLE_FILE_SHARING = builtins.toString cfg.features.fileSharing;
-        ENABLE_TRASH = builtins.toString cfg.features.trash;
-        ENABLE_SEARCH = builtins.toString cfg.features.search;
-        OIDC_ENABLED = builtins.toString cfg.sso.enable;
-        OIDC_ISSUER_URL = cfg.sso.issuerUrl;
-        OIDC_CLIENT_ID = cfg.sso.clientId;
-        OIDC_CLIENT_SECRET = cfg.sso.clientSecret;
-        OIDC_REDIRECT_URI = cfg.sso.redirectUri;
-        OIDC_SCOPES = cfg.sso.scopes;
-        OIDC_FRONTEND_URL = cfg.sso.frontendUrl;
-        OIDC_AUTO_PROVISION = builtins.toString cfg.sso.autoProvision;
-        OIDC_ADMIN_GROUPS = cfg.sso.adminGroups;
-        OIDC_DISABLE_PASSWORD_LOGIN = builtins.toString cfg.sso.disablePasswordLogin;
-        OIDC_PROVIDER_NAME = cfg.sso.providerName;
-        WOPI_ENABLED = builtins.toString cfg.wopi.enable;
-        WOPI_DISCOVERY_URL = cfg.wopi.discoveryUrl;
-        WOPI_SECRET = cfg.wopi.secret;
-        WOPI_TOKEN_TTL_SECS = builtins.toString cfg.wopi.tokenTtlSecs;
-        WOPI_LOCK_TTL_SECS = builtins.toString cfg.wopi.lockTtlSecs;
+        OXICLOUD_STORAGE_PATH = cfg.storagePath;
+        OXICLOUD_STATIC_PATH = cfg.staticPath;
+        OXICLOUD_SERVER_PORT = builtins.toString cfg.port;
+        OXICLOUD_SERVER_HOST = cfg.host;
+        OXICLOUD_BASE_URL = cfg.baseUrl;
+        OXICLOUD_DB_CONNECTION_STRING = cfg.database.url;
+        OXICLOUD_DB_MAX_CONNECTIONS = builtins.toString cfg.database.maxConnections;
+        OXICLOUD_DB_MIN_CONNECTIONS = builtins.toString cfg.database.minConnections;
+        OXICLOUD_JWT_SECRET = cfg.auth.jwtSecret;
+        OXICLOUD_ACCESS_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.accessTokenExpirySecs;
+        OXICLOUD_REFRESH_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.refreshTokenExpirySecs;
+        OXICLOUD_ENABLE_AUTH = builtins.toString cfg.auth.enable;
+        OXICLOUD_ENABLE_USER_STORAGE_QUOTAS = builtins.toString cfg.features.userStorageQuotas;
+        OXICLOUD_ENABLE_FILE_SHARING = builtins.toString cfg.features.fileSharing;
+        OXICLOUD_ENABLE_TRASH = builtins.toString cfg.features.trash;
+        OXICLOUD_ENABLE_SEARCH = builtins.toString cfg.features.search;
+        OXICLOUD_OIDC_ENABLED = builtins.toString cfg.sso.enable;
+        OXICLOUD_OIDC_ISSUER_URL = cfg.sso.issuerUrl;
+        OXICLOUD_OIDC_CLIENT_ID = cfg.sso.clientId;
+        OXICLOUD_OIDC_CLIENT_SECRET = cfg.sso.clientSecret;
+        OXICLOUD_OIDC_REDIRECT_URI = cfg.sso.redirectUri;
+        OXICLOUD_OIDC_SCOPES = cfg.sso.scopes;
+        OXICLOUD_OIDC_FRONTEND_URL = cfg.sso.frontendUrl;
+        OXICLOUD_OIDC_AUTO_PROVISION = builtins.toString cfg.sso.autoProvision;
+        OXICLOUD_OIDC_ADMIN_GROUPS = cfg.sso.adminGroups;
+        OXICLOUD_OIDC_DISABLE_PASSWORD_LOGIN = builtins.toString cfg.sso.disablePasswordLogin;
+        OXICLOUD_OIDC_PROVIDER_NAME = cfg.sso.providerName;
+        OXICLOUD_WOPI_ENABLED = builtins.toString cfg.wopi.enable;
+        OXICLOUD_WOPI_DISCOVERY_URL = cfg.wopi.discoveryUrl;
+        OXICLOUD_WOPI_SECRET = cfg.wopi.secret;
+        OXICLOUD_WOPI_TOKEN_TTL_SECS = builtins.toString cfg.wopi.tokenTtlSecs;
+        OXICLOUD_WOPI_LOCK_TTL_SECS = builtins.toString cfg.wopi.lockTtlSecs;
       };
 
       serviceConfig = {
@@ -307,14 +307,41 @@ in {
         EnvironmentFile = cfg.envFile;
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
-        WorkingDirectory = "${cfg.dataDir}";
+        WorkingDirectory = cfg.dataDir;
 
         # 🔒 hardening
+        # ProtectSystem = "strict";
+        # ProtectHome = true;
+
+        AmbientCapabilities = lib.mkIf (cfg.port < 1024) ["CAP_NET_BIND_SERVICE"];
+        CapabilityBoundingSet =
+          if (cfg.port < 1024)
+          then ["CAP_NET_BIND_SERVICE"]
+          else [""];
+        DeviceAllow = [""];
+        LockPersonality = true;
         NoNewPrivileges = true;
+        PrivateDevices = true;
         PrivateTmp = true;
-        ProtectSystem = "strict";
+        ProtectClock = true;
+        ProtectControlGroups = true;
         ProtectHome = true;
-        ReadWritePaths = [cfg.dataDir];
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "full";
+        RemoveIPC = true;
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_UNIX"
+        ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
       };
     };
   };
