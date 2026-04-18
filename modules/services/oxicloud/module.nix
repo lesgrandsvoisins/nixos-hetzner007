@@ -18,7 +18,7 @@ in {
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = oxicloud;
+      default = pkgs.callPackage ./package.nix {inherit pkgs;};
     };
 
     user = lib.mkOption {
