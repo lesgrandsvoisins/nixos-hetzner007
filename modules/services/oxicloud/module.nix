@@ -18,7 +18,7 @@ in {
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = oxicloud.oxicloud;
+      default = oxicloud;
     };
 
     user = lib.mkOption {
