@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.rustPlatform.buildRustPackage rec {
   pname = "oxicloud";
-  version = "unstable-2026-04-17";
+  version = "v.0.5.5";
 
   src = pkgs.fetchFromGitHub {
     owner = "DioCrafts";
