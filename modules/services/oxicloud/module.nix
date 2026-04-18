@@ -52,7 +52,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0750 ${cfg.user} ${cfg.group} -"
+      "d ${cfg.dataDir}/storage 0750 ${cfg.user} ${cfg.group} -"
       "d /etc/oxicloud 0750 root root -"
     ];
 
@@ -76,12 +76,15 @@ in {
 
       environment = {
         PORT = toString cfg.port;
+        OXICLOUD_STORAGE_PATH = "${cfg.dataDir}/storage";
+        OXICLOUD_STATIC_PATH = "${cfg.dataDir}/static";
+        # OXICLOUD_SERVER_HOST = "${cfg.dataDir}/static";
       };
 
       # 🔥 run migrations automatically
-      preStart = ''
-        ${cfg.package}/bin/oxicloud-migrate || true
-      '';
+      # preStart = ''
+      #   ${cfg.package}/bin/oxicloud-migrate || true
+      # '';
 
       serviceConfig = {
         User = cfg.user;
