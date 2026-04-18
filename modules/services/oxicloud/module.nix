@@ -278,6 +278,29 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.services.oxicloud-env = {
+      description = "Prepare OxiCloud environment file";
+
+      wantedBy = ["multi-user.target"];
+      before = ["oxicloud.service"];
+
+      serviceConfig.Type = "oneshot";
+
+      script = ''
+        install -d -m 0755 /run/oxicloud
+
+        cp ${generatedEnv} /run/oxicloud/.env
+
+        if [ -f ${cfg.envFile} ]; then
+          # append overrides (last wins in dotenv parsing)
+          cat ${cfg.envFile} >> /run/oxicloud/.env
+        fi
+
+        chown ${cfg.user}:${cfg.group} /run/oxicloud/.env
+        chmod 640 /run/oxicloud/.env
+      '';
+    };
+
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0750 ${cfg.user} ${cfg.group} -"
       "d ${cfg.storagePath} 0750 ${cfg.user} ${cfg.group} -"
@@ -306,7 +329,7 @@ in {
 
     systemd.services.oxicloud = {
       description = "OxiCloud server";
-      after = ["network.target" "postgresql.service"];
+      after = ["network.target" "postgresql.service" "oxicloud-env.service"];
       wantedBy = ["multi-user.target"];
 
       # environment = {
