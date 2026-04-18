@@ -48,7 +48,7 @@ in {
 
     baseUrl = lib.mkOption {
       type = lib.types.str;
-      default = "";
+      default = "http://${cfg.host}:${builtins.toString cfg.port}";
       description = "Public base URL for share links";
     };
 
@@ -163,7 +163,7 @@ in {
 
       frontendUrl = lib.mkOption {
         type = lib.types.str;
-        default = "http://localhost:8086";
+        default = "http://${cfg.host}:${builtins.toString cfg.port}";
         description = "Frontend URL";
       };
 
