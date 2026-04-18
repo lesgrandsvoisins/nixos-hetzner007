@@ -286,11 +286,11 @@ in {
       "d /run/oxicloud 0750 oxicloud services -"
     ];
 
-    systemd.services.oxicloud.serviceConfig.ExecStartPre = [
-      "cp ${generatedEnv} /run/oxicloud/.env"
-      "chmod 644 /run/oxicloud/.env"
-      "cat /etc/oxicloud/oxicloud.env >> /run/oxicloud/.env"
-    ];
+    # systemd.services.oxicloud.serviceConfig.ExecStartPre = [
+    #   "cp ${generatedEnv} /run/oxicloud/.env"
+    #   "chmod 644 /run/oxicloud/.env"
+    #   "cat /etc/oxicloud/oxicloud.env >> /run/oxicloud/.env"
+    # ];
     # Create user/group only if using defaults
     users.users = lib.mkIf (cfg.user == "oxicloud") {
       oxicloud = {
