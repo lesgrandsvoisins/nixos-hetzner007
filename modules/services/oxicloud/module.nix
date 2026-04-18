@@ -287,17 +287,17 @@ in {
       serviceConfig.Type = "oneshot";
 
       script = ''
-        install -d -m 0755 /run/oxicloud
+        install -d -m 0755 ${cfg.dataDir}
 
-        cp ${generatedEnv} /run/oxicloud/.env
+        cp ${generatedEnv} ${cfg.dataDir}/.env
 
         if [ -f ${cfg.envFile} ]; then
           # append overrides (last wins in dotenv parsing)
-          cat ${cfg.envFile} >> /run/oxicloud/.env
+          cat ${cfg.envFile} >> ${cfg.dataDir}/.env
         fi
 
-        chown ${cfg.user}:${cfg.group} /run/oxicloud/.env
-        chmod 640 /run/oxicloud/.env
+        chown ${cfg.user}:${cfg.group} ${cfg.dataDir}/.env
+        chmod 640 ${cfg.dataDir}/.env
       '';
     };
 
@@ -306,14 +306,9 @@ in {
       "d ${cfg.storagePath} 0750 ${cfg.user} ${cfg.group} -"
       "d ${cfg.staticPath} 0750 ${cfg.user} ${cfg.group} -"
       "d /etc/oxicloud 0750 root root -"
-      "d /run/oxicloud 0750 oxicloud services -"
+      "d ${cfg.dataDir} 0750 oxicloud services -"
     ];
 
-    # systemd.services.oxicloud.serviceConfig.ExecStartPre = [
-    #   "cp ${generatedEnv} /run/oxicloud/.env"
-    #   "chmod 644 /run/oxicloud/.env"
-    #   "cat /etc/oxicloud/oxicloud.env >> /run/oxicloud/.env"
-    # ];
     # Create user/group only if using defaults
     users.users = lib.mkIf (cfg.user == "oxicloud") {
       oxicloud = {
@@ -332,53 +327,18 @@ in {
       after = ["network.target" "postgresql.service" "oxicloud-env.service"];
       wantedBy = ["multi-user.target"];
 
-      # environment = {
-      #   OXICLOUD_STORAGE_PATH = cfg.storagePath;
-      #   OXICLOUD_STATIC_PATH = cfg.staticPath;
-      #   OXICLOUD_SERVER_PORT = builtins.toString cfg.port;
-      #   OXICLOUD_SERVER_HOST = cfg.host;
-      #   OXICLOUD_BASE_URL = cfg.baseUrl;
-      #   OXICLOUD_DB_CONNECTION_STRING = cfg.database.url;
-      #   OXICLOUD_DB_MAX_CONNECTIONS = builtins.toString cfg.database.maxConnections;
-      #   OXICLOUD_DB_MIN_CONNECTIONS = builtins.toString cfg.database.minConnections;
-      #   OXICLOUD_JWT_SECRET = cfg.auth.jwtSecret;
-      #   OXICLOUD_ACCESS_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.accessTokenExpirySecs;
-      #   OXICLOUD_REFRESH_TOKEN_EXPIRY_SECS = builtins.toString cfg.auth.refreshTokenExpirySecs;
-      #   OXICLOUD_ENABLE_AUTH = builtins.toString cfg.auth.enable;
-      #   OXICLOUD_ENABLE_USER_STORAGE_QUOTAS = builtins.toString cfg.features.userStorageQuotas;
-      #   OXICLOUD_ENABLE_FILE_SHARING = builtins.toString cfg.features.fileSharing;
-      #   OXICLOUD_ENABLE_TRASH = builtins.toString cfg.features.trash;
-      #   OXICLOUD_ENABLE_SEARCH = builtins.toString cfg.features.search;
-      #   OXICLOUD_OIDC_ENABLED = builtins.toString cfg.sso.enable;
-      #   OXICLOUD_OIDC_ISSUER_URL = cfg.sso.issuerUrl;
-      #   OXICLOUD_OIDC_CLIENT_ID = cfg.sso.clientId;
-      #   OXICLOUD_OIDC_CLIENT_SECRET = cfg.sso.clientSecret;
-      #   OXICLOUD_OIDC_REDIRECT_URI = cfg.sso.redirectUri;
-      #   OXICLOUD_OIDC_SCOPES = cfg.sso.scopes;
-      #   OXICLOUD_OIDC_FRONTEND_URL = cfg.sso.frontendUrl;
-      #   OXICLOUD_OIDC_AUTO_PROVISION = builtins.toString cfg.sso.autoProvision;
-      #   OXICLOUD_OIDC_ADMIN_GROUPS = cfg.sso.adminGroups;
-      #   OXICLOUD_OIDC_DISABLE_PASSWORD_LOGIN = builtins.toString cfg.sso.disablePasswordLogin;
-      #   OXICLOUD_OIDC_PROVIDER_NAME = cfg.sso.providerName;
-      #   OXICLOUD_WOPI_ENABLED = builtins.toString cfg.wopi.enable;
-      #   OXICLOUD_WOPI_DISCOVERY_URL = cfg.wopi.discoveryUrl;
-      #   OXICLOUD_WOPI_SECRET = cfg.wopi.secret;
-      #   OXICLOUD_WOPI_TOKEN_TTL_SECS = builtins.toString cfg.wopi.tokenTtlSecs;
-      #   OXICLOUD_WOPI_LOCK_TTL_SECS = builtins.toString cfg.wopi.lockTtlSecs;
-      # };
-
       serviceConfig = {
         User = cfg.user;
         Group = cfg.group;
         EnvironmentFile = [
-          "-/run/oxicloud/.env"
+          "-${cfg.dataDir}/.env"
           "-${generatedEnv}"
           "-${cfg.envFile}"
         ];
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
-        WorkingDirectory = "/run/oxicloud";
-        ReadWritePaths = ["/run/oxicloud" cfg.dataDir];
+        WorkingDirectory = cfg.dataDir;
+        ReadWritePaths = [cfg.dataDir];
 
         # 🔒 hardening
         # ProtectSystem = "strict";

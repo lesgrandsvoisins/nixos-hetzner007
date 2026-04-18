@@ -10,6 +10,10 @@ pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-Nn8qgLdiw7w4PZIMCiI+UHZGNW64fjWZ5mErTJifRZU=";
   };
 
+  # cargoBuildFlags = [
+  #   "--release"
+  # ];
+
   cargoHash = "sha256-4KfrKL2AKkTt3cOXdl9Xr2qed+qy8WSWuqYfN8WJ0bQ=";
 
   # Required for common Rust deps (very likely needed here)
@@ -19,7 +23,7 @@ pkgs.rustPlatform.buildRustPackage rec {
   # If tests fail due to DB, disable:
   doCheck = false;
 
-  # Install both binaries
+  # Install binary
   postInstall = ''
     mkdir -p $out/bin
 
