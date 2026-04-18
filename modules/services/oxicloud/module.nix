@@ -48,6 +48,30 @@ in {
       type = lib.types.int;
       default = 8085;
     };
+
+    host = lib.mkOption {
+      type = lib.types.str;
+      default = "127.0.0.1";
+      description = "Host to bind OxiCloud server";
+    };
+
+    localsPath = lib.mkOption {
+      type = lib.types.path;
+      default = "${cfg.dataDir}/locals";
+      description = "Path for l10n file storage";
+    };
+
+    staticPath = lib.mkOption {
+      type = lib.types.path;
+      default = "${cfg.dataDir}/static";
+      description = "Path for static file storage";
+    };
+
+    storagePath = lib.mkOption {
+      type = lib.types.path;
+      default = "${cfg.dataDir}/storage";
+      description = "Path for storage file storage";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -78,7 +102,8 @@ in {
         PORT = toString cfg.port;
         OXICLOUD_STORAGE_PATH = "${cfg.dataDir}/storage";
         OXICLOUD_STATIC_PATH = "${cfg.dataDir}/static";
-        # OXICLOUD_SERVER_HOST = "${cfg.dataDir}/static";
+        OXICLOUD_LOCALS_PATH = "${cfg.dataDir}/locals";
+        # OXICLOUD_SERVER_HOST = "${cfg.host}";
       };
 
       # 🔥 run migrations automatically
@@ -92,6 +117,7 @@ in {
         EnvironmentFile = cfg.envFile;
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
+        WorkingDirectory = "${cfg.dataDir}";
 
         # 🔥 run migrations before start
         # ExecStartPre = "${cfg.package}/bin/oxicloud-migrate";

@@ -19,11 +19,27 @@ pkgs.rustPlatform.buildRustPackage rec {
   # If tests fail due to DB, disable:
   doCheck = false;
 
+  cargoBuildFlags = [
+    "--release"
+    "--features"
+    "migrations"
+  ];
+
   # Install both binaries
   postInstall = ''
     mkdir -p $out/bin
-    cp target/release/oxicloud $out/bin/ || true
-    cp target/release/migrate $out/bin/oxicloud-migrate || true
+
+    # main server
+    if [ -f target/release/oxicloud ]; then
+      cp target/release/oxicloud $out/bin/
+    fi
+
+    # migration binary
+    if [ -f target/release/migrate ]; then
+      cp target/release/migrate $out/bin/oxicloud-migrate
+    fi
+
+    cp -r static $out/
   '';
 
   meta = with pkgs.lib; {
