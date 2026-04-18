@@ -355,7 +355,7 @@ in {
         ExecStart = "${cfg.package}/bin/oxicloud";
         Restart = "always";
         WorkingDirectory = "/run/oxicloud";
-        ReadWritePaths = ["/var/lib/oxicloud" "/run/oxicloud" cfg.dataDir];
+        ReadWritePaths = ["/run/oxicloud" cfg.dataDir];
 
         # 🔒 hardening
         # ProtectSystem = "strict";
