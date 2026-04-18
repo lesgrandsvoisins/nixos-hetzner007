@@ -91,7 +91,7 @@ in {
         Restart = "always";
 
         # 🔥 run migrations before start
-        ExecStartPre = "${cfg.package}/bin/oxicloud-migrate";
+        # ExecStartPre = "${cfg.package}/bin/oxicloud-migrate";
 
         # 🔒 hardening
         NoNewPrivileges = true;
