@@ -161,6 +161,12 @@ in {
       services.mysql.enable = cfg.database.enable;
       services.redis.enable = cfg.redis.enable;
 
+      systemd.tmpfiles.rules = [
+        "d /etc/sync-in 0750 ${cfg.user} ${cfg.group} -"
+        "f ${cfg.database.passwordFile} 0600 ${cfg.user} ${cfg.group} -"
+        "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group} -"
+      ];
+
       users.users.sync-in = {
         isSystemUser = true;
         home = cfg.dataDir;
