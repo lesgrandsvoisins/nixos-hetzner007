@@ -20,6 +20,18 @@ in {
       default = "/var/lib/sync-in";
     };
 
+    user = lib.mkOption {
+      type = lib.types.str;
+      default = "sync-in";
+      description = "User to run sync-in service";
+    };
+
+    group = lib.mkOption {
+      type = lib.types.str;
+      default = "sync-in";
+      description = "Group to run sync-in service";
+    };
+
     admin = {
       login = lib.mkOption {
         type = lib.types.str;
