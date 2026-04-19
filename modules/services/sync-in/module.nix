@@ -258,7 +258,7 @@ in {
             clientId = cfg.oidc.clientId;
             options = {
               autoCreatePermissions = cfg.oidc.options.autoCreatePermissions;
-              adminRoleOrGrou = cfg.oidc.options.adminRoleOrGrou;
+              adminRoleOrGroup = cfg.oidc.options.adminRoleOrGroup;
               enablePasswordAuth = cfg.oidc.options.enablePasswordAuth;
               autoRedirect = cfg.oidc.options.autoRedirect;
               buttonText = cfg.oidc.options.buttonText;
