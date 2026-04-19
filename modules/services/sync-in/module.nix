@@ -40,7 +40,7 @@ in {
 
       serviceConfig = {
         WorkingDirectory = cfg.dataDir;
-        ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/server.js";
+        ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/dist/server/main.js";
         Restart = "always";
         User = "sync-in";
         Group = "sync-in";
