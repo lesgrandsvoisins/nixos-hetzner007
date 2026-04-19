@@ -269,7 +269,7 @@ in {
       );
     in {
       services.mysql.enable = cfg.database.enable;
-      services.redis."${cfg.redis.name}" = {
+      services.redis.servers."${cfg.redis.name}" = {
         enable = cfg.redis.enable;
         port = cfg.redis.port;
         bind = cfg.redis.host;
