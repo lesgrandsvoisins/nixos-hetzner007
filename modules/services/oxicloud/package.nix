@@ -12,57 +12,57 @@ pkgs.rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-4KfrKL2AKkTt3cOXdl9Xr2qed+qy8WSWuqYfN8WJ0bQ=";
 
-  # nativeBuildInputs = [pkgs.pkg-config];
-  buildInputs = [
-    # Alpine Rust
-    pkgs.postgresql
-    pkgs.cargo
-    pkgs.cargo-c
-    pkgs.cargo-make
-    pkgs.rustup
-    pkgs.rustc
-    pkgs.openssl
-    pkgs.binutils
-    pkgs.zlib-ng
-    pkgs.zstd
-    pkgs.mpfr
-    pkgs.cryptopp
-    pkgs.cacert
-    pkgs.mkcert
-    pkgs.certstrap
-    pkgs.musl
-    pkgs.isl
-    pkgs.gcc
-    pkgs.libgcc
-    pkgs.jansson
-    pkgs.libatomic_ops
-    pkgs.pax-utils
-    pkgs.gomp
-    pkgs.libressl
-    pkgs.mpc
-    pkgs.pkg-config
-    pkgs.libpq
-    pkgs.libpqxx
-    pkgs.perl
-    pkgs.gnumake
-    pkgs.su-exec
-    # Postgres
-    pkgs.tzdata
-    pkgs.keyutils
-    pkgs.gsasl
-    pkgs.xz
-    pkgs.libedit
-    pkgs.libuuid
-    pkgs.libxslt
-    # WOPI
-    # collabora/code:latest
-    # Extra (I think)
-    pkgs.ffmpeg
-    pkgs.libavif
-    pkgs.librtprocess
-    pkgs.pdftk
-    pkgs.imagemagick
-  ];
+  # # nativeBuildInputs = [pkgs.pkg-config];
+  # buildInputs = [
+  #   # Alpine Rust
+  #   pkgs.postgresql
+  #   pkgs.cargo
+  #   pkgs.cargo-c
+  #   pkgs.cargo-make
+  #   pkgs.rustup
+  #   pkgs.rustc
+  #   pkgs.openssl
+  #   pkgs.binutils
+  #   pkgs.zlib-ng
+  #   pkgs.zstd
+  #   pkgs.mpfr
+  #   pkgs.cryptopp
+  #   pkgs.cacert
+  #   pkgs.mkcert
+  #   pkgs.certstrap
+  #   pkgs.musl
+  #   pkgs.isl
+  #   pkgs.gcc
+  #   pkgs.libgcc
+  #   pkgs.jansson
+  #   pkgs.libatomic_ops
+  #   pkgs.pax-utils
+  #   pkgs.gomp
+  #   pkgs.libressl
+  #   pkgs.mpc
+  #   pkgs.pkg-config
+  #   pkgs.libpq
+  #   pkgs.libpqxx
+  #   pkgs.perl
+  #   pkgs.gnumake
+  #   pkgs.su-exec
+  #   # Postgres
+  #   pkgs.tzdata
+  #   pkgs.keyutils
+  #   pkgs.gsasl
+  #   pkgs.xz
+  #   pkgs.libedit
+  #   pkgs.libuuid
+  #   pkgs.libxslt
+  #   # WOPI
+  #   # collabora/code:latest
+  #   # Extra (I think)
+  #   pkgs.ffmpeg
+  #   pkgs.libavif
+  #   pkgs.librtprocess
+  #   pkgs.pdftk
+  #   pkgs.imagemagick
+  # ];
 
   # If tests fail due to DB, disable:
   # doCheck = false;
