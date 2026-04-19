@@ -214,7 +214,7 @@ in {
           ${cfg.package}/bin/sync-in migrate-db
 
           if [ ! -f .admin_created ]; then
-            ${cfg.package}/bin/sync-in migrate-db create-user \
+            ${cfg.package}/bin/sync-in-create-user \
               --role admin \
               --login "${cfg.admin.login}" \
               --password "$ADMIN_PASS"
@@ -224,7 +224,7 @@ in {
         '';
 
         serviceConfig = {
-          ExecStart = "${cfg.package}/bin/sync-in start";
+          ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
           User = "sync-in";
           WorkingDirectory = cfg.dataDir;

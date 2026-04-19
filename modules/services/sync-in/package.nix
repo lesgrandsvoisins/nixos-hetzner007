@@ -34,9 +34,15 @@ pkgs.buildNpmPackage {
     cp -r . $out/lib
 
     mkdir -p $out/bin
-    cat > $out/bin/sync-in-server-start <<EOF
+
+    cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
     exec ${pkgs.nodejs_24}/bin/node $out/lib/release/sync-in-server/server/main.js "\$@"
+    EOF
+
+    cat > $out/bin/sync-in <<EOF
+    #!${pkgs.runtimeShell}
+    exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
     EOF
 
     chmod +x $out/bin/sync-in-*
