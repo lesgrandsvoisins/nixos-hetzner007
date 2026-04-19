@@ -193,7 +193,7 @@ in {
           description = "";
         };
         enablePasswordAuth = lib.mkOption {
-          type = lib.types.false;
+          type = lib.types.bool;
           default = false;
           description = "";
         };
