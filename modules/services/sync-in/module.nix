@@ -310,9 +310,12 @@ in {
           cp ${configFile} ${cfg.dataDir}/environment.yaml
           chmod ug+w ${cfg.dataDir}/environment.yaml
 
-          substituteInPlace environment.yaml \
-            --replace "__DB_PASSWORD__" "$DB_PASS" \
-            --replace "__LDAP_PASSWORD__" "$LDAP_PASS"
+          # substituteInPlace environment.yaml \
+          #   --replace "__DB_PASSWORD__" "$DB_PASS" \
+          #   --replace "__LDAP_PASSWORD__" "$LDAP_PASS"
+
+          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
 
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
@@ -329,7 +332,7 @@ in {
           ${cfg.package}/bin/sync-in migrate-db
 
           if [ ! -f .admin_created ]; then
-            ${cfg.package}/bin/sync-in-create-user \
+            ${cfg.package}/bin/sync-in create-user \
               --role admin \
               --login "${cfg.admin.login}" \
               --password "$ADMIN_PASS"
