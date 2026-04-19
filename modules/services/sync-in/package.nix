@@ -21,8 +21,8 @@ pkgs.buildNpmPackage {
 
   buildPhase = ''
     runHook preBuild
-    ${pkgs.nodejs_24}/bin/npm run build
-    ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
+    ${pkgs.nodejs_24}/bin/npm run build --ws
+    ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
 
     runHook postBuild
   '';
