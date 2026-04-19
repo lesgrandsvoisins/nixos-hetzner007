@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.buildNpmPackage {
   pname = "sync-in";
-  version = "2.2.0-a2";
+  version = "2.2.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "Sync-in";
@@ -12,18 +12,18 @@ pkgs.buildNpmPackage {
 
   nativeBuildInputs = [pkgs.nodejs_24];
 
-  # 🔥 force newer drizzle
   postPatch = ''
     ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-orm="^0.45.2"
-    # rm -f package-lock.json
+    ${pkgs.nodejs_24}/bin/npm pkg set dependencies.pdfjs-dist="^5.6.205"
   '';
 
-  # ⚠️ replace with real hash after first build
   npmDepsHash = "sha256-sOmR+cwIllv9V3JdqLlZnImsgntjS7ahDKXzyxKOS1M=";
 
   buildPhase = ''
     runHook preBuild
-    npm run build
+    ${pkgs.nodejs_24}/bin/npm run build --ws
+    ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
+
     runHook postBuild
   '';
 
@@ -34,12 +34,12 @@ pkgs.buildNpmPackage {
     cp -r . $out/lib
 
     mkdir -p $out/bin
-    cat > $out/bin/sync-in <<EOF
+    cat > $out/bin/sync-in-server-start <<EOF
     #!${pkgs.runtimeShell}
-    exec ${pkgs.nodejs_24}/bin/node $out/lib/dist/index.js "\$@"
+    exec ${pkgs.nodejs_24}/bin/node $out/lib/release/sync-in-server/server/main.js "\$@"
     EOF
 
-    chmod +x $out/bin/sync-in
+    chmod +x $out/bin/sync-in-*
 
     runHook postInstall
   '';

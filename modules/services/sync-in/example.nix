@@ -1,5 +1,5 @@
 {
-  inputs.sync-in.url = "github:your-org/sync-in-nix";
+  inputs.sync-in.url = "path:./.";
 
   outputs = {
     self,
@@ -7,7 +7,7 @@
     sync-in,
     ...
   }: {
-    nixosConfigurations.my-host = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       modules = [
@@ -16,8 +16,9 @@
         {
           services.sync-in = {
             enable = true;
-            port = 8080;
-            dataDir = "/var/lib/sync-in";
+
+            admin.passwordFile = "/run/secrets/admin";
+            database.passwordFile = "/run/secrets/db";
           };
         }
       ];
