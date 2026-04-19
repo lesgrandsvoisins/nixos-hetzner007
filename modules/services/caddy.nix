@@ -235,7 +235,8 @@ in {
       };
       "moi.gv.je" = {
         extraConfig = ''
-          reverse_proxy http://localhost:3000
+          # reverse_proxy http://localhost:3000
+          redir https://www.gv.je
         '';
       };
       "yo.gv.je" = {
