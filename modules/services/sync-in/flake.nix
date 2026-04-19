@@ -18,7 +18,7 @@
   in {
     packages = forAllSystems (pkgs: {
       sync-in = pkgs.callPackage ./package.nix {};
-      default = pkgs.callPackage ./package.nix {};
+      # default = pkgs.callPackage ./package.nix {};
       # default = sync-in;
     });
 
