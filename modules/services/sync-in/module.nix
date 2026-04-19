@@ -204,7 +204,7 @@ in {
             touch .initialized
           fi
 
-          ${pkgs.mysql}/bin/mysql <<EOF
+          ${pkgs.mariadb}/bin/mysql <<EOF
           CREATE DATABASE IF NOT EXISTS ${cfg.database.name};
           CREATE USER IF NOT EXISTS '${cfg.database.user}'@'localhost' IDENTIFIED BY '$DB_PASS';
           GRANT ALL PRIVILEGES ON ${cfg.database.name}.* TO '${cfg.database.user}'@'localhost';
