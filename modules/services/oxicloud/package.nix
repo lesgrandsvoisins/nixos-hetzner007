@@ -12,12 +12,15 @@ pkgs.rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-4KfrKL2AKkTt3cOXdl9Xr2qed+qy8WSWuqYfN8WJ0bQ=";
 
-  nativeBuildInputs = [pkgs.pkg-config];
+  # nativeBuildInputs = [pkgs.pkg-config];
   buildInputs = [
     # Alpine Rust
     pkgs.postgresql
     pkgs.cargo
+    pkgs.cargo-c
+    pkgs.cargo-make
     pkgs.rustup
+    pkgs.rustc
     pkgs.openssl
     pkgs.binutils
     pkgs.zlib-ng
