@@ -27,6 +27,10 @@ in {
     };
   };
 
+  # buildInputs = [
+  #   pkgs.nodejs_24
+  # ];
+
   config = lib.mkIf cfg.enable {
     systemd.services.sync-in = {
       description = "Sync-in Server";
@@ -36,7 +40,7 @@ in {
 
       serviceConfig = {
         WorkingDirectory = cfg.dataDir;
-        ExecStart = "${cfg.package}/bin/node ${cfg.package}/server.js";
+        ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/server.js";
         Restart = "always";
         User = "sync-in";
         Group = "sync-in";
