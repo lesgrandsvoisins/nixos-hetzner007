@@ -32,6 +32,7 @@
     immich = 1514;
     oxicloud = 1515;
     # mysql = 1516;
+    sync-in = 1517;
     cherryldap = 11111;
   };
   ports = {
