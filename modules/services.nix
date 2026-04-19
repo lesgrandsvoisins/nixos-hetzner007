@@ -25,6 +25,7 @@ in {
     ./services/postgresql.nix
     ./services/radicale.nix
     ./services/sftpgo.nix
+    ./services/sync-in.nix
     ./services/vaultwarden.nix
     ./services/vikunja.nix
     ./services/wiki-js.nix

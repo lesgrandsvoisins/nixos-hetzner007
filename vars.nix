@@ -63,6 +63,7 @@
     miniflux = 8088;
     immich = 2283;
     oxicloud = 8086;
+    sync-in = 8087;
   };
   hosts = {
     node-red = {

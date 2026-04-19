@@ -2,7 +2,7 @@
   description = "Sync-in NixOS package + module";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -15,30 +15,7 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
 
-        sync-in = pkgs.buildNpmPackage {
-          pname = "sync-in";
-          version = "1.0.0";
-
-          src = pkgs.fetchFromGitHub {
-            owner = "Sync-in";
-            repo = "server";
-            rev = "main";
-            hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-          };
-
-          npmDepsHash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";
-
-          installPhase = ''
-            mkdir -p $out
-            cp -r . $out
-          '';
-
-          meta = with pkgs.lib; {
-            description = "Sync-in server (self-hosted collaboration platform)";
-            license = licenses.agpl3Only;
-            platforms = platforms.linux;
-          };
-        };
+        sync-in = import ./package.nix {inherit pkgs;};
       in {
         packages.sync-in = sync-in;
 

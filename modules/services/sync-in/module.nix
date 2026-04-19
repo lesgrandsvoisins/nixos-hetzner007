@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  sync-in,
   ...
 }: let
   cfg = config.services.sync-in;
@@ -11,7 +12,7 @@ in {
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.sync-in;
+      default = pkgs.callPackage ./package.nix {inherit pkgs;};
       description = "Sync-in package";
     };
 
