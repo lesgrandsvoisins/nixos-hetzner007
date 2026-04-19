@@ -20,6 +20,7 @@ in {
     ./services/lldap.nix
     ./services/memos.nix
     ./services/miniflux.nix
+    ./services/mysql.nix
     ./services/openldap.nix
     ./services/oxicloud.nix
     ./services/postgresql.nix

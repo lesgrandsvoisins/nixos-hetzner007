@@ -31,6 +31,7 @@
     miniflux = 1514;
     immich = 1514;
     oxicloud = 1515;
+    # mysql = 1516;
     cherryldap = 11111;
   };
   ports = {
