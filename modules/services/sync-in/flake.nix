@@ -9,13 +9,22 @@
     self,
     nixpkgs,
   }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
+    systems = ["x86_64-linux"];
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs systems (
+        system:
+          f (import nixpkgs {inherit system;})
+      );
   in {
-    packages.${system}.sync-in = pkgs.callPackage ./package.nix {};
-    # packages.${system}.default = self.packages.${system}.sync-in;
+    packages = forAllSystems (pkgs: {
+      sync-in = pkgs.callPackage ./package.nix {};
+      default = pkgs.callPackage ./package.nix {};
+      # default = sync-in;
+    });
 
     nixosModules.sync-in = import ./module.nix;
+
+    # packages.x86_64-linux.default = self.packages.x86_64-linux.sync-in;
 
     # nixosConfigurations.example = nixpkgs.lib.nixosSystem {
     #   inherit system;
