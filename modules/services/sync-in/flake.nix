@@ -19,8 +19,7 @@
   in {
     packages = forAllSystems (pkgs: {
       sync-in = pkgs.callPackage ./package.nix {};
-      # default = pkgs.callPackage ./package.nix {};
-      # default = sync-in;
+      # default = pkgs.sync-in;
     });
 
     nixosModules.sync-in = import ./module.nix;

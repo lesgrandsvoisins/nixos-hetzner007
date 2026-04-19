@@ -269,9 +269,11 @@ in {
       );
     in {
       services.mysql.enable = cfg.database.enable;
-      services.redis."${cfg.redis.name}".enable = cfg.redis.enable;
-      services.redis."${cfg.redis.name}".port = cfg.redis.port;
-      services.redis."${cfg.redis.name}".bind = cfg.redis.host;
+      services.redis."${cfg.redis.name}" = {
+        enable = cfg.redis.enable;
+        port = cfg.redis.port;
+        bind = cfg.redis.host;
+      };
 
       systemd.tmpfiles.rules = [
         "d /etc/sync-in 0750 ${cfg.user} ${cfg.group}"
