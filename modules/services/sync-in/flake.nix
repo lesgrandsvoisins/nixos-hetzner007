@@ -17,20 +17,20 @@
 
     nixosModules.sync-in = import ./module.nix;
 
-    nixosConfigurations.example = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        self.nixosModules.sync-in
-        {
-          services.sync-in = {
-            enable = true;
-            package = self.packages.${system}.sync-in;
+    # nixosConfigurations.example = nixpkgs.lib.nixosSystem {
+    #   inherit system;
+    #   modules = [
+    #     self.nixosModules.sync-in
+    #     {
+    #       services.sync-in = {
+    #         enable = true;
+    #         package = self.packages.${system}.sync-in;
 
-            admin.passwordFile = "/run/secrets/admin";
-            database.passwordFile = "/run/secrets/db";
-          };
-        }
-      ];
-    };
+    #         admin.passwordFile = "/run/secrets/admin";
+    #         database.passwordFile = "/run/secrets/db";
+    #       };
+    #     }
+    #   ];
+    # };
   };
 }
