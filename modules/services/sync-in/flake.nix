@@ -13,7 +13,7 @@
     pkgs = import nixpkgs {inherit system;};
   in {
     packages.${system}.sync-in = pkgs.callPackage ./package.nix {};
-    packages.${system}.default = self.packages.${system}.sync-in;
+    # packages.${system}.default = self.packages.${system}.sync-in;
 
     nixosModules.sync-in = import ./module.nix;
 
