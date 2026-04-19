@@ -307,7 +307,6 @@ in {
             LDAP_PASS=$(cat ${builtins.toString cfg.ldap.bindPasswordFile})
           fi
 
-          cp ${configFile} environment.yaml
           cp ${configFile} ${cfg.dataDir}/environment.yaml
 
           substituteInPlace environment.yaml \
