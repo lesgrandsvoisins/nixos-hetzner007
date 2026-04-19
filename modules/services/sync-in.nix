@@ -10,15 +10,15 @@ in {
   services.mysql = {
     ensureUsers = [
       {
-        name = "sync-in";
+        name = "syncin";
         ensurePermissions = {
-          "sync-in.*" = "ALL PRIVILEGES";
+          "syncin.*" = "ALL PRIVILEGES";
         };
       }
     ];
     initialDatabases = [
       {
-        name = "sync-in";
+        name = "syncin";
       }
     ];
   };
