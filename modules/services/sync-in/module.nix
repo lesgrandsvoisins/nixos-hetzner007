@@ -308,6 +308,7 @@ in {
           fi
 
           cp ${configFile} ${cfg.dataDir}/environment.yaml
+          chmod ug+w ${cfg.dataDir}/environment.yaml
 
           substituteInPlace environment.yaml \
             --replace "__DB_PASSWORD__" "$DB_PASS" \
