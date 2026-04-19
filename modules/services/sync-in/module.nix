@@ -245,23 +245,23 @@ in {
           };
 
           auth = {
-            provider = cfg.provider;
-            encryptionKey = cfg.encryptionKey;
-            cookieSameSite = cfg.cookieSameSite;
-            token.access.secret = cfg.token.access.secret;
+            provider = cfg.auth.provider;
+            encryptionKey = cfg.auth.encryptionKey;
+            cookieSameSite = cfg.auth.cookieSameSite;
+            token.access.secret = cfg.auth.token.access.secret;
           };
 
           oidc = {
-            redirectUri = cfg.redirectUri;
-            clientSecretFile = cfg.clientSecretFile;
-            issuerUrl = cfg.issuerUrl;
-            clientId = cfg.clientId;
+            redirectUri = cfg.oidc.redirectUri;
+            clientSecretFile = cfg.oidc.clientSecretFile;
+            issuerUrl = cfg.oidc.issuerUrl;
+            clientId = cfg.oidc.clientId;
             options = {
-              autoCreatePermissions = cfg.autoCreatePermissions;
-              adminRoleOrGrou = cfg.adminRoleOrGrou;
-              enablePasswordAuth = cfg.enablePasswordAuth;
-              autoRedirect = cfg.autoRedirect;
-              buttonText = cfg.buttonText;
+              autoCreatePermissions = cfg.oidc.options.autoCreatePermissions;
+              adminRoleOrGrou = cfg.oidc.options.adminRoleOrGrou;
+              enablePasswordAuth = cfg.oidc.options.enablePasswordAuth;
+              autoRedirect = cfg.oidc.options.autoRedirect;
+              buttonText = cfg.oidc.options.buttonText;
             };
           };
         }
