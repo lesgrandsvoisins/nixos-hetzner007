@@ -274,9 +274,9 @@ in {
       services.redis."${cfg.redis.name}".bind = cfg.redis.host;
 
       systemd.tmpfiles.rules = [
-        "d /etc/sync-in 0750 ${cfg.user} ${cfg.group} -"
-        "f ${cfg.database.passwordFile} 0600 ${cfg.user} ${cfg.group} -"
-        "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group} -"
+        "d /etc/sync-in 0750 ${cfg.user} ${cfg.group}"
+        "f ${cfg.database.passwordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group}"
       ];
 
       users.users.sync-in = {
@@ -306,6 +306,7 @@ in {
           fi
 
           cp ${configFile} environment.yaml
+          cp ${configFile} ${cfg.dataDir}/environment.yaml
 
           substituteInPlace environment.yaml \
             --replace "__DB_PASSWORD__" "$DB_PASS" \
