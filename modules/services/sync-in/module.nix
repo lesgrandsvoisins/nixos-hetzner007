@@ -189,8 +189,8 @@ in {
           ADMIN_PASS=$(cat ${cfg.admin.passwordFile})
           LDAP_PASS=""
 
-          if [ -n "${cfg.ldap.bindPasswordFile or ""}" ]; then
-            LDAP_PASS=$(cat ${cfg.ldap.bindPasswordFile})
+          if [ -n "${builtins.toString cfg.ldap.bindPasswordFile or ""}" ]; then
+            LDAP_PASS=$(cat ${builtins.toString cfg.ldap.bindPasswordFile})
           fi
 
           cp ${configFile} environment.yaml
