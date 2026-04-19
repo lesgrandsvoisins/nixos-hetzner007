@@ -1,0 +1,2 @@
+#!/nix/store/6ph0zypyfc09fw6hlc1ygjvk2hv4j9vd-bash-5.3p3/bin/bash
+exec /nix/store/9h94rfrcxkgnjb8df11ab00nax1v163g-nodejs-24.14.0/bin/node /nix/store/2n0lq10qmn6h8snrg02i44bq37pfmh8w-sync-in-2.2.0-a2/lib/dist/server/main.js "$@"
