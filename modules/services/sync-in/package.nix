@@ -45,7 +45,8 @@ pkgs.buildNpmPackage {
     exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
     EOF
 
-    chmod +x $out/bin/sync-in-*
+    chmod +x $out/bin/sync-in
+    chmod +x $out/bin/sync-in-start
 
     runHook postInstall
   '';
