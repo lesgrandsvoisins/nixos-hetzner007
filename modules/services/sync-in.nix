@@ -34,6 +34,9 @@ in {
     admin.passwordFile = "/etc/sync-in/admin.secret";
     admin.login = "sync-in";
     database.passwordFile = "/etc/sync-in/database.secret";
+    database.user = "syncin";
+    auth.provider = "oidc";
+
     user = "sync-in";
     group = "services";
   };

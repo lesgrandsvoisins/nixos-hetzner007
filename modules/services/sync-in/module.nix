@@ -136,6 +136,79 @@ in {
       type = lib.types.attrs;
       default = {};
     };
+
+    auth = {
+      provider = lib.mkOption {
+        type = lib.types.str;
+        default = "mysql";
+        description = "Authentication method mysql | ldap | oidc";
+      };
+      encryptionKey = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Key used to encrypt user secret keys in the database";
+      };
+      cookieSameSite = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = " `lax` | `strict`";
+      };
+      token.access.secret = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Used for token and cookie signatures";
+      };
+    };
+
+    oidc = {
+      redirectUri = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "";
+      };
+      clientSecretFile = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "";
+      };
+      issuerUrl = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "";
+      };
+      clientId = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "";
+      };
+      options = {
+        autoCreatePermissions = lib.mkOption {
+          type = lib.types.str;
+          default = "[personal_space, spaces_access, webdav_access]";
+          description = "";
+        };
+        adminRoleOrGroup = lib.mkOption {
+          type = lib.types.str;
+          default = "admin";
+          description = "";
+        };
+        enablePasswordAuth = lib.mkOption {
+          type = lib.types.false;
+          default = false;
+          description = "";
+        };
+        autoRedirect = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "";
+        };
+        buttonText = lib.mkOption {
+          type = lib.types.str;
+          default = "key.gv.je";
+          description = "";
+        };
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable (
@@ -169,6 +242,27 @@ in {
             bindPassword = "__LDAP_PASSWORD__";
             searchBase = cfg.ldap.searchBase;
             searchFilter = cfg.ldap.searchFilter;
+          };
+
+          auth = {
+            provider = cfg.provider;
+            encryptionKey = cfg.encryptionKey;
+            cookieSameSite = cfg.cookieSameSite;
+            token.access.secret = cfg.token.access.secret;
+          };
+
+          oidc = {
+            redirectUri = cfg.redirectUri;
+            clientSecretFile = cfg.clientSecretFile;
+            issuerUrl = cfg.issuerUrl;
+            clientId = cfg.clientId;
+            options = {
+              autoCreatePermissions = cfg.autoCreatePermissions;
+              adminRoleOrGrou = cfg.adminRoleOrGrou;
+              enablePasswordAuth = cfg.enablePasswordAuth;
+              autoRedirect = cfg.autoRedirect;
+              buttonText = cfg.buttonText;
+            };
           };
         }
         cfg.extraSettings
