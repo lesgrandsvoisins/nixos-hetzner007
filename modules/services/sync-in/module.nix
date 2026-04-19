@@ -72,7 +72,7 @@ in {
     redis = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
       };
       host = lib.mkOption {
         type = lib.types.str;
@@ -80,7 +80,11 @@ in {
       };
       port = lib.mkOption {
         type = lib.types.int;
-        default = 6379;
+        default = 6380;
+      };
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "sync-in";
       };
     };
 
@@ -171,7 +175,9 @@ in {
       );
     in {
       services.mysql.enable = cfg.database.enable;
-      services.redis.enable = cfg.redis.enable;
+      services.redis."${cfg.redis.name}".enable = cfg.redis.enable;
+      services.redis."${cfg.redis.name}".port = cfg.redis.port;
+      services.redis."${cfg.redis.name}".bind = cfg.redis.host;
 
       systemd.tmpfiles.rules = [
         "d /etc/sync-in 0750 ${cfg.user} ${cfg.group} -"
