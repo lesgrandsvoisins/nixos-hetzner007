@@ -37,8 +37,9 @@ pkgs.buildNpmPackage {
     cp -r . $out/lib
 
     mkdir -p $out/bin
+    mkdir -p $out/conf
 
-    cat > $out/drizzle.js <<EOF
+    cat > $out/conf/drizzle.js <<EOF
     import { defineConfig } from "drizzle-kit";
 
     export default defineConfig({
