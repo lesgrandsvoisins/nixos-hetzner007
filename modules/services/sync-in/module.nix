@@ -348,7 +348,7 @@ in {
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
 
           cp ${drizzleJsFile} /etc/sync-in/drizzle.js
-          chown ${cfg.user} ${cfg.group} /etc/sync-in/drizzle.js
+          chown ${cfg.user}:${cfg.group} /etc/sync-in/drizzle.js
 
           sed -i "s|__PASSWORD__|$DB_PASS|g" /etc/sync-in/drizzle.js
           sed -i "s|__USER__|$DB_USER|g" /etc/sync-in/drizzle.js
