@@ -40,7 +40,7 @@ in
 
       mkdir -p $out/bin
       mkdir -p $out/conf
-      cp ${dirzzleJsFile} $out/conf/drizzle.js
+      cp ${drizzleJsFile} $out/conf/drizzle.js
 
       # cat > $out/conf/drizzle.js <<EOF
       # import { defineConfig } from "drizzle-kit";
