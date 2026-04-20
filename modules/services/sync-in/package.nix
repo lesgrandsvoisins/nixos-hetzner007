@@ -56,18 +56,11 @@ in
       # });
       # EOF
 
-      cat > $out/bin/sync-in-start <<EOF
+      cat > $out/bin/sync-in <<EOF
       #!${pkgs.runtimeShell}
       export NODE_PATH=$NODE_PATH:$out/lib/node_modules
       exec ${pkgs.nodejs_24}/bin/node $out/lib/release/sync-in-server/server/main.js "\$@"
       EOF
-
-      cat > $out/bin/sync-in <<EOF
-      #!${pkgs.runtimeShell}
-      export NODE_PATH=$NODE_PATH:$out/lib/node_modules
-      exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
-      EOF
-
 
       cat > $out/bin/sync-in-migrate-db <<EOF
       #!${pkgs.runtimeShell}

@@ -6,6 +6,7 @@
 }: let
   cfg = config.services.sync-in;
   yaml = pkgs.formats.yaml {};
+  drizzleJsFile = ./drizzle.js;
 in {
   options.services.sync-in = {
     enable = lib.mkEnableOption "Sync-in";
@@ -300,6 +301,11 @@ in {
           cd ${cfg.dataDir}
 
           DB_PASS=$(cat ${cfg.database.passwordFile})
+          DB_USER=${cfg.database.user}
+          DB_NAME=${cfg.database.name}
+          DB_HOST=${cfg.database.host}
+          DB_PORT=${builtins.toString cfg.database.port}
+          DB_USER=${cfg.database.user}
           ADMIN_PASS=$(cat ${cfg.admin.passwordFile})
           LDAP_PASS=""
 
@@ -316,6 +322,14 @@ in {
 
           sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment.yaml
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
+
+          cp ${drizzleJsFile} /etc/sync-in/drizzle.js
+
+          sed -i "s|__PASSWORD__|$DB_PASS|g" /etc/sync-in/drizzle.js
+          sed -i "s|__USER__|$DB_USER|g" /etc/sync-in/drizzle.js
+          sed -i "s|__HOST__|$DB_HOST|g" /etc/sync-in/drizzle.js
+          sed -i "s|__PORT__|$DB_PORT|g" /etc/sync-in/drizzle.js
+          sed -i "s|__NAME__|$DB_NAME|g" /etc/sync-in/drizzle.js
 
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
