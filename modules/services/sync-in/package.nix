@@ -26,7 +26,7 @@ pkgs.buildNpmPackage {
     ${pkgs.nodejs_24}/bin/npm run build
     # ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
 
-    cat > $out/dist/drizzle.js <<EOF
+    cat > $out/drizzle.js <<EOF
     import { defineConfig } from "drizzle-kit";
 
     export default defineConfig({
