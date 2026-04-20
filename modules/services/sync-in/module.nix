@@ -264,7 +264,7 @@ in {
               buttonText = cfg.oidc.options.buttonText;
             };
           };
-          files = {
+          applications.files = {
             dataPath = cfg.dataDir;
             maxUploadSize = 5368709120;
             contentIndexing = {
@@ -283,8 +283,8 @@ in {
                 enabled = false;
               };
             };
-            appstore.repository = "public";
           };
+          applications.appstore.repository = "public";
         }
         cfg.extraSettings
       );
