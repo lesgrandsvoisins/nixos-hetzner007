@@ -2,7 +2,8 @@
   "PROFITEZ des nouveaux services des GV" = [
     {
       "Vos PHOTOS via IMMICH" = {
-        href = "https://immich.gv.je";
+        # href = "https://immich.gv.je";
+        href = "https://memos.gv.je/memos/UhTemx3M2CkptqcJ9xighz";
         icon = "si-immich";
         description = "Vos photos et vidéos sur Immich";
       };
