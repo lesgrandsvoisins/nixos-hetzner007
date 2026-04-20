@@ -25,8 +25,8 @@ in
 
     buildPhase = ''
       runHook preBuild
-      ${pkgs.nodejs_24}/bin/npm run build
-      # ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
+      # ${pkgs.nodejs_24}/bin/npm run build
+      ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
 
 
       runHook postBuild
@@ -47,7 +47,7 @@ in
 
       # export default defineConfig({
       #   dialect: "mysql",
-      #   schema: "./dist/server/infrastructure/database/schema.js",
+      #   schema: "./release/sync-in-server/server/infrastructure/database/schema.js",
       #   out: "./backend/migrations",
       #   url: "mysql://root@localhost/syncin",
       #   tablesFilter: [
@@ -59,7 +59,7 @@ in
       cat > $out/bin/sync-in-start <<EOF
       #!${pkgs.runtimeShell}
       export NODE_PATH=$NODE_PATH:$out/lib/node_modules
-      exec ${pkgs.nodejs_24}/bin/node $out/lib/dist/server/main.js "\$@"
+      exec ${pkgs.nodejs_24}/bin/node $out/lib/release/sync-in-server/server/main.js "\$@"
       EOF
 
       cat > $out/bin/sync-in <<EOF

@@ -342,7 +342,7 @@ in {
         '';
 
         serviceConfig = {
-          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/dist/server/main.js";
+          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/server/main.js";
           # ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
           User = "sync-in";
