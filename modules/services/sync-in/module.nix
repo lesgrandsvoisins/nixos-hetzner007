@@ -151,7 +151,7 @@ in {
       };
       cookieSameSite = lib.mkOption {
         type = lib.types.str;
-        default = "";
+        default = "strict";
         description = " `lax` | `strict`";
       };
       token.access.secret = lib.mkOption {
@@ -214,7 +214,7 @@ in {
 
   config = lib.mkIf cfg.enable (
     let
-      configFile = yaml.generate "environment.yaml" (
+      configFile = yaml.generate "environment-generated.yaml" (
         lib.recursiveUpdate
         {
           server = {
@@ -333,15 +333,15 @@ in {
             LDAP_PASS=$(cat ${builtins.toString cfg.ldap.bindPasswordFile})
           fi
 
-          cp ${configFile} ${cfg.dataDir}/environment.yaml
-          chmod ug+w ${cfg.dataDir}/environment.yaml
+          cp ${configFile} ${cfg.dataDir}/environment-generated.yaml
+          chmod ug+w ${cfg.dataDir}/environment-generated.yaml
 
-          # substituteInPlace environment.yaml \
+          # substituteInPlace environment-generated.yaml \
           #   --replace "__DB_PASSWORD__" "$DB_PASS" \
           #   --replace "__LDAP_PASSWORD__" "$LDAP_PASS"
 
-          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment.yaml
-          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
+          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment-generated.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment-generated.yaml
 
           cp ${drizzleJsFile} ${cfg.dataDir}/drizzle.js
           chown ${cfg.user}:${cfg.group} ${cfg.dataDir}/drizzle.js
