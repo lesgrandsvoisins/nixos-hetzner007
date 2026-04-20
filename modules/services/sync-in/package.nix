@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}: let
-  dirzzleJsFile = ./drizzle.js;
+  drizzleJsFile = ./drizzle.js;
 in
   pkgs.buildNpmPackage {
     pname = "sync-in";
