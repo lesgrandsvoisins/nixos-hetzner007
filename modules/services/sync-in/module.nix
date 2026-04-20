@@ -251,7 +251,6 @@ in {
             cookieSameSite = cfg.auth.cookieSameSite;
             token.access.secret = cfg.auth.token.access.secret;
           };
-
           oidc = {
             redirectUri = cfg.oidc.redirectUri;
             clientSecretFile = cfg.oidc.clientSecretFile;
@@ -264,6 +263,27 @@ in {
               autoRedirect = cfg.oidc.options.autoRedirect;
               buttonText = cfg.oidc.options.buttonText;
             };
+          };
+          files = {
+            dataPath = cfg.dataDir;
+            maxUploadSize = 5368709120;
+            contentIndexing = {
+              enabled = true;
+              ocr = {
+                enabled = true;
+                languages = "[fra,eng]";
+                offline = false;
+                # lanuagesPath = '';
+              };
+              showHiddenFiles = false;
+              onlyoffice = {
+                enabled = false;
+              };
+              collabora = {
+                enabled = false;
+              };
+            };
+            appstore.repository = "public";
           };
         }
         cfg.extraSettings
@@ -281,6 +301,10 @@ in {
         "f ${cfg.database.passwordFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group}"
       ];
+
+      # environment.etc.sync-in = {
+
+      # };
 
       users.users.sync-in = {
         isSystemUser = true;
@@ -324,6 +348,7 @@ in {
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
 
           cp ${drizzleJsFile} /etc/sync-in/drizzle.js
+          chown ${cfg.user} ${cfg.group} /etc/sync-in/drizzle.js
 
           sed -i "s|__PASSWORD__|$DB_PASS|g" /etc/sync-in/drizzle.js
           sed -i "s|__USER__|$DB_USER|g" /etc/sync-in/drizzle.js
