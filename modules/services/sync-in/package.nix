@@ -66,10 +66,14 @@ pkgs.buildNpmPackage {
     EOF
 
 
-
+    cat > $out/bin/sync-in-migrate-db <<EOF
+    #!${pkgs.runtimeShell}
+    export NODE_PATH=$NODE_PATH:$out/lib
+    exec ${pkgs.nodejs_24}/bin/npx drizzle-kit migrate --config=/etc/sync-in/drizzle.js "\$@"
+    EOF
 
     chmod +x $out/bin/sync-in
-    chmod +x $out/bin/sync-in-start
+    chmod +x $out/bin/sync-in-*
 
     runHook postInstall
   '';
