@@ -12,16 +12,18 @@ pkgs.buildNpmPackage {
 
   nativeBuildInputs = [pkgs.nodejs_24];
 
-  postPatch = ''
-    ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-orm="^0.45.2"
-    ${pkgs.nodejs_24}/bin/npm pkg set dependencies.pdfjs-dist="^5.6.205"
-    ${pkgs.nodejs_24}/bin/npm update drizzle-orm
-    ${pkgs.nodejs_24}/bin/npm update pdfjs-dist
-  '';
+  # postPatch = ''
+  #   # ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-orm="^0.45.2"
+  #   # ${pkgs.nodejs_24}/bin/npm pkg set dependencies.pdfjs-dist="^5.6.205"
+  #   # ${pkgs.nodejs_24}/bin/npm update drizzle-orm
+  #   # ${pkgs.nodejs_24}/bin/npm update pdfjs-dist
+  # '';
 
   # npmInstallFlags = "";
 
-  npmDepsHash = "sha256-sOmR+cwIllv9V3JdqLlZnImsgntjS7ahDKXzyxKOS1M=";
+  npmDeps = ["drizzle-orm" "pdfjs-dist"];
+
+  npmDepsHash = "";
 
   buildPhase = ''
     runHook preBuild
