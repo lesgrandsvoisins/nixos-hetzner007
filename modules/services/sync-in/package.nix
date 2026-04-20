@@ -39,19 +39,19 @@ pkgs.buildNpmPackage {
     mkdir -p $out/bin
     mkdir -p $out/conf
 
-    cat > $out/conf/drizzle.js <<EOF
-    import { defineConfig } from "drizzle-kit";
+    # cat > $out/conf/drizzle.js <<EOF
+    # import { defineConfig } from "drizzle-kit";
 
-    export default defineConfig({
-      dialect: "mysql",
-      schema: "./dist/server/infrastructure/database/schema.js",
-      out: "./backend/migrations",
-      url: "mysql://root@localhost/syncin",
-      tablesFilter: [
-        'files_content_*'
-      ]
-    });
-    EOF
+    # export default defineConfig({
+    #   dialect: "mysql",
+    #   schema: "./dist/server/infrastructure/database/schema.js",
+    #   out: "./backend/migrations",
+    #   url: "mysql://root@localhost/syncin",
+    #   tablesFilter: [
+    #     'files_content_*'
+    #   ]
+    # });
+    # EOF
 
     cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
