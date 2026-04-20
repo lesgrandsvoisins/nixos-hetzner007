@@ -228,18 +228,18 @@ in {
             logQueries = false;
           };
 
-          redis = lib.mkIf cfg.redis.enable {
-            host = cfg.redis.host;
-            port = cfg.redis.port;
-          };
+          # redis = lib.mkIf cfg.redis.enable {
+          #   host = cfg.redis.host;
+          #   port = cfg.redis.port;
+          # };
 
-          ldap = lib.mkIf cfg.ldap.enable {
-            url = cfg.ldap.url;
-            bindDN = cfg.ldap.bindDN;
-            bindPassword = "__LDAP_PASSWORD__";
-            searchBase = cfg.ldap.searchBase;
-            searchFilter = cfg.ldap.searchFilter;
-          };
+          # ldap = lib.mkIf cfg.ldap.enable {
+          #   url = cfg.ldap.url;
+          #   bindDN = cfg.ldap.bindDN;
+          #   bindPassword = "__LDAP_PASSWORD__";
+          #   searchBase = cfg.ldap.searchBase;
+          #   searchFilter = cfg.ldap.searchFilter;
+          # };
 
           auth = {
             provider = cfg.auth.provider;
