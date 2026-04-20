@@ -1,14 +1,6 @@
 {
   "PROFITEZ des nouveaux services des GV" = [
     {
-      "Vos PHOTOS via IMMICH" = {
-        # href = "https://immich.gv.je";
-        href = "https://memos.gv.je/memos/UhTemx3M2CkptqcJ9xighz";
-        icon = "si-immich";
-        description = "Vos photos et vidéos sur Immich";
-      };
-    }
-    {
       "Vos FICHIERS via casiers OXICLOUD" = {
         href = "https://oxicloud.gv.je";
         icon = "si-sunrise";
@@ -27,6 +19,14 @@
         description = "Serveur de développement et de codes sources";
         href = "https://forgejo.roses.gv.je/user/login";
         icon = "si-forgejo";
+      };
+    }
+    {
+      "Vos PHOTOS via IMMICH" = {
+        # href = "https://immich.gv.je";
+        href = "https://memos.gv.je/memos/UhTemx3M2CkptqcJ9xighz";
+        icon = "si-immich";
+        description = "Vos photos et vidéos sur Immich";
       };
     }
   ];
