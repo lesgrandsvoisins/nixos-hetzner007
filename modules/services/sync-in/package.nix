@@ -55,13 +55,13 @@ pkgs.buildNpmPackage {
 
     cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
-    export NODE_PATH=$NODE_PATH:${out}/lib
+    export NODE_PATH=$NODE_PATH:$out/lib
     exec ${pkgs.nodejs_24}/bin/node $out/lib/dist/server/main.js "\$@"
     EOF
 
     cat > $out/bin/sync-in <<EOF
     #!${pkgs.runtimeShell}
-    export NODE_PATH=$NODE_PATH:${out}/lib
+    export NODE_PATH=$NODE_PATH:$out/lib
     exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
     EOF
 
