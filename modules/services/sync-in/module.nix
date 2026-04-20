@@ -223,13 +223,9 @@ in {
             publicUrl = cfg.server.publicUrl;
           };
 
-          database = lib.mkIf cfg.database.enable {
-            type = "mysql";
-            host = cfg.database.host;
-            port = cfg.database.port;
-            name = cfg.database.name;
-            user = cfg.database.user;
-            password = "__DB_PASSWORD__";
+          mysql = {
+            url = "mysql://${cfg.database.user}:__DB_PASSWORD__@${cfg.database.host}:${builtins.toString cfg.database.port}/${cfg.database.name}";
+            logQueries = false;
           };
 
           redis = lib.mkIf cfg.redis.enable {
