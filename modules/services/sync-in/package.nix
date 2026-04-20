@@ -38,6 +38,7 @@ pkgs.buildNpmPackage {
 
     mkdir -p $out/bin
     mkdir -p $out/conf
+    # cp ${./drizzle.ts} out/conf/drizzle.ts
 
     # cat > $out/conf/drizzle.js <<EOF
     # import { defineConfig } from "drizzle-kit";
@@ -55,20 +56,20 @@ pkgs.buildNpmPackage {
 
     cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
-    export NODE_PATH=$NODE_PATH:$out/lib
+    export NODE_PATH=$NODE_PATH:$out/lib/node_modules
     exec ${pkgs.nodejs_24}/bin/node $out/lib/dist/server/main.js "\$@"
     EOF
 
     cat > $out/bin/sync-in <<EOF
     #!${pkgs.runtimeShell}
-    export NODE_PATH=$NODE_PATH:$out/lib
+    export NODE_PATH=$NODE_PATH:$out/lib/node_modules
     exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
     EOF
 
 
     cat > $out/bin/sync-in-migrate-db <<EOF
     #!${pkgs.runtimeShell}
-    export NODE_PATH=$NODE_PATH:$out/lib
+    export NODE_PATH=$NODE_PATH:$out/lib/node_modules
     exec ${pkgs.nodejs_24}/bin/npx drizzle-kit migrate --config=/etc/sync-in/drizzle.js "\$@"
     EOF
 
