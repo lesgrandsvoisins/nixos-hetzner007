@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.buildNpmPackage {
   pname = "sync-in";
-  version = "2.2.0";
+  version = "2.2.0-a4";
 
   src = pkgs.fetchFromGitHub {
     owner = "Sync-in";
@@ -15,14 +15,32 @@ pkgs.buildNpmPackage {
   postPatch = ''
     ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-orm="^0.45.2"
     ${pkgs.nodejs_24}/bin/npm pkg set dependencies.pdfjs-dist="^5.6.205"
+    ${pkgs.nodejs_24}/bin/npm update drizzle-orm
+    ${pkgs.nodejs_24}/bin/npm update pdfjs-dist
   '';
+
+  # npmInstallFlags = "";
 
   npmDepsHash = "sha256-sOmR+cwIllv9V3JdqLlZnImsgntjS7ahDKXzyxKOS1M=";
 
   buildPhase = ''
     runHook preBuild
-    ${pkgs.nodejs_24}/bin/npm run build --ws
-    ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
+    ${pkgs.nodejs_24}/bin/npm run build
+    # ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
+
+    cat > $out/dist/drizzle.js <<EOF
+    import { defineConfig } from "drizzle-kit";
+
+    export default defineConfig({
+      dialect: "mysql",
+      schema: "./dist/server/infrastructure/database/schema.js",
+      out: "./backend/migrations",
+      url: "mysql://root@localhost/syncin",
+      tablesFilter: [
+        'files_content_*'
+      ]
+    });
+    EOF
 
     runHook postBuild
   '';
@@ -37,13 +55,18 @@ pkgs.buildNpmPackage {
 
     cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
+    export NODE_PATH=$NODE_PATH:${out}/lib
     exec ${pkgs.nodejs_24}/bin/node $out/lib/dist/server/main.js "\$@"
     EOF
 
     cat > $out/bin/sync-in <<EOF
     #!${pkgs.runtimeShell}
+    export NODE_PATH=$NODE_PATH:${out}/lib
     exec ${pkgs.nodejs_24}/bin/node $out/lib/scripts/npm-sync-in-server.js "\$@"
     EOF
+
+
+
 
     chmod +x $out/bin/sync-in
     chmod +x $out/bin/sync-in-start
