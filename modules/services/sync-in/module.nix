@@ -347,14 +347,14 @@ in {
           sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment.yaml
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment.yaml
 
-          cp ${drizzleJsFile} /etc/sync-in/drizzle.js
-          chown ${cfg.user}:${cfg.group} /etc/sync-in/drizzle.js
+          cp ${drizzleJsFile} ${cfg.dataDir}/drizzle.js
+          chown ${cfg.user}:${cfg.group} ${cfg.dataDir}/drizzle.js
 
-          sed -i "s|__PASSWORD__|$DB_PASS|g" /etc/sync-in/drizzle.js
-          sed -i "s|__USER__|$DB_USER|g" /etc/sync-in/drizzle.js
-          sed -i "s|__HOST__|$DB_HOST|g" /etc/sync-in/drizzle.js
-          sed -i "s|__PORT__|$DB_PORT|g" /etc/sync-in/drizzle.js
-          sed -i "s|__NAME__|$DB_NAME|g" /etc/sync-in/drizzle.js
+          sed -i "s|__PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/drizzle.js
+          sed -i "s|__USER__|$DB_USER|g" ${cfg.dataDir}/drizzle.js
+          sed -i "s|__HOST__|$DB_HOST|g" ${cfg.dataDir}/drizzle.js
+          sed -i "s|__PORT__|$DB_PORT|g" ${cfg.dataDir}/drizzle.js
+          sed -i "s|__NAME__|$DB_NAME|g" ${cfg.dataDir}/drizzle.js
 
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
@@ -385,6 +385,7 @@ in {
           # ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
           User = "sync-in";
+          Group = "services";
           WorkingDirectory = cfg.dataDir;
         };
       };
