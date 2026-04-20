@@ -26,6 +26,18 @@ pkgs.buildNpmPackage {
     ${pkgs.nodejs_24}/bin/npm run build
     # ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
 
+
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/lib
+    cp -r . $out/lib
+
+    mkdir -p $out/bin
+
     cat > $out/drizzle.js <<EOF
     import { defineConfig } from "drizzle-kit";
 
@@ -39,17 +51,6 @@ pkgs.buildNpmPackage {
       ]
     });
     EOF
-
-    runHook postBuild
-  '';
-
-  installPhase = ''
-    runHook preInstall
-
-    mkdir -p $out/lib
-    cp -r . $out/lib
-
-    mkdir -p $out/bin
 
     cat > $out/bin/sync-in-start <<EOF
     #!${pkgs.runtimeShell}
