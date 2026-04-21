@@ -90,14 +90,14 @@ in {
         clientSecretFile = "/etc/sync-in/oidc.secret";
         redirectUri = "https://sync-in.gv.je/api/auth/oidc/callback";
         security = {
-          scope = "openid";
+          scope = "openid email profile";
           tokenEndpointAuthMethod = "client_secret_post";
         };
         options = {
           adminRoleOrGroup = "admin";
           autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
-          autoRedirect = true;
-          buttonText = "\"key.gv.je\"";
+          autoRedirect = false;
+          buttonText = "key.gv.je";
           enablePasswordAuth = false;
         };
       };
