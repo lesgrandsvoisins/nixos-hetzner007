@@ -88,6 +88,7 @@ in {
         clientId = "sync-in";
         clientSecretFile = "/etc/sync-in/oidc.secret";
         redirectUri = "https://sync-in.gv.je/api/auth/oidc/callback";
+        security.scope = "openid";
         options = {
           adminRoleOrGroup = "admin";
           autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
