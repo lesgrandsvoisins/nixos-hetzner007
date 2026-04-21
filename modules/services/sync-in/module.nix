@@ -569,6 +569,7 @@ in {
           sed -i "s|__OIDC_PASSWORD__|$OIDC_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
           sed -i "s|__ACCESS_TOKEN__|$ACCESS_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
           sed -i "s|__REFRESH_TOKEN__|$REFRESH_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i -E '/ecretFile:|asswordFile:|: null$/d' ${cfg.applications.files.dataPath}/environment-generated.yaml
 
           cp ${drizzleJsFile} ${cfg.applications.files.dataPath}/drizzle.js
           chown ${cfg.user}:${cfg.group} ${cfg.applications.files.dataPath}/drizzle.js
@@ -579,7 +580,6 @@ in {
           sed -i "s|__PORT__|$DB_PORT|g" ${cfg.applications.files.dataPath}/drizzle.js
           sed -i "s|__NAME__|$DB_NAME|g" ${cfg.applications.files.dataPath}/drizzle.js
 
-          sed -i -E '/ecretFile:|asswordFile:|: null$/d' environment-generated.yaml
 
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
