@@ -140,13 +140,13 @@ in {
           type = lib.types.nullOr (lib.types.str);
           default = null;
         };
-        passwordFile = lib.mkOption {
+        passFile = lib.mkOption {
           type = lib.types.nullOr (lib.types.str);
           default = "/etc/sync-in/mail.password";
         };
-        password = lib.mkOption {
-          type = lib.types.enum ["__MAIL_PASSWORD__"];
-          default = "__MAIL_PASSWORD__";
+        pass = lib.mkOption {
+          type = lib.types.enum ["__MAIL_PASS__"];
+          default = "__MAIL_PASS__";
         };
       };
       secure = lib.mkOption {
@@ -509,7 +509,7 @@ in {
         "d /etc/sync-in 0750 ${cfg.user} ${cfg.group}"
         "f ${cfg.mysql.passwordFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group}"
-        "f ${cfg.mail.auth.passwordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.mail.auth.passFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.auth.ldap.serverBindPasswordFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.auth.token.access.secretFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.auth.token.refresh.secretFile} 0600 ${cfg.user} ${cfg.group}"
@@ -545,7 +545,7 @@ in {
           DB_PORT=${builtins.toString cfg.mysql.port}
           DB_USER=${cfg.mysql.user}
           ADMIN_PASS=$(cat ${cfg.admin.passwordFile})
-          MAIL_PASS=$(cat ${cfg.mail.auth.passwordFile})
+          MAIL_PASS=$(cat ${cfg.mail.auth.passFile})
           LDAP_PASS=$(cat ${cfg.auth.ldap.serverBindPasswordFile})
           OIDC_PASS=$(cat ${cfg.auth.oidc.clientSecretFile})
           ACCESS_TOKEN=$(cat ${cfg.auth.token.access.secretFile})
@@ -565,12 +565,12 @@ in {
           sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
 
-          sed -i "s|__MAIL_PASSWORD__|$MAIL_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__MAIL_PASS__|$MAIL_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
           sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
           sed -i "s|__OIDC_PASSWORD__|$OIDC_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
           sed -i "s|__ACCESS_TOKEN__|$ACCESS_TOKEN|g" ${cfg.applications.files.dataPath}/environment.yaml
           sed -i "s|__REFRESH_TOKEN__|$REFRESH_TOKEN|g" ${cfg.applications.files.dataPath}/environment.yaml
-          sed -i -E '/ecretFile:|asswordFile:|: null$/d' ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i -E '/ecretFile:|asswordFile:|assFile:|: null$/d' ${cfg.applications.files.dataPath}/environment.yaml
 
           cp ${drizzleJsFile} ${cfg.applications.files.dataPath}/drizzle.js
           chown ${cfg.user}:${cfg.group} ${cfg.applications.files.dataPath}/drizzle.js

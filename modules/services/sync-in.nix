@@ -35,7 +35,7 @@ in {
     };
     mail = {
       auth = {
-        passwordFile = "/etc/sync-in/mail.password";
+        passFile = "/etc/sync-in/mail.password";
         user = "list@lesgrandsvoisins.com";
       };
       host = "mail.lesgrandsvoisins.com";
