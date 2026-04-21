@@ -479,7 +479,7 @@ in {
 
   config = lib.mkIf cfg.enable (
     let
-      configFile = yaml.generate "environment-generated.yaml" (
+      configFile = yaml.generate "environment.yaml" (
         lib.recursiveUpdate
         {
           server = cfg.server;
@@ -554,22 +554,22 @@ in {
           #   LDAP_PASS=$(cat ${builtins.toString cfg.auth.ldap.serverBindPasswordFile})
           # fi
 
-          cp ${configFile} ${cfg.applications.files.dataPath}/environment-generated.yaml
-          chmod ug+w ${cfg.applications.files.dataPath}/environment-generated.yaml
+          cp ${configFile} ${cfg.applications.files.dataPath}/environment.yaml
+          chmod ug+w ${cfg.applications.files.dataPath}/environment.yaml
 
-          # substituteInPlace environment-generated.yaml \
+          # substituteInPlace environment.yaml \
           #   --replace "__DB_PASSWORD__" "$DB_PASS" \
           #   --replace "__LDAP_PASSWORD__" "$LDAP_PASS"
 
-          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
 
-          sed -i "s|__MAIL_PASSWORD__|$MAIL_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i "s|__OIDC_PASSWORD__|$OIDC_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i "s|__ACCESS_TOKEN__|$ACCESS_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i "s|__REFRESH_TOKEN__|$REFRESH_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
-          sed -i -E '/ecretFile:|asswordFile:|: null$/d' ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__MAIL_PASSWORD__|$MAIL_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__OIDC_PASSWORD__|$OIDC_PASS|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__ACCESS_TOKEN__|$ACCESS_TOKEN|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i "s|__REFRESH_TOKEN__|$REFRESH_TOKEN|g" ${cfg.applications.files.dataPath}/environment.yaml
+          sed -i -E '/ecretFile:|asswordFile:|: null$/d' ${cfg.applications.files.dataPath}/environment.yaml
 
           cp ${drizzleJsFile} ${cfg.applications.files.dataPath}/drizzle.js
           chown ${cfg.user}:${cfg.group} ${cfg.applications.files.dataPath}/drizzle.js

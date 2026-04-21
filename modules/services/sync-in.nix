@@ -29,13 +29,63 @@ in {
   # users.users.mysql.uid = vars.uid.mysql;
   services.sync-in = {
     enable = true;
-    server.port = vars.ports.sync-in;
-    applications.files.dataPath = "/srv/sync-in";
-    admin.passwordFile = "/etc/sync-in/admin.secret";
-    admin.login = "sync-in";
-    mysql.passwordFile = "/etc/sync-in/database.secret";
-    mysql.user = "syncin";
-    auth.provider = "oidc";
+    server = {
+      port = vars.ports.sync-in;
+      publicUrl = "https://sync-in.gv.je";
+    };
+    applications = {
+      files = {
+        dataPath = "/srv/sftpgo";
+        contentIndexing = {
+          enabled = true;
+          ocr = {
+            enabled = true;
+            languages = [
+              "fra"
+              "eng"
+            ];
+          };
+        };
+        collabora = {
+          enabled = false;
+        };
+        onlyoffice = {
+          enabled = false;
+        };
+        showHiddenFiles = false;
+        maxUploadSize = 41234567890; # about 39 GB
+      };
+      appStore = "public";
+    };
+    admin = {
+      passwordFile = "/etc/sync-in/admin.secret";
+      login = "sync-in";
+    };
+    mysql = {
+      passwordFile = "/etc/sync-in/database.secret";
+      user = "syncin";
+      logQueries = false;
+    };
+    auth = {
+      provider = "oidc";
+      token = {
+        access.secretFile = "/etc/sync-in/access.token";
+        refresh.secretFile = "/etc/sync-in/refresh.token";
+      };
+      oidc = {
+        issuerUrl = "https://key.gv.je/realms/master";
+        clientId = "sync-in";
+        clientSecretFile = "/etc/sync-in/oidc.secret";
+        redirectUri = "https://sync-in.gv.je/api/auth/oidc/callback";
+        options = {
+          adminRoleOrGroup = "admin";
+          autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
+          autoRedirect = true;
+          buttonText = "key.gv.je";
+          enablePasswordAuth = false;
+        };
+      };
+    };
     user = "sync-in";
     group = "services";
   };
