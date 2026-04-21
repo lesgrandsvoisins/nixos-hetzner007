@@ -119,8 +119,8 @@ in {
 
   environment.systemPackages = [sftpgo-prelogin-hook];
   users.users.sftpgo.uid = vars.uid.sftpgo;
-  users.users.sftpgo.group = "sftpgo";
-  users.users.sftpgo.extraGroups = ["services"];
+  users.users.sftpgo.group = lib.mkForce "services";
+  users.users.sftpgo.extraGroups = ["sftpgo"];
   users.groups.sftpgo.gid = vars.gid.sftpgo;
   # systemd.services.sftpgo.environment = {"SFTPGO_DATA_PROVIDER__PASSWORD" = "$(cat /etc/sftpgo/.secret.postgresqlpassword)";};
   # systemd.services.sftpgo.environment = {"SFTPGO_SMTP__PASSWORD" = "$(cat /etc/sftpgo/.secret.smtppassword)";};

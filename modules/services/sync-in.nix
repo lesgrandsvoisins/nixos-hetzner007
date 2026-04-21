@@ -102,7 +102,7 @@ in {
         };
       };
     };
-    user = "sync-in";
+    user = "sftpgo";
     group = "services";
   };
 }
