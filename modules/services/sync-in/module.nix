@@ -583,6 +583,7 @@ in {
           cp ${drizzleJsFile} ${cfg.applications.files.dataPath}/drizzle.js
           chown ${cfg.user}:${cfg.group} ${cfg.applications.files.dataPath}/drizzle.js
 
+          sed -i "s|\./release/sync-in-server/server/|${cfg.package}/lib/release/sync-in-server/server/|g" ${cfg.applications.files.dataPath}/drizzle.js
           sed -i "s|__PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/drizzle.js
           sed -i "s|__USER__|$DB_USER|g" ${cfg.applications.files.dataPath}/drizzle.js
           sed -i "s|__HOST__|$DB_HOST|g" ${cfg.applications.files.dataPath}/drizzle.js
