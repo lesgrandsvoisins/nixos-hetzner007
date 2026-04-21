@@ -454,7 +454,7 @@ in {
           };
         };
       };
-      appStore = lib.mkOption {
+      appStore.repository = lib.mkOption {
         type = lib.types.enum ["public" "local"];
         default = "public";
       };

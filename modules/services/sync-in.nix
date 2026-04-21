@@ -65,7 +65,7 @@ in {
         showHiddenFiles = false;
         maxUploadSize = 41234567890; # about 39 GB
       };
-      appStore = "public";
+      appStore.repository = "public";
     };
     admin = {
       passwordFile = "/etc/sync-in/admin.secret";
