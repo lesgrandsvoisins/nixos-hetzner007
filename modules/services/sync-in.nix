@@ -68,7 +68,7 @@ in {
       };
       appStore.repository = "public";
     };
-    logger.level = "debug";
+    logger.level = "info";
     admin = {
       passwordFile = "/etc/sync-in/admin.secret";
       login = "sync-in";
@@ -89,7 +89,10 @@ in {
         clientId = "sync-in";
         clientSecretFile = "/etc/sync-in/oidc.secret";
         redirectUri = "https://sync-in.gv.je/api/auth/oidc/callback";
-        security.scope = "openid";
+        security = {
+          scope = "openid";
+          tokenEndpointAuthMethod = "client_secret_post";
+        };
         options = {
           adminRoleOrGroup = "admin";
           autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
