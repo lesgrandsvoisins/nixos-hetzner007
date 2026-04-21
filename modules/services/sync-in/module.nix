@@ -602,7 +602,10 @@ in {
           FLUSH PRIVILEGES;
           EOF
 
-          ${cfg.package}/bin/sync-in migrate-db
+          sed "s|/etc/sync-in/drizzle.js|${cfg.applications.files.dataPath}/drizzle.js|g" ${cfg.package}/bin/sync-in-migrate-db >  ${cfg.applications.files.dataPath}/sync-in-migrate-db
+          chown ug+x sync-in-migrate-db
+
+          ${cfg.applications.files.dataPath}/sync-in-migrate-db
 
           if [ ! -f .admin_created ]; then
             ${cfg.package}/bin/sync-in create-user \
@@ -615,7 +618,7 @@ in {
         '';
 
         serviceConfig = {
-          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/server/main.js";
+          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/sync-in-server.js start";
           # ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
           User = "${cfg.user}";
