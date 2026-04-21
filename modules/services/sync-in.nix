@@ -88,7 +88,7 @@ in {
         issuerUrl = "https://key.gv.je/realms/master";
         clientId = "sync-in";
         clientSecretFile = "/etc/sync-in/oidc.secret";
-        redirectUri = "\"https://sync-in.gv.je/api/auth/oidc/callback\"";
+        redirectUri = "https://sync-in.gv.je/api/auth/oidc/callback";
         security.scope = "openid";
         options = {
           adminRoleOrGroup = "admin";
