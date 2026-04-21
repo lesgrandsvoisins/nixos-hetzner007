@@ -17,6 +17,7 @@ in
     postPatch = ''
       ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-orm="^0.45.2"
       ${pkgs.nodejs_24}/bin/npm pkg set dependencies.pdfjs-dist="^5.6.205"
+      ${pkgs.nodejs_24}/bin/npm pkg set dependencies.drizzle-kit="^v0.31.10"
     '';
 
     # npmInstallFlags = "";
