@@ -606,7 +606,7 @@ in {
         '';
 
         serviceConfig = {
-          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/sync-in-server.js start";
+          ExecStart = "NODE_PATH=$NODE_PATH:${cfg.package}/lib/node_modules/ ${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/server/main.js";
           # ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
           User = "${cfg.user}";
