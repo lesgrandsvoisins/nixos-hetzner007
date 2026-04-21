@@ -67,6 +67,7 @@ in {
       };
       appStore.repository = "public";
     };
+    logger.level = "debug";
     admin = {
       passwordFile = "/etc/sync-in/admin.secret";
       login = "sync-in";
