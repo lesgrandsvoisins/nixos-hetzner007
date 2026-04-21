@@ -620,7 +620,7 @@ in {
           Restart = "always";
           User = "${cfg.user}";
           Group = "${cfg.group}";
-          Environment = "NODE_PATH=${pkgs.nodejs_24}/lib/modules:${cfg.package}/lib/node_modules";
+          Environment = "NODE_PATH=${pkgs.nodejs_24}/lib/node_modules:${cfg.package}/lib/node_modules";
           WorkingDirectory = cfg.applications.files.dataPath;
         };
       };
