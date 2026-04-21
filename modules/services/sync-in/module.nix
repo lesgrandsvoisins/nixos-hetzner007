@@ -16,11 +16,6 @@ in {
       default = pkgs.callPackage ./package.nix {};
     };
 
-    dataDir = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/lib/sync-in";
-    };
-
     user = lib.mkOption {
       type = lib.types.str;
       default = "sync-in";
@@ -33,23 +28,55 @@ in {
       description = "Group to run sync-in service";
     };
 
-    admin = {
-      login = lib.mkOption {
+    server = {
+      host = lib.mkOption {
         type = lib.types.str;
-        default = "admin";
+        default = "0.0.0.0";
       };
-
-      passwordFile = lib.mkOption {
-        type = lib.types.path;
+      port = lib.mkOption {
+        type = lib.types.int;
+        default = 8080;
       };
-    };
-
-    database = {
-      enable = lib.mkOption {
+      workers = lib.mkOption {
+        type = lib.types.int;
+        default = 1;
+      };
+      trustProxy = lib.mkOption {
+        type = lib.types.str;
+        default = "1";
+      };
+      restartOnFailure = lib.mkOption {
         type = lib.types.bool;
         default = true;
       };
-
+      publicUrl = lib.mkOption {
+        type = lib.types.str;
+        default = "http://localhost:8080";
+      };
+    };
+    logger = {
+      level = lib.mkOption {
+        type = lib.types.enum ["trace" "debug" "info" "warn" "error" "fatal"];
+        default = "info";
+      };
+      stdout = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+      colorize = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+      jsonOutput = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+      };
+      filePath = lib.mkOption {
+        type = lib.types.str;
+        default = "/var/lib/sync-in";
+      };
+    };
+    mysql = {
       name = lib.mkOption {
         type = lib.types.str;
         default = "syncin";
@@ -58,7 +85,14 @@ in {
         type = lib.types.str;
         default = "syncin";
       };
-      passwordFile = lib.mkOption {type = lib.types.path;};
+      passwordFile = lib.mkOption {
+        type = lib.types.str;
+      };
+
+      password = lib.mkOption {
+        type = lib.types.enum ["__DB_PASSWORD__"];
+        default = "__DB_PASSWORD__";
+      };
 
       host = lib.mkOption {
         type = lib.types.str;
@@ -68,147 +102,378 @@ in {
         type = lib.types.int;
         default = 3306;
       };
-    };
-
-    redis = {
-      enable = lib.mkOption {
+      logQueries = lib.mkOption {
         type = lib.types.bool;
         default = false;
       };
+      cache = {
+        adapter = lib.mkOption {
+          type = lib.types.enum ["mysql" "redis"];
+          default = "mysql";
+        };
+        ttl = lib.mkOption {
+          type = lib.types.int;
+          default = 60;
+        };
+        redis = lib.mkOption {
+          type = lib.types.str;
+          default = "redis://127.0.0.1:6379";
+        };
+      };
+    };
+    mail = {
       host = lib.mkOption {
-        type = lib.types.str;
-        default = "127.0.0.1";
-      };
-      port = lib.mkOption {
-        type = lib.types.int;
-        default = 6380;
-      };
-      name = lib.mkOption {
-        type = lib.types.str;
-        default = "sync-in";
-      };
-    };
-
-    ldap = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-      };
-
-      url = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      };
-      bindDN = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      };
-      bindPasswordFile = lib.mkOption {
-        type = lib.types.nullOr lib.types.path;
+        type = lib.types.nullOr (lib.types.str);
         default = null;
       };
-
-      searchBase = lib.mkOption {
-        type = lib.types.str;
-        default = "";
+      port = lib.mkOption {
+        type = lib.types.int;
+        default = 25;
       };
-      searchFilter = lib.mkOption {
-        type = lib.types.str;
-        default = "(uid={{username}})";
+      sender = lib.mkOption {
+        type = lib.types.nullOr (lib.types.str);
+        default = null;
+      };
+      auth = {
+        user = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        passwordFile = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = "/etc/sync-in/mail.password";
+        };
+        password = lib.mkOption {
+          type = lib.types.enum ["__MAIL_PASSWORD__"];
+          default = "__MAIL_PASSWORD__";
+        };
+      };
+      secure = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      ignoreTLS = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      rejectUnauthorized = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      logger = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+      debug = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+    };
+    websocket = {
+      adapter = lib.mkOption {
+        type = lib.types.enum ["cluster" "url"];
+        default = "cluster";
+      };
+      corsOrigine = lib.mkOption {
+        type = lib.types.nullOr (lib.types.str);
+        default = "*";
+      };
+      redis = lib.mkOption {
+        type = lib.types.nullOr (lib.types.str);
+        default = "redis://127.0.0.1:6379";
+      };
+    };
+    auth = {
+      provider = lib.mkOption {
+        type = lib.types.enum ["mysql" "ldap" "oidc"];
+        default = "mysql";
+        description = "Authentication method mysql | ldap | oidc";
+      };
+      encryptionKey = lib.mkOption {
+        type = lib.types.nullOr (lib.types.str);
+        default = null;
+        description = "Key used to encrypt user secret keys in the database";
+      };
+      cookieSameSite = lib.mkOption {
+        type = lib.types.enum ["lax" "strict"];
+        default = "strict";
+        description = " `lax` | `strict`";
+      };
+      token = {
+        access = {
+          secretFile = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "/etc/sync-in/access.token";
+            description = "Used for token and cookie signatures";
+          };
+          secret = lib.mkOption {
+            type = lib.types.enum ["__ACCESS_TOKEN__"];
+            default = "__ACCESS_TOKEN__";
+          };
+          expiration = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "30m";
+          };
+        };
+        refresh = {
+          secret = lib.mkOption {
+            type = lib.types.enum ["__REFRESH_TOKEN__"];
+            default = "__REFRESH_TOKEN__";
+          };
+          secretFile = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "/etc/sync-in/refresh.token";
+            description = "Used for token and cookie signatures";
+          };
+          expiration = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "30m";
+          };
+        };
+      };
+      mfa = {
+        enabled = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+        };
+        issuer = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = "Sync-in";
+        };
+      };
+
+      ldap = {
+        servers = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [];
+        };
+        tlsOptions = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        baseDN = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        filter = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        upnSuffix = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        netbiosName = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        serverBindDN = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        serverBindPasswordFile = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = "/etc/sync-in/ldap.secret";
+        };
+        serverBindPassword = lib.mkOption {
+          type = lib.types.enum ["__LDAP_PASSWORD__"];
+          default = "__LDAP_PASSWORD__";
+        };
+        attributes = {
+          login = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "uid";
+          };
+          email = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "mail";
+          };
+        };
+        options = {
+          autoCreateUser = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          autoCreatePermissions = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = [];
+            description = "https://sync-in.com/docs/admin-guide/permissions";
+          };
+          adminGroup = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = null;
+          };
+          enablePaswordAuthFallback = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+        };
+      };
+      oidc = {
+        issuerUrl = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        clientId = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        clientSecretFile = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = "/etc/sync-in/oidc.secret";
+        };
+        clientSecret = lib.mkOption {
+          type = lib.types.enum ["__OIDC_PASSWORD__"];
+          default = "__OIDC_PASSWORD__";
+        };
+        redirectUri = lib.mkOption {
+          type = lib.types.nullOr (lib.types.str);
+          default = null;
+        };
+        options = {
+          autoCreateUser = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+          autoCreatePermissions = lib.mkOption {
+            type = lib.types.listOf lib.types.str;
+            default = ["personal_space" "spaces_access" "webdav_access"];
+          };
+          adminRoleOrGroup = lib.mkOption {
+            type = lib.types.str;
+            default = "admin";
+          };
+          enablePasswordAuth = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+          autoRedirect = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          buttonText = lib.mkOption {
+            type = lib.types.str;
+            default = "Continue with OpenID Connect";
+          };
+        };
+        security = {
+          scope = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "openid email profile";
+          };
+          supportPKCE = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+          tokenEndpointAuthMethod = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "client_secret_basic";
+          };
+          tokenSigningAlg = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = "RS256";
+          };
+          userInfoSigningAlg = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = null;
+          };
+          skipSubjectCheck = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+        };
+      };
+    };
+    applications = {
+      files = {
+        dataPath = lib.mkOption {
+          type = lib.types.str;
+          default = "/var/lib/sync-in";
+        };
+        maxUploadSize = lib.mkOption {
+          type = lib.types.int;
+          default = 5368709120;
+        };
+        contentIndexing = {
+          enabled = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+          };
+          ocr = {
+            enabled = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+            };
+            languages = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = ["eng"];
+            };
+            languagesPath = lib.mkOption {
+              type = lib.types.nullOr (lib.types.str);
+              default = null;
+            };
+            offline = lib.mkOption {
+              type = lib.types.bool;
+              default = true;
+            };
+          };
+        };
+
+        showHiddenFiles = lib.mkOption {
+          type = lib.types.bool;
+          default = false;
+        };
+
+        onlyoffice = {
+          enabled = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          externalServer = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = null;
+          };
+          secret = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = null;
+          };
+          verifySSL = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+        };
+        collabora = {
+          enabled = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+          };
+          externalServer = lib.mkOption {
+            type = lib.types.nullOr (lib.types.str);
+            default = null;
+          };
+        };
+      };
+      appStore = lib.mkOption {
+        type = lib.types.enum ["public" "local"];
+        default = "public";
       };
     };
 
-    server = {
-      port = lib.mkOption {
-        type = lib.types.int;
-        default = 8080;
-      };
-      host = lib.mkOption {
+    admin = {
+      login = lib.mkOption {
         type = lib.types.str;
-        default = "0.0.0.0";
+        default = "admin";
       };
-      publicUrl = lib.mkOption {
+
+      passwordFile = lib.mkOption {
         type = lib.types.str;
-        default = "http://localhost:8080";
+        default = "/etc/sync-in/admin.password";
       };
     };
 
     extraSettings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
-    };
-
-    auth = {
-      provider = lib.mkOption {
-        type = lib.types.str;
-        default = "mysql";
-        description = "Authentication method mysql | ldap | oidc";
-      };
-      encryptionKey = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "Key used to encrypt user secret keys in the database";
-      };
-      cookieSameSite = lib.mkOption {
-        type = lib.types.str;
-        default = "strict";
-        description = " `lax` | `strict`";
-      };
-      token.access.secret = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "Used for token and cookie signatures";
-      };
-    };
-
-    oidc = {
-      redirectUri = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "";
-      };
-      clientSecretFile = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "";
-      };
-      issuerUrl = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "";
-      };
-      clientId = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "";
-      };
-      options = {
-        autoCreatePermissions = lib.mkOption {
-          type = lib.types.str;
-          default = "[personal_space, spaces_access, webdav_access]";
-          description = "";
-        };
-        adminRoleOrGroup = lib.mkOption {
-          type = lib.types.str;
-          default = "admin";
-          description = "";
-        };
-        enablePasswordAuth = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-          description = "";
-        };
-        autoRedirect = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "";
-        };
-        buttonText = lib.mkOption {
-          type = lib.types.str;
-          default = "key.gv.je";
-          description = "";
-        };
-      };
     };
   };
 
@@ -217,85 +482,37 @@ in {
       configFile = yaml.generate "environment-generated.yaml" (
         lib.recursiveUpdate
         {
-          server = {
-            port = cfg.server.port;
-            host = cfg.server.host;
-            publicUrl = cfg.server.publicUrl;
-          };
-
+          server = cfg.server;
+          logger = cfg.logger;
           mysql = {
-            url = "mysql://${cfg.database.user}:__DB_PASSWORD__@${cfg.database.host}:${builtins.toString cfg.database.port}/${cfg.database.name}";
-            logQueries = false;
+            url = "mysql://${cfg.mysql.user}:__DB_PASSWORD__@${cfg.mysql.host}:${builtins.toString cfg.mysql.port}/${cfg.mysql.name}";
+            logQueries = cfg.mysql.logQueries;
+            cache = cfg.mysql.cache;
           };
-
-          # redis = lib.mkIf cfg.redis.enable {
-          #   host = cfg.redis.host;
-          #   port = cfg.redis.port;
-          # };
-
-          # ldap = lib.mkIf cfg.ldap.enable {
-          #   url = cfg.ldap.url;
-          #   bindDN = cfg.ldap.bindDN;
-          #   bindPassword = "__LDAP_PASSWORD__";
-          #   searchBase = cfg.ldap.searchBase;
-          #   searchFilter = cfg.ldap.searchFilter;
-          # };
-
-          auth = {
-            provider = cfg.auth.provider;
-            encryptionKey = cfg.auth.encryptionKey;
-            cookieSameSite = cfg.auth.cookieSameSite;
-            token.access.secret = cfg.auth.token.access.secret;
-          };
-          oidc = {
-            redirectUri = cfg.oidc.redirectUri;
-            clientSecretFile = cfg.oidc.clientSecretFile;
-            issuerUrl = cfg.oidc.issuerUrl;
-            clientId = cfg.oidc.clientId;
-            options = {
-              autoCreatePermissions = cfg.oidc.options.autoCreatePermissions;
-              adminRoleOrGroup = cfg.oidc.options.adminRoleOrGroup;
-              enablePasswordAuth = cfg.oidc.options.enablePasswordAuth;
-              autoRedirect = cfg.oidc.options.autoRedirect;
-              buttonText = cfg.oidc.options.buttonText;
-            };
-          };
-          applications.files = {
-            dataPath = cfg.dataDir;
-            maxUploadSize = 5368709120;
-            contentIndexing = {
-              enabled = true;
-              ocr = {
-                enabled = true;
-                languages = "[fra,eng]";
-                offline = false;
-                # lanuagesPath = '';
-              };
-              showHiddenFiles = false;
-              onlyoffice = {
-                enabled = false;
-              };
-              collabora = {
-                enabled = false;
-              };
-            };
-          };
-          applications.appstore.repository = "public";
+          websocket = cfg.websocket;
+          mail = cfg.mail;
+          auth = cfg.auth;
+          applications = cfg.applications;
         }
         cfg.extraSettings
       );
     in {
-      services.mysql.enable = cfg.database.enable;
-      services.redis.servers."${cfg.redis.name}" = {
-        enable = cfg.redis.enable;
-        port = cfg.redis.port;
-        bind = cfg.redis.host;
-      };
+      services.mysql.enable = true;
+      # services.redis.servers."syncin" = {
+      #   enable = lib.mkIf (cfg.) true ;
+      #   port = cfg.redis.port;
+      #   bind = cfg.redis.host;
+      # };
 
       systemd.tmpfiles.rules = [
         "d /etc/sync-in 0750 ${cfg.user} ${cfg.group}"
-        "f ${cfg.database.passwordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.mysql.passwordFile} 0600 ${cfg.user} ${cfg.group}"
         "f ${cfg.admin.passwordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.mail.auth.passwordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.auth.ldap.serverBindPasswordFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.auth.token.access.secretFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.auth.token.refresh.secretFile} 0600 ${cfg.user} ${cfg.group}"
+        "f ${cfg.auth.oidc.clientSecretFile} 0600 ${cfg.user} ${cfg.group}"
       ];
 
       # environment.etc.sync-in = {
@@ -304,12 +521,12 @@ in {
 
       users.users.sync-in = {
         isSystemUser = true;
-        home = cfg.dataDir;
+        home = cfg.applications.files.dataPath;
         createHome = true;
-        group = "sync-in";
+        group = cfg.group;
       };
 
-      users.groups.sync-in = {};
+      users.groups."${cfg.group}" = {};
 
       systemd.services.sync-in = {
         description = "Sync-in";
@@ -318,39 +535,49 @@ in {
 
         preStart = ''
           set -e
-          cd ${cfg.dataDir}
+          cd ${cfg.applications.files.dataPath}
 
-          DB_PASS=$(cat ${cfg.database.passwordFile})
-          DB_USER=${cfg.database.user}
-          DB_NAME=${cfg.database.name}
-          DB_HOST=${cfg.database.host}
-          DB_PORT=${builtins.toString cfg.database.port}
-          DB_USER=${cfg.database.user}
+          DB_PASS=$(cat ${cfg.mysql.passwordFile})
+          DB_USER=${cfg.mysql.user}
+          DB_NAME=${cfg.mysql.name}
+          DB_HOST=${cfg.mysql.host}
+          DB_PORT=${builtins.toString cfg.mysql.port}
+          DB_USER=${cfg.mysql.user}
           ADMIN_PASS=$(cat ${cfg.admin.passwordFile})
-          LDAP_PASS=""
+          MAIL_PASS=$(cat ${cfg.mail.auth.passwordFile})
+          LDAP_PASS=$(cat ${cfg.auth.ldap.serverBindPasswordFile})
+          OIDC_PASS=$(cat ${cfg.auth.oidc.clientSecretFile})
+          ACCESS_TOKEN=$(cat ${cfg.auth.token.access.secretFile})
+          REFRESH_TOKEN=$(cat ${cfg.auth.token.refresh.secretFile})
 
-          if [ -n "${builtins.toString cfg.ldap.bindPasswordFile or ""}" ]; then
-            LDAP_PASS=$(cat ${builtins.toString cfg.ldap.bindPasswordFile})
-          fi
+          # if [ -n "${builtins.toString cfg.auth.ldap.serverBindPasswordFile or ""}" ]; then
+          #   LDAP_PASS=$(cat ${builtins.toString cfg.auth.ldap.serverBindPasswordFile})
+          # fi
 
-          cp ${configFile} ${cfg.dataDir}/environment-generated.yaml
-          chmod ug+w ${cfg.dataDir}/environment-generated.yaml
+          cp ${configFile} ${cfg.applications.files.dataPath}/environment-generated.yaml
+          chmod ug+w ${cfg.applications.files.dataPath}/environment-generated.yaml
 
           # substituteInPlace environment-generated.yaml \
           #   --replace "__DB_PASSWORD__" "$DB_PASS" \
           #   --replace "__LDAP_PASSWORD__" "$LDAP_PASS"
 
-          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/environment-generated.yaml
-          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.dataDir}/environment-generated.yaml
+          sed -i "s|__DB_PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
 
-          cp ${drizzleJsFile} ${cfg.dataDir}/drizzle.js
-          chown ${cfg.user}:${cfg.group} ${cfg.dataDir}/drizzle.js
+          sed -i "s|__MAIL_PASSWORD__|$MAIL_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__LDAP_PASSWORD__|$LDAP_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__OIDC_PASSWORD__|$OIDC_PASS|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__ACCESS_TOKEN__|$ACCESS_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
+          sed -i "s|__REFRESH_TOKEN__|$REFRESH_TOKEN|g" ${cfg.applications.files.dataPath}/environment-generated.yaml
 
-          sed -i "s|__PASSWORD__|$DB_PASS|g" ${cfg.dataDir}/drizzle.js
-          sed -i "s|__USER__|$DB_USER|g" ${cfg.dataDir}/drizzle.js
-          sed -i "s|__HOST__|$DB_HOST|g" ${cfg.dataDir}/drizzle.js
-          sed -i "s|__PORT__|$DB_PORT|g" ${cfg.dataDir}/drizzle.js
-          sed -i "s|__NAME__|$DB_NAME|g" ${cfg.dataDir}/drizzle.js
+          cp ${drizzleJsFile} ${cfg.applications.files.dataPath}/drizzle.js
+          chown ${cfg.user}:${cfg.group} ${cfg.applications.files.dataPath}/drizzle.js
+
+          sed -i "s|__PASSWORD__|$DB_PASS|g" ${cfg.applications.files.dataPath}/drizzle.js
+          sed -i "s|__USER__|$DB_USER|g" ${cfg.applications.files.dataPath}/drizzle.js
+          sed -i "s|__HOST__|$DB_HOST|g" ${cfg.applications.files.dataPath}/drizzle.js
+          sed -i "s|__PORT__|$DB_PORT|g" ${cfg.applications.files.dataPath}/drizzle.js
+          sed -i "s|__NAME__|$DB_NAME|g" ${cfg.applications.files.dataPath}/drizzle.js
 
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
@@ -358,9 +585,9 @@ in {
           fi
 
           ${pkgs.mariadb}/bin/mariadb <<EOF
-          CREATE DATABASE IF NOT EXISTS ${cfg.database.name};
-          CREATE USER IF NOT EXISTS '${cfg.database.user}'@'localhost' IDENTIFIED BY '$DB_PASS';
-          GRANT ALL PRIVILEGES ON ${cfg.database.name}.* TO '${cfg.database.user}'@'localhost';
+          CREATE DATABASE IF NOT EXISTS ${cfg.mysql.name};
+          CREATE USER IF NOT EXISTS '${cfg.mysql.user}'@'${cfg.mysql.host}' IDENTIFIED BY '$DB_PASS';
+          GRANT ALL PRIVILEGES ON ${cfg.mysql.name}.* TO '${cfg.mysql.user}'@'${cfg.mysql.host}';
           FLUSH PRIVILEGES;
           EOF
 
@@ -377,12 +604,12 @@ in {
         '';
 
         serviceConfig = {
-          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/server/main.js";
+          ExecStart = "${pkgs.nodejs_24}/bin/node ${cfg.package}/lib/release/sync-in-server/sync-in-server.js start";
           # ExecStart = "${cfg.package}/bin/sync-in-start";
           Restart = "always";
-          User = "sync-in";
-          Group = "services";
-          WorkingDirectory = cfg.dataDir;
+          User = "${cfg.user}";
+          Group = "${cfg.group}";
+          WorkingDirectory = cfg.applications.files.dataPath;
         };
       };
     }

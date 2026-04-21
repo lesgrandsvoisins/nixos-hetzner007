@@ -30,13 +30,12 @@ in {
   services.sync-in = {
     enable = true;
     server.port = vars.ports.sync-in;
-    dataDir = "/srv/sync-in";
+    applications.files.dataPath = "/srv/sync-in";
     admin.passwordFile = "/etc/sync-in/admin.secret";
     admin.login = "sync-in";
-    database.passwordFile = "/etc/sync-in/database.secret";
-    database.user = "syncin";
+    mysql.passwordFile = "/etc/sync-in/database.secret";
+    mysql.user = "syncin";
     auth.provider = "oidc";
-
     user = "sync-in";
     group = "services";
   };
