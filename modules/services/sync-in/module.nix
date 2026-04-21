@@ -579,6 +579,8 @@ in {
           sed -i "s|__PORT__|$DB_PORT|g" ${cfg.applications.files.dataPath}/drizzle.js
           sed -i "s|__NAME__|$DB_NAME|g" ${cfg.applications.files.dataPath}/drizzle.js
 
+          sed -i -E '/ecretFile:|asswordFile:|: null$/d' environment-generated.yaml
+
           if [ ! -f .initialized ]; then
             ${cfg.package}/bin/sync-in init
             touch .initialized
