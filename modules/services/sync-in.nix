@@ -96,7 +96,7 @@ in {
         options = {
           adminRoleOrGroup = "admin";
           autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
-          autoRedirect = false;
+          autoRedirect = true;
           buttonText = "key.gv.je";
           enablePasswordAuth = false;
         };
