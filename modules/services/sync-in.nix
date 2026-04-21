@@ -33,6 +33,16 @@ in {
       port = vars.ports.sync-in;
       publicUrl = "https://sync-in.gv.je";
     };
+    mail = {
+      auth = {
+        passwordFile = "/etc/sync-in/mail.password";
+        user = "list@lesgrandsvoisins.com";
+      };
+      host = "mail.lesgrandsvoisins.com";
+      port = 465;
+      secure = true;
+      sender = "list@lesgrandsvoisins.com";
+    };
     applications = {
       files = {
         dataPath = "/srv/sftpgo";
@@ -62,7 +72,7 @@ in {
       login = "sync-in";
     };
     mysql = {
-      passwordFile = "/etc/sync-in/database.secret";
+      passwordFile = "/etc/sync-in/mysql.secret";
       user = "syncin";
       logQueries = false;
     };

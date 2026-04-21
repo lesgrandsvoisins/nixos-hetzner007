@@ -87,6 +87,7 @@ in {
       };
       passwordFile = lib.mkOption {
         type = lib.types.str;
+        default = "/etc/sync-in/mysql.password";
       };
 
       password = lib.mkOption {
