@@ -520,14 +520,21 @@ in {
 
       # };
 
-      users.users.sync-in = {
-        isSystemUser = true;
-        home = cfg.applications.files.dataPath;
-        createHome = true;
-        group = cfg.group;
-      };
+      # users.users.sync-in = {
+      #   isSystemUser = true;
+      #   home = cfg.applications.files.dataPath;
+      #   createHome = true;
+      #   group = cfg.group;
+      # };
 
-      users.groups."${cfg.group}" = {};
+      # users.users."${cfg.user}" = {
+      #   isSystemUser = true;
+      #   # home = cfg.applications.files.dataPath;
+      #   # createHome = true;
+      #   group = cfg.group;
+      # };
+
+      # users.groups."${cfg.group}" = {};
 
       systemd.services.sync-in = {
         description = "Sync-in";
