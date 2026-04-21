@@ -89,7 +89,6 @@ in {
         type = lib.types.str;
         default = "/etc/sync-in/mysql.password";
       };
-
       password = lib.mkOption {
         type = lib.types.enum ["__DB_PASSWORD__"];
         default = "__DB_PASSWORD__";

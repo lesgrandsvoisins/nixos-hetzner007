@@ -74,7 +74,7 @@ in {
       login = "sync-in";
     };
     mysql = {
-      passwordFile = "/etc/sync-in/mysql.secret";
+      passwordFile = "/etc/sync-in/mysql.password";
       user = "syncin";
       logQueries = false;
     };
