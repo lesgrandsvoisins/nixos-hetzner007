@@ -532,7 +532,8 @@ in {
       systemd.services.sync-in = {
         description = "Sync-in";
         wantedBy = ["multi-user.target"];
-        after = ["network.target" "mysql.service" "redis.service"];
+        after = ["network.target" "mysql.service"];
+        # after = ["network.target" "mysql.service" "redis.service"];
 
         preStart = ''
           set -e
@@ -612,7 +613,7 @@ in {
           Restart = "always";
           User = "${cfg.user}";
           Group = "${cfg.group}";
-          Environment = "NODE_PATH=$NODE_PATH:${cfg.package}/lib/node_modules/";
+          Environment = "NODE_PATH=${pkgs.nodejs_24}/lib/modules:${cfg.package}/lib/node_modules";
           WorkingDirectory = cfg.applications.files.dataPath;
         };
       };
