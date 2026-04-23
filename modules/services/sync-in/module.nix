@@ -393,13 +393,31 @@ in {
           };
           autoCreatePermissions = lib.mkOption {
             type = lib.types.listOf lib.types.str;
-            default = [];
+            default = [
+              "personal_space"
+              "spaces_access"
+              "spaces_admin"
+              "shares_access"
+              "shares_admin"
+              "personal_groups_admin"
+              "webdav_access"
+            ];
             description = ''
               autoCreatePermissions: Permissions assigned to users automatically created via LDAP.
               Applied only at user creation time when autoCreateUser is enabled.
               Has no effect on existing users.
               A complete list of permissions is available in the documentation: https://sync-in.com/docs/admin-guide/permissions
               e.g.: [personal_space, spaces_access] (array required)
+              "personal_space" - Grants access to the user's own personal space.
+              "spaces_access" - Grants access to collaborative spaces the user is a member of.
+              "spaces_admin" - Allows the user to create, modify, and delete collaborative spaces.
+              "shares_access" - Provides access to the Shared with Me module, which gathers all items shared with the user.
+              "shares_admin" - Provides access to the Shared with Others module, allowing the user to view, modify, or revoke their outgoing shares.
+              "guests_admin" - Allows the user to create, modify, and delete guests. Includes managing their managers and account information (name, email, password).
+              "personal_groups_admin" - Allows the user to create personal groups and add or remove members.
+              "desktop_app_access" - Authorizes access via the desktop application
+              "desktop_app_sync" - Grants permission to synchronize files using the desktop or CLI client.
+              "webdav_access" - Allows access to files via a WebDAV client
             '';
             adminGroup = lib.mkOption {
               type = lib.types.nullOr (lib.types.str);

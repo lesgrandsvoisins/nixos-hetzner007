@@ -95,7 +95,15 @@ in {
         };
         options = {
           adminRoleOrGroup = "admin";
-          autoCreatePermissions = ["personal_space" "spaces_access" "webdav_access"];
+          autoCreatePermissions = [
+            "personal_space"
+            "spaces_access"
+            "spaces_admin"
+            "shares_access"
+            "shares_admin"
+            "personal_groups_admin"
+            "webdav_access"
+          ];
           autoRedirect = true;
           buttonText = "key.gv.je";
           enablePasswordAuth = false;
