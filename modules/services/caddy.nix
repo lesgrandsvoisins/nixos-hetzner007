@@ -119,6 +119,11 @@ in {
     # '';
 
     virtualHosts = {
+      "jitsi.grandzine.org" = {
+        extraConfig = ''
+          redir https://jitsi.lgv.info{uri}
+        '';
+      };
       "meet.gv.je" = {
         extraConfig = ''
           redir https://meet.lgv.info
