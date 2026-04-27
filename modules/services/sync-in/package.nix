@@ -1,14 +1,20 @@
 {pkgs ? import <nixpkgs> {}}: let
   drizzleJsFile = ./drizzle.js;
+  lib = pkgs.lib;
+  fetchFromGitHub = pkgs.fetchFromGitHub;
+  runtimeShell = pkgs.runtimeShell;
+  buildNpmPackage = pkgs.buildNpmPackage;
+  nodejs_24 = pkgs.nodejs_24;
+  nixosTests = null;
 in
   pkgs.buildNpmPackage {
     pname = "sync-in";
-    version = "2.2.0-a4";
+    version = "2.2.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "Sync-in";
       repo = "server";
-      rev = "v2.2.0";
+      rev = "v${version}";
       hash = "sha256-PkdVveWfAqEU/Ljs28OZt1QPjE+DqQX4Aet/wCk7eok=";
     };
 
@@ -26,10 +32,7 @@ in
 
     buildPhase = ''
       runHook preBuild
-      # ${pkgs.nodejs_24}/bin/npm run build
       ${pkgs.nodejs_24}/bin/npm run build && ${pkgs.nodejs_24}/bin/node scripts/build/release.mjs
-
-
       runHook postBuild
     '';
 
@@ -41,21 +44,21 @@ in
 
       mkdir -p $out/bin
       mkdir -p $out/conf
-      cp ${drizzleJsFile} $out/conf/drizzle.js
+      # cp $ {./drizzle.js} $out/conf/drizzle.js
 
-      # cat > $out/conf/drizzle.js <<EOF
-      # import { defineConfig } from "drizzle-kit";
+      cat > $out/conf/drizzle.js <<EOF
+      import { defineConfig } from "drizzle-kit";
 
-      # export default defineConfig({
-      #   dialect: "mysql",
-      #   schema: "./release/sync-in-server/server/infrastructure/database/schema.js",
-      #   out: "./backend/migrations",
-      #   url: "mysql://root@localhost/syncin",
-      #   tablesFilter: [
-      #     'files_content_*'
-      #   ]
-      # });
-      # EOF
+      export default defineConfig({
+        dialect: "mysql",
+        schema: "$out/lib/release/sync-in-server/server/infrastructure/database/schema.js",
+        out: "./backend-migrations",
+        url: "mysql://__USER__:__PASSWORD__@__HOST__:__PORT__/__NAME__",
+        tablesFilter: [
+          'files_content_*'
+        ]
+      });
+      EOF
 
       cat > $out/bin/sync-in <<EOF
       #!${pkgs.runtimeShell}
@@ -79,5 +82,7 @@ in
       description = "Sync-in server (self-hosted collaboration platform)";
       license = licenses.agpl3Only;
       platforms = platforms.linux;
+      homepage = "https://github.com/Sync-in/server";
+      changelog = "https://github.com/Sync-in/server/releases/tag/v${version}";
     };
   }
