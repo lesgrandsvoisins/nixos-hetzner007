@@ -3,14 +3,14 @@
     {
       "Vos CASIERS de fichiers via SYNC-IN" = {
         href = "https://sync-in.gv.je";
-        icon = "si-sunrise";
+        icon = "si-sync-circle";
         description = "Vos fichiers avec votre casier SYNC-IN (Même fichiers que SFTPGo)";
       };
     }
     {
       "Vos FICHIERS via casiers OXICLOUD" = {
         href = "https://oxicloud.gv.je";
-        icon = "mdi-sync-circle";
+        icon = "mdi-cloud-circle";
         description = "Vos fichiers avec votre casier Oxicloud";
       };
     }
