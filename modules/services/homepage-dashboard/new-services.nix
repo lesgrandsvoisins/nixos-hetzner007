@@ -10,7 +10,7 @@
     {
       "Vos FICHIERS via casiers OXICLOUD" = {
         href = "https://oxicloud.gv.je";
-        icon = "si-sunrise";
+        icon = "mdi-sync-circle";
         description = "Vos fichiers avec votre casier Oxicloud";
       };
     }
