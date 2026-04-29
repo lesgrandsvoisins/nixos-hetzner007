@@ -8,13 +8,6 @@
       };
     }
     {
-      "Vos FICHIERS via casiers OXICLOUD" = {
-        href = "https://oxicloud.gv.je";
-        icon = "mdi-cloud-circle";
-        description = "Vos fichiers avec votre casier Oxicloud";
-      };
-    }
-    {
       "CONSOLIDER vos flux RSS" = {
         href = "https://miniflux.gv.je/oauth2/oidc/redirect";
         icon = "si-freshrss";

@@ -1,6 +1,13 @@
 {
   "Projets Alpha" = [
     {
+      "Vos FICHIERS via casiers OXICLOUD" = {
+        href = "https://oxicloud.gv.je";
+        icon = "mdi-cloud-circle";
+        description = "Vos fichiers avec votre casier Oxicloud";
+      };
+    }
+    {
       "alpha forum (Discourse)" = {
         description = "Forum Discourse";
         href = "https://discourse.lesgrandsvoisins.com/";
