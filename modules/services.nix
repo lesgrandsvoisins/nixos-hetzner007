@@ -23,6 +23,7 @@ in {
     ./services/mysql.nix
     ./services/openldap.nix
     ./services/oxicloud.nix
+    # ./services/peertube.nix
     ./services/postgresql.nix
     ./services/radicale.nix
     ./services/sftpgo.nix

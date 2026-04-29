@@ -34,6 +34,7 @@
     # mysql = 1516;
     sync-in = 1517;
     cherryldap = 11111;
+    peertube = 1518;
   };
   ports = {
     postgresql = 5432;
@@ -66,12 +67,14 @@
     immich = 2283;
     oxicloud = 8086;
     sync-in = 8087;
+    peertube = 8089;
   };
   hosts = {
     node-red = {
       ipv4 = "10.0.13.101";
       ipv6 = "fa13::101";
     };
+    peertube = {};
     memos = {
       addr = "127.0.0.1";
     };

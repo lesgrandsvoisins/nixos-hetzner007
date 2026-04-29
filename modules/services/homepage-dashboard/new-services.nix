@@ -3,7 +3,7 @@
     {
       "Vos CASIERS de fichiers via SYNC-IN" = {
         href = "https://sync-in.gv.je";
-        icon = "si-sync-circle";
+        icon = "mdi-sync-circle";
         description = "Vos fichiers avec votre casier SYNC-IN (Même fichiers que SFTPGo)";
       };
     }
