@@ -104,7 +104,7 @@ in {
       # enableIPv6 = true;
       forwardPorts = [
         {
-          destination = "192.168.103.2:443";
+          destination = "${vars.containers.wordpress.localAddress6}:443";
           proto = "tcp";
           sourcePort = 11443;
         }
