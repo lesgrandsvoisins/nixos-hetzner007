@@ -127,7 +127,7 @@ in {
             # host = "2a01:4f8:241:4faa::10";
             port = 5432;
             # host = "localhost";
-            # host = "/run/postgresql/";
+            host = "/run/postgresql/";
             # host = "/run/postgresql/";
             db = "wikijs";
             user = "wikijs";
