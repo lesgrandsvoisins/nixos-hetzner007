@@ -142,6 +142,34 @@ in {
       "wagtailvillage"
       "wwwcfran"
       "wwwfastoche"
+      "coopgv" # h5
+      "desgv" # h5
+      "gdvox" # h5
+      "keycloak" # h5
+      "lesgrandsvoisins20241026" # h5
+      "lesgv" # h5
+      "mydb" # h5
+      "odoo" # h5
+      "odoofor" # h5
+      "odoothree" # h5
+      "odootoo" # h5
+      "resdigita" # h5
+      "roundcube" # h5
+      "sogo" # h5
+      "villagengo" # h5
+      "wagtailfastoche" # h5
+      "gitea" # h7
+      "homarr" # h7
+      "immich" # h7
+      "lemmy" # h7
+      "memos" # h7
+      "memos2" # h7
+      "memos3" # h7
+      "miniflux" # h7
+      "oxicloud" # h7
+      "vaultwarden" # h7
+      "vikunja" # h7
+      "wiki-js" # h7
     ];
   };
 }
