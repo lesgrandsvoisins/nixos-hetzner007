@@ -5,7 +5,7 @@
   vars,
   ...
 }: let
-  vars = import ../vars.nix;
+  # vars = import ../vars.nix;
   # external-mac = "90:1b:0e:9e:ec:37";
   # ext-if = "enx901b0e9eec37";
   # external-ip = "213.239.216.138";
@@ -103,6 +103,16 @@ in {
       externalInterface = "${vars.hetzner.interface}";
       # enableIPv6 = true;
       forwardPorts = [
+        {
+          destination = "192.168.103.2:443";
+          proto = "tcp";
+          sourcePort = 11443;
+        }
+        {
+          destination = "192.168.105.11:14443";
+          proto = "tcp";
+          sourcePort = 14443;
+        }
       ];
     };
 

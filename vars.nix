@@ -60,6 +60,7 @@
     fossil = 1531;
     wagtail = 1532;
     python = 1533;
+    guichet = 1534;
   };
   ports = {
     postgresql = 5432;
