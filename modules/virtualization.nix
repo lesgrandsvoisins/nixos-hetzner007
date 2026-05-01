@@ -18,4 +18,5 @@ in {
 
   virtualisation.lxc.enable = true;
   virtualisation.lxc.lxcfs.enable = true;
+  virtualisation.libvirtd.enable = true;
 }

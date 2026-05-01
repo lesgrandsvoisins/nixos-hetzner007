@@ -1,0 +1,34 @@
+---
+
+login:
+  title: "key lesgrandsvoisins com"
+  default_method: "oidc"
+  default_redirect: "https://protection.gdvoisins.com"
+  names:
+    oidc: "OIDC avec Key Lesgrandsvoisins Com"
+cookie:
+  domain: ".gdvoisins.com"
+  authentication_key: "Ff1uWJcLouKu9kwxgbnKcU3ps47gps72sxEz79TGHFCpJNfeew66FDisM4MWbstH"
+listen:
+  addr: "127.0.0.1"
+  port: 8082
+audit_log:
+  targets:
+    - fd://stdout
+    - file:///var/lib/nginx-sso/audit.jsonl
+  events: ['access_denied', 'login_success', 'login_failure', 'logout', 'validate']
+  headers: ['x-origin-uri']
+  trusted_ip_headers: ["X-Forwarded-For", "RemoteAddr", "X-Real-IP"]
+acl:
+  rule_sets:
+  - rules:
+    allow: [ "chris" ]
+plugins:
+  directory: "/var/lib/nginx-sso/plugins/"
+providers:
+  oidc:
+    client_id: "nsso"
+    client_secret: "tnyynKSrchCcAXxrDmGbTStmBMPJXlWf"
+    issuer_name: "Key.Lesgrandsvoisins.com"
+    issuer_url: "https://key.lesgrandsvoisins.com/realms/master"
+    redirect_url: "https://login.gdvoisins.com/login"

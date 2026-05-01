@@ -5,6 +5,17 @@
     services = 500;
     radicale = 504;
     named = 989;
+    mailserver = 1973;
+    aaa = 1526;
+    appflowycloud = 1527;
+    haproxy = 1528;
+    filebrowser = 1529;
+    crabfit = 1530;
+    fossil = 1531;
+    wagtail = 1532;
+    python = 1533;
+    guichet = 1534;
+    wwwrun = 505;
   };
   uid = {
     caddy = 239;
@@ -19,6 +30,22 @@
     named = 991;
     services = 500;
     vikunja = 1508;
+    ghostio = 1519;
+    ghost = 1520;
+    odoo = 1521;
+    odootoo = 1522;
+    odoothree = 1523;
+    odoofor = 1524;
+    mysql = 84;
+    aaa = 1526;
+    appflowycloud = 1527;
+    haproxy = 1528;
+    filebrowser = 1529;
+    crabfit = 1530;
+    fossil = 1531;
+    wagtail = 1532;
+    python = 1533;
+    guichet = 1534;
   };
   ports = {
     postgresql = 5434;

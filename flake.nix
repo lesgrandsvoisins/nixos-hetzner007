@@ -13,6 +13,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
   };
   outputs = {
     self,
@@ -23,6 +24,7 @@
     agenix,
     oxicloud,
     sync-in,
+    simple-nixos-mailserver,
     ...
   } @ inputs:
   # flake-utils.lib.eachDefaultSystem (system:
@@ -45,6 +47,7 @@
           home-manager.nixosModules.home-manager
           oxicloud.nixosModules.oxicloud
           sync-in.nixosModules.sync-in
+          simple-nixos-mailserver.nixosModule
         ];
         specialArgs = {inherit vars secrets inputs oxicloud sync-in;};
       };

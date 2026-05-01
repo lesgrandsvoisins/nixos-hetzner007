@@ -31,6 +31,7 @@ in {
     ./modules/home.nix
     ./modules/networking.nix
     ./modules/packages.nix
+    ./modules/secrets.nix
     ./modules/security.nix
     ./modules/services.nix
     ./modules/users.nix
