@@ -6,6 +6,8 @@
   ...
 }: let
 in {
-  enable = true;
-  environmentFile = "/etc/vaultwarden.env";
+  services.vaultwarden = {
+    enable = true;
+    environmentFile = "/etc/vaultwarden.env";
+  };
 }

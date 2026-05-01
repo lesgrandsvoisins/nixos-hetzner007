@@ -5,6 +5,7 @@
   var,
   ...
 }: let
+  vars = import ./vars.nix;
 in {
   environment.systemPackages = with pkgs; [
     (

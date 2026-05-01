@@ -2,9 +2,9 @@
   config,
   pkgs,
   lib,
-  vars,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /etc/sftpgo 0775 sftpgo services"

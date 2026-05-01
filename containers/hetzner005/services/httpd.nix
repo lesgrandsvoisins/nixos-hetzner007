@@ -1,5 +1,10 @@
-{ config, pkgs, lib, ... }:
-let 
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  vars = import ../vars.nix;
   wagtailExtraConfig = ''
     CacheDisable /
     <Location />
@@ -32,13 +37,12 @@ let
   # keepasswebSecretPassphrase = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.keepassweb.passphrase));
   # httpd-radicale-oidcclientsecret = builtins.readFile /etc/nixos/.secrets.httpd.radicale.oidcclientsecret;
   # httpd-dav-oidcclientsecret = builtins.readFile /etc/nixos/.secrets.httpd.dav.oidcclientsecret;
-  # SECRETS_NEWUSER_PASSWORD = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.newuser));           
+  # SECRETS_NEWUSER_PASSWORD = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.newuser));
   # keepasswebSecret = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.keepassweb));
   # chrisSecret = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.chris));
-in
-{ 
+in {
   nix.settings.experimental-features = "nix-command flakes";
-  users.users.mannchri.extraGroups = [ "wwwrun" ];
+  users.users.mannchri.extraGroups = ["wwwrun"];
   # age.secrets = {
   #   # "filebrowser" = { file = ./secrets/filebrowser.age; owner="wwwrun";};
   #   "newuser" = { file = ./secrets/newuser.age; owner="wwwrun";};
@@ -50,35 +54,54 @@ in
   services.httpd.group = "wwwrun";
   services.httpd.enablePHP = false;
   services.httpd.extraConfig = ''
-  KeepAlive On
-  MaxKeepAliveRequests 100
-  KeepAliveTimeout 3
-  Protocols h2 http/1.1
-  # Listen [2a01:4f8:241:4faa::]:80
-  # Listen [2a01:4f8:241:4faa::1]:80
-  # Listen [2a01:4f8:241:4faa::2]:80
-  # Listen [2a01:4f8:241:4faa::3]:80
-  # Listen [2a01:4f8:241:4faa::4]:80
-  # Listen [2a01:4f8:241:4faa::5]:80
-  # Listen [2a01:4f8:241:4faa::]:80
-  # Listen 116.202.236.241:80
-  # Listen [2a01:4f8:241:4faa::]:443
-  # Listen [2a01:4f8:241:4faa::1]:443
-  # Listen [2a01:4f8:241:4faa::2]:443
-  # Listen [2a01:4f8:241:4faa::3]:443
-  # Listen [2a01:4f8:241:4faa::4]:443
-  # Listen [2a01:4f8:241:4faa::5]:443
-  # Listen [2a01:4f8:241:4faa::]:443
-  # Listen 116.202.236.241:443
+    KeepAlive On
+    MaxKeepAliveRequests 100
+    KeepAliveTimeout 3
+    Protocols h2 http/1.1
+    # Listen [2a01:4f8:241:4faa::]:80
+    # Listen [2a01:4f8:241:4faa::1]:80
+    # Listen [2a01:4f8:241:4faa::2]:80
+    # Listen [2a01:4f8:241:4faa::3]:80
+    # Listen [2a01:4f8:241:4faa::4]:80
+    # Listen [2a01:4f8:241:4faa::5]:80
+    # Listen [2a01:4f8:241:4faa::]:80
+    # Listen 116.202.236.241:80
+    # Listen [2a01:4f8:241:4faa::]:443
+    # Listen [2a01:4f8:241:4faa::1]:443
+    # Listen [2a01:4f8:241:4faa::2]:443
+    # Listen [2a01:4f8:241:4faa::3]:443
+    # Listen [2a01:4f8:241:4faa::4]:443
+    # Listen [2a01:4f8:241:4faa::5]:443
+    # Listen [2a01:4f8:241:4faa::]:443
+    # Listen 116.202.236.241:443
   '';
   services.httpd.adminAddr = "chris@lesgrandsvoisins.com";
-  services.httpd.extraModules = [ "proxy" "proxy_http" "dav" "ldap" "authnz_ldap" "alias" "ssl" "rewrite" "proxy_fcgi" "http2" "proxy_uwsgi"
-    { name = "auth_openidc"; path = "/usr/local/lib/modules/mod_auth_openidc.so"; }
-     ];
-  users.users.wwwrun.extraGroups = [ "acme" "wagtail" "users" "ghost" "ghostio" "guichet" ];
+  services.httpd.extraModules = [
+    "proxy"
+    "proxy_http"
+    "dav"
+    "ldap"
+    "authnz_ldap"
+    "alias"
+    "ssl"
+    "rewrite"
+    "proxy_fcgi"
+    "http2"
+    "proxy_uwsgi"
+    {
+      name = "auth_openidc";
+      path = "/usr/local/lib/modules/mod_auth_openidc.so";
+    }
+  ];
+  users.users.wwwrun.extraGroups = ["acme" "wagtail" "users" "ghost" "ghostio" "guichet"];
   services.httpd.virtualHosts = {
-     "maruftuyel.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+    "maruftuyel.resdigita.com" = {
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/maruftuyel.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/maruftuyel.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/maruftuyel.resdigita.com/key.pem";
@@ -97,7 +120,7 @@ in
           Require valid-user
           ProxyPass unix:/opt/filebrowser/dbs/filebrowser/maruftuyel/filebrowser.sock|http://127.0.0.1/
           # ProxyPass unix:/opt/filebrowser/dbs/filebrowser/%{env:MATCH_USERNAME}/filebrowser.sock|http://filebrowser.resdigita.com/
-          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
+          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
           RequestHeader set X-Forwarded-Proto "https"
           RequestHeader set X-Forwarded-Port "443"
           RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -106,7 +129,12 @@ in
       '';
     };
     "axel.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/axel.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/axel.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/axel.resdigita.com/key.pem";
@@ -127,7 +155,7 @@ in
           # Require user axel.leroux
           ProxyPass unix:/opt/filebrowser/dbs/filebrowser/axel.leroux/filebrowser.sock|http://127.0.0.1/
           # ProxyPass unix:/opt/filebrowser/dbs/filebrowser/%{env:MATCH_USERNAME}/filebrowser.sock|http://filebrowser.resdigita.com/
-          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
+          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
           RequestHeader set X-Forwarded-Proto "https"
           RequestHeader set X-Forwarded-Port "443"
           RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -136,7 +164,12 @@ in
       '';
     };
     "chris.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/chris.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/chris.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/chris.resdigita.com/key.pem";
@@ -155,7 +188,7 @@ in
           Require valid-user
           ProxyPass unix:/opt/filebrowser/dbs/filebrowser/chris/filebrowser.sock|http://127.0.0.1/
           # ProxyPass unix:/opt/filebrowser/dbs/filebrowser/%{env:MATCH_USERNAME}/filebrowser.sock|http://filebrowser.resdigita.com/
-          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
+          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
           RequestHeader set X-Forwarded-Proto "https"
           RequestHeader set X-Forwarded-Port "443"
           RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -164,7 +197,12 @@ in
       '';
     };
     "filebrowser.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/filebrowser.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/filebrowser.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/filebrowser.resdigita.com/key.pem";
@@ -185,13 +223,13 @@ in
         #   # RewriteEngine On
         #   # Redirect to the specific path based on the header value
         #   # RewriteRule ^(.*)$ /u/%{env:OIDC_CLAIM_username}/ [R,L]
-        # </LocationMatch>      
+        # </LocationMatch>
         # <LocationMatch "/u/(?<username>[^/]+)/">
         <Location "/">
           AuthType openid-connect
           Require valid-user
           ProxyPass unix:/opt/filebrowser/dbs/filebrowser/multi-user/filebrowser.sock|http://127.0.0.1/
-          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
+          RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
           RequestHeader set X-Forwarded-Proto "https"
           RequestHeader set X-Forwarded-Port "443"
           RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -199,9 +237,9 @@ in
         </Location>
         # <LocationMatch "^/u/(?<username>[^/]+)">
         #   AuthType openid-connect
-        #   Require valid-user      
+        #   Require valid-user
         #   ProxyPass unix:/opt/filebrowser/dbs/filebrowser/%{env:MATCH_USERNAME}/filebrowser.sock|http://127.0.0.1/
-        #   RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
+        #   RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
         #   RequestHeader set X-Forwarded-Proto "https"
         #   RequestHeader set X-Forwarded-Port "443"
         #   RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -216,9 +254,9 @@ in
         #   Require valid-user
         #   # ProxyPass unix:/opt/filebrowser/dbs/filebrowser/filebrowser/filebrowser.sock|http://filebrowser.resdigita.com/
         #   # ProxyPass "http://filebrowser.resdigita.com:8334/"
-        #   # RequestHeader set FileBrowserUser "admin"   
-        #   RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s  
-        #   # RequestHeader set FileBrowserUser "admin"        
+        #   # RequestHeader set FileBrowserUser "admin"
+        #   RequestHeader set FileBrowserUser %{env:OIDC_CLAIM_username}s
+        #   # RequestHeader set FileBrowserUser "admin"
         #   RequestHeader set X-Forwarded-Proto "https"
         #   RequestHeader set X-Forwarded-Port "443"
         #   RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for"
@@ -229,14 +267,19 @@ in
       '';
     };
     "keeweb.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
 
       sslServerCert = "/var/lib/acme/keeweb.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/keeweb.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/keeweb.resdigita.com/key.pem";
-      
+
       documentRoot = "/var/www";
-      
+
       extraConfig = ''
         Alias /static /var/www/wagtail/static
         Alias /media /var/www/wagtail/media
@@ -252,7 +295,7 @@ in
         OIDCClientSecret ${keeweb_secret}
         OIDCRedirectURI https://keeweb.resdigita.com/redirect_uri_from_oauth2
         OIDCCryptoPassphrase ${keewebSecretPassphrase}
-        
+
         <LocationMatch "^/redirect$">
           AuthType openid-connect
           Require valid-user
@@ -271,7 +314,7 @@ in
         </LocationMatch>
 
         <LocationMatch "^/(?<username>[^/]+)/.*">
-          AuthType openid-connect 
+          AuthType openid-connect
           Require claim username:%{env:MATCH_USERNAME}
           <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE CONNECT>
              Require claim useername:%{env:MATCH_USERNAME}
@@ -306,9 +349,14 @@ in
           Require all granted
         </Directory>
       '';
-    };   
+    };
     "keepass.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/keepass.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/keepass.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/keepass.resdigita.com/key.pem";
@@ -343,7 +391,7 @@ in
           RewriteRule ^(.*)$ /auth/web/%1 [R,L]
         </Location>
         <LocationMatch "^/auth/web/(?<username>[^/]+)">
-          AuthType openid-connect 
+          AuthType openid-connect
           # Should already be inherited
           # Allow https://httpd.apache.org/docs/2.4/mod/mod_dav.html
           # Require claim username:%{env:MATCH_USERNAME}
@@ -356,7 +404,7 @@ in
         # <LocationMatch "^/auth/dav/(?<username>[^/]+).*">
         # Require claim email:%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN}
         <LocationMatch "^/auth/dav/(?<username>[^/]+)">
-          AuthType openid-connect 
+          AuthType openid-connect
           # Should already be inherited
           # Allow https://httpd.apache.org/docs/2.4/mod/mod_dav.html
           Require claim username:%{env:MATCH_USERNAME}
@@ -423,173 +471,99 @@ in
       '';
     };
     "radicale.resdigita.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       documentRoot = "/var/www/radicale";
 
       sslServerCert = "/var/lib/acme/radicale.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/radicale.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/radicale.resdigita.com/key.pem";
       extraConfig = ''
-        Alias /auth /var/www/radicale
-        RedirectMatch ^/$ https://radicale.resdigita.com/auth/
-        OIDCProviderMetadataURL https://keycloak.village.ngo/realms/master/.well-known/openid-configuration
-        OIDCClientID radicale
-        OIDCClientSecret ${httpd-radicale-oidcclientsecret}
-        OIDCRedirectURI https://radicale.resdigita.com/auth/keycloak-radicale-openid
-        OIDCCryptoPassphrase jksdjflskfjslkfjSAFSAFDSADF
-        OIDCRemoteUserClaim username
-        RewriteEngine On
-        RewriteRule ^/auth$ /auth/ [R,L]
-        RewriteRule ^/pass$ /pass/ [R,L]
-        <Location "/auth/index.html">
-          ProxyPass !
-          AuthType openid-connect
-          Require valid-user
-        </Location>
-        <Location "/auth/">
-          AuthType openid-connect
-          Require valid-user
-          RequestHeader    set X-Script-Name /auth
-          RequestHeader    set X-Remote-User expr=%{env:OIDC_CLAIM_username}
-          ProxyPass        http://localhost:5232/ retry=0
-          ProxyPassReverse http://localhost:5232/
-          ProxyAddHeaders On
-          # ProxyPass uwsgi://localhost:5232/
-       </Location>
-      #  <LocationMatch "/pass/(?<username>[^/]+)">
-      #       AuthType Basic
-      #       AuthBasicProvider ldap
-      #       AuthName "Radicale CalDAV et CardDAV par LDAP"
-      #       AuthLDAPBindDN cn=newuser,ou=users,dc=resdigita,dc=org
-      #       AuthLDAPBindPassword ${newuser_secret}
-      #       AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
-      #       #Require valid-user
-      #       Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=resdigita,dc=org
-
-      #     RequestHeader    set X-Script-Name /radicale
-      #     RequestHeader    set X-Remote-User expr=%{env:MATCH_USERNAME}
-      #     ProxyPass        http://localhost:5232/ retry=0
-      #     ProxyPassReverse http://localhost:5232/
-      #  </LocationMatch>
-       <Location "/pass/">
-            AuthType Basic
-            AuthBasicProvider ldap
-            AuthName "Radicale CalDAV et CardDAV par LDAP"
-            AuthLDAPBindDN cn=newuser,ou=users,dc=resdigita,dc=org
-            AuthLDAPBindPassword ${newuser_secret}
-            AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
-            AuthLDAPRemoteUserAttribute cn
+          Alias /auth /var/www/radicale
+          RedirectMatch ^/$ https://radicale.resdigita.com/auth/
+          OIDCProviderMetadataURL https://keycloak.village.ngo/realms/master/.well-known/openid-configuration
+          OIDCClientID radicale
+          OIDCClientSecret ${httpd-radicale-oidcclientsecret}
+          OIDCRedirectURI https://radicale.resdigita.com/auth/keycloak-radicale-openid
+          OIDCCryptoPassphrase jksdjflskfjslkfjSAFSAFDSADF
+          OIDCRemoteUserClaim username
+          RewriteEngine On
+          RewriteRule ^/auth$ /auth/ [R,L]
+          RewriteRule ^/pass$ /pass/ [R,L]
+          <Location "/auth/index.html">
+            ProxyPass !
+            AuthType openid-connect
             Require valid-user
-            #Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=resdigita,dc=org
+          </Location>
+          <Location "/auth/">
+            AuthType openid-connect
+            Require valid-user
+            RequestHeader    set X-Script-Name /auth
+            RequestHeader    set X-Remote-User expr=%{env:OIDC_CLAIM_username}
+            ProxyPass        http://localhost:5232/ retry=0
+            ProxyPassReverse http://localhost:5232/
+            ProxyAddHeaders On
+            # ProxyPass uwsgi://localhost:5232/
+         </Location>
+        #  <LocationMatch "/pass/(?<username>[^/]+)">
+        #       AuthType Basic
+        #       AuthBasicProvider ldap
+        #       AuthName "Radicale CalDAV et CardDAV par LDAP"
+        #       AuthLDAPBindDN cn=newuser,ou=users,dc=resdigita,dc=org
+        #       AuthLDAPBindPassword ${newuser_secret}
+        #       AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
+        #       #Require valid-user
+        #       Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=resdigita,dc=org
 
-          RequestHeader    set X-Script-Name /pass
-          RequestHeader    set X-Remote-User expr=%{env:AUTHENTICATE_cn}
-          ProxyAddHeaders On
-          ProxyPass        http://localhost:5232/ retry=0
-          ProxyPassReverse http://localhost:5232/
-       </Location>
+        #     RequestHeader    set X-Script-Name /radicale
+        #     RequestHeader    set X-Remote-User expr=%{env:MATCH_USERNAME}
+        #     ProxyPass        http://localhost:5232/ retry=0
+        #     ProxyPassReverse http://localhost:5232/
+        #  </LocationMatch>
+         <Location "/pass/">
+              AuthType Basic
+              AuthBasicProvider ldap
+              AuthName "Radicale CalDAV et CardDAV par LDAP"
+              AuthLDAPBindDN cn=newuser,ou=users,dc=resdigita,dc=org
+              AuthLDAPBindPassword ${newuser_secret}
+              AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
+              AuthLDAPRemoteUserAttribute cn
+              Require valid-user
+              #Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=resdigita,dc=org
+
+            RequestHeader    set X-Script-Name /pass
+            RequestHeader    set X-Remote-User expr=%{env:AUTHENTICATE_cn}
+            ProxyAddHeaders On
+            ProxyPass        http://localhost:5232/ retry=0
+            ProxyPassReverse http://localhost:5232/
+         </Location>
       '';
     };
-    
+
     "dav.lesgrandsvoisins.com" = {
-      listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/dav.lesgrandsvoisins.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/dav.lesgrandsvoisins.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/dav.lesgrandsvoisins.com/key.pem";
       documentRoot = "/var/www/dav";
       extraConfig = ''
-        Alias /static /var/www/wagtail/static
-        Alias /media /var/www/wagtail/media
-        DavLockDB /tmp/DesGVDavLock
-
-        OIDCProviderMetadataURL https://key.lesgrandsvoisins.com/realms/master/.well-known/openid-configuration
-        OIDCClientID dav
-        OIDCClientSecret ${httpd-dav-oidcclientsecret}
-        OIDCRedirectURI https://dav.lesgrandsvoisins.com/auth/redirect_uri_from_oauth2
-        OIDCCryptoPassphrase JoWT5Mz1DIzsgI3MT2GH82aA6Xamp2ni
-
-        RedirectMatch ^/?$ /redirect
-
-        <Location "/auth">
-          AuthType openid-connect
-          Require valid-user
-        </Location>
-
-        <LocationMatch "^/auth/(?<username>[^/]+)">
-          AuthType openid-connect
-          Require claim preferred_username:%{env:MATCH_USERNAME}
-            
-          <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPOFIND CONNECT>
-              Require claim preferred_username:%{env:MATCH_USERNAME}
-          </LimitExcept>
-        </LocationMatch>
-
-        <Location "/redirect">
-          AuthType openid-connect
-          Require valid-user
-          RewriteEngine On
-          # Check for the presence of the OIDC_CLAIM_email header
-          # RewriteCond %{env:OIDC_CLAIM_email} ^(.+)$
-          RewriteCond %{env:OIDC_CLAIM_preferred_username} ^(.+)$
-          # Redirect to the specific path based on the header value
-          RewriteRule ^(.*)$ /auth/%1 [R,L]
-        </Location>
-        RedirectMatch ^/$ /redirect
-      
-        Alias /auth /var/www/dav/data
-        Alias /pass /var/www/dav/data
-
-        <LocationMatch "^/pass/(?<username>[^/]+)">
-          AuthType Basic
-          AuthBasicProvider ldap
-          AuthName "DAV par LDAP"
-          AuthLDAPBindDN cn=newuser,ou=users,dc=lesgrandsvoisins,dc=com
-          AuthLDAPBindPassword ${newuser_secret}
-          AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
-          # Require valid-user
-          # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
-          Require ldap-attribute cn=%{env:MATCH_USERNAME}
-          
-          <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPFIND CONNECT>
-            # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
-            Require ldap-attribute cn=%{env:MATCH_USERNAME}
-            # Require valid-user
-          </LimitExcept>
-        </LocationMatch>
-
-        <Directory "/var/www">
-          Options Indexes FollowSymLinks
-          AllowOverride None
-          Require all granted
-        </Directory>
-
-      <Directory "/var/www/dav/data">
-        Dav On
-        DavDepthInfinity On
-      </Directory>
-      '';
-    };
-
-    "dav.resdigita.com" = {
-      # serverAliases = ["dav.gv.coop"];
-      # serverAliases = ["dav.lesgrandsvoisins.com"];
-      listen = [{port = 8443; ssl=true;}];
-      sslServerCert = "/var/lib/acme/dav.resdigita.com/fullchain.pem";
-      sslServerChain = "/var/lib/acme/dav.resdigita.com/fullchain.pem";
-      sslServerKey = "/var/lib/acme/dav.resdigita.com/key.pem";
-      documentRoot = "/var/www/dav";
-      extraConfig = lib.strings.concatStrings [ ''
-        Alias /static /var/www/wagtail/static
-        Alias /media /var/www/wagtail/media
-      ''
-      # wagtailExtraConfig
-      ''
+          Alias /static /var/www/wagtail/static
+          Alias /media /var/www/wagtail/media
           DavLockDB /tmp/DesGVDavLock
 
           OIDCProviderMetadataURL https://key.lesgrandsvoisins.com/realms/master/.well-known/openid-configuration
           OIDCClientID dav
           OIDCClientSecret ${httpd-dav-oidcclientsecret}
-          OIDCRedirectURI https://dav.resdigita.com/auth/redirect_uri_from_oauth2
+          OIDCRedirectURI https://dav.lesgrandsvoisins.com/auth/redirect_uri_from_oauth2
           OIDCCryptoPassphrase JoWT5Mz1DIzsgI3MT2GH82aA6Xamp2ni
 
           RedirectMatch ^/?$ /redirect
@@ -602,9 +576,9 @@ in
           <LocationMatch "^/auth/(?<username>[^/]+)">
             AuthType openid-connect
             Require claim preferred_username:%{env:MATCH_USERNAME}
-              
+
             <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPOFIND CONNECT>
-               Require claim preferred_username:%{env:MATCH_USERNAME}
+                Require claim preferred_username:%{env:MATCH_USERNAME}
             </LimitExcept>
           </LocationMatch>
 
@@ -619,7 +593,7 @@ in
             RewriteRule ^(.*)$ /auth/%1 [R,L]
           </Location>
           RedirectMatch ^/$ /redirect
-       
+
           Alias /auth /var/www/dav/data
           Alias /pass /var/www/dav/data
 
@@ -633,10 +607,10 @@ in
             # Require valid-user
             # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
             Require ldap-attribute cn=%{env:MATCH_USERNAME}
-            
+
             <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPFIND CONNECT>
               # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
-              Require ldap-attribute cn=%{env:MATCH_USERNAME}             
+              Require ldap-attribute cn=%{env:MATCH_USERNAME}
               # Require valid-user
             </LimitExcept>
           </LocationMatch>
@@ -651,10 +625,106 @@ in
           Dav On
           DavDepthInfinity On
         </Directory>
-        ''];
+      '';
+    };
+
+    "dav.resdigita.com" = {
+      # serverAliases = ["dav.gv.coop"];
+      # serverAliases = ["dav.lesgrandsvoisins.com"];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
+      sslServerCert = "/var/lib/acme/dav.resdigita.com/fullchain.pem";
+      sslServerChain = "/var/lib/acme/dav.resdigita.com/fullchain.pem";
+      sslServerKey = "/var/lib/acme/dav.resdigita.com/key.pem";
+      documentRoot = "/var/www/dav";
+      extraConfig = lib.strings.concatStrings [
+        ''
+          Alias /static /var/www/wagtail/static
+          Alias /media /var/www/wagtail/media
+        ''
+        # wagtailExtraConfig
+        ''
+            DavLockDB /tmp/DesGVDavLock
+
+            OIDCProviderMetadataURL https://key.lesgrandsvoisins.com/realms/master/.well-known/openid-configuration
+            OIDCClientID dav
+            OIDCClientSecret ${httpd-dav-oidcclientsecret}
+            OIDCRedirectURI https://dav.resdigita.com/auth/redirect_uri_from_oauth2
+            OIDCCryptoPassphrase JoWT5Mz1DIzsgI3MT2GH82aA6Xamp2ni
+
+            RedirectMatch ^/?$ /redirect
+
+            <Location "/auth">
+              AuthType openid-connect
+              Require valid-user
+            </Location>
+
+            <LocationMatch "^/auth/(?<username>[^/]+)">
+              AuthType openid-connect
+              Require claim preferred_username:%{env:MATCH_USERNAME}
+
+              <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPOFIND CONNECT>
+                 Require claim preferred_username:%{env:MATCH_USERNAME}
+              </LimitExcept>
+            </LocationMatch>
+
+            <Location "/redirect">
+              AuthType openid-connect
+              Require valid-user
+              RewriteEngine On
+              # Check for the presence of the OIDC_CLAIM_email header
+              # RewriteCond %{env:OIDC_CLAIM_email} ^(.+)$
+              RewriteCond %{env:OIDC_CLAIM_preferred_username} ^(.+)$
+              # Redirect to the specific path based on the header value
+              RewriteRule ^(.*)$ /auth/%1 [R,L]
+            </Location>
+            RedirectMatch ^/$ /redirect
+
+            Alias /auth /var/www/dav/data
+            Alias /pass /var/www/dav/data
+
+            <LocationMatch "^/pass/(?<username>[^/]+)">
+              AuthType Basic
+              AuthBasicProvider ldap
+              AuthName "DAV par LDAP"
+              AuthLDAPBindDN cn=newuser,ou=users,dc=lesgrandsvoisins,dc=com
+              AuthLDAPBindPassword ${newuser_secret}
+              AuthLDAPURL "ldaps://ldap.lesgrandsvoisins.com:14636/ou=users,dc=lesgrandsvoisins,dc=com?cn"
+              # Require valid-user
+              # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
+              Require ldap-attribute cn=%{env:MATCH_USERNAME}
+
+              <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPFIND CONNECT>
+                # Require ldap-dn cn=%{env:MATCH_USERNAME},ou=users,dc=lesgrandsvoisins,dc=com
+                Require ldap-attribute cn=%{env:MATCH_USERNAME}
+                # Require valid-user
+              </LimitExcept>
+            </LocationMatch>
+
+            <Directory "/var/www">
+              Options Indexes FollowSymLinks
+              AllowOverride None
+              Require all granted
+            </Directory>
+
+          <Directory "/var/www/dav/data">
+            Dav On
+            DavDepthInfinity On
+          </Directory>
+        ''
+      ];
     };
     "wagtail.resdigita.com" = {
-       listen = [{port = 8443; ssl=true;}];
+      listen = [
+        {
+          port = 8443;
+          ssl = true;
+        }
+      ];
       sslServerCert = "/var/lib/acme/wagtail.resdigita.com/fullchain.pem";
       sslServerChain = "/var/lib/acme/wagtail.resdigita.com/fullchain.pem";
       sslServerKey = "/var/lib/acme/wagtail.resdigita.com/key.pem";
@@ -699,41 +769,40 @@ in
         "gvcity.resdigita.com"
         "toutdouxlissecom.resdigita.com"
         "iciwowcom.resdigita.com"
-        ];
-        extraConfig = ''
-            <Location />
-            Require all granted
-            </Location>
-            # SSLProxyEngine on
-            # RewriteEngine on
+      ];
+      extraConfig = ''
+        <Location />
+        Require all granted
+        </Location>
+        # SSLProxyEngine on
+        # RewriteEngine on
 
-            # RequestHeader set X-Forwarded-Proto "https"
-            # RequestHeader set X-Forwarded-Port "443"
+        # RequestHeader set X-Forwarded-Proto "https"
+        # RequestHeader set X-Forwarded-Port "443"
 
-            # <Location /static/>
-            # ProxyPass http://10.245.101.35:8888/
-            # # ProxyPassReverse http://10.245.101.35:8888/
-            # ProxyPreserveHost On
-            # </Location>
+        # <Location /static/>
+        # ProxyPass http://10.245.101.35:8888/
+        # # ProxyPassReverse http://10.245.101.35:8888/
+        # ProxyPreserveHost On
+        # </Location>
 
-            # <Location /media/>
-            # ProxyPass http://10.245.101.35:8889/
-            # # ProxyPassReverse http://10.245.101.35:8889/
-            # ProxyPreserveHost On
-            # </Location>
+        # <Location /media/>
+        # ProxyPass http://10.245.101.35:8889/
+        # # ProxyPassReverse http://10.245.101.35:8889/
+        # ProxyPreserveHost On
+        # </Location>
 
-            ProxyPass /.well-known !
-            ProxyPass /static !
-            ProxyPass /media !
-            ProxyPass /favicon.ico !
-            ProxyPass /  unix:/var/lib/wagtail/wagtail-lesgv.sock|http://127.0.0.1/
-            ProxyPassReverse / unix:/var/lib/wagtail/wagtail-lesgv.sock|http://127.0.0.1/
-            # ProxyPassReverse / http://10.245.101.35:8080/
-            ProxyPreserveHost On
-            CacheDisable /
-        '';
+        ProxyPass /.well-known !
+        ProxyPass /static !
+        ProxyPass /media !
+        ProxyPass /favicon.ico !
+        ProxyPass /  unix:/var/lib/wagtail/wagtail-lesgv.sock|http://127.0.0.1/
+        ProxyPassReverse / unix:/var/lib/wagtail/wagtail-lesgv.sock|http://127.0.0.1/
+        # ProxyPassReverse / http://10.245.101.35:8080/
+        ProxyPreserveHost On
+        CacheDisable /
+      '';
     };
-    
 
     # "resdigita.com" = {
     #   # listenAddresses = ["*" "[2a01:4f8:241:4faa::]" "[2a01:4f8:241:4faa::1]" "[2a01:4f8:241:4faa::2]" "[2a01:4f8:241:4faa::3]" "[2a01:4f8:241:4faa::4]" "[2a01:4f8:241:4faa::5]"];
@@ -761,7 +830,6 @@ in
     # #    ProxyPass /media !
     # #    ProxyPass /favicon.ico !
 
-     
     #   ProxyPreserveHost On
     #   CacheDisable /
     #   '';
@@ -881,7 +949,7 @@ in
     #       #     RewriteCond %{HTTP:Connection} Upgrade [NC]
     #       #     RewriteCond %{HTTP:Upgrade} websocket [NC]
     #       #     RewriteRule /(.*) ws://10.245.101.35:9443/$1 [P,L]
-    #       #ProxySet keepalive=On 
+    #       #ProxySet keepalive=On
     #       #ProxyPass /  http://10.245.101.35:9000/
     #       #ProxyPass /  http://10.245.101.35:9000/
     #       #ProxyPass /  https://10.245.101.35:9443/ upgrade=websocket keepalive=on
@@ -889,7 +957,7 @@ in
     #       #ProxyPass /  https://localhost:8443/ upgrade=websocket keepalive=on
     #       ProxyPass /  https://localhost:8443/ upgrade=websocket
     #       SSLProxyEngine on
-    #       SSLProxyVerify none 
+    #       SSLProxyVerify none
     #       SSLProxyCheckPeerCN off
     #       SSLProxyCheckPeerName off
     #       SSLProxyCheckPeerExpire off
@@ -920,18 +988,18 @@ in
     #   forceSSL = true;
     #   extraConfig = ''
     #       #ProxyPass /  http://10.245.101.35:9000/
-    #       #ProxyPass /  http://10.245.101.35:9000/ 
+    #       #ProxyPass /  http://10.245.101.35:9000/
     #       #ProxyPass /  https://localhost:8443/ upgrade=websocket keepalive=on
     #       ProxyPass /  https://localhost:8443/ upgrade=websocket
     #       #ProxyPass /  https://10.245.101.35:9443/
-    #        #ProxySet keepalive=On 
+    #        #ProxySet keepalive=On
 
     #       SSLProxyEngine on
-    #       SSLProxyVerify none 
+    #       SSLProxyVerify none
     #       SSLProxyCheckPeerCN off
     #       SSLProxyCheckPeerName off
     #       SSLProxyCheckPeerExpire off
-          
+
     #       RequestHeader set X-Forwarded-Proto "https"
     #       RequestHeader set X-Forwarded-Port "443"
     #       # RequestHeader set X-Forwarded-For "$proxy_add_x_forwarded_for
@@ -1027,7 +1095,7 @@ in
     #     DavLockDB /tmp/DavLockSecret
     #     OIDCProviderMetadataURL https://authentik.resdigita.com/application/o/dav/.well-known/openid-configuration
     #     OIDCClientID V7p2o3hX6Im6crzdExLI1lb81zMJEjDO3mO3rNBk
-    #     OIDCClientSecret 
+    #     OIDCClientSecret
     #     OIDCRedirectURI https://secret.desgrandsvoisins.com/auth/redirect_uri_from_oauth2
     #     OIDCCryptoPassphrase JoWT5Mz1DIzsgI3MT2GH82aA6Xamp2ni
     #     <LocationMatch "^/(auth|pass|ldap|login)/(?<username>[^/]+)/manifest.json$">
@@ -1048,7 +1116,7 @@ in
     #       RewriteRule ^(.*)$ /auth/web/%2/%1 [R,L]
     #     </Location>
     #     <LocationMatch "^/auth/web/(?<username>[^/]+)">
-    #       AuthType openid-connect 
+    #       AuthType openid-connect
     #       # Should already be inherited
     #       # Allow https://httpd.apache.org/docs/2.4/mod/mod_dav.html
     #       Require claim sub:%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN}
@@ -1057,7 +1125,7 @@ in
     #       </LimitExcept>
     #     </LocationMatch>
     #     <LocationMatch "^/auth/dav/(?<username>[^/]+)">
-    #       AuthType openid-connect 
+    #       AuthType openid-connect
     #       # Should already be inherited
     #       # Allow https://httpd.apache.org/docs/2.4/mod/mod_dav.html
     #       Require claim sub:%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN}
@@ -1113,9 +1181,6 @@ in
     #   '';
     # };
 
-
-
-
     # "dav.lesgrandsvoisins.com" = {
     #   # serverAliases = ["dav.lesgrandsvoisins.com"];
     #   listen = [{port = 8443; ssl=true;}];
@@ -1145,7 +1210,7 @@ in
 
     #       OIDCProviderMetadataURL https://authentik.resdigita.com/application/o/dav/.well-known/openid-configuration
     #       OIDCClientID V7p2o3hX6Im6crzdExLI1lb81zMJEjDO3mO3rNBk
-    #       OIDCClientSecret 
+    #       OIDCClientSecret
     #       OIDCRedirectURI https://dav.lesgrandsvoisins.com/auth/redirect_uri_from_oauth2
     #       OIDCCryptoPassphrase JoWT5Mz1DIzsgI3MT2GH82aA6Xamp2ni
 
@@ -1159,7 +1224,7 @@ in
     #       <LocationMatch "^/auth/(?<username>[^/]+)">
     #         AuthType openid-connect
     #         Require claim sub:%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN}
-              
+
     #         <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPOFIND CONNECT>
     #            Require claim sub:%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN}
     #         </LimitExcept>
@@ -1175,9 +1240,6 @@ in
     #       RewriteRule ^(.*)$ /auth/%2/%1 [R,L]
     #     </Location>
     #     RedirectMatch ^/$ /redirect
-        
-
-
 
     #       Alias /ldap /var/www/dav/data
     #       Alias /auth /var/www/dav/data
@@ -1193,7 +1255,7 @@ in
     #         AuthLDAPURL "ldap:///ou=users,dc=resdigita,dc=org?cn?sub"
     #         #Require valid-user
     #         Require ldap-dn cn=%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN},ou=users,dc=resdigita,dc=org
-            
+
     #         <LimitExcept OPTIONS GET HEAD POST PUT DELETE TRACE PROPFIND CONNECT>
     #           Require ldap-dn cn=%{env:MATCH_USERNAME}@%{env:MATCH_USERNAMEDOMAIN},ou=users,dc=resdigita,dc=org
     #         </LimitExcept>
@@ -1291,16 +1353,14 @@ in
     #     ProxyPassReverse /auth/ https://localhost:8443/ upgrade=websocket
 
     #       SSLProxyEngine on
-    #       SSLProxyVerify none 
+    #       SSLProxyVerify none
     #       SSLProxyCheckPeerCN off
     #       SSLProxyCheckPeerName off
     #       SSLProxyCheckPeerExpire off
     #       ProxyPass /blog/static/ !
     #       ProxyPass /blog/media/ !
     #       ProxyPass /blog/ http://localhost:2368/
-          
 
-          
     #       ''
     #       wagtailExtraConfig
     #       ];
@@ -1311,11 +1371,11 @@ in
     #   #     ProxyPass https://localhost:8443/ upgrade=websocket
 
     #   #     SSLProxyEngine on
-    #   #     SSLProxyVerify none 
+    #   #     SSLProxyVerify none
     #   #     SSLProxyCheckPeerCN off
     #   #     SSLProxyCheckPeerName off
     #   #     SSLProxyCheckPeerExpire off
-          
+
     #   #     RequestHeader set X-Forwarded-Proto "https"
     #   #     RequestHeader set X-Forwarded-Port "443"
     #   #     ProxyPreserveHost On
@@ -1342,7 +1402,7 @@ in
     # #     ProxyVia On
     # #     ProxyAddHeaders On
 
-    # #     # CacheDisable 
+    # #     # CacheDisable
     # #   '';
     # #   };
     # };
@@ -1389,7 +1449,7 @@ in
     # #    <Location />
     # #    Require all granted
     # #    </Location>
-    # #    
+    # #
     # #    ProxyPass /.well-known !
     # #    ProxyPass /static !
     # #    ProxyPass /media !
@@ -1561,7 +1621,6 @@ in
     #     </Proxy>
     #   '';
     # };
-
 
     # "odoo4.resdigita.com" = {
     #    listen = [{port = 8443; ssl=true;}];

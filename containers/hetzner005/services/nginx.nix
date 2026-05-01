@@ -4,6 +4,7 @@
   lib,
   ...
 }: let
+  vars = import ../vars.nix;
   nginxLocationWagtailExtraConfig = ''
     proxy_redirect off;
     proxy_set_header X-Forwarded-Proto $scheme;

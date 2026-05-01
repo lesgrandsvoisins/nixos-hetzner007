@@ -4,6 +4,7 @@
   lib,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   services.homepage-dashboard = {
     enable = true;

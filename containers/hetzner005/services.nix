@@ -5,6 +5,7 @@
   vars,
   ...
 }: let
+  vars = import ./hetzner005/vars.nix;
 in {
   imports = [
     ./services/bind.nix

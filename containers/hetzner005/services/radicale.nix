@@ -1,5 +1,10 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  vars = import ../vars.nix;
 in {
   services.radicale = {
     enable = true;

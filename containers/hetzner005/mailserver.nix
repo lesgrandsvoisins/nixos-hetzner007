@@ -4,6 +4,7 @@
   lib,
   ...
 }: let
+  vars = import ./vars.nix;
   domainName = import mailserver/vars/domain-name-mx.nix;
   ldapBaseDCDN = import mailserver/vars/ldap-base-dc-dn.nix;
   roundcube-ui-gv = pkgs.callPackage ./services/roundcube/roundcube-ui-gv.nix {};
