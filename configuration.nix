@@ -23,6 +23,7 @@ in {
     # ./containers/keycloak.nix
     ./containers/postgresql.nix
     ./containers/node-red.nix
+    ./containers/wikijs.nix
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
     ./containers/wiki-js-www.nix

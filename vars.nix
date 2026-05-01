@@ -18,6 +18,7 @@
     python = 1533;
     wwwrun = 54;
     mysql = 84;
+    acme = 993;
   };
   uid = {
     caddy = 239;
@@ -64,6 +65,8 @@
     guichet = 1534;
     users = 100;
     wwwrun = 54;
+    acme = 994;
+    wikijs = 1535;
   };
   ports = {
     postgresql = 5432;
@@ -166,6 +169,18 @@
           hostPath = "/var/local/cherryldap";
           isReadOnly = false;
         };
+      };
+    };
+    wikijs = {
+      hostAddress = "192.168.112.10";
+      localAddress = "192.168.112.11";
+      hostAddress6 = "fc00::12:1";
+      localAddress6 = "fc00::12:2";
+      bindMounts = {
+        #   "/var/lib/acme/www.configmagic.com/" = {
+        #     hostPath = "/var/lib/acme/www.configmagic.com/";
+        #     isReadOnly = true;
+        #   };
       };
     };
     hetzner005 = {

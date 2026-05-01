@@ -24,7 +24,7 @@ in {
   containers.hetzner005.bindMounts = vars.containers.hetzner005.bindMounts;
 
   containers.hetzner005 = {
-    autoStart = false;
+    autoStart = true;
     privateNetwork = true;
     config = {
       config,
