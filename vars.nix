@@ -19,7 +19,6 @@
     wwwrun = 54;
     mysql = 84;
   };
-  do
   uid = {
     caddy = 239;
     homarr = 1002; # Ce n'est plus utilisé
