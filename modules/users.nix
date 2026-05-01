@@ -115,7 +115,7 @@ in {
       haproxy = {
         extraGroups = ["wwwrun" "acme"];
         uid = vars.uid.haproxy;
-        group = "services";
+        # group = "services";
         isSystemUser = true;
       };
       # mannchri = {

@@ -165,6 +165,18 @@
         };
       };
     };
+    hetzner005 = {
+      hostAddress = "192.168.107.1";
+      localAddress = "192.168.107.2";
+      hostAddress6 = "fc00::7:1";
+      localAddress6 = "fc00::7:2";
+      bindMounts = {
+        # "/var/local/hetzner005" = {
+        #   hostPath = "/var/local/hetzner005";
+        #   isReadOnly = false;
+        # };
+      };
+    };
     discourse = {};
     discourseparis14cc = {};
     haproxy = {};
