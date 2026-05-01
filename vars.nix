@@ -7,6 +7,16 @@
     named = 989;
     sftpgo = 1506;
     node-red = 1507;
+    mailserver = 1973;
+    aaa = 1526;
+    appflowycloud = 1527;
+    haproxy = 1528;
+    filebrowser = 1529;
+    crabfit = 1530;
+    fossil = 1531;
+    wagtail = 1532;
+    python = 1533;
+    wwwrun = 505;
   };
   uid = {
     caddy = 239;
@@ -43,6 +53,13 @@
     odoofor = 1524;
     mysql = 84;
     aaa = 1526;
+    appflowycloud = 1527;
+    haproxy = 1528;
+    filebrowser = 1529;
+    crabfit = 1530;
+    fossil = 1531;
+    wagtail = 1532;
+    python = 1533;
   };
   ports = {
     postgresql = 5432;
