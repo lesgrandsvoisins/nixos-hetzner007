@@ -116,6 +116,71 @@ in {
         name = "ffdncoin";
         ensureDBOwnership = true;
       }
+
+      {
+        name = "coopgv";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "desgv";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "gdvox";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "keycloak";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "lesgrandsvoisins20241026";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "lesgv";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "mydb";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "odoo";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "odoofor";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "odoothree";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "odootoo";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "resdigita";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "roundcube";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "sogo";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "villagengo";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "wagtailfastoche";
+        ensureDBOwnership = true;
+      }
     ];
     ensureDatabases = [
       "keygvje"
