@@ -16,7 +16,7 @@
     fossil = 1531;
     wagtail = 1532;
     python = 1533;
-    wwwrun = 505;
+    wwwrun = 54;
   };
   uid = {
     caddy = 239;
@@ -62,6 +62,7 @@
     python = 1533;
     guichet = 1534;
     users = 100;
+    wwwrun = 54;
   };
   ports = {
     postgresql = 5432;
