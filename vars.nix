@@ -17,6 +17,7 @@
     wagtail = 1532;
     python = 1533;
     wwwrun = 54;
+    mysql = 84;
   };
   uid = {
     caddy = 239;
