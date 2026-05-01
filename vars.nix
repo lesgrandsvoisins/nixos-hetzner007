@@ -61,6 +61,7 @@
     wagtail = 1532;
     python = 1533;
     guichet = 1534;
+    users = 100;
   };
   ports = {
     postgresql = 5432;
@@ -174,6 +175,18 @@
         # "/var/local/hetzner005" = {
         #   hostPath = "/var/local/hetzner005";
         #   isReadOnly = false;
+        # };
+      };
+    };
+    wordpress = {
+      hostAddress = "192.168.103.1";
+      localAddress = "192.168.103.2";
+      hostAddress6 = "fc00::3:1";
+      localAddress6 = "fc00::3:2";
+      bindMounts = {
+        # "/var/lib/acme/wordpress.resdigita.com/" = {
+        #   hostPath = "/var/lib/acme/wordpress.resdigita.com/";
+        #   isReadOnly = true;
         # };
       };
     };
