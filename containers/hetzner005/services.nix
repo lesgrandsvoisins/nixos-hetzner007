@@ -9,7 +9,10 @@
 in {
   imports = [
     ./services/bind.nix
+    # ./services/httpd.nix
     ./services/homepage-dashboard.nix
+    # ./services/nginx.nix
+    ./services/postgresql.nix
     ./services/radicale.nix
     ./services/sftpgo.nix
     ./services/vaultwarden.nix
