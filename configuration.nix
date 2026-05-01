@@ -26,6 +26,7 @@ in {
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
     ./containers/wiki-js-www.nix
+    ./containers/wordpress.nix
     ./hardware-configuration.nix
     ./modules/custom.nix
     ./modules/home.nix

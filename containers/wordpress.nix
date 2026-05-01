@@ -27,7 +27,7 @@ in {
       ...
     }: {
       users.users = {
-        mannchri.uid = vars.uid.mannchri;
+        # mannchri.uid = vars.uid.mannchri;
         mysql.uid = vars.uid.mysql;
         wwwrun.uid = vars.uid.wwwrun;
       };
