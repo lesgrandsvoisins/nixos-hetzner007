@@ -85,21 +85,21 @@ in {
       users = {
         groups = {
           "acme" = {
-            gid = 993;
+            gid = vars.gid.acme;
             members = ["acme"];
           };
           "wwwrun" = {
-            gid = 54;
+            gid = vars.gid.wwwrun;
             members = ["acme" "wwwrun" "wikijs" "postgres"];
           };
         };
         users = {
           "acme" = {
-            uid = 994;
+            uid = vars.uid.acme;
             group = "acme";
           };
           "wwwrun" = {
-            uid = 54;
+            uid = vars.uid.wwwrun;
             group = "wwwrun";
           };
           "wikijs" = {
@@ -127,7 +127,7 @@ in {
             # host = "2a01:4f8:241:4faa::10";
             port = 5432;
             # host = "localhost";
-            host = "/run/postgresql/";
+            # host = "/run/postgresql/";
             # host = "/run/postgresql/";
             db = "wikijs";
             user = "wikijs";
@@ -162,7 +162,7 @@ in {
             # ssl_key_file = "/var/lib/acme/www.configmagic.com/key.pem";
             # ssl_cert_file = "/var/lib/acme/www.configmagic.com/fullchain.pem";
             port = 5432;
-            listen_addresses = lib.mkForce "2a01:4f8:241:4faa::";
+            # listen_addresses = lib.mkForce "2a01:4f8:241:4faa::";
           };
         };
       };
