@@ -26,12 +26,14 @@ in {
     ./containers/wiki-js-libregood.nix
     ./containers/wiki-js-www.nix
     ./hardware-configuration.nix
+    ./modules/custom.nix
     ./modules/home.nix
     ./modules/networking.nix
     ./modules/packages.nix
     ./modules/security.nix
     ./modules/services.nix
     ./modules/users.nix
+    ./modules/virtualization.nix
   ];
 
   # Bootloader.
