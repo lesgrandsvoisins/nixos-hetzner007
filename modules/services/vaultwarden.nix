@@ -4,22 +4,16 @@
   config,
   vars,
   ...
-}:
-let
-in
-{
+}: let
+in {
   systemd.tmpfiles.rules = [
     "d /etc/vaultwarden 0755 vaultwarden services"
     "f /etc/vaultwarden/vaultwarden.env 0600 vaultwarden services"
   ];
   networking.hosts = {
-    "127.0.0.1" = [ "vaultwarden.local" ];
+    "127.0.0.1" = ["vaultwarden.local"];
   };
-  users.users.vaultwarden.extraGroups = [ "services" ];
-  services.postgresqlBackup = {
-    enable = true;
-    backupAll = true;
-  };
+  users.users.vaultwarden.extraGroups = ["services"];
   services.vaultwarden = {
     domain = "vw.gv.je";
     enable = true;

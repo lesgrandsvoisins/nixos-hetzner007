@@ -20,6 +20,7 @@ in {
     ./containers/homarr.nix
     ./containers/homarr2.nix
     # ./containers/keycloak.nix
+    ./containers/postgresql.nix
     ./containers/node-red.nix
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
