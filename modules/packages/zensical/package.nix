@@ -38,6 +38,7 @@ in
       pymdown-extensions
       pyyaml
       mkdocstrings-python
+      tomli
     ];
 
     nativeCheckInputs = [versionCheckHook];
