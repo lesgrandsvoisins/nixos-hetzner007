@@ -206,6 +206,12 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
+      "zensical.gv.je" = {
+        extraConfig = ''
+          file_server
+          root * /var/www/zensical
+        '';
+      };
       "keepass.gv.je" = {
         serverAliases = ["keeweb.gv.je"];
         extraConfig = ''
