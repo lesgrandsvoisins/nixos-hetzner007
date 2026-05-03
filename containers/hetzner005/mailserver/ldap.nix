@@ -8,7 +8,7 @@
   # alicePassword = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.alice));
   # bobPassword = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.bob));
   # sogoPassword = (lib.removeSuffix "\n" (builtins.readFile /etc/nixos/.secrets.sogo));
-  bindSlappasswd = import ../secrets/bind.slappasswd;
+  # bindSlappasswd = import ../secrets/bind.slappasswd;
   domainName = import vars/domain-name-mail.nix;
   ldapBaseDCDN = import vars/ldap-base-dc-dn.nix;
 in {
@@ -60,7 +60,7 @@ in {
           your admin account, do not use writeText on a production system
           */
           olcRootDN = "cn=admin,${ldapBaseDCDN}";
-          olcRootPW = "${bindSlappasswd}";
+          olcRootPW = "$bindSlappasswd";
           olcAccess = [
             /*
             custom access rules for userPassword attributes

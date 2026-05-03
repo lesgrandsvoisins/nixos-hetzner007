@@ -5,6 +5,7 @@
   vars,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   home-manager.users.wagtail = {pkgs, ...}: {
     home.packages = with pkgs; [
@@ -20,5 +21,10 @@ in {
     ];
     home.stateVersion = "25.11";
     programs.home-manager.enable = true;
+  };
+  users.users.wagtail = {
+    isNormalUser = true;
+    group = "services";
+    uid = vars.uid.wagtail;
   };
 }

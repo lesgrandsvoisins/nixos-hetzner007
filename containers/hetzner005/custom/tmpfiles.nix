@@ -5,6 +5,7 @@
   vars,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "d /var/www/key.lesgrandsvoisins.com 0755 wwwrun users -"
@@ -34,5 +35,8 @@ in {
     "d /var/www/wagtail.resdigita.com.develop 0775 wagtail users -"
     "d /var/www/wagtail.resdigita.com.develop/static 0775 wagtail users -"
     "d /var/www/wagtail.resdigita.com.develop/media 0775 wagtail users -"
+    # /etc/.secrets/openldap.bind
+    "d /etc/.secrets 0750 root services -"
+    "f /etc/.secrets/openldap.bind 0640 openldap root -"
   ];
 }

@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  vars,
   ...
 }: let
   vars = import ./vars.nix;
@@ -10,9 +11,13 @@ in {
   nixpkgs.config.allowUnfree = true;
   imports = [
     ./common.nix
+    ./custom.nix
     ./services.nix
+    ./security.nix
     ./home-manager.nix
+    ./mailserver.nix
     ./users.nix
+    # ./secrets.nix
   ];
   system.stateVersion = "25.11";
   users.groups.services.gid = vars.gid.services;

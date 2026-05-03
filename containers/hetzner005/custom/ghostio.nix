@@ -5,7 +5,8 @@
   vars,
   ...
 }: let
-  ghostTemplate = pkgs.callPackage ../../derivations/ghost-lgv-headline/package.nix {};
+  ghostTemplate = pkgs.callPackage ../derivations/ghost-lgv-headline/package.nix {};
+  vars = import ../vars.nix;
 in {
   systemd.tmpfiles.rules = [
     "L+ ${ghostTemplate} - - - - /var/www/ghost/content/themes/lgv-headline"

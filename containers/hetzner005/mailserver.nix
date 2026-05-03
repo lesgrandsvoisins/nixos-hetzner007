@@ -58,18 +58,7 @@ in {
     pkgs.roundcube
     roundcube-ui-gv
   ];
-  age.secrets = {
-    "oauthpassword" = {
-      file = ./secrets/oauthpassword.age;
-      group = "mailserver";
-      mode = "770";
-    };
-    "bind" = {
-      file = ./secrets/bind.age;
-      group = "mailserver";
-      mode = "770";
-    };
-  };
+
   users.users.nginx.extraGroups = ["wwwrun"];
   services.phpfpm.pools."roundcube" = {
     settings = {
@@ -206,7 +195,8 @@ in {
       enable = true;
       bind = {
         dn = "cn=admin,${ldapBaseDCDN}";
-        passwordFile = config.age.secrets.bind.path;
+        # passwordFile = config.age.secrets.bind.path;
+        passwordFile = "/etc/.secrets/openldap.bind";
       };
       uris = [
         "ldaps://ldap.lesgrandsvoisins.com:14636/"

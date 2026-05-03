@@ -8,6 +8,7 @@
   lib,
   vars,
   secrets,
+  agenix,
   ...
 }: let
 in {
@@ -33,7 +34,7 @@ in {
     ./modules/home.nix
     ./modules/networking.nix
     ./modules/packages.nix
-    ./modules/secrets.nix
+    ./secrets.nix
     ./modules/security.nix
     ./modules/services.nix
     ./modules/users.nix

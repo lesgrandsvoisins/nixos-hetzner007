@@ -1,11 +1,10 @@
 {
   config,
   pkgs,
-  lib,
-  vars,
   ...
 }: let
   gv-ldap-update = import ./gv-ldap-update/default.nix {inherit pkgs;};
+  vars = import ../vars.nix;
 in {
   environment.systemPackages = [
     gv-ldap-update

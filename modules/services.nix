@@ -11,11 +11,8 @@ in {
     ./services/bind.nix
     ./services/caddy.nix
     ./services/collabora-online.nix
-    ./services/etherclac.nix
-    ./services/etebase-server.nix
     ./services/freshrss.nix
     ./services/gitea.nix
-    ./services/gv-ldap-update.nix
     ./services/haproxy.nix
     ./services/homepage-dashboard.nix
     ./services/immich.nix
@@ -24,7 +21,6 @@ in {
     ./services/lldap.nix
     ./services/memos.nix
     ./services/miniflux.nix
-    ./services/minio.nix
     ./services/mysql.nix
     ./services/openldap.nix
     ./services/openssh.nix
@@ -34,12 +30,9 @@ in {
     ./services/radicale.nix
     ./services/sftpgo.nix
     ./services/sync-in.nix
-    ./services/uptime-kuma.nix
     ./services/vaultwarden.nix
     ./services/vikunja.nix
-    ./services/xandikos.nix
     ./services/wiki-js.nix
-    ./services/writefreely.nix
   ];
   # systemd.tmpfiles.rules = [
   #   "d /etc/pocket-id 0775 pocket-id services"

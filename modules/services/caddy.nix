@@ -124,6 +124,16 @@ in {
           redir https://jitsi.lgv.info{uri}
         '';
       };
+      "www.grandsvoisins.org" = {
+        extraConfig = ''
+          root * /var/www/grandsvoisins.org
+        '';
+      };
+      "grandsvoisins.org" = {
+        extraConfig = ''
+          redir https://www.grandsvoisins.org
+        '';
+      };
       "meet.gv.je" = {
         extraConfig = ''
           redir https://meet.lgv.info

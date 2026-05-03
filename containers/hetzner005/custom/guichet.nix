@@ -5,6 +5,7 @@
   vars,
   ...
 }: let
+  vars = import ../vars.nix;
 in {
   users.users."guichet" = {
     isNormalUser = true;

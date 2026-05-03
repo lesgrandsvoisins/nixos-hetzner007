@@ -33,4 +33,17 @@ in {
       owner = "vikunja";
     };
   };
+  ## Mailserver
+  age.secrets = {
+    "oauthpassword" = {
+      file = ./secrets/oauthpassword.age;
+      group = "mailserver";
+      mode = "770";
+    };
+    "bind" = {
+      file = ./secrets/bind.age;
+      group = "mailserver";
+      mode = "770";
+    };
+  };
 }
