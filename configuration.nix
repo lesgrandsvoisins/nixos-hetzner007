@@ -23,6 +23,7 @@ in {
     ./containers/homarr2.nix
     # ./containers/keycloak.nix
     ./containers/postgresql.nix
+    ./containers/python.nix
     ./containers/node-red.nix
     ./containers/wikijs.nix
     ./containers/wiki-js-doc.nix

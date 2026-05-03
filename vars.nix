@@ -67,6 +67,7 @@
     wwwrun = 54;
     acme = 994;
     wikijs = 1535;
+    monty = 1536;
   };
   ports = {
     postgresql = 5432;
@@ -205,6 +206,18 @@
         #   hostPath = "/var/lib/acme/wordpress.resdigita.com/";
         #   isReadOnly = true;
         # };
+      };
+    };
+    python = {
+      hostAddress = "192.168.120.1";
+      localAddress = "192.168.120.2";
+      hostAddress6 = "fc00::20:1";
+      localAddress6 = "fc00::20:2";
+      bindMounts = {
+        "/etc/monty" = {
+          hostPath = "/etc/monty";
+          isReadOnly = false;
+        };
       };
     };
     discourse = {};

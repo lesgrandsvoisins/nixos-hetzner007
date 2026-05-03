@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     oxicloud.url = "path:./modules/services/oxicloud";
+    zensical.url = "path:./modules/packages/zensical";
     sync-in.url = "path:./modules/services/sync-in";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # caddy-ui-grandsvoisins.url = "path:./flakes/caddy-ui";
@@ -25,6 +26,7 @@
     oxicloud,
     sync-in,
     simple-nixos-mailserver,
+    zensical,
     ...
   } @ inputs:
   # flake-utils.lib.eachDefaultSystem (system:
