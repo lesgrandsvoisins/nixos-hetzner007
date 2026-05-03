@@ -61,7 +61,7 @@ in {
       users.groups.services.gid = vars.gid.services;
       programs.nix-ld.enable = true;
       environment.systemPackages = [
-        pkgs.zensical
+        zensical.packages.${pkgs.stdenv.hostPlatform.system}.zensical
       ];
     };
   };
