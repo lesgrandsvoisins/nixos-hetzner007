@@ -1,5 +1,5 @@
 {
-  pkgs ? import <nixpkgs> {},
+  pkgs ? import <nixpkgs-unstable> {},
   lib ? pkgs.lib,
   fetchPypi ? pkgs.fetchPypi,
   rustPlatform ? pkgs.rustPlatform,
