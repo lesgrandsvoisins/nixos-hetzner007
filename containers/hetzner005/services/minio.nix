@@ -7,8 +7,7 @@
 }: let
   vars = import ../vars.nix;
 in {
-  services.vaultwarden = {
+  services.minio = {
     enable = true;
-    environmentFile = "/etc/vaultwarden.env";
   };
 }

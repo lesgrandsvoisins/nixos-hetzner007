@@ -8,6 +8,7 @@
   lib,
   vars,
   secrets,
+  agenix,
   ...
 }: let
 in {
@@ -22,6 +23,7 @@ in {
     ./containers/homarr2.nix
     # ./containers/keycloak.nix
     ./containers/postgresql.nix
+    ./containers/python.nix
     ./containers/node-red.nix
     ./containers/wikijs.nix
     ./containers/wiki-js-doc.nix
@@ -33,7 +35,7 @@ in {
     ./modules/home.nix
     ./modules/networking.nix
     ./modules/packages.nix
-    ./modules/secrets.nix
+    ./secrets.nix
     ./modules/security.nix
     ./modules/services.nix
     ./modules/users.nix

@@ -16,6 +16,12 @@ in {
     ./services/radicale.nix
     ./services/sftpgo.nix
     ./services/vaultwarden.nix
+    ./services/writefreely.nix
+    ./services/minio.nix
+    ./services/etebase-server.nix
+    ./services/ethercalc.nix
+    ./services/xandikos.nix
+    ./services/uptime-kuma.nix
     ./services/vikunja.nix
   ];
 }

@@ -137,11 +137,6 @@ in {
         group = "services";
         uid = vars.uid.fossil;
       };
-      wagtail = {
-        isNormalUser = true;
-        group = "services";
-        uid = vars.uid.wagtail;
-      };
       python = {
         isNormalUser = true;
         group = "services";
