@@ -51,7 +51,7 @@
           sync-in.nixosModules.sync-in
           simple-nixos-mailserver.nixosModule
         ];
-        specialArgs = {inherit vars secrets inputs oxicloud sync-in zensical simple-nixos-mailserver agenix;};
+        specialArgs = {inherit vars secrets inputs oxicloud sync-in zensical simple-nixos-mailserver agenix nixpkgs-unstable;};
       };
     };
   };

@@ -2,19 +2,20 @@
   description = "Zensical Nix flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
   };
 
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
   }: let
     systems = ["x86_64-linux"];
     forAllSystems = f:
-      nixpkgs.lib.genAttrs systems (
+      nixpkgs-unstable.lib.genAttrs systems (
         system:
-          f (import nixpkgs {inherit system;})
+          f (import nixpkgs-unstable {inherit system;})
       );
   in {
     packages = forAllSystems (pkgs: {

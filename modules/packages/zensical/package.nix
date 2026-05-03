@@ -1,10 +1,11 @@
 {
-  pkgs ? import <nixpkgs-unstable> {},
-  lib ? pkgs.lib,
-  fetchPypi ? pkgs.fetchPypi,
-  rustPlatform ? pkgs.rustPlatform,
-  python3Packages ? pkgs.python3Packages,
-  versionCheckHook ? pkgs.versionCheckHook,
+  pkgs ? import <nixpkgs> {},
+  pkgs-unstable ? import <nixpkgs-unstable> {},
+  lib ? pkgs-unstable.lib,
+  fetchPypi ? pkgs-unstable.fetchPypi,
+  rustPlatform ? pkgs-unstable.rustPlatform,
+  python3Packages ? pkgs-unstable.python3Packages,
+  versionCheckHook ? pkgs-unstable.versionCheckHook,
 }: let
 in
   python3Packages.buildPythonApplication rec {
