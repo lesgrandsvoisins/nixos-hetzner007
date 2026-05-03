@@ -60,6 +60,9 @@ in {
       };
       users.groups.services.gid = vars.gid.services;
       programs.nix-ld.enable = true;
+      environment.systemPackages = [
+        pkgs.zensical
+      ];
     };
   };
 }
