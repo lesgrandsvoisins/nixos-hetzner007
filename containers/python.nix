@@ -6,7 +6,7 @@
   zensical,
   ...
 }: let
-  # vars = import ../vars.nix;
+  vars = import ../vars.nix;
 in {
   users = {
     users.monty = {
@@ -37,7 +37,7 @@ in {
       vars,
       ...
     }: let
-      # vars = import ./hetzner005/vars.nix;
+      vars = import ../vars.nix;
     in {
       systemd.tmpfiles.rules = [
         "d /etc/monty 0775 monty services"
@@ -58,6 +58,7 @@ in {
         isNormalUser = true;
         group = "services";
       };
+      users.groups.services.gid = vars.gid.services;
       programs.nix-ld.enable = true;
     };
   };

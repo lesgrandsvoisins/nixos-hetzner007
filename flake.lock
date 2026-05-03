@@ -297,6 +297,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_6": {
+      "locked": {
+        "lastModified": 1777673416,
+        "narHash": "sha256-5c2POKPOjU40Kh0MirOdScBLG0bu9TAuPYAtPRNZMBs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "26ef669cffa904b6f6832ab57b77892a37c1a671",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "oxicloud": {
       "inputs": {
         "nixpkgs": "nixpkgs_3"
@@ -320,7 +336,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "oxicloud": "oxicloud",
         "simple-nixos-mailserver": "simple-nixos-mailserver",
-        "sync-in": "sync-in"
+        "sync-in": "sync-in",
+        "zensical": "zensical"
       }
     },
     "simple-nixos-mailserver": {
@@ -404,6 +421,20 @@
         "repo": "default",
         "type": "github"
       }
+    },
+    "zensical": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_6"
+      },
+      "locked": {
+        "path": "./modules/packages/zensical",
+        "type": "path"
+      },
+      "original": {
+        "path": "./modules/packages/zensical",
+        "type": "path"
+      },
+      "parent": []
     }
   },
   "root": "root",

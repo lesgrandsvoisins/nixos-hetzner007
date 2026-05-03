@@ -36,6 +36,7 @@ python3Packages.buildPythonApplication rec {
     pygments
     pymdown-extensions
     pyyaml
+    mkdocstrings-python
   ];
 
   nativeCheckInputs = [versionCheckHook];
