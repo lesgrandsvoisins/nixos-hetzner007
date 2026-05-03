@@ -124,16 +124,16 @@ in {
           redir https://jitsi.lgv.info{uri}
         '';
       };
-      "www.grandsvoisins.org" = {
-        extraConfig = ''
-          root * /var/www/grandsvoisins.org
-        '';
-      };
-      "grandsvoisins.org" = {
-        extraConfig = ''
-          redir https://www.grandsvoisins.org
-        '';
-      };
+      # "www.grandsvoisins.org" = {
+      #   extraConfig = ''
+      #     root * /var/www/grandsvoisins.org
+      #   '';
+      # };
+      # "grandsvoisins.org" = {
+      #   extraConfig = ''
+      #     redir https://www.grandsvoisins.org
+      #   '';
+      # };
       "meet.gv.je" = {
         extraConfig = ''
           redir https://meet.lgv.info
@@ -297,36 +297,36 @@ in {
         ];
         extraConfig = "redir https://www.gdvoisins.org{uri} 301";
       };
-      "lesgv.com" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
-      "www.lesgv.com" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
-      "lesgv.org" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
-      "www.lesgv.org" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
+      # "lesgv.com" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
+      # "www.lesgv.com" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
+      # "lesgv.org" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
+      # "www.lesgv.org" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
       "www.gvois.org" = {
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "gvois.grandsvoisins.com" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
+      # "gvois.grandsvoisins.com" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
       "lldap.whowhatetc.com" = {
         extraConfig = ''
           redir https://lldap.ggvv.org{uri}
