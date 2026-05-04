@@ -40,60 +40,77 @@ Copyright &copy; 2026 The authors
 """
 
 nav = [
-  {"Civisme" = [
-    {"Civisme" = "civisme.md"},
-  "civisme/empathie.md",  
-  "civisme/profession-empathie-nationale.md",  
-  "civisme/social.md", 
-  "civisme/empathie/2025.md"
-  ]},
-  {"Arts plastiques" = ["arts-plastiques.md"]},
-  {"Numérique" = [
-    
-    {"Numérique" = "numerique.md"},
-    {"Comptes @gv.je" = "numerique/comptes.md"},
-    
-    {"Services" = [
+  { "Civisme" = [
+    { "Civisme" = "civisme.md" },
+    "civisme/empathie.md",
+    "civisme/profession-empathie-nationale.md",
+    "civisme/social.md",
+    "civisme/empathie/2025.md",
+  ] },
+  { "Arts plastiques" = [
+    "arts-plastiques.md",
+  ] },
+  { "Numérique" = [
+
+    { "Numérique" = "numerique.md" },
+    { "Comptes @gv.je" = "numerique/comptes.md" },
+
+    { "Services" = [
       "numerique/services.md",
-      {"Key" = "numerique/services/keycloak.md"},
-      {"Home" = "numerique/services/homarr.md"},
-      {"Casiers" = "numerique/services/sftpgo.md"},
-      {"Markdown" = "numerique/services/hedgedoc.md"},
-      {"Favoris" = "numerique/services/linkding.md"},
-      {"Visio" = "numerique/services/jitsi.md"},
-      {"Email" = "numerique/services/email.md"},
-      {"Doc Wiki" = "numerique/services/jswiki.md"},
-      {"Tâches" = "numerique/services/vikunja.md"},
-      {"Calendriers" = "numerique/services/calendrier.md"},
-      {"Fiche Annuaire" = "numerique/services/annuaire.md"},
-      {"Blog" = "numerique/services/ghostio.md"},
-      {"WWW" = "numerique/services/wagtail.md"},
-      {"Beta" = "/numerique/services/beta.md"},
-      {"Alpha" = "/numerique/services/alpha.md"},
-      {"Anciens" = "/numerique/services/anciens.md"},
-      {"Backlog" = "/numerique/services/backlog.md"},
-      {"Changelog" = "/numerique/services/changelog.md"},
-    ],},
-    {"Permanences" = [
-      {"Le lundi de 12h à 19h30 à Paris 14 Alésia" = "https://blog.lesgrandsvoisins.com/salle-de-sociabilite-numerique/"},
-      {"Le 1er et 3e jeudi de 14h à 18h00 à Paris 14 Cité du souvenir" = "https://openagenda.com/lesgrandsvoisins/events/permanence-information-cite-du-souvenir?cl=fr/"},
-    ]},
-    {"Serveurs" = "numerique/serveurs.md"},
-    {"Sociabilité" = "numerique/sociabilite-numerique.md"},
-    {"Interdépendance" = "numerique/interdependance.md"},
-    "numerique/creatif.md",  "numerique/mecenat.md",  "numerique/parislenuage.md", "numerique/recyclage.md",  {"Sujets" = ["numerique/sujets.md", "numerique/sujets/assistance.md",  "numerique/sujets/secrets.md"]},
-  ],},
-  {"Association" = [{"Association" = "association.md"},
-  {"Conseils des Voisins" = ["association/conseils-des-voisins.md", 
-  "association/conseils-des-voisins/conseildesgv25.md", 
-  "association/conseils-des-voisins/conseildesgv26.md"]},
-  "association/historique.md",
-  "association/manifeste.md",
-  
-  ]},
-  {"Annuaire" = [{"Annuaire" = "annuaire.md"}]},
-  {"Agenda" = [{"Agenda" = "agenda.md"}]},
-]# Zensical supports both implicit navigation and explicitly defined navigation.
+      { "Key" = "numerique/services/keycloak.md" },
+      { "Home" = "numerique/services/homarr.md" },
+      { "Casiers" = "numerique/services/sftpgo.md" },
+      { "Markdown" = "numerique/services/hedgedoc.md" },
+      { "Favoris" = "numerique/services/linkding.md" },
+      { "Visio" = "numerique/services/jitsi.md" },
+      { "Email" = "numerique/services/email.md" },
+      { "Doc Wiki" = "numerique/services/jswiki.md" },
+      { "Tâches" = "numerique/services/vikunja.md" },
+      { "Calendriers" = "numerique/services/calendrier.md" },
+      { "Fiche Annuaire" = "numerique/services/annuaire.md" },
+      { "Blog" = "numerique/services/ghostio.md" },
+      { "WWW" = "numerique/services/wagtail.md" },
+      { "Beta" = "/numerique/services/beta.md" },
+      { "Alpha" = "/numerique/services/alpha.md" },
+      { "Anciens" = "/numerique/services/anciens.md" },
+      { "Backlog" = "/numerique/services/backlog.md" },
+      { "Changelog" = "/numerique/services/changelog.md" },
+    ] },
+    { "Permanences" = [
+      { "Le lundi de 12h à 19h30 à Paris 14 Alésia" = "https://blog.lesgrandsvoisins.com/salle-de-sociabilite-numerique/" },
+      { "Le 1er et 3e jeudi de 14h à 18h00 à Paris 14 Cité du souvenir" = "https://openagenda.com/lesgrandsvoisins/events/permanence-information-cite-du-souvenir?cl=fr/" },
+    ] },
+    { "Serveurs" = "numerique/serveurs.md" },
+    { "Sociabilité" = "numerique/sociabilite-numerique.md" },
+    { "Interdépendance" = "numerique/interdependance.md" },
+    "numerique/creatif.md",
+    "numerique/mecenat.md",
+    "numerique/parislenuage.md",
+    "numerique/recyclage.md",
+    { "Sujets" = [
+      "numerique/sujets.md",
+      "numerique/sujets/assistance.md",
+      "numerique/sujets/secrets.md",
+    ] },
+  ] },
+  { "Association" = [
+    { "Association" = "association.md" },
+    { "Conseils des Voisins" = [
+      "association/conseils-des-voisins.md",
+      "association/conseils-des-voisins/conseildesgv25.md",
+      "association/conseils-des-voisins/conseildesgv26.md",
+    ] },
+    "association/historique.md",
+    "association/manifeste.md",
+
+  ] },
+  { "Annuaire" = [
+    { "Annuaire" = "annuaire.md" },
+  ] },
+  { "Agenda" = [
+    { "Agenda" = "agenda.md" },
+  ] },
+] # Zensical supports both implicit navigation and explicitly defined navigation.
 # If you decide not to define a navigation here then Zensical will simply
 # derive the navigation structure from the directory structure of your
 # "docs_dir". The definition below demonstrates how a navigation structure
