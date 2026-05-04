@@ -24,7 +24,7 @@
     {
       "CONSULTER la documentation sur Zensical" = {
         description = "Présentation de la documentation des Grands Voisins";
-        href = "https://zensical";
+        href = "https://zensical.gv.je/fr/";
         icon = "si-gitbook";
       };
     }
