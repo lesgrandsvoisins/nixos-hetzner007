@@ -21,6 +21,13 @@
         icon = "si-forgejo";
       };
     }
+    {
+      "CONSULTER la documentation sur Zensical" = {
+        description = "Présentation de la documentation des Grands Voisins";
+        href = "https://zensical";
+        icon = "si-gitbook";
+      };
+    }
     # {
     #   "Vos PHOTOS via IMMICH" = {
     #     # href = "https://immich.gv.je";
