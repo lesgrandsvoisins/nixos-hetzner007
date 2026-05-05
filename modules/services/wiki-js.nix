@@ -14,15 +14,17 @@ in {
   systemd.services.wiki-js.serviceConfig = {
     User = "wiki-js";
     Group = "services";
-    # ReadWritePaths = [
-    #   "/var/lib/wiki-js"
-    #   "/var/lib/wiki-js-content"
-    # ];
+    ReadWritePaths = [
+      "/var/lib/wiki-js"
+      "/var/lib/wiki-js-content"
+    ];
   };
   systemd.tmpfiles.rules = [
     "d /etc/wiki-js 0750 wiki-js services"
-    # "d /var/lib/wiki-js-content/repo 0750 wiki-js services"
+    "d /var/lib/wiki-js-content/repo 0750 wiki-js services"
     "f /etc/wiki-js/.env 0640 wiki-js services"
+    "f /etc/wiki-js/wiki.private 0600 wiki-js services"
+    "f /etc/wiki-js/wiki.public 0600 wiki-js services"
     # "L /run/postgresql/.s.PGSQL.5434 /run/postgresql/.s.PGSQL.5432"
   ];
   services.cron.systemCronJobs = ["0 0 1 * *  root systemctl restart wiki-js"];
