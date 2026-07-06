@@ -470,6 +470,12 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
+      "janjic.gv.je" = {
+        extraConfig = ''
+          file_server
+          root * /var/www/janjic
+        '';
+      };
       "public.gv.je" = {
         extraConfig = ''
           file_server
