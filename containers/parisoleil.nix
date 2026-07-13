@@ -5,10 +5,17 @@
   vars,
   ...
 }: {
-  services.caddy.virtualHosts."www.parisoleil.com" = {
-    extraConfig = ''
-      reverse_proxy http://${vars.containers.parisoleil.localAddress}:8082
-    '';
+  services.caddy.virtualHosts = {
+    "www.parisoleil.com" = {
+      extraConfig = ''
+        reverse_proxy http://${vars.containers.parisoleil.localAddress}:8082
+      '';
+    };
+    "parisoleil.com" = {
+      extraConfig = ''
+        redir https://www.parisoleil.com
+      '';
+    };
   };
 
   containers.parisoleil = {
