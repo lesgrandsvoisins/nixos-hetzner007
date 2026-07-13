@@ -220,6 +220,13 @@
         };
       };
     };
+    parisoleil = {
+      hostAddress = "192.168.121.1";
+      localAddress = "192.168.121.2";
+      hostAddress6 = "fc00::21:1";
+      localAddress6 = "fc00::21:2";
+      bindMounts = {};
+    };
     discourse = {};
     discourseparis14cc = {};
     haproxy = {};

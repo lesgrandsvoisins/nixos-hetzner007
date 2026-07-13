@@ -25,6 +25,7 @@ in {
     ./containers/postgresql.nix
     ./containers/python.nix
     ./containers/node-red.nix
+    ./containers/parisoleil.nix
     ./containers/wikijs.nix
     ./containers/wiki-js-doc.nix
     ./containers/wiki-js-libregood.nix
