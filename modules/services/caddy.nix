@@ -573,11 +573,11 @@ in {
       #     }
       #   '';
       # };
-      "www.gv.je" = {
-        extraConfig = ''
-          reverse_proxy http://localhost:3000
-        '';
-      };
+      # "www.gv.je" = {
+      #   extraConfig = ''
+      #     reverse_proxy http://localhost:3000
+      #   '';
+      # };
       "vikunja.gv.je" = {
         extraConfig = ''
           reverse_proxy http://[::1]:3456
