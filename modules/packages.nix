@@ -51,5 +51,7 @@ in {
     pkgs.mdadm
 
     pkgs.btrfs-progs
+
+    pkgs.unstable.oxicloud
   ];
 }

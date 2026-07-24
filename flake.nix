@@ -2,7 +2,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    oxicloud.url = "path:./modules/services/oxicloud";
+    # oxicloud.url = "path:./modules/services/oxicloud";
     zensical.url = "path:./modules/packages/zensical";
     sync-in.url = "path:./modules/services/sync-in";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -23,7 +23,7 @@
     flake-utils,
     home-manager,
     agenix,
-    oxicloud,
+    # oxicloud,
     sync-in,
     simple-nixos-mailserver,
     zensical,
@@ -47,11 +47,12 @@
           ./configuration.nix
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
-          oxicloud.nixosModules.oxicloud
+          # oxicloud.nixosModules.oxicloud
           sync-in.nixosModules.sync-in
           simple-nixos-mailserver.nixosModule
         ];
-        specialArgs = {inherit vars secrets inputs oxicloud sync-in zensical simple-nixos-mailserver agenix nixpkgs-unstable;};
+        # specialArgs = {inherit vars secrets inputs oxicloud sync-in zensical simple-nixos-mailserver agenix nixpkgs-unstable;};
+        specialArgs = {inherit vars secrets inputs sync-in zensical simple-nixos-mailserver agenix nixpkgs-unstable;};
       };
     };
   };
