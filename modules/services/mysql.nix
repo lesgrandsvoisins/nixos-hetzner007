@@ -9,7 +9,7 @@ in {
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
-    # package = pkgs.mysql80;
+    # package = pkgs.mysql82;
     group = "services";
     user = "mysql";
   };

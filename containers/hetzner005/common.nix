@@ -44,7 +44,7 @@ in {
     # inetutils
     pwgen
     openldap
-    mysql80
+    mysql82
     sqlite-interactive
     btrfs-progs
     #    wkhtmltopdf
