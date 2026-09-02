@@ -56,13 +56,13 @@ in {
       41443 # from Hetzner005
     ];
     # interfaces."ve-homarr@if2".allowedTCPPorts = [vars.ports.homarr];
-    trustedInterfaces = ["ve-homarr" "ve-homarr@if2" "ve-node-red" "ve-parisoleil"];
+    trustedInterfaces = ["ve-homarr" "ve-homarr@if2" "ve-node-red" "ve-parisoleil" "ve-wagtailg8tNf"];
     extraInputRules = ''
-      ip daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress}/24 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
-      ip6 daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress6}/96 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
       ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
       ip6 daddr ${builtins.toString vars.hosts.node-red.ipv6}/96 tcp dport ${builtins.toString vars.ports.node-red} accept
     '';
+    # ip daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress}/24 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
+    # ip6 daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress6}/96 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
     # TODO MUST BE ADJUSTED FROM HETZNER005
     extraForwardRules = ''
       ip6 saddr 2a01:4f8:241:4faa::10 tcp dnat to fa01::2
