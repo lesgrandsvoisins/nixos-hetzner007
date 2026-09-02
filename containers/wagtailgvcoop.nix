@@ -154,7 +154,7 @@ in {
     "d /etc/wagtailgvcoop 0775 wagtailgvcoop services"
     "d /var/www/wagtailgvcoop 0775 wagtailgvcoop services"
   ];
-  containers.wagtail = {
+  containers.wagtailgvcoop = {
     hostAddress = vars.containers.wagtailgvcoop.hostAddress;
     localAddress = vars.containers.wagtailgvcoop.localAddress;
     hostAddress6 = vars.containers.wagtailgvcoop.hostAddress6;
