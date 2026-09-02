@@ -173,7 +173,7 @@ in {
         wantedBy = ["multi-user.target"];
         serviceConfig = {
           WorkingDirectory = "/home/wagtail/coopgv/";
-          ExecStart = ''/home/wagtailgvcoop/gvcooporg/www --env WAGTAIL_ENV='production' --access-logfile /var/log/wagtailgvcoop-access.log --error-logfile /var/log/wagtailgvcoop-error.log --chdir /home/wagtailgvcoop/gvcooporg/www --workers 12 --bind 0.0.0.0:${vars.ports.wagtailgvcoop} mysite.wsgi:application'';
+          ExecStart = ''/home/wagtailgvcoop/gvcooporg/www --env WAGTAIL_ENV='production' --access-logfile /var/log/wagtailgvcoop-access.log --error-logfile /var/log/wagtailgvcoop-error.log --chdir /home/wagtailgvcoop/gvcooporg/www --workers 12 --bind 0.0.0.0:${builtins.toString vars.ports.wagtailgvcoop} mysite.wsgi:application'';
           Restart = "always";
           RestartSec = "10s";
           User = "wagtail";
