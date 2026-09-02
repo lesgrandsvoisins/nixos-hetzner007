@@ -94,7 +94,7 @@ in {
       root = "/var/www/wagtailgvcoop";
       locations."/" = {
         extraConfig = nginxLocationWagtailExtraConfig;
-        proxyPass = "http://wagtailgvcoop.containers:${vars.ports.wagtailgvcoop}/";
+        proxyPass = "http://wagtailgvcoop.containers:${builtins.toString vars.ports.wagtailgvcoop}/";
       };
       locations."/favicon.ico" = {proxyPass = null;};
       locations."/static" = {proxyPass = null;};
