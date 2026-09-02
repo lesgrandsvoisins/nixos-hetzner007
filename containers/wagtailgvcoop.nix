@@ -49,10 +49,7 @@
   '';
   nginxLesGrandsVoisinsLocations = {
     "/" = {
-      # return =  "302 https://blog.lesgrandsvoisins.com";
-      proxyPass = "http://localhost:8904/";
-      # proxyPass = "http://localhost:8894/";
-      # extraConfig = nginxLocationWagtailExtraConfig + ''
+      proxyPass = "http://localhost:${vars.ports.wagtailgvcoop}/";
       extraConfig = ''
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_redirect off;
@@ -68,36 +65,7 @@
         # proxy_set_header Upgrade $http_upgrade;
         # proxy_set_header Connection $connection_upgrade_keepalive;
         # return 302 $scheme://www.grandsvoisins.com$request_uri;
-        if ($host = 'www.gvois.org') {
-          return 301 $scheme://www.gvois.com$request_uri;
-        }
-        # if ($host = 'grandsvoisins.org') {
-        #   return 301 $scheme://www.grandsvoisins.org$request_uri;
-        # }
-        # if ($host = 'lgv.info') {
-        #   return 301 $scheme://www.lgv.info$request_uri;
-        # }
-        # if ($host = 'lesgrandsvoisins.fr') {
-        #   return 301 $scheme://www.lesgrandsvoisins.fr$request_uri;
-        # }
-        # if ($host = 'lesgv.com') {
-        #   return 301 $scheme://www.lesgv.com$request_uri;
-        # }
-        # if ($host = 'lesgv.org') {
-        #   return 301 $scheme://www.lesgv.org$request_uri;
-        # }
-        # if ($host = 'parisle.com') {
-        #   return 301 $scheme://www.parisle.com$request_uri;
-        # }
-        # if ($host = 'yanlomsprod.parisle.org') {
-        #   return 301 $scheme://yanlomsprod.parisle.com$request_uri;
-        # }
-        # if ($host = 'coopgv.com') {
-        #   return 301 $scheme://www.coopgv.com$request_uri;
-        # }
-        # if ($host = 'parisle.org') {
-        #   return 301 $scheme://www.parisle.org$request_uri;
-        # }
+
         rewrite ^/cms-admin/login/?$ /accounts/oidc/key-gv-je/login/?process=cms-admin/login/ redirect;
       '';
     };
@@ -163,6 +131,14 @@ in {
     privateNetwork = true;
     autoStart = true;
 
+    users = {
+      users.wagtailgvcoop = {
+        group = "services";
+        uid = vars.uid.wagtailgvcoop;
+        isNormalUser = true;
+      };
+    };
+
     config = {
       config,
       pkgs,
@@ -186,6 +162,23 @@ in {
         "d /etc/wagtailgvcoop 0775 wagtailgvcoop services"
         "d /var/www/wagtailgvcoop 0775 wagtailgvcoop services"
       ];
+
+      systemd.services.wagtail-coopgv = {
+        description = "www.gvcoop'org on ";
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+        serviceConfig = {
+          WorkingDirectory = "/home/wagtail/coopgv/";
+          ExecStart = ''/home/wagtailgvcoop/gvcooporg/www --env WAGTAIL_ENV='production' --access-logfile /var/log/wagtailgvcoop-access.log --error-logfile /var/log/wagtailgvcoop-error.log --chdir /home/wagtailgvcoop/gvcooporg/www --workers 12 --bind 0.0.0.0:${vars.ports.wagtailgvcoop} mysite.wsgi:application'';
+          Restart = "always";
+          RestartSec = "10s";
+          User = "wagtail";
+          Group = "users";
+        };
+        unitConfig = {
+          StartLimitInterval = "1min";
+        };
+      };
     };
   };
 }
