@@ -14,7 +14,7 @@ in {
     # nix.settings.experimental-features = ["nix-command" "flakes"];
 
     # users.homarr = {
-    #   home.stateVersion = "26.05";
+    #   home.stateVersion = "25.11";
     #   # User-specific packages.
     #   home.packages = with pkgs; [
     #     unstable.nodejs_25

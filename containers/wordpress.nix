@@ -132,7 +132,7 @@ in {
       };
       # home-manager.users.mannchri = {pkgs, ...}: {
       #   home.packages = [ pkgs.atool pkgs.httpie ];
-      #   home.stateVersion = "26.05";
+      #   home.stateVersion = "25.11";
       #   programs.home-manager.enable = true;
       #   programs.vim = {
       #     enable = true;
