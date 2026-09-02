@@ -235,12 +235,12 @@
       hostAddress6 = "fc00::22:1";
       localAddress6 = "fc00::22:2";
       bindMounts = {
-        "/etc/wagtailgvcooporg" = {
-          hostPath = "/etc/wagtailgvcooporg";
+        "/etc/wagtailgvcoop" = {
+          hostPath = "/etc/wagtailgvcoop";
           isReadOnly = true;
         };
-        "/var/www/wagtailgvcooporg/" = {
-          hostPath = "/var/www/wagtailgvcooporg/";
+        "/var/www/wagtailgvcoop/" = {
+          hostPath = "/var/www/wagtailgvcoop/";
           isReadOnly = false;
         };
       };

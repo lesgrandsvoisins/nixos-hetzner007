@@ -7,25 +7,25 @@
 }: let
 in {
   users = {
-    users.wagtailgvcooporg = {
+    users.wagtailgvcoop = {
       group = "services";
-      uid = vars.uid.wagtailgvcooporg;
+      uid = vars.uid.wagtailgvcoop;
       isSystemUser = true;
     };
   };
   networking.hosts = {
-    "${vars.hosts.wagtailgvcooporg.ipv4}" = ["wagtailgvcooporg.containers"];
+    "${vars.hosts.wagtailgvcoop.ipv4}" = ["wagtailgvcoop.containers"];
   };
   systemd.tmpfiles.rules = [
-    "d /etc/wagtailgvcooporg 0775 wagtailgvcooporg services"
-    "d /var/www/wagtailgvcooporg 0775 wagtailgvcooporg services"
+    "d /etc/wagtailgvcoop 0775 wagtailgvcoop services"
+    "d /var/www/wagtailgvcoop 0775 wagtailgvcoop services"
   ];
   containers.wagtail = {
-    hostAddress = vars.containers.wagtailgvcooporg.hostAddress;
-    localAddress = vars.containers.wagtailgvcooporg.localAddress;
-    hostAddress6 = vars.containers.wagtailgvcooporg.hostAddress6;
-    localAddress6 = vars.containers.wagtailgvcooporg.localAddress6;
-    bindMounts = vars.containers.wagtailgvcooporg.bindMounts;
+    hostAddress = vars.containers.wagtailgvcoop.hostAddress;
+    localAddress = vars.containers.wagtailgvcoop.localAddress;
+    hostAddress6 = vars.containers.wagtailgvcoop.hostAddress6;
+    localAddress6 = vars.containers.wagtailgvcoop.localAddress6;
+    bindMounts = vars.containers.wagtailgvcoop.bindMounts;
     privateNetwork = true;
     autoStart = true;
 
@@ -49,8 +49,8 @@ in {
       ];
 
       systemd.tmpfiles.rules = [
-        "d /etc/wagtailgvcooporg 0775 wagtailgvcooporg services"
-        "d /var/www/wagtailgvcooporg 0775 wagtailgvcooporg services"
+        "d /etc/wagtailgvcoop 0775 wagtailgvcoop services"
+        "d /var/www/wagtailgvcoop 0775 wagtailgvcoop services"
       ];
     };
   };
