@@ -13,6 +13,6 @@ in {
     python311
     nodejs_20
   ];
-  home.stateVersion = "26.05";
+  home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 }
