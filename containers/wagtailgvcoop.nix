@@ -101,7 +101,7 @@ in {
   #     '';
   #   };
   # };
-  "www.gvcoop.org" = {
+  services.caddy.virtualHosts."www.gvcoop.org" = {
     extraConfig = ''
       reverse_proxy http://${vars.containers.wagtailgvcoop.localAddress}:${builtins.toString vars.ports.wagtailgvcoop}
     '';
