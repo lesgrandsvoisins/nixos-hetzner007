@@ -131,14 +131,6 @@ in {
     privateNetwork = true;
     autoStart = true;
 
-    users = {
-      users.wagtailgvcoop = {
-        group = "services";
-        uid = vars.uid.wagtailgvcoop;
-        isNormalUser = true;
-      };
-    };
-
     config = {
       config,
       pkgs,
@@ -152,6 +144,14 @@ in {
       nix.settings.experimental-features = "nix-command flakes";
       networking.useHostResolvConf = lib.mkForce false;
       services.resolved.enable = true;
+
+      users = {
+        users.wagtailgvcoop = {
+          group = "services";
+          uid = vars.uid.wagtailgvcoop;
+          isNormalUser = true;
+        };
+      };
 
       imports = [
         ../modules/packages/common.nix
