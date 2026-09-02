@@ -1,7 +1,7 @@
 {
   description = "memos package";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
   outputs = {
     self,
