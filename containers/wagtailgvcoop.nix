@@ -153,6 +153,10 @@ in {
         };
       };
 
+      users.groups.services = {
+        gid = vars.gid.services;
+      };
+
       imports = [
         ../modules/packages/common.nix
         ../modules/packages/vim.nix
