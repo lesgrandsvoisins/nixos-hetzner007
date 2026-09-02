@@ -21,6 +21,7 @@ in {
     ./containers/hetzner005.nix
     ./containers/homarr.nix
     ./containers/homarr2.nix
+    ./containers/wagtailgvcoop.nix
     # ./containers/keycloak.nix
     ./containers/postgresql.nix
     ./containers/python.nix

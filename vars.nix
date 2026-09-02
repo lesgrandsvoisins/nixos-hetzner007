@@ -68,6 +68,7 @@
     acme = 994;
     wikijs = 1535;
     monty = 1536;
+    wagtailgvcoop = 1537;
   };
   ports = {
     postgresql = 5432;
@@ -101,6 +102,7 @@
     oxicloud = 8086;
     sync-in = 8087;
     peertube = 8089;
+    wagtailgvcoop = 8090;
   };
   hosts = {
     node-red = {
@@ -227,6 +229,23 @@
       localAddress6 = "fc00::21:2";
       bindMounts = {};
     };
+    wagtailgvcoop = {
+      hostAddress = "192.168.122.1";
+      localAddress = "192.168.122.2";
+      hostAddress6 = "fc00::22:1";
+      localAddress6 = "fc00::22:2";
+      bindMounts = {
+        "/etc/wagtailgvcooporg" = {
+          hostPath = "/etc/wagtailgvcooporg";
+          isReadOnly = true;
+        };
+        "/var/www/wagtailgvcooporg/" = {
+          hostPath = "/var/www/wagtailgvcooporg/";
+          isReadOnly = false;
+        };
+      };
+    };
+
     discourse = {};
     discourseparis14cc = {};
     haproxy = {};
