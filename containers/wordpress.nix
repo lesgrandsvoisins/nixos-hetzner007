@@ -76,7 +76,7 @@ in {
         killall
         pwgen
         openldap
-        mysql82
+        mysql84
         python311Packages.pypdf
         python311Packages.python-ldap
         python311Packages.pq
