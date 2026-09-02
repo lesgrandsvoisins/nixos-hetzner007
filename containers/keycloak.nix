@@ -4,11 +4,8 @@
   lib,
   vars,
   ...
-}:
-let
-in
-{
-
+}: let
+in {
   systemd.tmpfiles.rules = [
     "d /etc/keycloak/certs 0755 keycloak services"
   ];
@@ -28,7 +25,7 @@ in
     # hostAddress6 = "2a01:4f8:241:4faa::10";
     # localAddress6 = "2a01:4f8:241:4faa::11";
     config = {
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
       nix.settings.experimental-features = "nix-command flakes";
       imports = [
         ../modules/packages/common.nix
@@ -38,7 +35,7 @@ in
         hostName = "keycloak";
         domain = "keycloak.grandsvoisins.org";
         hosts = {
-          "fa01::2" = [ "keycloak.local" ];
+          "fa01::2" = ["keycloak.local"];
         };
         useHostResolvConf = false;
         interfaces."eth0".useDHCP = true;

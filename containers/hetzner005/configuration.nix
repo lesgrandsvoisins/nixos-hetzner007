@@ -19,7 +19,7 @@ in {
     ./users.nix
     # ./secrets.nix
   ];
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   users.groups.services.gid = vars.gid.services;
   users.users.vikunja.uid = vars.uid.vikunja;
   nixpkgs.config.permittedInsecurePackages = [

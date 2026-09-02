@@ -65,7 +65,7 @@ in {
     };
     autoStart = true;
     config = {
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
 
       networking.hosts = {
         "10.0.12.102" = ["wiki-js-libregood.local"];

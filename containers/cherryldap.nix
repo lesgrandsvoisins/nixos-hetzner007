@@ -32,7 +32,7 @@ in {
       ];
       nix.settings.experimental-features = "nix-command flakes";
       time.timeZone = "Europe/Paris";
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
       environment.systemPackages = with pkgs; [
         (
           (vim-full.override {}).customize {

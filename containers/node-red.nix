@@ -62,7 +62,7 @@ in {
     autoStart = true;
 
     config = {
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
       nix.settings.experimental-features = "nix-command flakes";
       imports = [
         ../modules/packages/common.nix
@@ -73,7 +73,7 @@ in {
         # "f /etc/node-red/node-red.containers.pem 0664 node-red services"
         # "f /etc/node-red/node-red.containers-key.pem 0640 node-red services"
       ];
-      # system.stateVersion = "25.11";
+      # system.stateVersion = "26.05";
       # imports = [../modules/packages/common.nix];n
       systemd.services.node-red = {
         path = with pkgs; [

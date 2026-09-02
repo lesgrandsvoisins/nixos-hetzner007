@@ -69,7 +69,7 @@ in {
 
   # home-manager.users.homarr = {
   #   /* The home.stateVersion option does not have a default and must be set */
-  #   home.stateVersion = "25.11";
+  #   home.stateVersion = "26.05";
   #   /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
   # };
   users = {

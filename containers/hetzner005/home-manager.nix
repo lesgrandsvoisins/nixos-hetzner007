@@ -6,7 +6,7 @@
 }: let
   # vars = import ./hetzner005/vars.nix;
   # home-manager = {
-  #   url = "github:nix-community/home-manager/release-25.11";
+  #   url = "github:nix-community/home-manager/release-26.05";
   #   # The `follows` keyword in inputs is used for inheritance.
   #   # Here, `inputs.nixpkgs` of home-manager is kept consistent with
   #   # the `inputs.nixpkgs` of the current flake,
@@ -14,7 +14,7 @@
   #   inputs.nixpkgs.follows = "nixpkgs";
   # };
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+    url = "https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz";
     sha256 = "sha256:16mcnqpcgl3s2frq9if6vb8rpnfkmfxkz5kkkjwlf769wsqqg3i9";
   };
 

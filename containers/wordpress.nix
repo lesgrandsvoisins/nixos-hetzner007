@@ -6,7 +6,7 @@
   ...
 }: let
   # home-manager = builtins.fetchTarball {
-  #   url="https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
+  #   url="https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz";
   #   sha256="sha256:1rj0cazl5kjcfn4433fj31293yx421wbawryp5q3bq3fsmhkkr9h";
   # };
   # home-manager = import ../vars/home-manager.nix;
@@ -105,7 +105,7 @@ in {
       };
       system = {
         # copySystemConfiguration = true;
-        stateVersion = "25.11";
+        stateVersion = "26.05";
       };
       environment.sessionVariables = rec {
         EDITOR = "vim";
@@ -132,7 +132,7 @@ in {
       };
       # home-manager.users.mannchri = {pkgs, ...}: {
       #   home.packages = [ pkgs.atool pkgs.httpie ];
-      #   home.stateVersion = "25.11";
+      #   home.stateVersion = "26.05";
       #   programs.home-manager.enable = true;
       #   programs.vim = {
       #     enable = true;

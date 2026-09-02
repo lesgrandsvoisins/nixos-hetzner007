@@ -60,7 +60,7 @@
           #   };
           # };
           # networking.firewall.allowedTCPPorts = [vars.ports.homarr];
-          system.stateVersion = "25.11";
+          system.stateVersion = "26.05";
         })
       ];
     };

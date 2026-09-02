@@ -36,7 +36,7 @@
     }: let
       vars = import ../vars.nix;
     in {
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
       nix.settings.experimental-features = "nix-command flakes";
       networking.useHostResolvConf = lib.mkForce false;
       services.resolved.enable = true;
