@@ -58,6 +58,8 @@ in {
     # interfaces."ve-homarr@if2".allowedTCPPorts = [vars.ports.homarr];
     trustedInterfaces = ["ve-homarr" "ve-homarr@if2" "ve-node-red" "ve-parisoleil"];
     extraInputRules = ''
+      ip daddr ${builtins.toString vars.hosts.wagtailgvcoop.ipv4}/24 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
+      ip6 daddr ${builtins.toString vars.hosts.wagtailgvcoop.ipv6}/96 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
       ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
       ip6 daddr ${builtins.toString vars.hosts.node-red.ipv6}/96 tcp dport ${builtins.toString vars.ports.node-red} accept
     '';
