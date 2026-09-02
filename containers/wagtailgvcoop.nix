@@ -165,13 +165,13 @@ in {
         "d /var/www/wagtailgvcoop 0775 wagtailgvcoop services"
       ];
 
-      systemd.services.wagtail-coopgv = {
+      systemd.services.wagtailgvcoop = {
         description = "www.gvcoop.org on ";
         after = ["network.target"];
         wantedBy = ["multi-user.target"];
         serviceConfig = {
           WorkingDirectory = "/home/wagtailgvcoop/gvcooporg/www";
-          ExecStart = ''/home/wagtailgvcoop/gvcooporg/www --env WAGTAIL_ENV='production' --access-logfile /var/log/wagtailgvcoop-access.log --error-logfile /var/log/wagtailgvcoop-error.log --chdir /home/wagtailgvcoop/gvcooporg/www --workers 12 --bind 0.0.0.0:${builtins.toString vars.ports.wagtailgvcoop} mysite.wsgi:application'';
+          ExecStart = ''/home/wagtailgvcoop/gvcooporg/.venv/bin/gunicorn --env WAGTAIL_ENV='production' --access-logfile /home/wagtailgvcoop/wagtailgvcoop-access.log --error-logfile /home/wagtailgvcoop/wagtailgvcoop-error.log --chdir /home/wagtailgvcoop/gvcooporg/www --workers 12 --bind 0.0.0.0:${builtins.toString vars.ports.wagtailgvcoop} mysite.wsgi:application'';
           Restart = "always";
           RestartSec = "10s";
           User = "wagtailgvcoop";
