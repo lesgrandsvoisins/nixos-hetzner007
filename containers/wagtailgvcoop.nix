@@ -103,9 +103,14 @@ in {
   # };
   services.caddy.virtualHosts."www.gvcoop.org" = {
     extraConfig = ''
-      root /var/www/wagtailgvcoop
-      file_server /static
-      reverse_proxy http://${vars.containers.wagtailgvcoop.localAddress}:${builtins.toString vars.ports.wagtailgvcoop}
+      handle /static/* {
+          root * /var/www/wagtailgvcoop
+          file_server
+      }
+
+      handle {
+          reverse_proxy http://${vars.containers.wagtailgvcoop.localAddress}:${builtins.toString vars.ports.wagtailgvcoop}
+      }
     '';
   };
   users = {
