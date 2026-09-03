@@ -181,6 +181,7 @@ in {
           StartLimitInterval = "1min";
         };
       };
+      networking.firewall.enable = false;
     };
   };
 }
