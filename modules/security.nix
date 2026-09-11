@@ -40,16 +40,16 @@ in {
           };
           group = "users";
         };
-        "ggvv.org" = {
-          dnsProvider = "clouddns";
-          # environmentFile = "/etc/.secrets/.cloudns.auth";
-          credentialFiles = {
-            "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
-            "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
-          };
-          extraDomainNames = ["wiki.ggvv.org" "homarr.ggvv.org" "www.ggvv.org" "test.ggvv.org" "auth.ggvv.org"];
-          group = "services";
-        };
+        # "ggvv.org" = {
+        #   dnsProvider = "clouddns";
+        #   # environmentFile = "/etc/.secrets/.cloudns.auth";
+        #   credentialFiles = {
+        #     "CLOUDNS_AUTH_ID_FILE" = "/etc/.secrets/.cloudns.auth.id";
+        #     "CLOUDNS_AUTH_PASSWORD_FILE" = "/etc/.secrets/.cloudns.auth.password";
+        #   };
+        #   extraDomainNames = ["wiki.ggvv.org" "homarr.ggvv.org" "www.ggvv.org" "test.ggvv.org" "auth.ggvv.org"];
+        #   group = "services";
+        # };
       };
     };
   };

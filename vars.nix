@@ -363,7 +363,7 @@
   domains = {
     ldap = "ldap.gv.je";
     memos = "memos.gv.je";
-    wiki-js = "wiki.ggvv.org";
+    wiki-js = "wiki.grandsvoisins.org";
     lemmy = "lemmy.gv.je";
     oxicloud = "oxicloud.gv.je";
     voisinter = "www.voisinter.net";

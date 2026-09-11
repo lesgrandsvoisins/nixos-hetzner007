@@ -66,11 +66,11 @@ in {
         file = "/var/lib/bind/zones/gdvox.com.txt";
         masters = ["213.239.216.138"];
       };
-      "ggvv.org" = {
-        master = false;
-        file = "/var/lib/bind/zones/ggvv.org.txt";
-        masters = ["213.239.216.138"];
-      };
+      # "ggvv.org" = {
+      #   master = false;
+      #   file = "/var/lib/bind/zones/ggvv.org.txt";
+      #   masters = ["213.239.216.138"];
+      # };
       "grandsvoisins.com" = {
         master = false;
         file = "/var/lib/bind/zones/grandsvoisins.com.txt";

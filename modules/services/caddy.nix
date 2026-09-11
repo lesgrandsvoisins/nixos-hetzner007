@@ -20,11 +20,11 @@ in {
     "f /var/lib/caddy/ssl/cert.pem 0664 caddy caddy"
   ];
 
-  security.acme.certs."lldap.ggvv.org" = {
-    dnsProvider = "porkbun";
-    environmentFile = "/etc/caddy/caddy.env";
-    group = "services";
-  };
+  # security.acme.certs."lldap.lgv.info" = {
+  #   dnsProvider = "porkbun";
+  #   environmentFile = "/etc/caddy/caddy.env";
+  #   group = "services";
+  # };
 
   users.users.caddy.extraGroups = ["services"];
 
@@ -188,17 +188,20 @@ in {
       };
       "wiki.whowhatetc.com" = {
         extraConfig = ''
-          redir https://wiki.ggvv.org
+          redir https://wiki.grandsvoisins.org
+          # redir https://wiki.lgv.info
         '';
       };
       "www.whowhatetc.com" = {
         extraConfig = ''
-          redir https://www.ggvv.org
+          redir https://www.grandsvoisins.org
+          # redir https://www.lgv.info
         '';
       };
       "whowhatetc.com" = {
         extraConfig = ''
-          redir https://ggvv.org{uri}
+          redir https://grandsvoisins.org{uri}
+          # redir https://lgv.info{uri}
         '';
       };
       "auth.whowhatetc.com" = {
@@ -221,12 +224,14 @@ in {
       };
       "test.whowhatetc.com" = {
         extraConfig = ''
-          redir https://test.ggvv.org{uri}
+          redir https://test.gv.je{uri}
+          # redir https://test.lgv.info{uri}
         '';
       };
       "maelanc.whowhatetc.com" = {
         extraConfig = ''
-          redir https://maelanc.ggvv.org{uri}
+          redir https://maelanc.gv.je{uri}
+          # redir https://maelanc.lgv.info{uri}
         '';
       };
       "homarr.whowhatetc.com" = {
@@ -234,11 +239,11 @@ in {
           redir https://www.gdvoisins.org{uri} 301
         '';
       };
-      "homarr.ggvv.org" = {
-        extraConfig = ''
-          redir https://www.gdvoisins.org{uri} 301
-        '';
-      };
+      # "homarr.lgv.info" = {
+      #   extraConfig = ''
+      #     redir https://www.gdvoisins.org{uri} 301
+      #   '';
+      # };
       "www.gvois.com" = {
         extraConfig = ''
           redir https://www.gdvoisins.org{uri} 301
@@ -336,17 +341,20 @@ in {
       # };
       "lldap.whowhatetc.com" = {
         extraConfig = ''
-          redir https://lldap.ggvv.org{uri}
+          redir https://lldap.grandsvoisins.org{uri}
+          # redir https://lldap.lgv.info{uri}
         '';
       };
       "forgejo.whowhatetc.com" = {
         extraConfig = ''
-          redir https://forgejo.ggvv.org{uri}
+          redir https://forgejo.grandsvoisins.org{uri}
+          # redir https://forgejo.lgv.info{uri}
         '';
       };
       "dashy.whowhatetc.com" = {
         extraConfig = ''
-          redir https://dashy.ggvv.org{uri}
+          redir https://dashy.grandsvoisins.org{uri}
+          # redir https://dashy.lgv.info{uri}
         '';
       };
 
@@ -428,7 +436,7 @@ in {
           }
         '';
       };
-      "wiki.ggvv.org" = {
+      "wiki.gv.je" = {
         extraConfig = ''
           reverse_proxy http://[::1]:3480
         '';
@@ -445,7 +453,7 @@ in {
 
         '';
       };
-      "www.ggvv.org" = {
+      "www.grandsvoisins.org" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
@@ -472,7 +480,7 @@ in {
           file_server
         '';
       };
-      "ggvv.org" = {
+      "lgv.info" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
@@ -524,18 +532,18 @@ in {
           redir https://www.gdvoisins.org
         '';
       };
-      "auth.ggvv.org" = {
+      "auth.lgv.info" = {
         extraConfig = ''
           # authenticate with keygvjeportal
-          respond "auth.ggvv.org is running"
+          respond "auth.lgv.info is running"
         '';
       };
-      "test.ggvv.org" = {
+      "test.lgv.info" = {
         extraConfig = ''
           reverse_proxy http://localhost:3000
         '';
       };
-      "maelanc.ggvv.org" = {
+      "maelanc.lgv.info" = {
         extraConfig = ''
           reverse_proxy http://localhost:8090
         '';
@@ -595,17 +603,17 @@ in {
           reverse_proxy http://localhost:3000
         '';
       };
-      "lldap.ggvv.org" = {
+      "lldap.lgv.info" = {
         extraConfig = ''
           reverse_proxy http://0.0.0.0:17170
         '';
       };
-      "forgejo.ggvv.org" = {
+      "forgejo.lgv.info" = {
         extraConfig = ''
           reverse_proxy http://0.0.0.0:3003
         '';
       };
-      "dashy.ggvv.org" = {
+      "dashy.lgv.info" = {
         extraConfig = ''
           # authorize with identifiedpolicy
           reverse_proxy https://max.local:8443 {

@@ -65,7 +65,8 @@
     xandikos = 10888;
   };
   ips.wiki-js = "::1";
-  domains.wiki-js = "wiki.ggvv.org";
+  domains.wiki-js = "wiki.grandsvoisins.org";
+  # domains.wiki-js = "wiki.ggvv.org";
   hetzner.interfaces = [
     {
       mac = "90:1b:0e:9e:ec:37";
