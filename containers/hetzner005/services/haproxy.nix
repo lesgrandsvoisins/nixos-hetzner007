@@ -7,7 +7,8 @@
   vars = import ../vars.nix;
 in {
   services.haproxy = {
-    enable = true;
+    enable = false;
+    # enable = true;
     config = ''
       global
         daemon
