@@ -60,6 +60,7 @@ in {
     extraInputRules = ''
       ip daddr ${builtins.toString vars.hosts.node-red.ipv4}/24 tcp dport ${builtins.toString vars.ports.node-red} accept
       ip6 daddr ${builtins.toString vars.hosts.node-red.ipv6}/96 tcp dport ${builtins.toString vars.ports.node-red} accept
+      ip saddr ${builtins.toString vars.containers.voisinter-django.localAddress}/32 ip daddr ${builtins.toString vars.containers.voisinter-django.hostAddress}/32 tcp dport ${builtins.toString vars.ports.postgresql} accept
     '';
     # ip daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress}/24 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept
     # ip6 daddr ${builtins.toString vars.containers.wagtailgvcoop.localAddress6}/96 tcp dport ${builtins.toString vars.ports.wagtailgvcoop} accept

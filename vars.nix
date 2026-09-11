@@ -69,6 +69,7 @@
     wikijs = 1535;
     monty = 1536;
     wagtailgvcoop = 1537;
+    voisinter-django = 1538;
   };
   ports = {
     postgresql = 5432;
@@ -103,6 +104,7 @@
     sync-in = 8087;
     peertube = 8089;
     wagtailgvcoop = 8090;
+    voisinter-django = 8091;
   };
   hosts = {
     node-red = {
@@ -245,6 +247,22 @@
         };
       };
     };
+    voisinter-django = {
+      hostAddress = "192.168.123.1";
+      localAddress = "192.168.123.2";
+      hostAddress6 = "fc00::23:1";
+      localAddress6 = "fc00::23:2";
+      bindMounts = {
+        "/etc/voisinter-django" = {
+          hostPath = "/etc/voisinter-django";
+          isReadOnly = true;
+        };
+        "/var/www/voisinter-django/" = {
+          hostPath = "/var/www/voisinter-django/";
+          isReadOnly = false;
+        };
+      };
+    };
 
     discourse = {};
     discourseparis14cc = {};
@@ -348,6 +366,7 @@
     wiki-js = "wiki.ggvv.org";
     lemmy = "lemmy.gv.je";
     oxicloud = "oxicloud.gv.je";
+    voisinter = "www.voisinter.net";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";

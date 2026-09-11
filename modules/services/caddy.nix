@@ -297,6 +297,13 @@ in {
         ];
         extraConfig = "redir https://www.gdvoisins.org{uri} 301";
       };
+      "voisinter.net" = {
+        serverAliases = [
+          "voisinternet.com"
+          "www.voisinternet.com"
+        ];
+        extraConfig = "redir https://${vars.domains.voisinter}{uri} 301";
+      };
       # "lesgv.com" = {
       #   extraConfig = ''
       #     redir https://www.gdvoisins.org{uri} 301

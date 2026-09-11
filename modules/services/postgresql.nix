@@ -57,6 +57,10 @@ in {
         ensureDBOwnership = true;
       }
       {
+        name = "voisinter-django";
+        ensureDBOwnership = true;
+      }
+      {
         name = "sftpgo";
         ensureDBOwnership = true;
       }
@@ -204,6 +208,7 @@ in {
       "wagtail"
       "wagtailcfran"
       "wagtailgvcoop"
+      "voisinter-django"
       "wagtailvillage"
       "wwwcfran"
       "wwwfastoche"

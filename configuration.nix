@@ -22,6 +22,7 @@ in {
     ./containers/homarr.nix
     ./containers/homarr2.nix
     ./containers/wagtailgvcoop.nix
+    ./containers/voisinter-django.nix
     # ./containers/keycloak.nix
     ./containers/postgresql.nix
     ./containers/python.nix
