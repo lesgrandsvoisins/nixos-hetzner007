@@ -258,7 +258,7 @@
           isReadOnly = true;
         };
         "/var/www/voisinter-django/static" = {
-          hostPath = "/var/www/voisinter-django/static";
+          hostPath = "/var/www/voisinter-django/staticfiles";
           isReadOnly = false;
         };
         "/var/voisinter/voisinter/var/media" = {
