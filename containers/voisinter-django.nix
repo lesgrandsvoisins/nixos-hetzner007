@@ -12,6 +12,10 @@ in {
           root * /var/www/voisinter-django
           file_server
       }
+      handle /media/* {
+          root * /var/www/voisinter-django
+          file_server
+      }
 
       handle {
           reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-django}
