@@ -106,6 +106,7 @@
     peertube = 8089;
     wagtailgvcoop = 8090;
     voisinter-django = 8091;
+    voisinter-dev = 8092;
   };
   hosts = {
     node-red = {

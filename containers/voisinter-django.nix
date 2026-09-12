@@ -33,6 +33,7 @@ in {
           reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-dev}
       }
     '';
+  };
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
       handle /static/* {
