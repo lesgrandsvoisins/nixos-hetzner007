@@ -13,7 +13,7 @@ in {
           file_server
       }
       handle /media/* {
-          root * /var/voisinter/voisinter/var/
+          root * /var/www/voisinter-django/var/
           file_server
       }
 
@@ -79,6 +79,8 @@ in {
       systemd.tmpfiles.rules = [
         "d /etc/voisinter-django 0775 voisinter-django services"
         "d /var/www/voisinter-django 0775 voisinter-django services"
+        "d /var/www/voisinter-django/static 0775 voisinter-django services"
+        "d /var/www/voisinter-django/media 0775 voisinter-django services"
       ];
 
       systemd.services.voisinter-django = {
