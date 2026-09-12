@@ -14,6 +14,9 @@ in {
       }
     ];
     ensureDatabases = ["voisinter-django"];
+    authentication = lib.mkAfter ''
+      hostssl voisinter-django voisinter-django ${vars.containers.voisinter-django.localAddress}/32 scram-sha-256
+    '';
   };
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
