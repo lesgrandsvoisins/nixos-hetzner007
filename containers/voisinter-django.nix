@@ -18,6 +18,21 @@ in {
       hostssl voisinter-django voisinter-django ${vars.containers.voisinter-django.localAddress}/32 scram-sha-256
     '';
   };
+  services.caddy.virtualHosts."${vars.domains.voisinter-dev}" = {
+    extraConfig = ''
+      handle /static/* {
+          root * /var/www/voisinter-dev
+          file_server
+      }
+      handle /media/* {
+          root * /var/www/voisinter-dev
+          file_server
+      }
+
+      handle {
+          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-dev}
+      }
+    '';
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
       handle /static/* {
@@ -47,6 +62,7 @@ in {
   systemd.tmpfiles.rules = [
     "d /etc/voisinter-django 0775 voisinter-django services"
     "d /var/www/voisinter-django 0775 voisinter-django services"
+    "d /var/www/voisinter-dev 0775 voisinter-django services"
   ];
   containers."voisinter-django" = {
     hostAddress = vars.containers.voisinter-django.hostAddress;
@@ -95,6 +111,7 @@ in {
         "d /var/www/voisinter-django/static 0775 voisinter-django services"
         "d /var/www/voisinter-django/media 0775 voisinter-django services"
         "d /var/cache/voisinter-django 0750 voisinter-django services"
+        "d /home/voisinter-django/voisinter-dev 0755 voisinter-django services"
       ];
 
       systemd.services.voisinter-django = let

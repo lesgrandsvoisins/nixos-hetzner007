@@ -70,6 +70,7 @@
     monty = 1536;
     wagtailgvcoop = 1537;
     voisinter-django = 1538;
+    voisinter-dev = 1539;
   };
   ports = {
     postgresql = 5432;
@@ -257,6 +258,14 @@
           hostPath = "/etc/voisinter-django";
           isReadOnly = true;
         };
+        "/home/voisinter/voisinter-dev/staticfiles" = {
+          hostPath = "/var/www/voisinter-dev/static";
+          isReadOnly = false;
+        };
+        "/home/voisinter/voisinter-dev/media" = {
+          hostPath = "/var/www/voisinter-dev/media";
+          isReadOnly = false;
+        };
         "/var/voisinter/voisinter/staticfiles" = {
           hostPath = "/var/www/voisinter-django/static";
           isReadOnly = false;
@@ -375,6 +384,7 @@
     lemmy = "lemmy.gv.je";
     oxicloud = "oxicloud.gv.je";
     voisinter = "www.voisinter.net";
+    voisinter-dev = "dev.voisinter.net";
   };
   ldap = {
     baseDN = "dc=lesgrandsvoisins,dc=com";
