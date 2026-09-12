@@ -259,14 +259,14 @@
           hostPath = "/etc/voisinter-django";
           isReadOnly = true;
         };
-        "/home/voisinter/voisinter-dev/staticfiles" = {
-          hostPath = "/var/www/voisinter-dev/static";
-          isReadOnly = false;
-        };
-        "/home/voisinter/voisinter-dev/media" = {
-          hostPath = "/var/www/voisinter-dev/media";
-          isReadOnly = false;
-        };
+        # "/home/voisinter/voisinter-dev/staticfiles" = {
+        #   hostPath = "/var/www/voisinter-dev/static";
+        #   isReadOnly = false;
+        # };
+        # "/home/voisinter/voisinter-dev/media" = {
+        #   hostPath = "/var/www/voisinter-dev/media";
+        #   isReadOnly = false;
+        # };
         "/var/voisinter/voisinter/staticfiles" = {
           hostPath = "/var/www/voisinter-django/static";
           isReadOnly = false;
