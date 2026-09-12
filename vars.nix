@@ -257,14 +257,14 @@
           hostPath = "/etc/voisinter-django";
           isReadOnly = true;
         };
-        # "/var/www/voisinter-django/static/" = {
-        #   hostPath = "/var/www/voisinter-django/static/";
-        #   isReadOnly = false;
-        # };
-        # "/var/www/voisinter-django/media/" = {
-        #   hostPath = "/var/voisinter/voisinter/media/";
-        #   isReadOnly = false;
-        # };
+        "/var/www/voisinter-django/static/" = {
+          hostPath = "/var/www/voisinter-django/static/";
+          isReadOnly = false;
+        };
+        "/var/www/voisinter-django/media/" = {
+          hostPath = "/var/voisinter/voisinter/media/";
+          isReadOnly = false;
+        };
         # "/var/www/voisinter-django/" = {
         #   hostPath = "/var/www/voisinter-django/";
         #   isReadOnly = false;
