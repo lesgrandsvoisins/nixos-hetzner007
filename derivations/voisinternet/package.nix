@@ -26,13 +26,13 @@
 in
   pkgs.stdenvNoCC.mkDerivation {
     pname = "voisinternet";
-    version = "unstable-2026-09-11";
+    version = "v0.1.1";
 
     src = fetchFromGitHub {
       owner = "lesgrandsvoisins";
       repo = "voisinternet";
-      rev = "v0.1.0";
-      hash = "sha256-5pYI7tyuHjad75AbCrLMR6gQcNckBofoFQulh3ZJSfM=";
+      rev = "v0.1.1";
+      hash = "sha256-cH8dP0ULF2pwp6pwOu002qlqxIYpOutEqQecIV0GzKQ=";
     };
 
     nativeBuildInputs = [makeWrapper];
