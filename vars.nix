@@ -265,11 +265,10 @@
           hostPath = "/var/voisinter/voisinter/media/";
           isReadOnly = false;
         };
-
-        "/var/www/voisinter-django/" = {
-          hostPath = "/var/www/voisinter-django/";
-          isReadOnly = false;
-        };
+        # "/var/www/voisinter-django/" = {
+        #   hostPath = "/var/www/voisinter-django/";
+        #   isReadOnly = false;
+        # };
       };
     };
 
