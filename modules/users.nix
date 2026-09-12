@@ -82,7 +82,7 @@ in {
     groups = {
       aaa.gid = vars.gid.aaa;
       appflowycloud.gid = vars.gid.appflowycloud;
-      haproxy.gid = vars.gid.haproxy;
+      # haproxy.gid = vars.gid.haproxy;
       filebrowser.gid = vars.gid.filebrowser;
       crabfit.gid = vars.gid.crabfit;
       fossil.gid = vars.gid.fossil;

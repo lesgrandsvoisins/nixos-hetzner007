@@ -13,7 +13,7 @@ in {
     ./services/collabora-online.nix
     ./services/freshrss.nix
     ./services/gitea.nix
-    ./services/haproxy.nix
+    # ./services/haproxy.nix
     ./services/homepage-dashboard.nix
     ./services/immich.nix
     ./services/keycloak.nix
