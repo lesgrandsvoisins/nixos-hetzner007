@@ -15,6 +15,13 @@
       };
     }
     {
+      "VENIR voir Voisinter.net" = {
+        description = "Un serveur autonome pour chaque personne par Les Grands Voisins";
+        href = "https://www.voisinter.net";
+        icon = "weather-sunny-alert";
+      };
+    }
+    {
       "GERER du code source avec Forgejo" = {
         description = "Serveur de développement et de codes sources";
         href = "https://forgejo.roses.gv.je/user/login";
