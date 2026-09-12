@@ -64,6 +64,8 @@ in {
     "d /etc/voisinter-django 0775 voisinter-django services"
     "d /var/www/voisinter-django 0775 voisinter-django services"
     "d /var/www/voisinter-dev 0775 voisinter-django services"
+    "d /var/www/voisinter-dev/media 0775 voisinter-django services"
+    "d /var/www/voisinter-dev/static 0775 voisinter-django services"
   ];
   containers."voisinter-django" = {
     hostAddress = vars.containers.voisinter-django.hostAddress;
