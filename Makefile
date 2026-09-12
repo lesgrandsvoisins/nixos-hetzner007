@@ -23,3 +23,6 @@ flake-update:
 
 rollback:
 	sudo nixos-rebuild switch --rollback --flake ./#hetzner007
+
+derivation-voisinternet:
+	make -C ./derivations/voisinternet 

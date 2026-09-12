@@ -31,8 +31,8 @@ in
     src = fetchFromGitHub {
       owner = "lesgrandsvoisins";
       repo = "voisinternet";
-      rev = "1e598322670d9d4f1e7541f60fe2c403fea4310e";
-      hash = "sha256-LyW5YJv0L+luH5csWdoFXicX0RmdEbawFmfuuq2+2mQ=";
+      rev = "v0.1.0";
+      hash = "sha256-5pYI7tyuHjad75AbCrLMR6gQcNckBofoFQulh3ZJSfM=";
     };
 
     nativeBuildInputs = [makeWrapper];
