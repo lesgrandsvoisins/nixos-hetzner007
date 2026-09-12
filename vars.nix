@@ -257,7 +257,7 @@
           hostPath = "/etc/voisinter-django";
           isReadOnly = true;
         };
-        "/var/voisinter/voisinter/var/staticfiles" = {
+        "/var/voisinter/voisinter/staticfiles" = {
           hostPath = "/var/www/voisinter-django/static";
           isReadOnly = false;
         };
