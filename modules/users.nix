@@ -112,12 +112,12 @@ in {
       #   # uid = 1020;
       #   # uid = vars.uid.sftpgo;
       # };
-      haproxy = {
-        extraGroups = ["wwwrun" "acme"];
-        uid = vars.uid.haproxy;
-        # group = "services";
-        isSystemUser = true;
-      };
+      # haproxy = {
+      #   extraGroups = ["wwwrun" "acme"];
+      #   uid = vars.uid.haproxy;
+      #   # group = "services";
+      #   isSystemUser = true;
+      # };
       # mannchri = {
       #   #   isNormalUser = true;
       #   #   openssh.authorizedKeys.keys = [vars.keys.public.mannchri];
