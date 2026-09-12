@@ -54,6 +54,10 @@ in {
     }: let
       vars = import ../vars.nix;
     in {
+      systemd.tmpfiles.rules = [
+        "d /etc/voisinter-django 0775 voisinter-django services"
+        "d /var/voisinter/voisinter/media 0775 voisinter-django services"
+      ];
       system.stateVersion = "26.05";
       nix.settings.experimental-features = "nix-command flakes";
       networking.useHostResolvConf = lib.mkForce false;
