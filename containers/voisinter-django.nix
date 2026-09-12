@@ -94,15 +94,31 @@ in {
         "d /var/www/voisinter-django 0775 voisinter-django services"
         "d /var/www/voisinter-django/static 0775 voisinter-django services"
         "d /var/www/voisinter-django/media 0775 voisinter-django services"
+        "d /var/cache/voisinter-django 0750 voisinter-django services"
       ];
 
-      systemd.services.voisinter-django = {
+      systemd.services.voisinter-django = let
+        voisinternet = pkgs.callPackage ../derivations/voisinternet/package.nix {};
+      in {
         description = "${vars.domains.voisinter} on voisinter-django";
         after = ["network.target"];
         wantedBy = ["multi-user.target"];
+        environment = {
+          # BASE_DIR (the Nix store path) is read-only, so every writable
+          # path Django would otherwise derive from it must be pointed at a
+          # bind-mounted or tmpfiles-managed directory instead.
+          DJANGO_STATIC_ROOT = "/var/voisinter/voisinter/staticfiles";
+          DJANGO_MEDIA_ROOT = "/var/voisinter/voisinter/var/media";
+          DJANGO_CACHE_DIR = "/var/cache/voisinter-django";
+        };
         serviceConfig = {
-          WorkingDirectory = "/var/voisinter/voisinter";
-          ExecStart = ''/var/voisinter/voisinter/.venv/bin/gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --chdir /var/voisinter/voisinter --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinternet.wsgi:application'';
+          EnvironmentFile = "-/etc/voisinter-django/voisinter-django.env";
+          WorkingDirectory = "${voisinternet}/share/voisinternet";
+          ExecStartPre = [
+            "${voisinternet}/bin/voisinternet-manage migrate --noinput"
+            "${voisinternet}/bin/voisinternet-manage collectstatic --noinput"
+          ];
+          ExecStart = ''${voisinternet}/bin/voisinternet-gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinternet.wsgi:application'';
           Restart = "always";
           RestartSec = "10s";
           User = "voisinter-django";
