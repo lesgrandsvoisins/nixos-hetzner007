@@ -13,7 +13,7 @@ in {
           file_server
       }
       handle /media/* {
-          root * /var/voisinter/voisinter/var
+          root * /var/www/voisinter-django
           file_server
       }
 
