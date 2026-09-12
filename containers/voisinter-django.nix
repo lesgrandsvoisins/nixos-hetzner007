@@ -83,22 +83,22 @@ in {
         "d /var/www/voisinter-django/media 0775 voisinter-django services"
       ];
 
-      systemd.services.voisinter-django = {
-        description = "${vars.domains.voisinter} on voisinter-django";
-        after = ["network.target"];
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-          WorkingDirectory = "/home/voisinter-django/voisinter/www";
-          ExecStart = ''/home/voisinter-django/voisinter/.venv/bin/gunicorn --access-logfile /home/voisinter-django/voisinter-django-access.log --error-logfile /home/voisinter-django/voisinter-django-error.log --chdir /home/voisinter-django/voisinter/www --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinter.wsgi:application'';
-          Restart = "always";
-          RestartSec = "10s";
-          User = "voisinter-django";
-          Group = "services";
-        };
-        unitConfig = {
-          StartLimitInterval = "1min";
-        };
-      };
+      # systemd.services.voisinter-django = {
+      #   description = "${vars.domains.voisinter} on voisinter-django";
+      #   after = ["network.target"];
+      #   wantedBy = ["multi-user.target"];
+      #   serviceConfig = {
+      #     WorkingDirectory = "/home/voisinter-django/voisinter/www";
+      #     ExecStart = ''/home/voisinter-django/voisinter/.venv/bin/gunicorn --access-logfile /home/voisinter-django/voisinter-django-access.log --error-logfile /home/voisinter-django/voisinter-django-error.log --chdir /home/voisinter-django/voisinter/www --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinter.wsgi:application'';
+      #     Restart = "always";
+      #     RestartSec = "10s";
+      #     User = "voisinter-django";
+      #     Group = "services";
+      #   };
+      #   unitConfig = {
+      #     StartLimitInterval = "1min";
+      #   };
+      # };
       networking.firewall.enable = false;
     };
   };
