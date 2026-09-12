@@ -99,7 +99,7 @@ in {
         wantedBy = ["multi-user.target"];
         serviceConfig = {
           WorkingDirectory = "/var/voisinter/voisinter";
-          ExecStart = ''/var/voisinter/voisinter/.venv/bin/gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --chdir /var/voisinter/voisinter/www --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinter.wsgi:application'';
+          ExecStart = ''/var/voisinter/voisinter/.venv/bin/gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --chdir /var/voisinter/voisinter --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinter.wsgi:application'';
           Restart = "always";
           RestartSec = "10s";
           User = "voisinter-django";
