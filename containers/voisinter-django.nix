@@ -140,10 +140,15 @@ in {
           # WorkingDirectory = "${voisinternet}/share/voisinternet";
           WorkingDirectory = "/var/voisinter/voisinter";
           ExecStartPre = [
-            "/var/voisinter/voisinter/.venv/bin/voisinternet-manage migrate --noinput"
-            "/var/voisinter/voisinter/.venv/bin/voisinternet-manage collectstatic --noinput"
+            "/var/voisinter/voisinter/.venv/bin/python manage.py migrate --noinput"
+            "/var/voisinter/voisinter/.venv/bin/python manage.py collectstatic --noinput"
           ];
-          ExecStart = ''/var/voisinter/voisinter/.venv/bin/voisinternet-gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinternet.wsgi:application'';
+          ExecStart = ''/var/voisinter/voisinter/.venv/bin/gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinternet.wsgi:application'';
+          # ExecStartPre = [
+          #   "${voisinternet}/bin/voisinternet-manage migrate --noinput"
+          #   "${voisinternet}/bin/voisinternet-manage collectstatic --noinput"
+          # ];
+          # ExecStart = ''${voisinternet}/bin/voisinternet-gunicorn --access-logfile /var/voisinter/voisinter-django-access.log --error-logfile /var/voisinter/voisinter-django-error.log --workers 4 --bind 0.0.0.0:${builtins.toString vars.ports.voisinter-django} voisinternet.wsgi:application'';
           Restart = "always";
           RestartSec = "10s";
           User = "voisinter-django";
