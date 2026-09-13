@@ -117,6 +117,10 @@ in {
         "d /home/voisinter-django/voisinter-dev 0755 voisinter-django services"
       ];
 
+      environment.systemPackages = with pkgs; [
+        sqlite
+      ];
+
       systemd.services.voisinter-django = let
         voisinternet = pkgs.callPackage ../derivations/voisinternet/package.nix {};
       in {
