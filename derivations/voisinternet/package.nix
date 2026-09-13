@@ -22,6 +22,7 @@
       bleach
       gunicorn
       psycopg
+      wagtail
     ]);
 in
   pkgs.stdenvNoCC.mkDerivation {
