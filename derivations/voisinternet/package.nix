@@ -22,6 +22,7 @@
       bleach
       gunicorn
       psycopg
+      django-treebeard
       wagtail
     ]);
 in
