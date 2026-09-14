@@ -38,7 +38,6 @@ in {
     extraConfig = ''
       redir https://${vars.domains.lesgrandsvoisinsfr}{uri}
     '';
-    };
     # extraConfig = ''
     #   handle /static/* {
     #       root * /var/www/voisinter-django
