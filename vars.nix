@@ -385,6 +385,7 @@
     lemmy = "lemmy.gv.je";
     oxicloud = "oxicloud.gv.je";
     voisinter = "www.voisinter.net";
+    lesgrandsvoisinsfr = "www.lesgrandsvoisins.fr";
     voisinter-dev = "dev.voisinter.net";
   };
   ldap = {

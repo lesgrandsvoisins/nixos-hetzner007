@@ -15,9 +15,9 @@
       };
     }
     {
-      "VENIR voir Voisinter.net" = {
+      "VENIR voir lesgrandsvoisins.fr" = {
         description = "Un serveur autonome pour chaque personne par Les Grands Voisins";
-        href = "https://www.voisinter.net";
+        href = "https://www.lesgrandsvoisins.fr";
         icon = "weather-sunny-alert";
       };
     }
