@@ -53,7 +53,7 @@ in {
 
   services.caddy.virtualHosts."lesgrandsvoisins.fr" = {
     extraConfig = ''
-      redir https://wwww.lesgrandsvoisins.fr{uri}
+      redir https://www.lesgrandsvoisins.fr{uri}
     '';
   };
   services.caddy.virtualHosts."${vars.domains.lesgrandsvoisinsfr}" = {
