@@ -36,24 +36,28 @@ in {
   };
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
-      handle /static/* {
-          root * /var/www/voisinter-django
-          file_server
-      }
-      handle /media/* {
-          root * /var/www/voisinter-django
-          file_server
-      }
-
-      handle {
-          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-django}
-      }
+      redir https://${vars.domains.lesgrandsvoisinsfr}{uri}
     '';
+    };
+    # extraConfig = ''
+    #   handle /static/* {
+    #       root * /var/www/voisinter-django
+    #       file_server
+    #   }
+    #   handle /media/* {
+    #       root * /var/www/voisinter-django
+    #       file_server
+    #   }
+
+    #   handle {
+    #       reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-django}
+    #   }
+    # '';
   };
 
   services.caddy.virtualHosts."lesgrandsvoisins.fr" = {
     extraConfig = ''
-      redir https://www.lesgrandsvoisins.fr{uri}
+      redir https://${vars.domains.lesgrandsvoisinsfr}{uri}
     '';
   };
   services.caddy.virtualHosts."${vars.domains.lesgrandsvoisinsfr}" = {
