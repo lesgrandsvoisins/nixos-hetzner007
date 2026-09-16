@@ -386,6 +386,7 @@
     oxicloud = "oxicloud.gv.je";
     voisinter = "www.voisinter.net";
     lesgrandsvoisinsfr = "www.lesgrandsvoisins.fr";
+    gdvoisinscom = "www.gdvoisins.com";
     voisinter-dev = "dev.voisinter.net";
   };
   ldap = {
