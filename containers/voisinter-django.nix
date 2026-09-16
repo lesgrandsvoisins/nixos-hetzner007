@@ -36,12 +36,12 @@ in {
   };
   services.caddy.virtualHosts."${vars.domains.lesgrandsvoisinsfr}" = {
     extraConfig = ''
-      redir https://${vars.domains.lesgrandsvoisinsfr}{uri}
+      redir https://${vars.domains.gdvoisinscom}{uri}
     '';
   };
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
-      redir https://${vars.domains.lesgrandsvoisinsfr}{uri}
+      redir https://${vars.domains.gdvoisinscom}{uri}
     '';
     # extraConfig = ''
     #   handle /static/* {
