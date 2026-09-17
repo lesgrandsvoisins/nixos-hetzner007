@@ -36,12 +36,12 @@ in {
   };
   services.caddy.virtualHosts."${vars.domains.lesgrandsvoisinsfr}" = {
     extraConfig = ''
-      redir https://${vars.domains.newlesgrandsvoisinsfr}{uri}
+      redir https://${vars.domains.newlesgrandsvoisinscom}{uri}
     '';
   };
   services.caddy.virtualHosts."${vars.domains.voisinter}" = {
     extraConfig = ''
-      redir https://${vars.domains.newlesgrandsvoisinsfr}{uri}
+      redir https://${vars.domains.newlesgrandsvoisinscom}{uri}
     '';
     # extraConfig = ''
     #   handle /static/* {
@@ -71,10 +71,10 @@ in {
   };
   services.caddy.virtualHosts."${vars.domains.gdvoisinscom}" = {
     extraConfig = ''
-      redir https://${vars.domains.newlesgrandsvoisinsfr}{uri}
+      redir https://${vars.domains.newlesgrandsvoisinscom}{uri}
     '';
   };
-  services.caddy.virtualHosts."${vars.domains.newlesgrandsvoisinsfr}" = {
+  services.caddy.virtualHosts."${vars.domains.newlesgrandsvoisinscom}" = {
     extraConfig = ''
       handle /static/* {
           root * /var/www/voisinter-django
