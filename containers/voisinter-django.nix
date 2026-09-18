@@ -46,7 +46,7 @@ in {
       }
 
       handle {
-          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-dev}
+          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-django}
       }
     '';
   };
