@@ -18,6 +18,22 @@ in {
       hostssl voisinter-django voisinter-django ${vars.containers.voisinter-django.localAddress}/32 scram-sha-256
     '';
   };
+  services.caddy.virtualHosts."transition.lesgrandsvoisins.com" = {
+    extraConfig = ''
+      handle /static/* {
+          root * /var/www/voisinter-django
+          file_server
+      }
+      handle /media/* {
+          root * /var/www/voisinter-django
+          file_server
+      }
+
+      handle {
+          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-dev}
+      }
+    '';
+  };
   services.caddy.virtualHosts."${vars.domains.voisinter-dev}" = {
     extraConfig = ''
       handle /static/* {
