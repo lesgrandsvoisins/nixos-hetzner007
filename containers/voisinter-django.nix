@@ -34,6 +34,22 @@ in {
       }
     '';
   };
+  services.caddy.virtualHosts."www.lesgrandsvoisins.com" = {
+    extraConfig = ''
+      handle /static/* {
+          root * /var/www/voisinter-django
+          file_server
+      }
+      handle /media/* {
+          root * /var/www/voisinter-django
+          file_server
+      }
+
+      handle {
+          reverse_proxy http://${vars.containers.voisinter-django.localAddress}:${builtins.toString vars.ports.voisinter-django}
+      }
+    '';
+  };
   services.caddy.virtualHosts."${vars.domains.voisinter-dev}" = {
     extraConfig = ''
       handle /static/* {
