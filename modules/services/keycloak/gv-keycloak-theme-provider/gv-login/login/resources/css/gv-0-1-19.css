@@ -24,4 +24,10 @@
   line-height: 1.4;
 }
 
+
+div.kc-social-providers svg {
+  max-height: 3rem;
+  width: auto;
+}
+
 @import url(https://public.gv.je/static/web/gvbtn/gvbtn.css);
