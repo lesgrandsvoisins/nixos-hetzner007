@@ -1,4 +1,4 @@
-.gv-identifier-preview {
+.je-gv-key-username-preview {
   margin-top: 1rem;
   padding: 1rem;
   border: 1px solid var(--pf-v5-global--BorderColor--100, #d2d2d2);
@@ -6,26 +6,32 @@
   background: var(--pf-v5-global--BackgroundColor--200, #f5f5f5);
 }
 
-.gv-identifier-preview__label {
+.je-gv-key-username-preview__label {
   font-size: 0.875rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
 }
 
-.gv-identifier-preview__value {
+.je-gv-key-username-preview__value {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
 
-.gv-identifier-preview__help {
+.je-gv-key-username-preview__help {
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.4;
 }
 
 
-div.kc-social-providers svg {
+.pf-v5-u-pb-sm svg {
   max-height: 3rem;
   width: auto;
 }
+
+.pf-v5-u-pb-sm span {
+  white-space: wrap;
+}
+
+/* @import url(https://public.gv.je/static/web/gvbtn/gvbtn.css); */
